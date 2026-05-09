@@ -16,3 +16,9 @@ node_modules/
 
 # Claude Code local files (keep CLAUDE.md, ignore launch configs)
 .claude/launch.json
+.claude/.skills-last-update
+.claude/.skills-update.log
+.claude/scheduled_tasks.lock
+
+# Skills locais instaladas via npx skills add
+.agents/

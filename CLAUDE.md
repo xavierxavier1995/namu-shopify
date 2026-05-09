@@ -66,6 +66,47 @@ Run this checklist IN ORDER:
 - Naming convention: all custom files use `namu-` prefix — if no `namu-*` match exists, then create
 - Never create README/MD docs unless explicitly requested
 
+### Iron Law #10 — MUST invoke Shopify skills for Shopify tasks
+This project has **19 official Shopify skills** installed (`.agents/skills/shopify-*`). They are mandatory references — Claude must invoke the matching skill **before** writing code:
+
+| Task signal | Skill to invoke |
+|---|---|
+| Liquid templating, sections, schemas, snippets | `shopify-liquid` + `liquid-theme-standards` |
+| `shopify` CLI commands (dev, push, pull) | `shopify-use-shopify-cli` |
+| GraphQL Admin API (products, orders, collections) | `shopify-admin` |
+| Customer accounts, login, profile | `shopify-customer` |
+| Metafields, metaobjects, custom data | `shopify-custom-data` |
+| Checkout customizations (UI extensions) | `shopify-polaris-checkout-extensions` |
+| Discount/payment/delivery rules | `shopify-functions` |
+| Storefront API (headless reads) | `shopify-storefront-graphql` |
+| App store submission, partner workflows | `shopify-app-store-review`, `shopify-partner` |
+| General Shopify dev guidance | `shopify-dev` |
+| Theme accessibility | `liquid-theme-a11y` |
+
+**Rule:** if the user's request matches any row above, invoke the skill via the Skill tool BEFORE writing code or running commands. Never improvise from training data when a skill is available.
+
+### Iron Law #11 — MUST invoke Claude Code skills for harness/config tasks
+| Task signal | Skill to invoke |
+|---|---|
+| Edit `settings.json`, hooks, permissions, env vars | `update-config` |
+| Keybindings (`~/.claude/keybindings.json`) | `keybindings-help` |
+| Reduce permission prompts | `fewer-permission-prompts` |
+| Build/improve other skills | `skill-creator`, `skill-improver` |
+| Anthropic SDK / Claude API code | `claude-api` |
+| Code review preparation | `simplify`, `code-reviewer` |
+
+---
+
+## Skills auto-update (weekly)
+
+The `.claude/scripts/skills-autoupdate.ps1` script runs at every `SessionStart`:
+- Checks `.claude/.skills-last-update` timestamp
+- If > 7 days old (or missing), spawns `npx skills add Shopify/shopify-ai-toolkit` in background
+- Logs to `.claude/.skills-update.log`
+- Updates timestamp so next session waits another 7 days
+
+**Manual update:** `npx skills add Shopify/shopify-ai-toolkit` (reinstalls all 19, latest versions).
+
 ---
 
 ## Development Workflow
