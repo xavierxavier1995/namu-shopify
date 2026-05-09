@@ -46,15 +46,40 @@ Run this checklist IN ORDER:
 - Don't say "tudo pronto" until you've either (a) seen the dev server reflect it, or (b) pulled from remote post-push and confirmed
 - "Cache" is the #1 cause of false failures — always suggest hard refresh first
 
+### Iron Law #7 — Localhost-first feedback loop
+- After **every visual/interactive change**, end the response with: **"Quer ver no localhost antes de continuar?"** (or equivalent in pt-BR)
+- The user has `http://127.0.0.1:9292` running with hot reload — they can see results in seconds
+- Don't batch 5 unrelated changes without a checkpoint — small steps, validate, continue
+- Exception: trivial typo fixes / inline copy edits — just announce them concisely
+
+### Iron Law #8 — Cache-busting first response on visual bugs
+- When user reports "não atualizou" / "tá igual" / "não mudou": **respond with this 3-step checklist BEFORE any debugging**:
+  1. DevTools aberto (F12) → aba **Network** → checkbox **"Disable cache"** marcado
+  2. `Ctrl+Shift+R` (hard refresh) na página
+  3. Confirmar que a URL é `http://127.0.0.1:9292` (não a loja Shopify direta)
+- Only after these 3 steps fail, start investigating the actual code
+- 90% of "not updating" reports are stale cache — diagnosing code first wastes context
+
+### Iron Law #9 — Reuse before create
+- Before creating ANY new file (asset, section, snippet, CSS), run `Glob` to check for similar
+- If a similar file exists, **edit it** rather than creating a new one
+- Naming convention: all custom files use `namu-` prefix — if no `namu-*` match exists, then create
+- Never create README/MD docs unless explicitly requested
+
 ---
 
 ## Development Workflow
 
 ### Active development (preferred — no push needed)
 ```bash
-shopify theme dev --theme 149665775694 --store namu-matcha.myshopify.com
+shopify theme dev --theme 149665775694 --store namu-matcha.myshopify.com --store-password namu
 ```
-Open the printed `https://*.trycloudflare.com` URL — saves to .liquid files reload automatically.
+Open `http://127.0.0.1:9292` in Chrome — saves to `.liquid`, `.css`, `.js`, and `.json` reload automatically.
+
+**DevTools setup (do once per Chrome profile):**
+1. `F12` to open DevTools, dock to right side (`⋮` → Dock side → right)
+2. Network tab → check **"Disable cache"** (only active while DevTools is open)
+3. Keep DevTools open during all dev sessions to bypass cache reliably
 
 ### Push only when finishing a session or sharing
 ```bash
@@ -86,19 +111,27 @@ namu-shopify/
 Homepage is defined in `templates/index.json` — it references sections in order.
 Each section in `sections/` is a self-contained Liquid file with schema.
 
-### Homepage Sections (build order)
-1. `sections/announcement-bar.liquid` — rotating promo text strip
-2. `sections/header.liquid` — nav + logo (already in Dawn, customize)
-3. `sections/hero-slider.liquid` — full-width hero with slider
-4. `sections/marquee-strip.liquid` — animated rotating text band
-5. `sections/featured-products.liquid` — best sellers carousel
-6. `sections/categories-grid.liquid` — Matchas Puros / Blends / Utensílios / Kits
-7. `sections/video-banner.liquid` — video background with text overlay
-8. `sections/benefits-strip.liquid` — icon + text benefits row
-9. `sections/blog-posts.liquid` — editorial blog grid
-10. `sections/recipes-grid.liquid` — recipe cards carousel
-11. `sections/food-service-banner.liquid` — B2B/food service CTA
-12. `sections/footer.liquid` — links + newsletter + social (already in Dawn, customize)
+### Homepage Sections (current order in templates/index.json)
+1. `sections/namu-hero-slider.liquid` — full-width hero with 5 rotating slides
+2. `sections/namu-marquee.liquid` — infinite-loop rotating differentials strip (JS-animated)
+3. `sections/namu-featured-products.liquid` — "Favoritos da Estação" carousel (uses `mais-vendidos` collection)
+4. `sections/namu-categories.liquid` — 4 category cards (Matchas Puros / Blends / Utensílios / Kits)
+5. `sections/namu-b2b.liquid` — B2B / food service editorial banner
+6. `sections/namu-recipes.liquid` — recipe cards grid
+7. `sections/namu-newsletter.liquid` — email signup with logo
+8. `sections/namu-blog.liquid` — editorial article grid
+9. `sections/namu-benefits.liquid` — icon + text benefits row
+
+**Header** (via `sections/header-group.json`): `announcement-bar` + `namu-header`
+**Footer** (via `sections/footer-group.json`): `namu-footer`
+
+### Cleanup state (after pre-cleanup snapshot ec3fea5)
+The following Dawn defaults were **removed** — do NOT recreate them. If functionality is needed, build a `namu-*` version:
+- Removed sections: `slideshow`, `image-banner`, `image-with-text`, `featured-collection`, `featured-product`, `featured-blog`, `collage`, `multicolumn`, `multirow`, `newsletter`, `email-signup-banner`, `rich-text`, `video`, `collapsible-content`, `collection-list`, `bulk-quick-order-list`, `quick-order-list`, `main-blog`, `main-article`, `main-page`, `contact-form`, `main-password-footer`, `main-password-header`, `page`
+- Removed templates: `article.json`, `blog.json`, `page.contact.json`
+- Removed assets: ~50 unused Dawn icons, 6 unused section CSS files, demo slides
+
+**Sections that MUST stay** (Shopify loads them dynamically): `cart-drawer`, `cart-icon-bubble`, `cart-notification-*`, `predictive-search`, `apps`, `main-404`, `pickup-availability`, `related-products`, `custom-liquid`, plus all `main-*` for product/collection/cart/customers/search.
 
 ## Liquid Conventions
 
