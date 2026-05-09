@@ -2,15 +2,15 @@
 {{ 'namu-marquee.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
-  assign duration = section.settings.duration | default: 50
+  assign duration = section.settings.duration | default: 30
 -%}
 
 <section
   class="namu-marquee"
   aria-label="{{ section.settings.aria_label | default: 'Diferenciais Namu' }}"
-  style="--namu-marquee-duration: {{ duration }}s; --namu-marquee-bg: {{ section.settings.bg_color }}; --namu-marquee-text: {{ section.settings.text_color }};"
+  style="--namu-marquee-bg: {{ section.settings.bg_color }}; --namu-marquee-text: {{ section.settings.text_color }};"
 >
-  <div class="namu-marquee__track">
+  <div class="namu-marquee__track" data-duration="{{ duration }}">
     {%- comment -%} Renderiza dois grupos para loop infinito sem corte {%- endcomment -%}
     {%- for i in (1..2) -%}
       <ul class="namu-marquee__group" aria-hidden="{% if i == 2 %}true{% else %}false{% endif %}">
@@ -24,6 +24,90 @@
     {%- endfor -%}
   </div>
 </section>
+
+<script>
+  (function () {
+    function initMarquee(section) {
+      var track = section.querySelector('.namu-marquee__track');
+      if (!track || track._namuInit) return;
+
+      // Aguarda layout calculado (garante getBoundingClientRect correto)
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          startAnimation(section, track);
+        });
+      });
+    }
+
+    function startAnimation(section, track) {
+      if (track._namuInit) return;
+      track._namuInit = true;
+
+      // Mantém apenas 1 grupo no DOM (remove o duplicado do Liquid)
+      var groups = track.querySelectorAll('.namu-marquee__group');
+      for (var i = 1; i < groups.length; i++) groups[i].remove();
+
+      var group = track.querySelector('.namu-marquee__group');
+      if (!group) return;
+
+      // Clona até preencher pelo menos 3x a largura da tela — garante loop sem gap
+      while (track.getBoundingClientRect().width < window.innerWidth * 3) {
+        var clone = group.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        track.appendChild(clone);
+      }
+
+      // Remove animação CSS — JS assume controle total
+      track.style.animation = 'none';
+      track.style.willChange = 'transform';
+
+      var groupWidth = group.getBoundingClientRect().width;
+      var pxPerSec = 80; // velocidade: 80px/s (~agradável para leitura)
+      var pos = 0;
+      var lastTs = null;
+      var paused = false;
+      var raf;
+
+      section.addEventListener('mouseenter', function () { paused = true; });
+      section.addEventListener('mouseleave', function () { paused = false; });
+
+      function step(ts) {
+        if (lastTs === null) lastTs = ts;
+        var delta = ts - lastTs;
+        lastTs = ts;
+
+        if (!paused && groupWidth > 0) {
+          pos -= (pxPerSec / 1000) * delta;
+          // Reseta ao completar 1 grupo — loop seamless invisível
+          if (pos <= -groupWidth) pos += groupWidth;
+          track.style.transform = 'translateX(' + pos + 'px)';
+        }
+        raf = requestAnimationFrame(step);
+      }
+
+      raf = requestAnimationFrame(step);
+
+      document.addEventListener('shopify:section:unload', function (e) {
+        if (e.target.contains(section)) cancelAnimationFrame(raf);
+      });
+    }
+
+    // Inicia após layout completo
+    function run() {
+      document.querySelectorAll('.namu-marquee').forEach(initMarquee);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', run);
+    } else {
+      run();
+    }
+
+    document.addEventListener('shopify:section:load', function (e) {
+      e.target.querySelectorAll('.namu-marquee').forEach(initMarquee);
+    });
+  })();
+</script>
 
 {% schema %}
 {

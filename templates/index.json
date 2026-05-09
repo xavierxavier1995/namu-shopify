@@ -67,7 +67,7 @@
       "settings": {
         "bg_color": "#045133",
         "text_color": "#FFFFFF",
-        "duration": 50,
+        "duration": 30,
         "aria_label": "Diferenciais Namu"
       },
       "blocks": {

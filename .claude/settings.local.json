@@ -34,7 +34,13 @@
       "Bash(git rm *)",
       "Bash(git push *)",
       "Bash(gh auth *)",
-      "Bash(gh --version)"
+      "Bash(gh --version)",
+      "Bash(echo \"PID: $!\")",
+      "Bash(netstat -ano)",
+      "Bash(findstr :9292)",
+      "PowerShell(Stop-Process -Id 22064 -Force)",
+      "Bash(git -C \"C:/Users/unk_g/OneDrive/Área de Trabalho/namu-shopify\" add -A)",
+      "Bash(git -C \"C:/Users/unk_g/OneDrive/Área de Trabalho/namu-shopify\" commit -m \"snapshot: pre-cleanup state \\(marquee infinite loop working\\)\" --no-verify)"
     ]
   }
 }

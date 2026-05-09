@@ -9,11 +9,7 @@
 .namu-marquee__track {
   display: flex;
   width: max-content;
-  animation: namu-marquee-scroll var(--namu-marquee-duration, 50s) linear infinite;
-}
-
-.namu-marquee:hover .namu-marquee__track {
-  animation-play-state: paused;
+  /* Animação controlada por JS (requestAnimationFrame) para máxima compatibilidade */
 }
 
 .namu-marquee__group {
@@ -41,17 +37,8 @@
   padding: 1rem 0.25rem;
 }
 
-@keyframes namu-marquee-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .namu-marquee__track {
-    animation: none;
-    /* Show only one group when animation is off */
-  }
-  /* Hide duplicate group — only needed for scroll illusion */
+  /* Oculta grupo duplicado quando animação é desabilitada pelo sistema */
   .namu-marquee__group:last-child {
     display: none;
   }
