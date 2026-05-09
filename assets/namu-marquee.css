@@ -1,0 +1,66 @@
+.namu-marquee {
+  background: var(--namu-marquee-bg, var(--namu-verde-matcha));
+  color: var(--namu-marquee-text, #fff);
+  overflow: hidden;
+  width: 100%;
+  font-family: var(--namu-font-body);
+}
+
+.namu-marquee__track {
+  display: flex;
+  width: max-content;
+  animation: namu-marquee-scroll var(--namu-marquee-duration, 50s) linear infinite;
+}
+
+.namu-marquee:hover .namu-marquee__track {
+  animation-play-state: paused;
+}
+
+.namu-marquee__group {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.namu-marquee__item,
+.namu-marquee__sep {
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  padding: 1rem 1.5rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.namu-marquee__sep {
+  opacity: 0.5;
+  padding: 1rem 0.25rem;
+}
+
+@keyframes namu-marquee-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .namu-marquee__track {
+    animation: none;
+    /* Show only one group when animation is off */
+  }
+  /* Hide duplicate group — only needed for scroll illusion */
+  .namu-marquee__group:last-child {
+    display: none;
+  }
+}
+
+@media (max-width: 749px) {
+  .namu-marquee__item,
+  .namu-marquee__sep {
+    font-size: 0.85rem;
+    padding: 0.75rem 1rem;
+  }
+}

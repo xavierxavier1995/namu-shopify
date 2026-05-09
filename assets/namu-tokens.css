@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap');
+
+:root {
+  /* Cores institucionais (manual de marca) */
+  --namu-verde-matcha: #045133;
+  --namu-verde-puro: #78C33F;
+
+  /* Cores secundárias (categorias de chá) */
+  --namu-laranja-premium: #BE5B28;
+  --namu-azul-cerimonial: #10A6BD;
+  --namu-azul-vanilla: #33348E;
+
+  /* Cores de apoio */
+  --namu-branco-porcelana: #F4F4F0;
+  --namu-cinza-sombra: #2D2D2D;
+  --namu-branco: #FFFFFF;
+
+  /* Aliases semânticos */
+  --namu-color-primary: var(--namu-verde-matcha);
+  --namu-color-accent: var(--namu-verde-puro);
+  --namu-color-text: var(--namu-cinza-sombra);
+  --namu-color-text-muted: #666666;
+  --namu-color-bg: var(--namu-branco);
+  --namu-color-bg-warm: var(--namu-branco-porcelana);
+
+  /* Tipografia */
+  --namu-font-heading: 'Libre Baskerville', Georgia, serif;
+  --namu-font-body: 'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Transições */
+  --namu-transition-fast:   0.18s ease;
+  --namu-transition-base:   0.25s ease;
+  --namu-transition-slow:   0.4s cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Border radius */
+  --namu-radius-sm:   10px;
+  --namu-radius-md:   16px;
+  --namu-radius-lg:   20px;
+  --namu-radius-xl:   24px;
+  --namu-radius-pill: 999px;
+
+  /* Sombras */
+  --namu-shadow-sm:  0 2px 12px rgba(0,0,0,0.06);
+  --namu-shadow-md:  0 8px 28px rgba(0,0,0,0.10);
+  --namu-shadow-lg:  0 20px 60px rgba(0,0,0,0.14);
+
+  /* Espaçamentos de seção */
+  --namu-section-gap-mobile:  3.5rem;
+  --namu-section-gap-desktop: 5rem;
+}
+
+/* ── Scroll suave (respeita preferência do usuário) ── */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ── Focus visible global — acessibilidade ─────────── */
+:focus-visible {
+  outline: 2px solid var(--namu-verde-matcha, #045133);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* Remove outline de clique (mantém apenas teclado/tab) */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ── Selection color ─────────────────────────────── */
+::selection {
+  background: rgba(4, 81, 51, 0.15);
+  color: var(--namu-cinza-sombra, #2D2D2D);
+}

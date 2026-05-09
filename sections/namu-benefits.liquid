@@ -1,0 +1,139 @@
+{{ 'namu-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'namu-benefits.css' | asset_url | stylesheet_tag }}
+
+<section class="namu-ben" aria-label="Benefícios Namu Matcha">
+  <div class="namu-ben__inner">
+    {%- for block in section.blocks -%}
+      <div class="namu-ben__item" {{ block.shopify_attributes }}>
+        <div class="namu-ben__icon" aria-hidden="true">
+          {%- case block.settings.icon -%}
+            {%- when 'energy' -%}
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M28 7 L16 27 h10 L20 43 L34 23 H24 Z"/>
+              </svg>
+            {%- when 'organic' -%}
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M24 5 L7 12 v13 c0 10 7.5 18 17 20 9.5-2 17-10 17-20 V12 Z"/>
+                <polyline points="16,25 22,31 34,18"/>
+              </svg>
+            {%- when 'harvest' -%}
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="24" y1="42" x2="24" y2="26"/>
+                <path d="M24 26 C24 12 9 9 9 9 S9 24 24 26 Z"/>
+                <path d="M24 26 C24 12 39 9 39 9 S39 24 24 26 Z"/>
+                <path d="M24 32 C20 30 16 31 14 34" stroke-width="1.1"/>
+              </svg>
+            {%- when 'antioxidant' -%}
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="24" cy="24" r="6"/>
+                <line x1="24" y1="7" x2="24" y2="14"/>
+                <line x1="24" y1="34" x2="24" y2="41"/>
+                <line x1="7"  y1="24" x2="14" y2="24"/>
+                <line x1="34" y1="24" x2="41" y2="24"/>
+                <line x1="12.7" y1="12.7" x2="17.8" y2="17.8"/>
+                <line x1="30.2" y1="30.2" x2="35.3" y2="35.3"/>
+                <line x1="35.3" y1="12.7" x2="30.2" y2="17.8"/>
+                <line x1="17.8" y1="30.2" x2="12.7" y2="35.3"/>
+              </svg>
+            {%- when 'calm' -%}
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="24" cy="21" r="13"/>
+                <polyline points="24,13 24,21 30,21"/>
+                <path d="M10 39 C12 37 14 41 16 39 C18 37 20 41 22 39 C24 37 26 41 28 39 C30 37 32 41 34 39 C36 37 38 41 40 39" stroke-width="1.1"/>
+              </svg>
+            {%- when 'cognitive' -%}
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M18 38 v-5 a9 9 0 0 1-7-8.5 A8 8 0 0 1 17 18 a9 9 0 0 1 14 0 A8 8 0 0 1 38 24.5 A9 9 0 0 1 31 33 v5"/>
+                <line x1="18" y1="34" x2="30" y2="34"/>
+                <line x1="18" y1="38" x2="30" y2="38"/>
+                <path d="M21 24 a3 3 0 0 1 6 0" stroke-width="1.1"/>
+              </svg>
+            {%- when 'leaf' -%}
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M24 42 V22"/>
+                <path d="M24 22 C24 8 8 6 8 6 S8 22 24 22 Z"/>
+                <path d="M24 28 C22 26 18 27 16 30" stroke-width="1.1"/>
+              </svg>
+            {%- when 'star' -%}
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="24,7 29,19 42,19 32,27 36,40 24,32 12,40 16,27 6,19 19,19"/>
+              </svg>
+            {%- else -%}
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="24" cy="24" r="14"/>
+                <line x1="24" y1="17" x2="24" y2="24"/>
+                <circle cx="24" cy="29" r="1.2" fill="currentColor" stroke="none"/>
+              </svg>
+          {%- endcase -%}
+        </div>
+
+        <div class="namu-ben__text">
+          {%- if block.settings.title != blank -%}
+            <p class="namu-ben__title">{{ block.settings.title | escape }}</p>
+          {%- endif -%}
+          {%- if block.settings.description != blank -%}
+            <p class="namu-ben__desc">{{ block.settings.description | escape }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Barra de Benefícios",
+  "tag": "section",
+  "class": "shopify-section-namu-benefits",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefício",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Ícone",
+          "options": [
+            { "value": "energy",     "label": "Raio / Energia" },
+            { "value": "organic",    "label": "Escudo / Orgânico" },
+            { "value": "harvest",    "label": "Folhas / Colheita" },
+            { "value": "antioxidant","label": "Brilho / Antioxidante" },
+            { "value": "calm",       "label": "Relógio / Calma" },
+            { "value": "cognitive",  "label": "Cérebro / Cognitivo" },
+            { "value": "leaf",       "label": "Folha simples" },
+            { "value": "star",       "label": "Estrela" }
+          ],
+          "default": "leaf"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Benefício"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Descrição (opcional)"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Barra de Benefícios",
+      "blocks": [
+        { "type": "benefit", "settings": { "icon": "energy",      "title": "Fonte limpa e natural de energia" } },
+        { "type": "benefit", "settings": { "icon": "organic",     "title": "Livre de agrotóxicos e aditivos" } },
+        { "type": "benefit", "settings": { "icon": "harvest",     "title": "Matcha fresco, colhido artesanalmente" } },
+        { "type": "benefit", "settings": { "icon": "antioxidant", "title": "Rico em antioxidantes e vitaminas" } },
+        { "type": "benefit", "settings": { "icon": "calm",        "title": "4 a 6 horas de energia calma" } },
+        { "type": "benefit", "settings": { "icon": "cognitive",   "title": "Apoia na função cognitiva" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

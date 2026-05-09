@@ -1,0 +1,195 @@
+{{ 'namu-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'namu-featured-products.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign fp_collection = section.settings.collection
+  if fp_collection != blank and fp_collection.products_count > 0
+    assign fp_products = fp_collection.products
+  else
+    assign fp_products = collections['mais-vendidos'].products
+    if fp_products.size == 0
+      assign fp_products = collections.all.products
+    endif
+  endif
+  assign limit = section.settings.products_to_show | default: 8
+-%}
+
+<namu-featured-products class="namu-fp">
+  <div class="namu-fp__header">
+    <div class="namu-fp__header-left">
+      {%- if section.settings.label != blank -%}
+        <p class="namu-fp__label">{{ section.settings.label | upcase | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="namu-fp__title">{{ section.settings.title | upcase | escape }}</h2>
+      {%- endif -%}
+    </div>
+    {%- if section.settings.cta_label != blank -%}
+      <a href="{{ section.settings.cta_link | default: '/collections/all' }}" class="namu-fp__cta">
+        {{ section.settings.cta_label | escape }}
+      </a>
+    {%- endif -%}
+  </div>
+
+  <div class="namu-fp__wrapper">
+    <button class="namu-fp__nav namu-fp__nav--prev" type="button" aria-label="Anterior" hidden>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+    </button>
+
+    <div class="namu-fp__track" role="list">
+      {%- for product in fp_products limit: limit -%}
+        <div class="namu-fp__card" role="listitem">
+          <a href="{{ product.url }}" class="namu-fp__card-link">
+            <div class="namu-fp__card-img">
+              {%- if product.featured_image != blank -%}
+                {%- assign fp_img = product.featured_image -%}
+                {%- assign fp_alt = fp_img.alt | default: product.title | escape -%}
+                <img
+                  src="{{ fp_img | image_url: width: 600 }}"
+                  srcset="{{ fp_img | image_url: width: 400 }} 400w,
+                          {{ fp_img | image_url: width: 600 }} 600w,
+                          {{ fp_img | image_url: width: 900 }} 900w"
+                  sizes="(max-width: 768px) 78vw, 25vw"
+                  alt="{{ fp_alt }}"
+                  loading="lazy"
+                  decoding="async"
+                  width="{{ fp_img.width }}"
+                  height="{{ fp_img.height }}"
+                  class="namu-fp__card-img-el"
+                >
+              {%- else -%}
+                <div class="namu-fp__card-img-placeholder"></div>
+              {%- endif -%}
+            </div>
+            <div class="namu-fp__card-info">
+              <p class="namu-fp__card-title">{{ product.title | escape }}</p>
+              <p class="namu-fp__card-price">
+                {%- if product.price_varies -%}
+                  {{ product.price_min | money }} &ndash; {{ product.price_max | money }}
+                {%- else -%}
+                  {{ product.price | money }}
+                {%- endif -%}
+              </p>
+            </div>
+          </a>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <button class="namu-fp__nav namu-fp__nav--next" type="button" aria-label="Próximo">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="namu-fp__progress-wrap" aria-hidden="true">
+    <div class="namu-fp__progress-track">
+      <div class="namu-fp__progress-fill"></div>
+    </div>
+  </div>
+</namu-featured-products>
+
+<script>
+  class NamuFeaturedProducts extends HTMLElement {
+    connectedCallback() {
+      this.track    = this.querySelector('.namu-fp__track');
+      this.fill     = this.querySelector('.namu-fp__progress-fill');
+      this.prevBtn  = this.querySelector('.namu-fp__nav--prev');
+      this.nextBtn  = this.querySelector('.namu-fp__nav--next');
+
+      if (!this.track) return;
+
+      this.track.addEventListener('scroll', () => this.update(), { passive: true });
+      this.prevBtn?.addEventListener('click', () => this.step(-1));
+      this.nextBtn?.addEventListener('click', () => this.step(1));
+      this.addEventListener('mouseenter', () => { this.classList.add('is-hovered'); this.update(); });
+      this.addEventListener('mouseleave', () => this.classList.remove('is-hovered'));
+
+      this.update();
+    }
+
+    step(dir) {
+      const card = this.track.querySelector('.namu-fp__card');
+      const gap  = parseFloat(getComputedStyle(this.track).gap) || 20;
+      const w    = card ? card.offsetWidth + gap : 340;
+      this.track.scrollBy({ left: dir * w, behavior: 'smooth' });
+    }
+
+    update() {
+      const { scrollLeft, scrollWidth, clientWidth } = this.track;
+      const max = scrollWidth - clientWidth;
+
+      if (this.fill && max > 0) {
+        const fillPct = (clientWidth / scrollWidth) * 100;
+        const posPct  = (scrollLeft / max) * (100 - fillPct);
+        this.fill.style.width = fillPct + '%';
+        this.fill.style.left  = posPct + '%';
+      }
+
+      if (this.prevBtn) this.prevBtn.hidden = scrollLeft < 2;
+      if (this.nextBtn) this.nextBtn.hidden = scrollLeft >= max - 2;
+    }
+  }
+  customElements.define('namu-featured-products', NamuFeaturedProducts);
+</script>
+
+{% schema %}
+{
+  "name": "Produtos em Destaque",
+  "tag": "section",
+  "class": "shopify-section-namu-featured-products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Rótulo acima do título",
+      "default": "Mais Vendidos"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título da seção",
+      "default": "Favoritos da Estação"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Texto do botão",
+      "default": "IR PARA LOJA"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Link do botão"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Coleção de produtos"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Quantidade de produtos",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Produtos em Destaque",
+      "settings": {
+        "label": "Mais Vendidos",
+        "title": "Favoritos da Estação",
+        "cta_label": "IR PARA LOJA",
+        "cta_link": "/collections/all"
+      }
+    }
+  ]
+}
+{% endschema %}

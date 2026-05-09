@@ -1,0 +1,229 @@
+{{ 'namu-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'namu-newsletter.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign success = false
+  assign error   = false
+  if customer
+    assign success = true
+  endif
+-%}
+
+<section class="namu-nl" aria-label="{{ section.settings.title | default: 'Newsletter' | escape }}">
+  <div class="namu-nl__inner">
+
+    {%- comment -%} ── Col 1: Logo / institucional ─────────── {%- endcomment -%}
+    <div class="namu-nl__brand">
+      {%- if section.settings.logo != blank -%}
+        <img
+          src="{{ section.settings.logo | image_url: width: 240 }}"
+          alt="{{ shop.name | escape }}"
+          loading="lazy"
+          width="{{ section.settings.logo.width }}"
+          height="{{ section.settings.logo.height }}"
+          class="namu-nl__logo"
+        >
+      {%- elsif section.settings.logo_asset != blank -%}
+        <img
+          src="{{ section.settings.logo_asset | asset_url }}"
+          alt="{{ shop.name | escape }}"
+          loading="lazy"
+          decoding="async"
+          width="200"
+          height="60"
+          class="namu-nl__logo"
+        >
+      {%- else -%}
+        <span class="namu-nl__brand-name">{{ section.settings.brand_name | default: shop.name | escape }}</span>
+      {%- endif -%}
+      {%- if section.settings.tagline != blank -%}
+        <p class="namu-nl__tagline">{{ section.settings.tagline | escape }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} ── Divider ─────────────────────────────── {%- endcomment -%}
+    <div class="namu-nl__divider" aria-hidden="true"></div>
+
+    {%- comment -%} ── Col 2: Texto newsletter ─────────────── {%- endcomment -%}
+    <div class="namu-nl__copy">
+      {%- if section.settings.title != blank -%}
+        <p class="namu-nl__title">{{ section.settings.title | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.subtitle != blank -%}
+        <p class="namu-nl__subtitle">{{ section.settings.subtitle | escape }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} ── Col 3-5: Form ────────────────────────── {%- endcomment -%}
+    <div class="namu-nl__form-wrap">
+      {%- if success -%}
+        <p class="namu-nl__success" role="status" aria-live="polite">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="7"/><polyline points="5 8 7 10.5 11.5 6"/></svg>
+          {{ section.settings.success_msg | default: 'Inscrição realizada! Bem-vindo(a) à família Namu.' | escape }}
+        </p>
+      {%- else -%}
+        {% form 'customer', id: 'namu-nl-form', class: 'namu-nl__form' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+
+          {%- comment -%} Name field {%- endcomment -%}
+          <div class="namu-nl__field">
+            <label for="namu-nl-name" class="namu-nl__label">{{ section.settings.label_name | default: 'Nome' | escape }}</label>
+            <input
+              type="text"
+              id="namu-nl-name"
+              name="contact[first_name]"
+              class="namu-nl__input"
+              placeholder="{{ section.settings.placeholder_name | default: 'Seu nome' | escape }}"
+              autocomplete="given-name"
+              aria-required="false"
+            >
+          </div>
+
+          {%- comment -%} Email field {%- endcomment -%}
+          <div class="namu-nl__field">
+            <label for="namu-nl-email" class="namu-nl__label">{{ section.settings.label_email | default: 'E-mail' | escape }}</label>
+            <input
+              type="email"
+              id="namu-nl-email"
+              name="contact[email]"
+              class="namu-nl__input"
+              placeholder="{{ section.settings.placeholder_email | default: 'seu@email.com' | escape }}"
+              autocomplete="email"
+              aria-required="true"
+              required
+            >
+          </div>
+
+          {%- comment -%} Submit {%- endcomment -%}
+          <button type="submit" class="namu-nl__btn" aria-label="{{ section.settings.cta_label | default: 'Cadastrar' | escape }}">
+            <span>{{ section.settings.cta_label | default: 'Cadastrar' | escape }}</span>
+            <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="1" y1="6" x2="15" y2="6"/>
+              <polyline points="10 1 15 6 10 11"/>
+            </svg>
+          </button>
+
+          {%- comment -%} Error messages {%- endcomment -%}
+          {%- if form.errors -%}
+            <p class="namu-nl__error" role="alert" aria-live="assertive">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7" cy="7" r="6"/><line x1="7" y1="4" x2="7" y2="7.5"/><circle cx="7" cy="10" r="0.6" fill="currentColor" stroke="none"/></svg>
+              {{ form.errors | default_errors }}
+            </p>
+          {%- elsif form.posted_successfully? -%}
+            <p class="namu-nl__success" role="status" aria-live="polite">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="7"/><polyline points="5 8 7 10.5 11.5 6"/></svg>
+              {{ section.settings.success_msg | default: 'Inscrição realizada! Bem-vindo(a) à família Namu.' | escape }}
+            </p>
+          {%- endif -%}
+
+        {% endform %}
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "tag": "section",
+  "class": "shopify-section-namu-newsletter",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Marca"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo (Shopify CDN)"
+    },
+    {
+      "type": "text",
+      "id": "logo_asset",
+      "label": "Logo asset local (ex: namu-logo-horizontal-white.svg)",
+      "info": "Usado quando nenhuma imagem CDN está selecionada"
+    },
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Nome da marca (quando sem logo)",
+      "default": "Namu Matcha"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline institucional",
+      "default": "Do campo à sua xícara."
+    },
+    {
+      "type": "header",
+      "content": "Texto"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Faça parte da nossa comunidade"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Receba receitas exclusivas, novidades e ofertas especiais direto no seu e-mail."
+    },
+    {
+      "type": "header",
+      "content": "Formulário"
+    },
+    {
+      "type": "text",
+      "id": "label_name",
+      "label": "Label do campo Nome",
+      "default": "Nome"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_name",
+      "label": "Placeholder do campo Nome",
+      "default": "Seu nome"
+    },
+    {
+      "type": "text",
+      "id": "label_email",
+      "label": "Label do campo E-mail",
+      "default": "E-mail"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_email",
+      "label": "Placeholder do campo E-mail",
+      "default": "seu@email.com"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Texto do botão",
+      "default": "Cadastrar"
+    },
+    {
+      "type": "text",
+      "id": "success_msg",
+      "label": "Mensagem de sucesso",
+      "default": "Inscrição realizada! Bem-vindo(a) à família Namu."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter",
+      "settings": {
+        "brand_name": "Namu Matcha",
+        "tagline": "Do campo à sua xícara.",
+        "title": "Faça parte da nossa comunidade",
+        "subtitle": "Receba receitas exclusivas, novidades e ofertas especiais direto no seu e-mail.",
+        "cta_label": "Cadastrar"
+      }
+    }
+  ]
+}
+{% endschema %}

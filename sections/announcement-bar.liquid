@@ -1,0 +1,64 @@
+{{ 'namu-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'namu-announcement-bar.css' | asset_url | stylesheet_tag }}
+
+<div class="namu-announcement-bar" role="region" aria-label="Avisos da loja">
+  <div class="namu-topbar__inner">
+    {%- for block in section.blocks -%}
+      {%- if block.settings.text != blank -%}
+        {%- unless forloop.first -%}
+          <span class="namu-topbar__sep" aria-hidden="true">|</span>
+        {%- endunless -%}
+        {%- if block.settings.link != blank -%}
+          <a href="{{ block.settings.link }}" class="namu-topbar__item namu-topbar__item--link" {{ block.shopify_attributes }}>
+            {{- block.settings.text | escape -}}
+          </a>
+        {%- else -%}
+          <span class="namu-topbar__item" {{ block.shopify_attributes }}>
+            {{- block.settings.text | escape -}}
+          </span>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.announcement-bar.name",
+  "max_blocks": 12,
+  "class": "announcement-bar-section",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "t:sections.announcement-bar.blocks.announcement.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "default": "t:sections.announcement-bar.blocks.announcement.settings.text.default",
+          "label": "t:sections.announcement-bar.blocks.announcement.settings.text.label"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.announcement-bar.blocks.announcement.settings.link.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.announcement-bar.presets.name",
+      "blocks": [
+        {
+          "type": "announcement"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

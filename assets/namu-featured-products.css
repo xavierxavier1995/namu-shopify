@@ -1,0 +1,250 @@
+.namu-fp {
+  display: block;
+  padding: 3.5rem 0 2.5rem;
+  background: #fff;
+  contain: layout style;
+}
+
+/* ── Header ───────────────────────────────────────────── */
+.namu-fp__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  max-width: 1320px;
+  margin: 0 auto 2rem;
+  padding: 0 1.5rem;
+}
+
+.namu-fp__header-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.namu-fp__label {
+  font-family: var(--namu-font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--namu-verde-matcha);
+  margin: 0 0 0.5rem;
+}
+
+.namu-fp__title {
+  font-family: var(--namu-font-heading);
+  font-size: clamp(1.75rem, 3.5vw, 3rem);
+  font-weight: 700;
+  color: var(--namu-cinza-sombra);
+  margin: 0;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.namu-fp__cta {
+  flex-shrink: 0;
+  display: inline-block;
+  padding: 0.7rem 1.6rem;
+  border: 1.5px solid var(--namu-cinza-sombra);
+  border-radius: 999px;
+  font-family: var(--namu-font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--namu-cinza-sombra);
+  text-decoration: none;
+  white-space: nowrap;
+  margin-bottom: 0.35rem;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.namu-fp__cta:hover {
+  background: var(--namu-cinza-sombra);
+  color: #fff;
+}
+
+/* ── Wrapper + nav arrows ─────────────────────────────── */
+.namu-fp__wrapper {
+  position: relative;
+}
+
+.namu-fp__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  color: var(--namu-verde-matcha);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.namu-fp__nav--prev { left: 0.75rem; }
+.namu-fp__nav--next { right: 0.75rem; }
+
+.namu-fp.is-hovered .namu-fp__nav:not([hidden]) {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.namu-fp__nav:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.16);
+  transform: translateY(-50%) scale(1.06);
+}
+
+/* ── Track (scrollable) ───────────────────────────────── */
+.namu-fp__track {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 0.5rem max(1.5rem, calc((100vw - 1320px) / 2 + 1.5rem)) 1rem;
+  padding-right: max(1.5rem, calc((100vw - 1320px) / 2 + 1.5rem));
+}
+
+.namu-fp__track::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Cards ────────────────────────────────────────────── */
+.namu-fp__card {
+  /* Normal desktop: 3 cards + partial */
+  flex: 0 0 calc((100vw - 2 * max(1.5rem, calc((100vw - 1320px) / 2 + 1.5rem)) - 2 * 1.25rem) / 3.15);
+  min-width: 200px;
+  scroll-snap-align: start;
+}
+
+/* Ultrawide: 4 cards + partial */
+@media (min-width: 1441px) {
+  .namu-fp__card {
+    flex: 0 0 calc((100vw - 2 * max(1.5rem, calc((100vw - 1320px) / 2 + 1.5rem)) - 3 * 1.25rem) / 4.15);
+  }
+}
+
+@media (max-width: 768px) {
+  .namu-fp__card {
+    flex: 0 0 78vw;
+  }
+}
+
+.namu-fp__card-link {
+  display: block;
+  text-decoration: none;
+  background: var(--namu-branco-porcelana);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.namu-fp__card-link:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+}
+
+.namu-fp__card-img {
+  aspect-ratio: 3 / 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.75rem;
+  overflow: hidden;
+}
+
+.namu-fp__card-img-el {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.namu-fp__card-link:hover .namu-fp__card-img-el {
+  transform: scale(1.03);
+}
+
+.namu-fp__card-img-placeholder {
+  width: 100%;
+  height: 100%;
+  background: #e8e4df;
+  border-radius: 8px;
+}
+
+.namu-fp__card-info {
+  padding: 0.6rem 1.25rem 1.25rem;
+}
+
+.namu-fp__card-title {
+  font-family: var(--namu-font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--namu-verde-matcha);
+  margin: 0 0 0.35rem;
+  line-height: 1.35;
+}
+
+.namu-fp__card-price {
+  font-family: var(--namu-font-body);
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: #888;
+  margin: 0;
+}
+
+/* ── Progress bar ─────────────────────────────────────── */
+.namu-fp__progress-wrap {
+  max-width: 1320px;
+  margin: 1.5rem auto 0;
+  padding: 0 1.5rem;
+}
+
+.namu-fp__progress-track {
+  height: 2px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  position: relative;
+}
+
+.namu-fp__progress-fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 30%;
+  background: var(--namu-verde-matcha);
+  border-radius: 2px;
+  transition: left 0.15s ease, width 0.15s ease;
+}
+
+/* ── Mobile adjustments ───────────────────────────────── */
+@media (max-width: 768px) {
+  .namu-fp {
+    padding: 2.5rem 0 2rem;
+  }
+
+  .namu-fp__header {
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .namu-fp__title {
+    font-size: clamp(1.5rem, 7vw, 2rem);
+  }
+
+  .namu-fp__nav {
+    display: none;
+  }
+}

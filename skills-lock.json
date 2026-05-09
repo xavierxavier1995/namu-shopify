@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "skills": {
+    "liquid-theme-a11y": {
+      "source": "shopify/liquid-skills",
+      "sourceType": "github",
+      "skillPath": "plugins/liquid-skills/skills/liquid-theme-a11y/SKILL.md",
+      "computedHash": "bac5ae78e5a7ac087acb2db53f442f990bd9554f904b2e5a9fde776f7051b9a3"
+    },
+    "liquid-theme-standards": {
+      "source": "shopify/liquid-skills",
+      "sourceType": "github",
+      "skillPath": "plugins/liquid-skills/skills/liquid-theme-standards/SKILL.md",
+      "computedHash": "bdefa886c67239815efa2a303188f508936f8474c8e768b53a97e197544411d5"
+    },
+    "shopify-liquid-themes": {
+      "source": "shopify/liquid-skills",
+      "sourceType": "github",
+      "skillPath": "plugins/liquid-skills/skills/shopify-liquid-themes/SKILL.md",
+      "computedHash": "4c4afe344d3e9b2b7da15a50aa9cb1863de01054e7e61f94119f3b4367bee67d"
+    }
+  }
+}

@@ -1,0 +1,375 @@
+/* ══════════════════════════════════════════════════════
+   NAMU FOOTER — premium dark editorial
+   ══════════════════════════════════════════════════════ */
+
+/* ── Base ────────────────────────────────────────────── */
+.namu-ft {
+  background: #161616;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--namu-font-body, sans-serif);
+}
+
+/* ── Inner containers ─────────────────────────────────── */
+.namu-ft__top-inner,
+.namu-ft__main-inner,
+.namu-ft__bottom-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ══════════════════════════════════════════════════════
+   TOP ROW — brand + social
+   ══════════════════════════════════════════════════════ */
+.namu-ft__top {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 2.5rem 0;
+}
+
+.namu-ft__top-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Brand */
+.namu-ft__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.namu-ft__logo {
+  max-width: 140px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+
+.namu-ft__logo-link {
+  display: inline-block;
+}
+
+.namu-ft__logo-text {
+  font-family: var(--namu-font-heading, serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.namu-ft__tagline {
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+}
+
+/* Social */
+.namu-ft__social {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.namu-ft__social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.namu-ft__social-link:hover {
+  border-color: rgba(255, 255, 255, 0.45);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* ══════════════════════════════════════════════════════
+   MAIN — 5 colunas
+   ══════════════════════════════════════════════════════ */
+.namu-ft__main {
+  padding: 3.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* Desktop: force all accordion content visible regardless of [open] */
+@media (min-width: 1024px) {
+  .namu-ft__accordion > nav,
+  .namu-ft__accordion > .namu-ft__contact {
+    display: flex !important;
+  }
+}
+
+/* Desktop grid */
+.namu-ft__main-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+@media (min-width: 640px) {
+  .namu-ft__main-inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .namu-ft__main-inner {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* ── Column ──────────────────────────────────────────── */
+.namu-ft__col {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0;
+}
+
+@media (min-width: 1024px) {
+  .namu-ft__col {
+    border-bottom: none;
+  }
+}
+
+/* ── Accordion <details> ─────────────────────────────── */
+.namu-ft__accordion {
+  padding: 0;
+}
+
+/* Desktop: sempre aberto, sem seta */
+@media (min-width: 1024px) {
+  .namu-ft__accordion[open] > .namu-ft__col-heading .namu-ft__chevron {
+    display: none;
+  }
+
+  .namu-ft__accordion:not([open]) {
+    /* force open on desktop via CSS */
+  }
+}
+
+/* Summary (heading) */
+.namu-ft__col-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  padding: 1.1rem 0;
+  cursor: pointer;
+  font-family: var(--namu-font-body, sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+  user-select: none;
+  transition: color 0.2s ease;
+}
+
+/* Hide default triangle marker */
+.namu-ft__col-heading::-webkit-details-marker,
+.namu-ft__col-heading::marker {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .namu-ft__col-heading {
+    padding: 0 0 1.25rem;
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+/* Chevron rotation */
+.namu-ft__chevron {
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.4);
+  transition: transform 0.25s ease;
+}
+
+.namu-ft__accordion[open] .namu-ft__chevron {
+  transform: rotate(180deg);
+}
+
+@media (min-width: 1024px) {
+  .namu-ft__chevron {
+    display: none;
+  }
+}
+
+/* ── Nav links ───────────────────────────────────────── */
+.namu-ft__accordion nav,
+.namu-ft__contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding-bottom: 1.25rem;
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+  .namu-ft__accordion nav,
+  .namu-ft__contact {
+    padding-bottom: 0;
+  }
+}
+
+.namu-ft__link {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  padding: 0.28rem 0;
+  line-height: 1.5;
+  transition: color 0.18s ease;
+  width: fit-content;
+}
+
+.namu-ft__link:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ── Contact items ───────────────────────────────────── */
+.namu-ft__contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  padding: 0.28rem 0;
+  line-height: 1.5;
+  font-style: normal;
+  transition: color 0.18s ease;
+}
+
+a.namu-ft__contact-item:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.namu-ft__contact-item--text {
+  margin: 0;
+  cursor: default;
+}
+
+.namu-ft__contact-item svg {
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+  opacity: 0.5;
+}
+
+/* ══════════════════════════════════════════════════════
+   BOTTOM — copyright + policies + payment
+   ══════════════════════════════════════════════════════ */
+.namu-ft__bottom {
+  padding: 1.75rem 0;
+}
+
+.namu-ft__bottom-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* Legal */
+.namu-ft__legal {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.namu-ft__copyright {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.3);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.namu-ft__policies {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.namu-ft__policy-link {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.3);
+  text-decoration: none;
+  transition: color 0.18s ease;
+  white-space: nowrap;
+}
+
+.namu-ft__policy-link:hover {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* Payment icons */
+.namu-ft__payments {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.namu-ft__payment-icon {
+  height: 22px;
+  width: auto;
+  border-radius: 3px;
+  opacity: 0.45;
+  filter: grayscale(1) brightness(2);
+  transition: opacity 0.2s ease;
+}
+
+.namu-ft__payments:hover .namu-ft__payment-icon {
+  opacity: 0.65;
+}
+
+/* ── Mobile stacked ───────────────────────────────────── */
+@media (max-width: 1023px) {
+  .namu-ft__main {
+    padding: 0.5rem 0 0.75rem;
+  }
+
+  .namu-ft__bottom-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .namu-ft__legal {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+}
+
+/* ── Reduced motion ──────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .namu-ft__social-link,
+  .namu-ft__link,
+  .namu-ft__chevron,
+  .namu-ft__payment-icon {
+    transition: none;
+  }
+}

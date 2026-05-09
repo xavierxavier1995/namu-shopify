@@ -1,0 +1,97 @@
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "settings": {
+        "auto_rotate": true,
+        "change_slides_speed": 5,
+        "color_scheme": "scheme-4",
+        "show_line_separator": false,
+        "show_social": false,
+        "enable_country_selector": false,
+        "enable_language_selector": false
+      },
+      "blocks": {
+        "msg-frete": {
+          "type": "announcement",
+          "settings": {
+            "text": "FRETE GRÁTIS ACIMA DE R$199",
+            "link": ""
+          }
+        },
+        "msg-cupom": {
+          "type": "announcement",
+          "settings": {
+            "text": "GANHE 10% OFF NA PRIMEIRA COMPRA COM O CUPOM NOVONAMU",
+            "link": ""
+          }
+        },
+        "msg-kit": {
+          "type": "announcement",
+          "settings": {
+            "text": "KIT CERIMONIAL EDIÇÃO LIMITADA COM CERÂMICA NAOKO",
+            "link": "/collections/kits"
+          }
+        }
+      },
+      "block_order": [
+        "msg-frete",
+        "msg-cupom",
+        "msg-kit"
+      ]
+    },
+    "namu-header": {
+      "type": "namu-header",
+      "settings": {
+        "sticky": true
+      },
+      "blocks": {
+        "menu-loja": {
+          "type": "menu_item",
+          "settings": {
+            "label": "Loja",
+            "link": "/collections/all",
+            "has_mega_menu": true,
+            "column_heading": "Categorias",
+            "submenu_links": "Best Sellers|/collections/best-sellers\nMatchá Cerimonial|/collections/matcha-cerimonial\nMatchá Premium|/collections/matcha-premium\nMatchá Vanilla|/collections/matcha-vanilla\nHojicha|/collections/hojicha\nKits & Acessórios|/collections/kits",
+            "shop_all_label": "Ver tudo",
+            "shop_all_link": "/collections/all",
+            "feature_1_label": "Kit Cerimonial",
+            "feature_1_link": "/collections/kits",
+            "feature_2_label": "Novidade Hojicha",
+            "feature_2_link": "/products/hojicha"
+          }
+        },
+        "menu-receitas": {
+          "type": "menu_item",
+          "settings": { "label": "Receitas", "link": "/blogs/receitas", "show_arrow": true }
+        },
+        "menu-sobre": {
+          "type": "menu_item",
+          "settings": { "label": "Sobre", "link": "/pages/sobre" }
+        },
+        "menu-blog": {
+          "type": "menu_item",
+          "settings": { "label": "Blog", "link": "/blogs/news", "show_arrow": true }
+        },
+        "menu-b2b": {
+          "type": "menu_item",
+          "settings": { "label": "Para seu negócio", "link": "/pages/b2b" }
+        }
+      },
+      "block_order": [
+        "menu-loja",
+        "menu-receitas",
+        "menu-sobre",
+        "menu-blog",
+        "menu-b2b"
+      ]
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "namu-header"
+  ]
+}

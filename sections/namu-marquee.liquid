@@ -1,0 +1,92 @@
+{{ 'namu-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'namu-marquee.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign duration = section.settings.duration | default: 50
+-%}
+
+<section
+  class="namu-marquee"
+  aria-label="{{ section.settings.aria_label | default: 'Diferenciais Namu' }}"
+  style="--namu-marquee-duration: {{ duration }}s; --namu-marquee-bg: {{ section.settings.bg_color }}; --namu-marquee-text: {{ section.settings.text_color }};"
+>
+  <div class="namu-marquee__track">
+    {%- comment -%} Renderiza dois grupos para loop infinito sem corte {%- endcomment -%}
+    {%- for i in (1..2) -%}
+      <ul class="namu-marquee__group" aria-hidden="{% if i == 2 %}true{% else %}false{% endif %}">
+        {%- for block in section.blocks -%}
+          <li class="namu-marquee__item" {{ block.shopify_attributes }}>
+            <span class="namu-marquee__text">{{ block.settings.text | escape }}</span>
+          </li>
+          <li class="namu-marquee__sep" aria-hidden="true">|</li>
+        {%- endfor -%}
+      </ul>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marquee Namu",
+  "tag": "section",
+  "class": "shopify-section-namu-marquee",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Cor de fundo",
+      "default": "#045133"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Cor do texto",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "duration",
+      "label": "Duração de uma volta (segundos)",
+      "min": 20,
+      "max": 120,
+      "step": 5,
+      "default": 50
+    },
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "Rótulo de acessibilidade",
+      "default": "Diferenciais Namu"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "✓ Diferencial"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Marquee Namu",
+      "blocks": [
+        { "type": "item", "settings": { "text": "✓ Matcha direto de Hadong" } },
+        { "type": "item", "settings": { "text": "✓ Processo 100% rastreável, do campo à sua xícara" } },
+        { "type": "item", "settings": { "text": "✓ Sabor único e frescor garantido" } },
+        { "type": "item", "settings": { "text": "+5.000 clientes satisfeitos" } },
+        { "type": "item", "settings": { "text": "✓ Sabor puro e intenso, 100% orgânico" } },
+        { "type": "item", "settings": { "text": "✓ Energia limpa + foco sem ansiedade" } },
+        { "type": "item", "settings": { "text": "✓ Aprovado por baristas e nutricionistas" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

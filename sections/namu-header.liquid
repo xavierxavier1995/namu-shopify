@@ -1,0 +1,304 @@
+{{ 'namu-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'namu-header.css' | asset_url | stylesheet_tag }}
+
+<namu-header class="namu-header" data-sticky="{{ section.settings.sticky }}">
+  <div class="namu-header__pill">
+    <a href="{{ routes.root_url }}" class="namu-header__logo" aria-label="{{ shop.name }}">
+      {%- if section.settings.logo != blank -%}
+        {{ section.settings.logo | image_url: width: 480 | image_tag:
+          loading: 'eager',
+          width: section.settings.logo.width,
+          height: section.settings.logo.height,
+          alt: shop.name,
+          class: 'namu-header__logo-img'
+        }}
+      {%- else -%}
+        <img
+          src="{{ 'namu-logo-horizontal.svg' | asset_url }}"
+          alt="{{ shop.name }}"
+          class="namu-header__logo-img"
+          width="200"
+          height="48"
+          loading="eager"
+        >
+      {%- endif -%}
+    </a>
+
+    <nav class="namu-header__nav" aria-label="Menu principal">
+      <ul class="namu-header__menu">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'menu_item' -%}
+            <li class="namu-header__menu-item {% if block.settings.has_mega_menu %}has-mega{% endif %}" {{ block.shopify_attributes }}>
+              <a
+                href="{{ block.settings.link | default: '#' }}"
+                class="namu-header__menu-link"
+                {% if block.settings.has_mega_menu %}aria-haspopup="true" aria-expanded="false" data-mega-trigger="{{ block.id }}"{% endif %}
+              >
+                {{ block.settings.label | escape }}
+                {%- if block.settings.has_mega_menu or block.settings.show_arrow -%}
+                  <svg class="namu-header__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 1 5 5 9 1"/></svg>
+                {%- endif -%}
+              </a>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    <div class="namu-header__icons">
+      <a href="{{ routes.search_url }}" class="namu-header__icon" aria-label="Buscar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="11" cy="11" r="7"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </a>
+      <a href="{{ routes.account_url }}" class="namu-header__icon" aria-label="Minha conta">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </a>
+      <a href="{{ routes.cart_url }}" class="namu-header__icon namu-header__icon--cart" aria-label="Carrinho">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        {%- if cart.item_count > 0 -%}
+          <span class="namu-header__cart-count">{{ cart.item_count }}</span>
+        {%- endif -%}
+      </a>
+      <button class="namu-header__icon namu-header__menu-toggle" aria-label="Abrir menu" type="button">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  {%- comment -%} Mega menus (rendered as siblings of pill, positioned absolute) {%- endcomment -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'menu_item' and block.settings.has_mega_menu -%}
+      <div
+        class="namu-mega"
+        data-mega-id="{{ block.id }}"
+        role="region"
+        aria-label="{{ block.settings.label | escape }}"
+        hidden
+      >
+        <div class="namu-mega__inner">
+          <div class="namu-mega__col namu-mega__col--links">
+            {%- if block.settings.column_heading != blank -%}
+              <h3 class="namu-mega__heading">{{ block.settings.column_heading | escape }}</h3>
+            {%- endif -%}
+            <ul class="namu-mega__links">
+              {%- assign rows = block.settings.submenu_links | newline_to_br | split: '<br />' -%}
+              {%- for row in rows -%}
+                {%- assign trimmed = row | strip -%}
+                {%- if trimmed != blank -%}
+                  {%- assign parts = trimmed | split: '|' -%}
+                  {%- if parts.size >= 2 -%}
+                    <li>
+                      <a href="{{ parts[1] | strip }}" class="namu-mega__link">{{ parts[0] | strip }}</a>
+                    </li>
+                  {%- else -%}
+                    <li>
+                      <a href="#" class="namu-mega__link">{{ trimmed }}</a>
+                    </li>
+                  {%- endif -%}
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+            {%- if block.settings.shop_all_label != blank -%}
+              <a href="{{ block.settings.shop_all_link | default: '#' }}" class="namu-mega__cta">
+                {{ block.settings.shop_all_label | escape }}
+              </a>
+            {%- endif -%}
+          </div>
+
+          <div class="namu-mega__col namu-mega__col--features">
+            {%- for n in (1..2) -%}
+              {%- assign img_key = 'feature_' | append: n | append: '_image' -%}
+              {%- assign label_key = 'feature_' | append: n | append: '_label' -%}
+              {%- assign link_key = 'feature_' | append: n | append: '_link' -%}
+              {%- assign feat_img = block.settings[img_key] -%}
+              {%- assign feat_label = block.settings[label_key] -%}
+              {%- assign feat_link = block.settings[link_key] -%}
+              {%- if feat_img != blank -%}
+                <a href="{{ feat_link | default: '#' }}" class="namu-mega__feature">
+                  <div class="namu-mega__feature-img">
+                    {{ feat_img | image_url: width: 600 | image_tag:
+                      loading: 'lazy',
+                      width: feat_img.width,
+                      height: feat_img.height,
+                      alt: feat_label
+                    }}
+                  </div>
+                  {%- if feat_label != blank -%}
+                    <span class="namu-mega__feature-label">{{ feat_label | escape }}</span>
+                  {%- endif -%}
+                </a>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+
+  <div class="namu-header__mobile-menu" hidden>
+    <nav aria-label="Menu mobile">
+      <ul class="namu-header__mobile-list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'menu_item' -%}
+            <li class="namu-header__mobile-item">
+              <a href="{{ block.settings.link | default: '#' }}" class="namu-header__mobile-link">
+                {{ block.settings.label | escape }}
+              </a>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </nav>
+  </div>
+</namu-header>
+
+<script>
+  class NamuHeader extends HTMLElement {
+    constructor() {
+      super();
+      this.toggle = this.querySelector('.namu-header__menu-toggle');
+      this.mobileMenu = this.querySelector('.namu-header__mobile-menu');
+      this.megas = this.querySelectorAll('.namu-mega');
+      this.megaTriggers = this.querySelectorAll('[data-mega-trigger]');
+      this.closeTimer = null;
+
+      this.toggle?.addEventListener('click', () => this.toggleMobileMenu());
+
+      this.megaTriggers.forEach(trigger => {
+        const id = trigger.dataset.megaTrigger;
+        const mega = this.querySelector(`.namu-mega[data-mega-id="${id}"]`);
+        if (!mega) return;
+
+        const parent = trigger.closest('.namu-header__menu-item');
+        parent.addEventListener('mouseenter', () => this.openMega(mega, trigger));
+        parent.addEventListener('mouseleave', () => this.scheduleClose());
+        mega.addEventListener('mouseenter', () => this.cancelClose());
+        mega.addEventListener('mouseleave', () => this.scheduleClose());
+
+        trigger.addEventListener('focus', () => this.openMega(mega, trigger));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') this.closeAllMegas();
+      });
+
+      if (this.dataset.sticky === 'true') {
+        window.addEventListener('scroll', () => this.handleScroll(), { passive: true });
+      }
+    }
+
+    openMega(mega, trigger) {
+      this.cancelClose();
+      this.closeAllMegas(mega);
+      mega.hidden = false;
+      requestAnimationFrame(() => mega.classList.add('is-active'));
+      trigger.setAttribute('aria-expanded', 'true');
+    }
+
+    scheduleClose() {
+      this.cancelClose();
+      this.closeTimer = setTimeout(() => this.closeAllMegas(), 180);
+    }
+
+    cancelClose() {
+      clearTimeout(this.closeTimer);
+    }
+
+    closeAllMegas(except) {
+      this.megas.forEach(mega => {
+        if (mega === except) return;
+        mega.classList.remove('is-active');
+        const id = mega.dataset.megaId;
+        const trigger = this.querySelector(`[data-mega-trigger="${id}"]`);
+        trigger?.setAttribute('aria-expanded', 'false');
+        setTimeout(() => { if (!mega.classList.contains('is-active')) mega.hidden = true; }, 250);
+      });
+    }
+
+    toggleMobileMenu() {
+      const isOpen = !this.mobileMenu.hidden;
+      this.mobileMenu.hidden = isOpen;
+      this.classList.toggle('namu-header--menu-open', !isOpen);
+    }
+
+    handleScroll() {
+      this.classList.toggle('namu-header--scrolled', window.scrollY > 20);
+    }
+  }
+  customElements.define('namu-header', NamuHeader);
+</script>
+
+{% schema %}
+{
+  "name": "Header Namu",
+  "tag": "header",
+  "class": "shopify-section-namu-header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo (deixe vazio para usar o SVG padrão)"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky",
+      "label": "Header flutuante (sticky)",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu_item",
+      "name": "Item de menu",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Texto", "default": "Item" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "header", "content": "Mega menu (opcional)" },
+        { "type": "checkbox", "id": "has_mega_menu", "label": "Ativar mega menu ao passar o mouse", "default": false },
+        { "type": "checkbox", "id": "show_arrow", "label": "Mostrar seta indicativa", "default": false },
+        { "type": "text", "id": "column_heading", "label": "Título da coluna" },
+        { "type": "textarea", "id": "submenu_links", "label": "Links da coluna", "info": "Um por linha no formato: Texto|/url-do-link" },
+        { "type": "text", "id": "shop_all_label", "label": "Botão 'Ver tudo' (texto)" },
+        { "type": "url", "id": "shop_all_link", "label": "Botão 'Ver tudo' (link)" },
+        { "type": "header", "content": "Destaque 1" },
+        { "type": "image_picker", "id": "feature_1_image", "label": "Imagem" },
+        { "type": "text", "id": "feature_1_label", "label": "Título" },
+        { "type": "url", "id": "feature_1_link", "label": "Link" },
+        { "type": "header", "content": "Destaque 2" },
+        { "type": "image_picker", "id": "feature_2_image", "label": "Imagem" },
+        { "type": "text", "id": "feature_2_label", "label": "Título" },
+        { "type": "url", "id": "feature_2_link", "label": "Link" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Header Namu",
+      "blocks": [
+        { "type": "menu_item", "settings": { "label": "Loja", "link": "/collections/all" } },
+        { "type": "menu_item", "settings": { "label": "Receitas", "link": "/blogs/receitas" } },
+        { "type": "menu_item", "settings": { "label": "Sobre", "link": "/pages/sobre" } },
+        { "type": "menu_item", "settings": { "label": "Blog", "link": "/blogs/news" } },
+        { "type": "menu_item", "settings": { "label": "Para seu negócio", "link": "/pages/b2b" } }
+      ]
+    }
+  ],
+  "enabled_on": {
+    "groups": ["header"]
+  }
+}
+{% endschema %}

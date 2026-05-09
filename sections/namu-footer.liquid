@@ -1,0 +1,442 @@
+{{ 'namu-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'namu-footer.css' | asset_url | stylesheet_tag }}
+
+<footer class="namu-ft" role="contentinfo" aria-label="Rodapé">
+
+  {%- comment -%} ════════════════════════════════════
+      TOP ROW — logo + tagline + social
+  ════════════════════════════════════ {%- endcomment -%}
+  <div class="namu-ft__top">
+    <div class="namu-ft__top-inner">
+
+      {%- comment -%} Brand {%- endcomment -%}
+      <div class="namu-ft__brand">
+        {%- if section.settings.logo != blank -%}
+          <a href="/" class="namu-ft__logo-link" aria-label="{{ shop.name | escape }}">
+            <img
+              src="{{ section.settings.logo | image_url: width: 200 }}"
+              alt="{{ shop.name | escape }}"
+              loading="lazy"
+              width="{{ section.settings.logo.width | at_most: 200 }}"
+              height="{{ section.settings.logo.height }}"
+              class="namu-ft__logo"
+            >
+          </a>
+        {%- else -%}
+          <a href="/" class="namu-ft__logo-text" aria-label="{{ shop.name | escape }}">
+            {{ section.settings.brand_name | default: shop.name | escape }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.tagline != blank -%}
+          <p class="namu-ft__tagline">{{ section.settings.tagline | escape }}</p>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Social links {%- endcomment -%}
+      <nav class="namu-ft__social" aria-label="Redes sociais">
+        {%- if section.settings.social_instagram != blank -%}
+          <a href="{{ section.settings.social_instagram }}" class="namu-ft__social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/></svg>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.social_tiktok != blank -%}
+          <a href="{{ section.settings.social_tiktok }}" class="namu-ft__social-link" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.social_youtube != blank -%}
+          <a href="{{ section.settings.social_youtube }}" class="namu-ft__social-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22.54 6.42A2.78 2.78 0 0 0 20.6 4.47C18.88 4 12 4 12 4s-6.88 0-8.6.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.53C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58Z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" stroke="none" fill="currentColor"/></svg>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.social_facebook != blank -%}
+          <a href="{{ section.settings.social_facebook }}" class="namu-ft__social-link" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.social_pinterest != blank -%}
+          <a href="{{ section.settings.social_pinterest }}" class="namu-ft__social-link" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.65 7.86 6.39 9.29-.09-.78-.17-1.98.04-2.83.18-.77 1.22-5.16 1.22-5.16s-.31-.62-.31-1.54c0-1.45.84-2.53 1.88-2.53.89 0 1.32.67 1.32 1.47 0 .9-.57 2.24-.87 3.48-.25 1.04.52 1.89 1.54 1.89 1.85 0 3.28-1.95 3.28-4.76 0-2.49-1.79-4.23-4.34-4.23-2.96 0-4.7 2.22-4.7 4.51 0 .89.34 1.85.77 2.37.08.1.09.19.07.29-.08.31-.25.99-.28 1.13-.04.18-.14.22-.32.13-1.25-.58-2.03-2.42-2.03-3.89 0-3.16 2.3-6.07 6.63-6.07 3.48 0 6.19 2.48 6.19 5.79 0 3.46-2.18 6.24-5.2 6.24-1.02 0-1.97-.53-2.3-1.15l-.62 2.33c-.23.87-.84 1.96-1.25 2.62.94.29 1.94.45 2.97.45 5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+          </a>
+        {%- endif -%}
+      </nav>
+
+    </div>
+  </div>
+
+  {%- comment -%} ════════════════════════════════════
+      MAIN — 5 colunas de links
+  ════════════════════════════════════ {%- endcomment -%}
+  <div class="namu-ft__main">
+    <div class="namu-ft__main-inner">
+
+      {%- comment -%} ── Coluna: Compras ─────────────── {%- endcomment -%}
+      <div class="namu-ft__col">
+        <details class="namu-ft__accordion" open>
+          <summary class="namu-ft__col-heading">
+            {{ section.settings.col1_heading | default: 'Compras' | escape }}
+            <span class="namu-ft__chevron" aria-hidden="true">
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 1 5 5 9 1"/></svg>
+            </span>
+          </summary>
+          <nav aria-label="{{ section.settings.col1_heading | default: 'Compras' | escape }}">
+            {%- if section.settings.col1_menu != blank -%}
+              {%- assign col1 = linklists[section.settings.col1_menu] -%}
+              {%- for link in col1.links -%}
+                <a href="{{ link.url }}" class="namu-ft__link">{{ link.title | escape }}</a>
+              {%- endfor -%}
+            {%- else -%}
+              <a href="/collections/all" class="namu-ft__link">Todos os produtos</a>
+              <a href="/collections/matcha-cerimonial" class="namu-ft__link">Matchas Puros</a>
+              <a href="/collections/matcha-vanilla" class="namu-ft__link">Blends</a>
+              <a href="/collections/kits" class="namu-ft__link">Kits</a>
+              <a href="/collections/kits" class="namu-ft__link">Utensílios</a>
+            {%- endif -%}
+          </nav>
+        </details>
+      </div>
+
+      {%- comment -%} ── Coluna: Institucional ──────── {%- endcomment -%}
+      <div class="namu-ft__col">
+        <details class="namu-ft__accordion">
+          <summary class="namu-ft__col-heading">
+            {{ section.settings.col2_heading | default: 'Institucional' | escape }}
+            <span class="namu-ft__chevron" aria-hidden="true">
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 1 5 5 9 1"/></svg>
+            </span>
+          </summary>
+          <nav aria-label="{{ section.settings.col2_heading | default: 'Institucional' | escape }}">
+            {%- if section.settings.col2_menu != blank -%}
+              {%- assign col2 = linklists[section.settings.col2_menu] -%}
+              {%- for link in col2.links -%}
+                <a href="{{ link.url }}" class="namu-ft__link">{{ link.title | escape }}</a>
+              {%- endfor -%}
+            {%- else -%}
+              <a href="/pages/sobre-nos" class="namu-ft__link">Sobre a Namu</a>
+              <a href="/pages/nossa-historia" class="namu-ft__link">Nossa História</a>
+              <a href="/blogs/news" class="namu-ft__link">Blog</a>
+              <a href="/pages/sustentabilidade" class="namu-ft__link">Sustentabilidade</a>
+              <a href="/pages/imprensa" class="namu-ft__link">Imprensa</a>
+            {%- endif -%}
+          </nav>
+        </details>
+      </div>
+
+      {%- comment -%} ── Coluna: Ajuda ──────────────── {%- endcomment -%}
+      <div class="namu-ft__col">
+        <details class="namu-ft__accordion">
+          <summary class="namu-ft__col-heading">
+            {{ section.settings.col3_heading | default: 'Ajuda' | escape }}
+            <span class="namu-ft__chevron" aria-hidden="true">
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 1 5 5 9 1"/></svg>
+            </span>
+          </summary>
+          <nav aria-label="{{ section.settings.col3_heading | default: 'Ajuda' | escape }}">
+            {%- if section.settings.col3_menu != blank -%}
+              {%- assign col3 = linklists[section.settings.col3_menu] -%}
+              {%- for link in col3.links -%}
+                <a href="{{ link.url }}" class="namu-ft__link">{{ link.title | escape }}</a>
+              {%- endfor -%}
+            {%- else -%}
+              <a href="/pages/faq" class="namu-ft__link">Perguntas Frequentes</a>
+              <a href="/pages/como-preparar" class="namu-ft__link">Como Preparar</a>
+              <a href="/pages/envios-e-entregas" class="namu-ft__link">Envios e Entregas</a>
+              <a href="/pages/trocas-e-devolucoes" class="namu-ft__link">Trocas e Devoluções</a>
+              <a href="/pages/rastreio" class="namu-ft__link">Rastreie seu Pedido</a>
+            {%- endif -%}
+          </nav>
+        </details>
+      </div>
+
+      {%- comment -%} ── Coluna: Minha Conta ────────── {%- endcomment -%}
+      <div class="namu-ft__col">
+        <details class="namu-ft__accordion">
+          <summary class="namu-ft__col-heading">
+            {{ section.settings.col4_heading | default: 'Minha Conta' | escape }}
+            <span class="namu-ft__chevron" aria-hidden="true">
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 1 5 5 9 1"/></svg>
+            </span>
+          </summary>
+          <nav aria-label="{{ section.settings.col4_heading | default: 'Minha Conta' | escape }}">
+            {%- if section.settings.col4_menu != blank -%}
+              {%- assign col4 = linklists[section.settings.col4_menu] -%}
+              {%- for link in col4.links -%}
+                <a href="{{ link.url }}" class="namu-ft__link">{{ link.title | escape }}</a>
+              {%- endfor -%}
+            {%- else -%}
+              <a href="/account/login" class="namu-ft__link">Entrar</a>
+              <a href="/account/register" class="namu-ft__link">Criar Conta</a>
+              <a href="/account/orders" class="namu-ft__link">Meus Pedidos</a>
+              <a href="/account/addresses" class="namu-ft__link">Endereços</a>
+              <a href="/account" class="namu-ft__link">Painel</a>
+            {%- endif -%}
+          </nav>
+        </details>
+      </div>
+
+      {%- comment -%} ── Coluna: Atendimento ────────── {%- endcomment -%}
+      <div class="namu-ft__col namu-ft__col--contact">
+        <details class="namu-ft__accordion">
+          <summary class="namu-ft__col-heading">
+            {{ section.settings.col5_heading | default: 'Atendimento' | escape }}
+            <span class="namu-ft__chevron" aria-hidden="true">
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 1 5 5 9 1"/></svg>
+            </span>
+          </summary>
+          <div class="namu-ft__contact">
+            {%- if section.settings.contact_email != blank -%}
+              <a href="mailto:{{ section.settings.contact_email }}" class="namu-ft__contact-item">
+                <svg width="13" height="13" viewBox="0 0 20 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="1" width="18" height="14" rx="2"/><polyline points="1 4 10 9.5 19 4"/></svg>
+                {{ section.settings.contact_email | escape }}
+              </a>
+            {%- endif -%}
+            {%- if section.settings.contact_phone != blank -%}
+              <a href="tel:{{ section.settings.contact_phone | remove: ' ' | remove: '-' | remove: '(' | remove: ')' }}" class="namu-ft__contact-item">
+                <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 1h4l2 5-2.5 1.5a11 11 0 0 0 4 4L14 9l5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 1 3a2 2 0 0 1 2-2"/></svg>
+                {{ section.settings.contact_phone | escape }}
+              </a>
+            {%- endif -%}
+            {%- if section.settings.contact_hours != blank -%}
+              <p class="namu-ft__contact-item namu-ft__contact-item--text">
+                <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="9"/><polyline points="10 5 10 10 14 12"/></svg>
+                {{ section.settings.contact_hours | escape }}
+              </p>
+            {%- endif -%}
+            {%- if section.settings.contact_address != blank -%}
+              <address class="namu-ft__contact-item namu-ft__contact-item--text">
+                <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2a6 6 0 0 1 6 6c0 4-6 10-6 10S4 12 4 8a6 6 0 0 1 6-6z"/><circle cx="10" cy="8" r="2"/></svg>
+                {{ section.settings.contact_address | escape }}
+              </address>
+            {%- endif -%}
+          </div>
+        </details>
+      </div>
+
+    </div>
+  </div>
+
+  {%- comment -%} ════════════════════════════════════
+      BOTTOM — políticas + payment + copyright
+  ════════════════════════════════════ {%- endcomment -%}
+  <div class="namu-ft__bottom">
+    <div class="namu-ft__bottom-inner">
+
+      {%- comment -%} Copyright + policies {%- endcomment -%}
+      <div class="namu-ft__legal">
+        <p class="namu-ft__copyright">
+          &copy; {{ 'now' | date: '%Y' }} {{ section.settings.brand_name | default: shop.name | escape }}
+          {%- if section.settings.copyright_text != blank -%}
+            &nbsp;{{ section.settings.copyright_text | escape }}
+          {%- endif -%}
+        </p>
+        <nav class="namu-ft__policies" aria-label="Políticas">
+          {%- for policy in shop.enabled_payment_types -%}{%- endfor -%}
+          {%- if shop.privacy_policy != blank -%}
+            <a href="{{ shop.privacy_policy.url }}" class="namu-ft__policy-link">{{ shop.privacy_policy.title | escape }}</a>
+          {%- endif -%}
+          {%- if shop.refund_policy != blank -%}
+            <a href="{{ shop.refund_policy.url }}" class="namu-ft__policy-link">{{ shop.refund_policy.title | escape }}</a>
+          {%- endif -%}
+          {%- if shop.terms_of_service != blank -%}
+            <a href="{{ shop.terms_of_service.url }}" class="namu-ft__policy-link">{{ shop.terms_of_service.title | escape }}</a>
+          {%- endif -%}
+          {%- if shop.shipping_policy != blank -%}
+            <a href="{{ shop.shipping_policy.url }}" class="namu-ft__policy-link">{{ shop.shipping_policy.title | escape }}</a>
+          {%- endif -%}
+        </nav>
+      </div>
+
+      {%- comment -%} Payment icons {%- endcomment -%}
+      {%- unless shop.enabled_payment_types == empty -%}
+        <div class="namu-ft__payments" aria-label="Formas de pagamento aceitas">
+          {%- for type in shop.enabled_payment_types -%}
+            {{ type | payment_type_svg_tag: class: 'namu-ft__payment-icon' }}
+          {%- endfor -%}
+        </div>
+      {%- endunless -%}
+
+    </div>
+  </div>
+
+</footer>
+
+{% schema %}
+{
+  "name": "Footer Namu",
+  "class": "shopify-section-namu-footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Marca"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo (versão clara para fundo escuro)"
+    },
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Nome da marca",
+      "default": "Namu Matcha"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Do campo à sua xícara."
+    },
+    {
+      "type": "header",
+      "content": "Redes sociais"
+    },
+    {
+      "type": "url",
+      "id": "social_instagram",
+      "label": "Instagram"
+    },
+    {
+      "type": "url",
+      "id": "social_tiktok",
+      "label": "TikTok"
+    },
+    {
+      "type": "url",
+      "id": "social_youtube",
+      "label": "YouTube"
+    },
+    {
+      "type": "url",
+      "id": "social_facebook",
+      "label": "Facebook"
+    },
+    {
+      "type": "url",
+      "id": "social_pinterest",
+      "label": "Pinterest"
+    },
+    {
+      "type": "header",
+      "content": "Coluna 1 — Compras"
+    },
+    {
+      "type": "text",
+      "id": "col1_heading",
+      "label": "Título",
+      "default": "Compras"
+    },
+    {
+      "type": "link_list",
+      "id": "col1_menu",
+      "label": "Menu de links"
+    },
+    {
+      "type": "header",
+      "content": "Coluna 2 — Institucional"
+    },
+    {
+      "type": "text",
+      "id": "col2_heading",
+      "label": "Título",
+      "default": "Institucional"
+    },
+    {
+      "type": "link_list",
+      "id": "col2_menu",
+      "label": "Menu de links"
+    },
+    {
+      "type": "header",
+      "content": "Coluna 3 — Ajuda"
+    },
+    {
+      "type": "text",
+      "id": "col3_heading",
+      "label": "Título",
+      "default": "Ajuda"
+    },
+    {
+      "type": "link_list",
+      "id": "col3_menu",
+      "label": "Menu de links"
+    },
+    {
+      "type": "header",
+      "content": "Coluna 4 — Minha Conta"
+    },
+    {
+      "type": "text",
+      "id": "col4_heading",
+      "label": "Título",
+      "default": "Minha Conta"
+    },
+    {
+      "type": "link_list",
+      "id": "col4_menu",
+      "label": "Menu de links"
+    },
+    {
+      "type": "header",
+      "content": "Coluna 5 — Atendimento"
+    },
+    {
+      "type": "text",
+      "id": "col5_heading",
+      "label": "Título",
+      "default": "Atendimento"
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "E-mail",
+      "default": "oi@namumatcha.com.br"
+    },
+    {
+      "type": "text",
+      "id": "contact_phone",
+      "label": "Telefone / WhatsApp",
+      "default": "(11) 99999-9999"
+    },
+    {
+      "type": "text",
+      "id": "contact_hours",
+      "label": "Horário de atendimento",
+      "default": "Seg – Sex, 9h às 18h"
+    },
+    {
+      "type": "text",
+      "id": "contact_address",
+      "label": "Endereço",
+      "default": "São Paulo, SP – Brasil"
+    },
+    {
+      "type": "header",
+      "content": "Rodapé inferior"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Texto após o copyright",
+      "default": "· Todos os direitos reservados."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer Namu",
+      "settings": {
+        "brand_name": "Namu Matcha",
+        "tagline": "Do campo à sua xícara.",
+        "col1_heading": "Compras",
+        "col2_heading": "Institucional",
+        "col3_heading": "Ajuda",
+        "col4_heading": "Minha Conta",
+        "col5_heading": "Atendimento",
+        "contact_email": "oi@namumatcha.com.br",
+        "contact_hours": "Seg – Sex, 9h às 18h",
+        "contact_address": "São Paulo, SP – Brasil",
+        "copyright_text": "· Todos os direitos reservados."
+      }
+    }
+  ]
+}
+{% endschema %}

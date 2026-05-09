@@ -1,0 +1,227 @@
+{{ 'namu-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'namu-recipes.css' | asset_url | stylesheet_tag }}
+
+<section class="namu-rec" aria-label="{{ section.settings.title | default: 'Receitas' | escape }}">
+  <div class="namu-rec__inner">
+
+    {%- comment -%} ── Header ─────────────────────────────── {%- endcomment -%}
+    <header class="namu-rec__header">
+      {%- if section.settings.label != blank -%}
+        <p class="namu-rec__label">{{ section.settings.label | upcase | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="namu-rec__title">{{ section.settings.title | upcase | escape }}</h2>
+      {%- endif -%}
+    </header>
+
+    {%- comment -%} ── Grid ───────────────────────────────── {%- endcomment -%}
+    <div class="namu-rec__grid" role="list">
+      {%- for block in section.blocks -%}
+        <div class="namu-rec__item" role="listitem" {{ block.shopify_attributes }}>
+          <a
+            href="{{ block.settings.link | default: '#' }}"
+            class="namu-rec__card"
+            aria-label="{{ block.settings.title | escape }}"
+          >
+            {%- comment -%} Background image {%- endcomment -%}
+            <div class="namu-rec__media">
+              {%- if block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 800 }}"
+                  srcset="
+                    {{ block.settings.image | image_url: width: 400 }} 400w,
+                    {{ block.settings.image | image_url: width: 700 }} 700w,
+                    {{ block.settings.image | image_url: width: 1000 }} 1000w"
+                  sizes="(max-width: 639px) 80vw, (max-width: 1023px) 50vw, 25vw"
+                  alt="{{ block.settings.title | escape }}"
+                  loading="lazy"
+                  decoding="async"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                  class="namu-rec__img"
+                >
+              {%- elsif block.settings.fallback_asset != blank -%}
+                <img
+                  src="{{ block.settings.fallback_asset | asset_url }}"
+                  alt="{{ block.settings.title | escape }}"
+                  loading="lazy"
+                  decoding="async"
+                  width="800"
+                  height="1067"
+                  class="namu-rec__img"
+                >
+              {%- else -%}
+                <div
+                  class="namu-rec__img-placeholder"
+                  style="background: {{ block.settings.placeholder_color | default: '#1a2e1e' }};"
+                  aria-hidden="true"
+                >
+                  <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M40 15 C40 4 23 4 23 15 S23 32 40 32 C40 16 57 14 57 14 S57 32 40 32 Z" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="40" y1="32" x2="40" y2="54" stroke="rgba(255,255,255,0.3)" stroke-width="1.4" stroke-linecap="round"/>
+                    <path d="M30 46 C28 44 24 45 22 48" stroke="rgba(255,255,255,0.2)" stroke-width="1.1" stroke-linecap="round"/>
+                  </svg>
+                </div>
+              {%- endif -%}
+            </div>
+
+            {%- comment -%} Overlay {%- endcomment -%}
+            <div class="namu-rec__overlay" aria-hidden="true"></div>
+
+            {%- comment -%} Content on top of overlay {%- endcomment -%}
+            <div class="namu-rec__content">
+              {%- if block.settings.category != blank -%}
+                <span class="namu-rec__category">{{ block.settings.category | upcase | escape }}</span>
+              {%- endif -%}
+
+              <div class="namu-rec__bottom">
+                <h3 class="namu-rec__name">{{ block.settings.title | escape }}</h3>
+                <span class="namu-rec__arrow" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="4" y1="10" x2="16" y2="10"/>
+                    <polyline points="11 5 16 10 11 15"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+
+          </a>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- comment -%} ── Sub CTA ─────────────────────────────── {%- endcomment -%}
+    {%- if section.settings.cta_label != blank and section.settings.cta_link != blank -%}
+      <div class="namu-rec__cta-wrap">
+        <a href="{{ section.settings.cta_link }}" class="namu-rec__cta">
+          {{ section.settings.cta_label | upcase | escape }}
+          <svg width="12" height="10" viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="1" y1="5" x2="11" y2="5"/>
+            <polyline points="7 1 11 5 7 9"/>
+          </svg>
+        </a>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Grade de Receitas",
+  "tag": "section",
+  "class": "shopify-section-namu-recipes",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Rótulo acima do título",
+      "default": "Inspiração"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título da seção",
+      "default": "Nossas Receitas Favoritas com Matcha"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Texto do CTA abaixo",
+      "default": "Ver todas"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Link do CTA"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "recipe",
+      "name": "Receita",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagem da receita (Shopify CDN)"
+        },
+        {
+          "type": "text",
+          "id": "fallback_asset",
+          "label": "Asset local (ex: receita.webp)",
+          "info": "Usado quando nenhuma imagem CDN está selecionada"
+        },
+        {
+          "type": "color",
+          "id": "placeholder_color",
+          "label": "Cor de placeholder",
+          "default": "#1a2e1e"
+        },
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Categoria (ex: Bebida, Sobremesa)",
+          "default": "Bebida"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Nome da receita",
+          "default": "Receita"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link da receita"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Grade de Receitas",
+      "settings": {
+        "label": "Inspiração",
+        "title": "Nossas Receitas Favoritas com Matcha",
+        "cta_label": "Ver todas"
+      },
+      "blocks": [
+        {
+          "type": "recipe",
+          "settings": {
+            "category": "Bebida",
+            "title": "Lemon Soda Matcha",
+            "placeholder_color": "#1e3a2a"
+          }
+        },
+        {
+          "type": "recipe",
+          "settings": {
+            "category": "Bebida",
+            "title": "Maracumatcha",
+            "placeholder_color": "#2b3d1f"
+          }
+        },
+        {
+          "type": "recipe",
+          "settings": {
+            "category": "Latte",
+            "title": "Houjicha Latte",
+            "placeholder_color": "#3d2b1a"
+          }
+        },
+        {
+          "type": "recipe",
+          "settings": {
+            "category": "Prato",
+            "title": "Gnocchi de Matcha",
+            "placeholder_color": "#1a2e1e"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

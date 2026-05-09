@@ -1,0 +1,274 @@
+/* ── Section wrapper ─────────────────────────────────── */
+.namu-nl {
+  background: #f0efeb;
+  padding: 3.25rem 0;
+}
+
+/* ── Inner — horizontal layout ───────────────────────── */
+.namu-nl__inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ── Desktop: linha horizontal ───────────────────────── */
+@media (min-width: 1024px) {
+  .namu-nl__inner {
+    flex-direction: row;
+    align-items: center;
+    gap: 0;
+  }
+}
+
+/* ── Col 1: Marca ────────────────────────────────────── */
+.namu-nl__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+@media (min-width: 1024px) {
+  .namu-nl__brand {
+    min-width: 200px;
+    padding-right: 3rem;
+  }
+}
+
+.namu-nl__logo {
+  max-width: 140px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.namu-nl__brand-name {
+  font-family: var(--namu-font-heading, serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--namu-cinza-sombra, #1a1a1a);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.namu-nl__tagline {
+  font-family: var(--namu-font-body, sans-serif);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: #888;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ── Divider — desktop only ──────────────────────────── */
+.namu-nl__divider {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .namu-nl__divider {
+    display: block;
+    width: 1px;
+    align-self: stretch;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(0, 0, 0, 0.12) 20%,
+      rgba(0, 0, 0, 0.12) 80%,
+      transparent
+    );
+    flex-shrink: 0;
+    margin: 0.5rem 0;
+  }
+}
+
+/* ── Col 2: Texto ────────────────────────────────────── */
+.namu-nl__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+@media (min-width: 1024px) {
+  .namu-nl__copy {
+    padding: 0 3rem;
+    max-width: 300px;
+    flex-shrink: 0;
+  }
+}
+
+.namu-nl__title {
+  font-family: var(--namu-font-body, sans-serif);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--namu-cinza-sombra, #1a1a1a);
+  margin: 0;
+  line-height: 1.35;
+}
+
+.namu-nl__subtitle {
+  font-family: var(--namu-font-body, sans-serif);
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: #777;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── Col 3-5: Form ───────────────────────────────────── */
+.namu-nl__form-wrap {
+  flex: 1;
+}
+
+@media (min-width: 1024px) {
+  .namu-nl__form-wrap {
+    padding-left: 3rem;
+  }
+}
+
+.namu-nl__form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: stretch;
+}
+
+@media (min-width: 640px) {
+  .namu-nl__form {
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 0.75rem;
+  }
+}
+
+/* ── Field wrapper ───────────────────────────────────── */
+.namu-nl__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Label ───────────────────────────────────────────── */
+.namu-nl__label {
+  font-family: var(--namu-font-body, sans-serif);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #888;
+}
+
+/* ── Input ───────────────────────────────────────────── */
+.namu-nl__input {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 46px;
+  padding: 0 1rem;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  font-family: var(--namu-font-body, sans-serif);
+  font-size: 0.84rem;
+  font-weight: 400;
+  color: var(--namu-cinza-sombra, #1a1a1a);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.namu-nl__input::placeholder {
+  color: #bbb;
+}
+
+.namu-nl__input:focus {
+  border-color: var(--namu-verde-matcha, #045133);
+  box-shadow: 0 0 0 3px rgba(4, 81, 51, 0.1);
+}
+
+/* ── Button ──────────────────────────────────────────── */
+.namu-nl__btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  height: 46px;
+  padding: 0 1.75rem;
+  background: #1a1a1a;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-family: var(--namu-font-body, sans-serif);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease, box-shadow 0.2s ease, gap 0.18s ease;
+}
+
+.namu-nl__btn:hover {
+  background: #000000;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  gap: 0.75rem;
+}
+
+.namu-nl__btn:focus-visible {
+  outline: 2px solid var(--namu-verde-matcha, #045133);
+  outline-offset: 3px;
+}
+
+/* ── Success message ─────────────────────────────────── */
+.namu-nl__success {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--namu-font-body, sans-serif);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--namu-verde-matcha, #045133);
+  margin: 0;
+  padding: 0.75rem 1rem;
+  background: rgba(4, 81, 51, 0.06);
+  border: 1px solid rgba(4, 81, 51, 0.15);
+  border-radius: 10px;
+}
+
+/* ── Error message ───────────────────────────────────── */
+.namu-nl__error {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-family: var(--namu-font-body, sans-serif);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #c0392b;
+  margin: 0;
+  padding: 0.65rem 1rem;
+  background: rgba(192, 57, 43, 0.05);
+  border: 1px solid rgba(192, 57, 43, 0.15);
+  border-radius: 10px;
+}
+
+/* ── Mobile tweaks ───────────────────────────────────── */
+@media (max-width: 1023px) {
+  .namu-nl {
+    padding: 2.75rem 0;
+  }
+}
+
+/* ── Reduced motion ──────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .namu-nl__input,
+  .namu-nl__btn {
+    transition: none;
+  }
+}

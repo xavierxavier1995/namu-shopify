@@ -1,0 +1,247 @@
+{{ 'namu-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'namu-hero-slider.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign autoplay_speed = section.settings.autoplay_speed | default: 6
+  assign overlap_header = section.settings.overlap_header
+-%}
+
+<namu-hero-slider
+  class="namu-hero {% if overlap_header %}namu-hero--overlap{% endif %}"
+  data-autoplay="{{ section.settings.autoplay }}"
+  data-speed="{{ autoplay_speed | times: 1000 }}"
+  aria-roledescription="carousel"
+  aria-label="Banner principal"
+>
+  <div class="namu-hero__track">
+    {%- for block in section.blocks -%}
+      {%- assign img = block.settings.image -%}
+      <div
+        class="namu-hero__slide"
+        data-index="{{ forloop.index0 }}"
+        role="group"
+        aria-roledescription="slide"
+        aria-label="{{ forloop.index }} de {{ forloop.length }}"
+        {{ block.shopify_attributes }}
+      >
+        {%- if block.settings.link != blank -%}
+          <a href="{{ block.settings.link }}" class="namu-hero__link" aria-label="{{ block.settings.alt | default: 'Ver oferta' }}">
+        {%- endif -%}
+
+        {%- if img != blank -%}
+          {%- assign desktop_url = img | image_url: width: 2400 -%}
+          <picture>
+            <source media="(min-width: 750px)" srcset="
+              {{ img | image_url: width: 1600 }} 1600w,
+              {{ img | image_url: width: 2000 }} 2000w,
+              {{ img | image_url: width: 2400 }} 2400w" sizes="100vw">
+            <img
+              src="{{ desktop_url }}"
+              alt="{{ block.settings.alt | escape }}"
+              class="namu-hero__image"
+              width="{{ img.width }}"
+              height="{{ img.height }}"
+              loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+              fetchpriority="{% if forloop.first %}high{% else %}auto{% endif %}"
+            >
+          </picture>
+        {%- else -%}
+          {%- comment -%} Fallback: local asset com suporte mobile/desktop {%- endcomment -%}
+          <picture>
+            {%- if block.settings.fallback_asset_mobile != blank -%}
+              <source
+                media="(max-width: 749px)"
+                srcset="{{ block.settings.fallback_asset_mobile | asset_url }}"
+              >
+            {%- endif -%}
+            <img
+              src="{{ block.settings.fallback_asset | asset_url }}"
+              alt="{{ block.settings.alt | escape }}"
+              class="namu-hero__image"
+              width="2000"
+              height="1000"
+              loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+              {% if forloop.first %}fetchpriority="high"{% endif %}
+              decoding="{% if forloop.first %}sync{% else %}async{% endif %}"
+            >
+          </picture>
+        {%- endif -%}
+
+        {%- if block.settings.link != blank -%}</a>{%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {%- if section.blocks.size > 1 -%}
+    <button class="namu-hero__nav namu-hero__nav--prev" type="button" aria-label="Slide anterior">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+    </button>
+    <button class="namu-hero__nav namu-hero__nav--next" type="button" aria-label="Próximo slide">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+    </button>
+
+    <div class="namu-hero__dots" role="tablist" aria-label="Selecionar slide">
+      {%- for block in section.blocks -%}
+        <button
+          class="namu-hero__dot {% if forloop.first %}is-active{% endif %}"
+          type="button"
+          role="tab"
+          aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+          aria-label="Slide {{ forloop.index }}"
+          data-index="{{ forloop.index0 }}"
+        ></button>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</namu-hero-slider>
+
+<script>
+  class NamuHeroSlider extends HTMLElement {
+    constructor() {
+      super();
+      this.track = this.querySelector('.namu-hero__track');
+      this.slides = Array.from(this.querySelectorAll('.namu-hero__slide'));
+      this.dots = Array.from(this.querySelectorAll('.namu-hero__dot'));
+      this.prevBtn = this.querySelector('.namu-hero__nav--prev');
+      this.nextBtn = this.querySelector('.namu-hero__nav--next');
+      this.current = 0;
+      this.autoplay = this.dataset.autoplay === 'true';
+      this.speed = parseInt(this.dataset.speed, 10) || 6000;
+      this.timer = null;
+
+      if (this.slides.length <= 1) return;
+
+      this.prevBtn?.addEventListener('click', () => this.go(this.current - 1));
+      this.nextBtn?.addEventListener('click', () => this.go(this.current + 1));
+      this.dots.forEach(dot => {
+        dot.addEventListener('click', () => this.go(parseInt(dot.dataset.index, 10)));
+      });
+
+      this.addEventListener('mouseenter', () => this.stop());
+      this.addEventListener('mouseleave', () => this.start());
+
+      if (this.autoplay) this.start();
+    }
+
+    go(index) {
+      const total = this.slides.length;
+      this.current = (index + total) % total;
+      this.track.style.transform = `translateX(-${this.current * 100}%)`;
+      this.dots.forEach((d, i) => {
+        const active = i === this.current;
+        d.classList.toggle('is-active', active);
+        d.setAttribute('aria-selected', active);
+      });
+    }
+
+    start() {
+      if (!this.autoplay) return;
+      this.stop();
+      this.timer = setInterval(() => this.go(this.current + 1), this.speed);
+    }
+
+    stop() {
+      clearInterval(this.timer);
+    }
+  }
+  customElements.define('namu-hero-slider', NamuHeroSlider);
+</script>
+
+{% schema %}
+{
+  "name": "Hero Slider Namu",
+  "tag": "section",
+  "class": "shopify-section-namu-hero",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Velocidade (segundos)",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "checkbox",
+      "id": "overlap_header",
+      "label": "Sobrepor header (header flutuante)",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagem desktop"
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Texto alternativo (acessibilidade/SEO)"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link ao clicar"
+        },
+        {
+          "type": "text",
+          "id": "fallback_asset",
+          "label": "Asset desktop (ex: banner_desktop.jpg)",
+          "info": "Usado quando nenhuma imagem é selecionada acima"
+        },
+        {
+          "type": "text",
+          "id": "fallback_asset_mobile",
+          "label": "Asset mobile (ex: banner_mobile.jpg)",
+          "info": "Versão mobile do banner (opcional)"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [
+    {
+      "name": "Hero Slider Namu",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "alt": "Novo por aqui? Ganhe 10% OFF na primeira compra com o cupom NOVONAMU",
+            "fallback_asset": "slide01.jpg"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "alt": "Sensível à cafeína? Experimente nosso Hojicha",
+            "fallback_asset": "slide02.jpg"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "alt": "Kit Cerimonial Edição Limitada com Cerâmica Naoko",
+            "fallback_asset": "slide03.jpg"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
