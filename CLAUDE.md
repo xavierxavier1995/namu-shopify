@@ -13,25 +13,25 @@ Inspiration: jadeleafmatcha.com
 - A single `theme push` takes 30-60s and burns context tokens. Batch all changes, then push ONCE.
 
 ### Iron Law #2 — Always use the development theme ID
-- **Theme ID:** `149665775694` (Development - 64a428-Gabriel)
+- **Theme ID:** `149681143886` (Development - 64a428-Gabriel)
 - **Live theme (Horizon `149660729422`) is OFF-LIMITS** unless user explicitly says "envia pra produção"
 - Push command always:
   ```bash
-  shopify theme push --theme 149665775694 --store namu-matcha.myshopify.com
+  shopify theme push --theme 149681143886 --store namu-matcha.myshopify.com
   ```
-- Preview URL: `https://namu-matcha.myshopify.com?preview_theme_id=149665775694`
+- Preview URL: `https://namu-matcha.myshopify.com?preview_theme_id=149681143886`
 
 ### Iron Law #3 — Before claiming "the change didn't work"
 Run this checklist IN ORDER:
 1. Did the user hard-refresh? (`Ctrl+Shift+R`) — solves 80% of cases
-2. Are they viewing the dev theme URL? (must contain `preview_theme_id=149665775694`)
+2. Are they viewing the dev theme URL? (must contain `preview_theme_id=149681143886`)
 3. Pull `templates/index.json` from remote into `_check/` and grep for the change — confirms server state
 4. ONLY then assume there's a real bug
 
 ### Iron Law #4 — Commit before risky changes
 - Before deleting sections, refactoring schemas, or touching `layout/theme.liquid`: **commit current state to Git first**
 - Use Git Desktop (user has it installed) — branch name pattern: `feature/<change-name>`
-- Rollback recipe: `git checkout <commit>` → `shopify theme push --theme 149665775694 ...`
+- Rollback recipe: `git checkout <commit>` → `shopify theme push --theme 149681143886 ...`
 
 ### Iron Law #5 — Liquid is NOT React
 - **No state, no hooks, no useEffect, no client context.** Don't suggest these.
@@ -95,6 +95,99 @@ This project has **19 official Shopify skills** installed (`.agents/skills/shopi
 | Anthropic SDK / Claude API code | `claude-api` |
 | Code review preparation | `simplify`, `code-reviewer` |
 
+### Iron Law #12 — Envie o link do localhost ao iniciar qualquer sessão ou conversa
+- **Sempre que abrir o projeto ou começar uma nova conversa no dia**, a primeira resposta deve incluir:
+  ```
+  🟢 Localhost: http://127.0.0.1:9292
+  ```
+- Se o servidor `shopify theme dev` não estiver rodando, avisar e sugerir o comando para iniciar:
+  ```powershell
+  cd "C:\Users\unk_g\OneDrive\Área de Trabalho\namu-shopify"
+  shopify theme dev --theme 149681143886 --store namu-matcha.myshopify.com --store-password namu
+  ```
+- Não espere o usuário perguntar — envie proativamente na abertura.
+
+### Iron Law #12.1 — Sempre inclua o `cd` antes de qualquer comando terminal
+- **Todo comando que o usuário precisar rodar no terminal** deve ser precedido do comando de navegação para a pasta correta:
+  ```powershell
+  cd "C:\Users\unk_g\OneDrive\Área de Trabalho\namu-shopify"
+  ```
+- Isso vale para: `shopify theme dev`, `shopify theme push`, `shopify theme pull`, `git`, `npm`, e qualquer outro comando do projeto
+- Nunca forneça só o comando isolado — sempre o par `cd` + comando
+- Exceção: se o usuário já confirmou que está na pasta certa naquela mesma conversa
+
+### Iron Law #13 — Toque SOMENTE no que foi pedido. Nunca mais, nunca menos.
+
+**Regra absoluta:** cada alteração deve acontecer exclusivamente no arquivo/seção indicado pelo usuário. Nenhum outro arquivo é tocado sem aprovação explícita.
+
+#### O que é PROIBIDO sem permissão
+- Editar, criar ou remover qualquer arquivo além do solicitado
+- Adicionar, mover ou apagar blocos, settings ou partes de uma seção que não foram mencionados
+- "Aproveitar" a edição para "melhorar" outro trecho que não foi pedido
+- Criar novos snippets, assets ou seções como efeito colateral de uma mudança
+
+#### O que fazer quando perceber que outra área precisa mudar
+**PARE. Não edite. Pergunte primeiro**, informando obrigatoriamente:
+
+1. **Onde:** qual arquivo/seção precisaria ser tocado além do pedido
+2. **Por quê:** motivo técnico claro (ex: "a seção X referencia a variável Y que está em Z")
+3. **Antes:** comportamento/aparência atual se a mudança NÃO for feita
+4. **Depois:** resultado esperado SE a mudança for aprovada
+5. **Impacto:** risco ou efeito colateral de fazer OU de não fazer
+
+Só prossiga após o usuário responder **"pode fazer"** ou equivalente explícito.
+
+#### Exemplos práticos
+| Pedido do usuário | Correto | Errado |
+|---|---|---|
+| "Muda a cor do texto do marquee" | Edita só `namu-marquee.css` | Também "ajusta" `namu-tokens.css` |
+| "Adiciona um bloco no hero slider" | Edita só `namu-hero-slider.liquid` | Também atualiza `templates/index.json` |
+| "Corrige o padding do footer" | Edita só `namu-footer.css` | Também "padroniza" outros CSS |
+
+#### Nunca alucine escopo
+Se não tiver certeza de qual arquivo deve ser editado, **pergunte antes de abrir qualquer ferramenta de escrita**. Dúvida = pergunta, não tentativa.
+
+### Iron Law #14 — Iconografia: Minimalista e Premium, ZERO emojis
+
+**Filosofia:** Namu não usa emojis. Toda iconografia deve ser minimalista, traço fino, classe.
+
+#### Regras obrigatórias
+- ❌ **NUNCA usar emojis** (🔍, 🛒, 👤, 💚, 🌿, ⭐, etc.)
+- ✅ **SEMPRE usar SVG com stroke fino** (1.5px–2px, não filled)
+- ✅ Ícones de bibliotecas: **Feather Icons** ou **Phosphor Light** (minimalistas, elegantes)
+- ✅ Cor padrão: `#2D2D2D` (var(--namu-cinza-sombra)) ou `#78C33F` (var(--namu-verde-puro)) em destaque
+- ✅ Tamanhos: 24px (nav), 32px (seções), 48px (benefícios)
+
+#### Ícones obrigatórios (nunca emoji)
+| Contexto | Usar SVG | ❌ NÃO usar |
+|----------|----------|------------|
+| Busca | Search / Magnifier glass | 🔍 |
+| Carrinho | Shopping bag | 🛒 |
+| Perfil / Conta | User circle | 👤 |
+| Menu mobile | Menu / Hambúrguer | ☰ |
+| Fechar | X | ✕ |
+| Favoritos | Heart outline | 🤍 ❤️ |
+| Entrega | Truck / Delivery | 🚚 |
+| Segurança | Shield / Lock | 🔐 |
+| Certificado | Award / Check circle | ✓ |
+| Social (Instagram, TikTok) | Brand SVG stroke | IG/TT |
+
+#### Exemplo correto (SVG minimalista)
+```html
+<!-- Search icon — Feather style -->
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="11" cy="11" r="8"></circle>
+  <path d="m21 21-4.35-4.35"></path>
+</svg>
+```
+
+#### Exemplo ERRADO (nunca fazer)
+```html
+❌ <span>🔍</span>
+❌ <img src="emoji.png"> <!-- emoji rasterizado -->
+❌ <svg stroke-width="4">...</svg> <!-- muito pesado -->
+```
+
 ---
 
 ## Skills auto-update (weekly)
@@ -113,7 +206,7 @@ The `.claude/scripts/skills-autoupdate.ps1` script runs at every `SessionStart`:
 
 ### Active development (preferred — no push needed)
 ```bash
-shopify theme dev --theme 149665775694 --store namu-matcha.myshopify.com --store-password namu
+shopify theme dev --theme 149681143886 --store namu-matcha.myshopify.com --store-password namu
 ```
 Open `http://127.0.0.1:9292` in Chrome — saves to `.liquid`, `.css`, `.js`, and `.json` reload automatically.
 
@@ -124,17 +217,17 @@ Open `http://127.0.0.1:9292` in Chrome — saves to `.liquid`, `.css`, `.js`, an
 
 ### Push only when finishing a session or sharing
 ```bash
-shopify theme push --theme 149665775694 --store namu-matcha.myshopify.com
+shopify theme push --theme 149681143886 --store namu-matcha.myshopify.com
 ```
 
 ### Pull (verify remote state or recover from accidental local delete)
 ```bash
-shopify theme pull --theme 149665775694 --store namu-matcha.myshopify.com
+shopify theme pull --theme 149681143886 --store namu-matcha.myshopify.com
 ```
 
 ### Rollback via Git Desktop
 1. Open Git Desktop → revert commit OR checkout previous commit
-2. Run `shopify theme push --theme 149665775694 ...` to sync remote
+2. Run `shopify theme push --theme 149681143886 ...` to sync remote
 
 ## Directory Structure
 ```
