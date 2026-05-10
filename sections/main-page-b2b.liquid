@@ -1,0 +1,495 @@
+{{ 'namu-b2b.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%} SVG sprite inline — 6 ícones scopados com prefixo b2b- {%- endcomment -%}
+{{ 'namu-b2b-icons.svg' | inline_asset_content }}
+
+<div class="namu-b2b-page">
+
+  <!-- ═══════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════ -->
+  <section class="hero">
+    {%- if section.settings.hero_image != blank -%}
+      {{
+        section.settings.hero_image
+        | image_url: width: 2000
+        | image_tag:
+          class: 'hero-img',
+          widths: '768, 1200, 1600, 2000',
+          sizes: '100vw',
+          alt: section.settings.hero_image.alt | default: 'Namu Matcha B2B',
+          loading: 'eager',
+          fetchpriority: 'high'
+      }}
+    {%- else -%}
+      <img
+        src="https://images.unsplash.com/photo-1515823064-d6e0c04616a7?q=80&w=2071&auto=format&fit=crop"
+        class="hero-img"
+        alt="Matcha B2B Premium"
+        loading="eager"
+        fetchpriority="high"
+        width="2071"
+        height="1380"
+      >
+    {%- endif -%}
+
+    <div class="hero-overlay"></div>
+
+    <div class="b2b-container">
+      <div class="hero-content">
+        <span class="eyebrow" style="text-align:left;color:var(--b2b-accent);">
+          {{- section.settings.hero_eyebrow -}}
+        </span>
+        <h1>{{ section.settings.hero_title }}</h1>
+        <p>{{ section.settings.hero_subtitle }}</p>
+        <div class="hero-btns">
+          <a href="#proposta" class="btn btn-primary">{{ section.settings.hero_cta_primary }}</a>
+          <a href="#beneficios" class="btn btn-ghost">{{ section.settings.hero_cta_secondary }}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       MARQUEE
+  ═══════════════════════════════════════ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      {%- assign marquee_items = section.settings.marquee_1
+        | append: '||'
+        | append: section.settings.marquee_2
+        | append: '||'
+        | append: section.settings.marquee_3
+        | append: '||'
+        | append: section.settings.marquee_4
+        | append: '||'
+        | append: section.settings.marquee_5
+        | append: '||'
+        | append: section.settings.marquee_6
+        | split: '||'
+      -%}
+      {%- comment -%} Duplica para loop infinito sem JS {%- endcomment -%}
+      {%- for item in marquee_items -%}
+        <span>✦ {{ item }}</span>
+      {%- endfor -%}
+      {%- for item in marquee_items -%}
+        <span>✦ {{ item }}</span>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       BENEFÍCIOS
+  ═══════════════════════════════════════ -->
+  <section id="beneficios">
+    <div class="b2b-container">
+      <span class="eyebrow">{{ section.settings.benefits_eyebrow }}</span>
+      <h2 class="section-title">{{ section.settings.benefits_title }}</h2>
+      <p class="section-subtitle">{{ section.settings.benefits_subtitle }}</p>
+
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <svg class="icon-box" aria-hidden="true" focusable="false"><use href="#b2b-icon-margin"></use></svg>
+          <h3>{{ section.settings.benefit_1_title }}</h3>
+          <p>{{ section.settings.benefit_1_text }}</p>
+        </div>
+        <div class="benefit-card">
+          <svg class="icon-box" aria-hidden="true" focusable="false"><use href="#b2b-icon-origin"></use></svg>
+          <h3>{{ section.settings.benefit_2_title }}</h3>
+          <p>{{ section.settings.benefit_2_text }}</p>
+        </div>
+        <div class="benefit-card">
+          <svg class="icon-box" aria-hidden="true" focusable="false"><use href="#b2b-icon-star"></use></svg>
+          <h3>{{ section.settings.benefit_3_title }}</h3>
+          <p>{{ section.settings.benefit_3_text }}</p>
+        </div>
+        <div class="benefit-card">
+          <svg class="icon-box" aria-hidden="true" focusable="false"><use href="#b2b-icon-box"></use></svg>
+          <h3>{{ section.settings.benefit_4_title }}</h3>
+          <p>{{ section.settings.benefit_4_text }}</p>
+        </div>
+        <div class="benefit-card">
+          <svg class="icon-box" aria-hidden="true" focusable="false"><use href="#b2b-icon-camera"></use></svg>
+          <h3>{{ section.settings.benefit_5_title }}</h3>
+          <p>{{ section.settings.benefit_5_text }}</p>
+        </div>
+        <div class="benefit-card">
+          <svg class="icon-box" aria-hidden="true" focusable="false"><use href="#b2b-icon-shield"></use></svg>
+          <h3>{{ section.settings.benefit_6_title }}</h3>
+          <p>{{ section.settings.benefit_6_text }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       ORIGEM
+  ═══════════════════════════════════════ -->
+  <section class="bg-warm">
+    <div class="b2b-container">
+      <div class="origin-section">
+        <div class="origin-img">
+          {%- if section.settings.origin_image != blank -%}
+            {{
+              section.settings.origin_image
+              | image_url: width: 900
+              | image_tag:
+                widths: '450, 600, 900',
+                sizes: '(max-width: 992px) 100vw, 50vw',
+                alt: section.settings.origin_image.alt | default: 'Hadong Plantation',
+                loading: 'lazy'
+            }}
+          {%- else -%}
+            <img
+              src="https://images.unsplash.com/photo-1582793988951-9aed55099993?q=80&w=2021&auto=format&fit=crop"
+              alt="Hadong Plantation"
+              loading="lazy"
+              width="900"
+              height="600"
+            >
+          {%- endif -%}
+          <p class="origin-caption">{{ section.settings.origin_image_caption }}</p>
+        </div>
+
+        <div class="origin-text">
+          <span class="eyebrow" style="text-align:left;">{{ section.settings.origin_eyebrow }}</span>
+          <h2>{{ section.settings.origin_title }}</h2>
+          <p>{{ section.settings.origin_text }}</p>
+          <div class="origin-bullets">
+            <div class="bullet">
+              <span class="bullet-icon">✦</span>
+              <h4>{{ section.settings.bullet_1_title }}</h4>
+              <p>{{ section.settings.bullet_1_text }}</p>
+            </div>
+            <div class="bullet">
+              <span class="bullet-icon">✦</span>
+              <h4>{{ section.settings.bullet_2_title }}</h4>
+              <p>{{ section.settings.bullet_2_text }}</p>
+            </div>
+            <div class="bullet">
+              <span class="bullet-icon">✦</span>
+              <h4>{{ section.settings.bullet_3_title }}</h4>
+              <p>{{ section.settings.bullet_3_text }}</p>
+            </div>
+            <div class="bullet">
+              <span class="bullet-icon">✦</span>
+              <h4>{{ section.settings.bullet_4_title }}</h4>
+              <p>{{ section.settings.bullet_4_text }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SEGMENTOS
+  ═══════════════════════════════════════ -->
+  <section>
+    <div class="b2b-container">
+      <span class="eyebrow">{{ section.settings.segments_eyebrow }}</span>
+      <h2 class="section-title">{{ section.settings.segments_title }}</h2>
+      <p class="section-subtitle">{{ section.settings.segments_subtitle }}</p>
+
+      <div class="segments-stack">
+        <div class="segment-row">
+          <div class="segment-media">
+            {%- if section.settings.segment_1_image != blank -%}
+              {{ section.settings.segment_1_image | image_url: width: 900 | image_tag: widths: '450, 700, 900', sizes: '(max-width: 768px) 100vw, 50vw', loading: 'lazy', alt: section.settings.segment_1_title }}
+            {%- else -%}
+              <img src="https://images.unsplash.com/photo-1559496417-e7f25cb247f3?q=80&w=1964&auto=format&fit=crop" alt="{{ section.settings.segment_1_title }}" loading="lazy" width="900" height="600">
+            {%- endif -%}
+          </div>
+          <div class="segment-info">
+            <h3>{{ section.settings.segment_1_title }}</h3>
+            <p>{{ section.settings.segment_1_text }}</p>
+            <a href="#proposta" class="btn btn-outline-dark">{{ section.settings.segment_cta_text }}</a>
+          </div>
+        </div>
+
+        <div class="segment-row">
+          <div class="segment-media">
+            {%- if section.settings.segment_2_image != blank -%}
+              {{ section.settings.segment_2_image | image_url: width: 900 | image_tag: widths: '450, 700, 900', sizes: '(max-width: 768px) 100vw, 50vw', loading: 'lazy', alt: section.settings.segment_2_title }}
+            {%- else -%}
+              <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2070&auto=format&fit=crop" alt="{{ section.settings.segment_2_title }}" loading="lazy" width="900" height="600">
+            {%- endif -%}
+          </div>
+          <div class="segment-info">
+            <h3>{{ section.settings.segment_2_title }}</h3>
+            <p>{{ section.settings.segment_2_text }}</p>
+            <a href="#proposta" class="btn btn-outline-dark">{{ section.settings.segment_cta_text }}</a>
+          </div>
+        </div>
+
+        <div class="segment-row">
+          <div class="segment-media">
+            {%- if section.settings.segment_3_image != blank -%}
+              {{ section.settings.segment_3_image | image_url: width: 900 | image_tag: widths: '450, 700, 900', sizes: '(max-width: 768px) 100vw, 50vw', loading: 'lazy', alt: section.settings.segment_3_title }}
+            {%- else -%}
+              <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop" alt="{{ section.settings.segment_3_title }}" loading="lazy" width="900" height="600">
+            {%- endif -%}
+          </div>
+          <div class="segment-info">
+            <h3>{{ section.settings.segment_3_title }}</h3>
+            <p>{{ section.settings.segment_3_text }}</p>
+            <a href="#proposta" class="btn btn-outline-dark">{{ section.settings.segment_cta_text }}</a>
+          </div>
+        </div>
+
+        <div class="segment-row">
+          <div class="segment-media">
+            {%- if section.settings.segment_4_image != blank -%}
+              {{ section.settings.segment_4_image | image_url: width: 900 | image_tag: widths: '450, 700, 900', sizes: '(max-width: 768px) 100vw, 50vw', loading: 'lazy', alt: section.settings.segment_4_title }}
+            {%- else -%}
+              <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=2070&auto=format&fit=crop" alt="{{ section.settings.segment_4_title }}" loading="lazy" width="900" height="600">
+            {%- endif -%}
+          </div>
+          <div class="segment-info">
+            <h3>{{ section.settings.segment_4_title }}</h3>
+            <p>{{ section.settings.segment_4_text }}</p>
+            <a href="#proposta" class="btn btn-outline-dark">{{ section.settings.segment_cta_text }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       DEPOIMENTOS
+  ═══════════════════════════════════════ -->
+  <section class="bg-warm">
+    <div class="b2b-container">
+      <span class="eyebrow">{{ section.settings.testimonials_eyebrow }}</span>
+      <h2 class="section-title">{{ section.settings.testimonials_title }}</h2>
+      <p class="section-subtitle">{{ section.settings.testimonials_subtitle }}</p>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-quote">{{ section.settings.testimonial_1_quote }}</p>
+          <div class="testimonial-author">
+            <h4>{{ section.settings.testimonial_1_name }}</h4>
+            <p>{{ section.settings.testimonial_1_role }}</p>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-quote">{{ section.settings.testimonial_2_quote }}</p>
+          <div class="testimonial-author">
+            <h4>{{ section.settings.testimonial_2_name }}</h4>
+            <p>{{ section.settings.testimonial_2_role }}</p>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-quote">{{ section.settings.testimonial_3_quote }}</p>
+          <div class="testimonial-author">
+            <h4>{{ section.settings.testimonial_3_name }}</h4>
+            <p>{{ section.settings.testimonial_3_role }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CTA + FORMULÁRIO
+  ═══════════════════════════════════════ -->
+  <section id="proposta" class="cta-section">
+    <div class="b2b-container">
+      <div class="cta-grid">
+        <div class="cta-content">
+          <span class="eyebrow">{{ section.settings.cta_eyebrow }}</span>
+          <h2>{{ section.settings.cta_title }}</h2>
+          <p>{{ section.settings.cta_text_1 }}</p>
+          <p>{{ section.settings.cta_text_2 }}</p>
+          <ul class="cta-list">
+            <li><span class="plus-icon" aria-hidden="true">+</span>{{ section.settings.cta_list_1 }}</li>
+            <li><span class="plus-icon" aria-hidden="true">+</span>{{ section.settings.cta_list_2 }}</li>
+            <li><span class="plus-icon" aria-hidden="true">+</span>{{ section.settings.cta_list_3 }}</li>
+          </ul>
+        </div>
+
+        <div class="form-card">
+          <h3>{{ section.settings.form_title }}</h3>
+          <p class="form-desc">{{ section.settings.form_desc }}</p>
+
+          {%- form 'contact', id: 'b2b-form' -%}
+            {%- if form.posted_successfully? -%}
+              <div class="form-success">
+                <p>✓ Solicitação enviada com sucesso!<br>Nossa equipe entrará em contato em breve.</p>
+              </div>
+            {%- else -%}
+              <div class="form-group">
+                <label class="form-label" for="b2b-name">Nome Completo</label>
+                <input
+                  type="text"
+                  id="b2b-name"
+                  name="contact[Nome Completo]"
+                  class="form-input"
+                  placeholder="Seu nome"
+                  required
+                >
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="b2b-email">E-mail Corporativo</label>
+                <input
+                  type="email"
+                  id="b2b-email"
+                  name="contact[Email]"
+                  class="form-input"
+                  placeholder="contato@empresa.com.br"
+                  required
+                >
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="b2b-instagram">Instagram do Negócio</label>
+                <input
+                  type="text"
+                  id="b2b-instagram"
+                  name="contact[Instagram]"
+                  class="form-input"
+                  placeholder="@seudominio"
+                >
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="b2b-volume">Volume Mensal Estimado</label>
+                <select
+                  id="b2b-volume"
+                  name="contact[Volume Mensal]"
+                  class="form-input form-select"
+                >
+                  <option value="">Selecione uma opção</option>
+                  <option value="Até 2kg/mês">Até 2kg / mês</option>
+                  <option value="2kg-10kg/mês">2kg - 10kg / mês</option>
+                  <option value="Mais de 10kg/mês">Mais de 10kg / mês</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-accent">
+                {{ section.settings.form_cta }}
+              </button>
+            {%- endif -%}
+          {%- endform -%}
+
+          <span class="form-footer">{{ section.settings.form_footer }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /.namu-b2b-page -->
+
+{% schema %}
+{
+  "name": "Página B2B",
+  "settings": [
+    { "type": "header", "content": "HERO" },
+    { "type": "image_picker", "id": "hero_image", "label": "Imagem de Fundo" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Tag Superior", "default": "Parceria B2B Exclusiva" },
+    { "type": "textarea", "id": "hero_title", "label": "Título Principal", "default": "O segredo dos menus mais sofisticados: Matcha Premium de Hadong para o seu negócio." },
+    { "type": "textarea", "id": "hero_subtitle", "label": "Subtítulo", "default": "Eleve o ticket médio e a estética do seu estabelecimento com o matcha coreano 100% puro, cultivado de forma artesanal." },
+    { "type": "text", "id": "hero_cta_primary", "label": "Botão Principal", "default": "Solicitar Proposta" },
+    { "type": "text", "id": "hero_cta_secondary", "label": "Botão Secundário", "default": "Vantagens B2B" },
+
+    { "type": "header", "content": "MARQUEE — Faixa Animada" },
+    { "type": "text", "id": "marquee_1", "label": "Item 1", "default": "Presente em +400 Estabelecimentos de Luxo" },
+    { "type": "text", "id": "marquee_2", "label": "Item 2", "default": "Logística Expressa para todo o Brasil" },
+    { "type": "text", "id": "marquee_3", "label": "Item 3", "default": "Suporte Técnico para Baristas & Mixologistas" },
+    { "type": "text", "id": "marquee_4", "label": "Item 4", "default": "Hadong Single Origin Certification" },
+    { "type": "text", "id": "marquee_5", "label": "Item 5", "default": "Tabela de Atacado com Margem Superior" },
+    { "type": "text", "id": "marquee_6", "label": "Item 6", "default": "100% Orgânico & Puro" },
+
+    { "type": "header", "content": "BENEFÍCIOS — 6 Cards" },
+    { "type": "text", "id": "benefits_eyebrow", "label": "Tag Superior", "default": "A Excelência Namu" },
+    { "type": "text", "id": "benefits_title", "label": "Título", "default": "Parceria que gera valor real." },
+    { "type": "text", "id": "benefits_subtitle", "label": "Subtítulo", "default": "Focamos nos pilares que sustentam o crescimento e a diferenciação da sua operação." },
+    { "type": "paragraph", "content": "— Card 1 —" },
+    { "type": "text", "id": "benefit_1_title", "label": "Título", "default": "Maximização de Margem" },
+    { "type": "textarea", "id": "benefit_1_text", "label": "Texto", "default": "O matcha é o insumo com maior margem no menu de bebidas. Reduza desperdícios e aumente o lucro por xícara servida." },
+    { "type": "paragraph", "content": "— Card 2 —" },
+    { "type": "text", "id": "benefit_2_title", "label": "Título", "default": "Hadong Single Origin" },
+    { "type": "textarea", "id": "benefit_2_text", "label": "Texto", "default": "Origem certificada da Coreia do Sul. Perfil menos adstringente e cor vibrante que cativa o cliente imediatamente." },
+    { "type": "paragraph", "content": "— Card 3 —" },
+    { "type": "text", "id": "benefit_3_title", "label": "Título", "default": "Consultoria de Menu" },
+    { "type": "textarea", "id": "benefit_3_text", "label": "Texto", "default": "Oferecemos treinamento de baristas e consultoria para ajuste de receitas, garantindo o padrão premium em cada preparo." },
+    { "type": "paragraph", "content": "— Card 4 —" },
+    { "type": "text", "id": "benefit_4_title", "label": "Título", "default": "Segurança de Estoque" },
+    { "type": "textarea", "id": "benefit_4_text", "label": "Texto", "default": "Estoque local com giro rápido e logística expressa. Mantenha sua operação abastecida sem necessidade de grandes estoques." },
+    { "type": "paragraph", "content": "— Card 5 —" },
+    { "type": "text", "id": "benefit_5_title", "label": "Título", "default": "Assets de Marketing" },
+    { "type": "textarea", "id": "benefit_5_text", "label": "Texto", "default": "Acesso exclusivo a fotos e vídeos de alta qualidade para suas redes sociais, fortalecendo a narrativa de luxo do seu negócio." },
+    { "type": "paragraph", "content": "— Card 6 —" },
+    { "type": "text", "id": "benefit_6_title", "label": "Título", "default": "Garantia de Pureza" },
+    { "type": "textarea", "id": "benefit_6_text", "label": "Texto", "default": "Lotes testados e certificados. Livre de aditivos, corantes ou conservantes. Apenas o poder do matcha 100% puro e orgânico." },
+
+    { "type": "header", "content": "ORIGEM — Seção com Imagem" },
+    { "type": "image_picker", "id": "origin_image", "label": "Imagem da Plantação" },
+    { "type": "text", "id": "origin_image_caption", "label": "Legenda da Imagem", "default": "Cultivado artesanalmente em Hadong" },
+    { "type": "text", "id": "origin_eyebrow", "label": "Tag Superior", "default": "Vantagem Competitiva" },
+    { "type": "text", "id": "origin_title", "label": "Título", "default": "Diferenciação que o seu cliente percebe." },
+    { "type": "textarea", "id": "origin_text", "label": "Texto", "default": "A escolha de Hadong vai além do sabor. É uma decisão estratégica para negócios que buscam exclusividade narrativa em um mercado saturado de opções genéricas." },
+    { "type": "paragraph", "content": "— Bullets de Diferenciação —" },
+    { "type": "text", "id": "bullet_1_title", "label": "Bullet 1 — Título", "default": "Perfil Sensorial" },
+    { "type": "text", "id": "bullet_1_text", "label": "Bullet 1 — Texto", "default": "Notas suaves que permitem harmonizações complexas em lattes." },
+    { "type": "text", "id": "bullet_2_title", "label": "Bullet 2 — Título", "default": "Visual que Vende" },
+    { "type": "text", "id": "bullet_2_text", "label": "Bullet 2 — Texto", "default": "Coloração intensa que favorece o engajamento digital." },
+    { "type": "text", "id": "bullet_3_title", "label": "Bullet 3 — Título", "default": "Narrativa Exclusiva" },
+    { "type": "text", "id": "bullet_3_text", "label": "Bullet 3 — Texto", "default": "Storytelling de terroir coreano para elevar percepção de marca." },
+    { "type": "text", "id": "bullet_4_title", "label": "Bullet 4 — Título", "default": "Eficiência" },
+    { "type": "text", "id": "bullet_4_text", "label": "Bullet 4 — Texto", "default": "Baixa adstringência permite receitas com menos desperdício." },
+
+    { "type": "header", "content": "SEGMENTOS — 4 Cards" },
+    { "type": "text", "id": "segments_eyebrow", "label": "Tag Superior", "default": "Ecossistema B2B" },
+    { "type": "text", "id": "segments_title", "label": "Título", "default": "Soluções para cada operação." },
+    { "type": "text", "id": "segments_subtitle", "label": "Subtítulo", "default": "Desenvolvemos modelos de parceria específicos para os desafios do seu setor." },
+    { "type": "text", "id": "segment_cta_text", "label": "Texto dos Botões", "default": "Falar com Especialista" },
+    { "type": "paragraph", "content": "— Segmento 1 —" },
+    { "type": "image_picker", "id": "segment_1_image", "label": "Imagem" },
+    { "type": "text", "id": "segment_1_title", "label": "Título", "default": "Cafeterias" },
+    { "type": "textarea", "id": "segment_1_text", "label": "Descrição", "default": "Diferencie seu menu com matcha ceremonial. Aumente o ticket médio através de lattes autorais e assinaturas visuais exclusivas." },
+    { "type": "paragraph", "content": "— Segmento 2 —" },
+    { "type": "image_picker", "id": "segment_2_image", "label": "Imagem" },
+    { "type": "text", "id": "segment_2_title", "label": "Título", "default": "Restaurantes & Bares" },
+    { "type": "textarea", "id": "segment_2_text", "label": "Descrição", "default": "Explore sobremesas, drinks e experiências gastronômicas com forte apelo visual e contemporâneo." },
+    { "type": "paragraph", "content": "— Segmento 3 —" },
+    { "type": "image_picker", "id": "segment_3_image", "label": "Imagem" },
+    { "type": "text", "id": "segment_3_title", "label": "Título", "default": "Hotéis de Luxo" },
+    { "type": "textarea", "id": "segment_3_text", "label": "Descrição", "default": "Ofereça experiências exclusivas em cafés, brunches, wellness menus e hospitalidade premium." },
+    { "type": "paragraph", "content": "— Segmento 4 —" },
+    { "type": "image_picker", "id": "segment_4_image", "label": "Imagem" },
+    { "type": "text", "id": "segment_4_title", "label": "Título", "default": "Influencers & Revendedores" },
+    { "type": "textarea", "id": "segment_4_text", "label": "Descrição", "default": "Produtos premium com forte valor percebido, branding sofisticado e alta desejabilidade digital." },
+
+    { "type": "header", "content": "DEPOIMENTOS — 3 Cards" },
+    { "type": "text", "id": "testimonials_eyebrow", "label": "Tag Superior", "default": "Parceiros" },
+    { "type": "text", "id": "testimonials_title", "label": "Título", "default": "Confiança de quem lidera." },
+    { "type": "text", "id": "testimonials_subtitle", "label": "Subtítulo", "default": "Resultados reais em operações que são referência no mercado." },
+    { "type": "paragraph", "content": "— Depoimento 1 —" },
+    { "type": "textarea", "id": "testimonial_1_quote", "label": "Depoimento", "default": "\"A Namu não é apenas um fornecedor, é um parceiro estratégico. A aceitação do matcha coreano foi superior a qualquer outro insumo.\"" },
+    { "type": "text", "id": "testimonial_1_name", "label": "Nome", "default": "Marina Costa" },
+    { "type": "text", "id": "testimonial_1_role", "label": "Cargo / Empresa", "default": "Chef Executiva, SP" },
+    { "type": "paragraph", "content": "— Depoimento 2 —" },
+    { "type": "textarea", "id": "testimonial_2_quote", "label": "Depoimento", "default": "\"O suporte técnico permitiu que nossos baristas atingissem um padrão de excelência em tempo recorde. Essencial para nossa rede.\"" },
+    { "type": "text", "id": "testimonial_2_name", "label": "Nome", "default": "Roberto Silva" },
+    { "type": "text", "id": "testimonial_2_role", "label": "Cargo / Empresa", "default": "Proprietário, Rede de Cafés" },
+    { "type": "paragraph", "content": "— Depoimento 3 —" },
+    { "type": "textarea", "id": "testimonial_3_quote", "label": "Depoimento", "default": "\"Logística impecável. Nunca tivemos problemas de estoque, o que é crucial para manter a consistência do nosso menu.\"" },
+    { "type": "text", "id": "testimonial_3_name", "label": "Nome", "default": "Lucia Mendes" },
+    { "type": "text", "id": "testimonial_3_role", "label": "Cargo / Empresa", "default": "F&B Manager, Grupo Hotelero" },
+
+    { "type": "header", "content": "CTA + FORMULÁRIO" },
+    { "type": "text", "id": "cta_eyebrow", "label": "Tag Superior", "default": "Parceria Exclusiva" },
+    { "type": "textarea", "id": "cta_title", "label": "Título", "default": "Vamos levar uma experiência premium de matcha para o seu negócio." },
+    { "type": "textarea", "id": "cta_text_1", "label": "Parágrafo 1", "default": "Preencha o formulário para receber uma proposta personalizada, acesso aos nossos materiais para parceiros e análise da melhor solução para o perfil da sua operação." },
+    { "type": "textarea", "id": "cta_text_2", "label": "Parágrafo 2", "default": "Parceiros selecionados também recebem amostras estratégicas e guias exclusivos de receitas para acelerar implementação e vendas." },
+    { "type": "text", "id": "cta_list_1", "label": "Lista — Item 1", "default": "Receitas exclusivas para bebidas e sobremesas" },
+    { "type": "text", "id": "cta_list_2", "label": "Lista — Item 2", "default": "Suporte para posicionamento premium do cardápio" },
+    { "type": "text", "id": "cta_list_3", "label": "Lista — Item 3", "default": "Condições especiais para operações recorrentes" },
+    { "type": "text", "id": "form_title", "label": "Título do Formulário", "default": "Solicitar proposta" },
+    { "type": "text", "id": "form_desc", "label": "Descrição do Formulário", "default": "Nossa equipe analisará o perfil do seu negócio para criar uma proposta alinhada à sua operação." },
+    { "type": "text", "id": "form_cta", "label": "Botão Enviar", "default": "Solicitar Proposta Exclusiva" },
+    { "type": "textarea", "id": "form_footer", "label": "Texto Rodapé do Formulário", "default": "Ao enviar, nossa equipe poderá entrar em contato para compartilhar materiais exclusivos, receitas e amostras para avaliação." }
+  ],
+  "presets": [
+    { "name": "Página B2B" }
+  ]
+}
+{% endschema %}

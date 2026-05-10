@@ -47,7 +47,8 @@
       "Bash(git -C 'C:/Users/unk_g/OneDrive/Área de Trabalho/namu-shopify' commit -m 'feat: add skills autoupdate hook + Iron Laws #10-11 *)",
       "WebFetch(domain:raw.githubusercontent.com)",
       "Bash(gh api *)",
-      "mcp__plugin_context-mode_context-mode__ctx_batch_execute"
+      "mcp__plugin_context-mode_context-mode__ctx_batch_execute",
+      "Bash(taskkill /F /IM node.exe)"
     ]
   },
   "hooks": {

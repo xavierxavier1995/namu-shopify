@@ -1,215 +1,219 @@
-/* ── Section wrapper ─────────────────────────────────── */
-.namu-b2b {
-  background: #f5f4f1;
-  overflow: hidden;
+/* ============================================================
+   NAMU B2B PAGE — namu-b2b.css
+   Estilos isolados para /pages/para-seu-negocio
+   Todos os seletores scopados em .namu-b2b-page
+   ============================================================ */
+
+html { scroll-behavior: smooth; }
+
+.namu-b2b-page {
+  --b2b-primary:       #2B5E2E;
+  --b2b-primary-light: #4A8C4E;
+  --b2b-accent:        #8FBA2E;
+  --b2b-text:          #1A1A1A;
+  --b2b-text-muted:    #666666;
+  --b2b-bg:            #FFFFFF;
+  --b2b-bg-warm:       #F8F5F0;
+  --b2b-bg-dark:       #1C2B1E;
+  --b2b-border:        #E5E0D8;
+  --b2b-font-heading:  'Playfair Display', Georgia, serif;
+  --b2b-font-body:     'Inter', -apple-system, sans-serif;
+  --b2b-radius-md:     8px;
+  --b2b-radius-lg:     16px;
+  --b2b-radius-full:   9999px;
+  --b2b-shadow-md:     0 4px 16px rgba(0,0,0,0.10);
+  --b2b-shadow-lg:     0 8px 32px rgba(0,0,0,0.12);
+  font-family: var(--b2b-font-body);
+  color: var(--b2b-text);
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
-/* ── Inner — 2 colunas ───────────────────────────────── */
-.namu-b2b__inner {
-  display: grid;
-  grid-template-columns: 1fr;
-  min-height: 560px;
+.namu-b2b-page *, .namu-b2b-page *::before, .namu-b2b-page *::after { box-sizing: border-box; }
+.namu-b2b-page a { text-decoration: none; }
+.namu-b2b-page h1, .namu-b2b-page h2, .namu-b2b-page h3, .namu-b2b-page h4 {
+  font-family: var(--b2b-font-heading);
+  font-weight: 500;
+  line-height: 1.2;
+}
+.namu-b2b-page img { max-width: 100%; display: block; border-radius: var(--b2b-radius-md); }
+.namu-b2b-page section { padding: 100px 0; }
+.namu-b2b-page .bg-warm { background-color: var(--b2b-bg-warm); }
+
+.namu-b2b-page .b2b-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
-@media (min-width: 768px) {
-  .namu-b2b__inner {
-    grid-template-columns: 1fr 1fr;
-    min-height: 620px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .namu-b2b__inner {
-    grid-template-columns: 48% 52%;
-    min-height: 680px;
-  }
-}
-
-/* ── Coluna esquerda ─────────────────────────────────── */
-.namu-b2b__left {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 4rem 2rem 4rem 1.5rem;
-  gap: 1.75rem;
-}
-
-@media (min-width: 768px) {
-  .namu-b2b__left {
-    padding: 5rem 4rem 5rem max(2.5rem, calc((100vw - 1320px) / 2 + 2.5rem));
-  }
-}
-
-@media (min-width: 1200px) {
-  .namu-b2b__left {
-    padding: 6rem 5rem 6rem max(3rem, calc((100vw - 1320px) / 2 + 3rem));
-    gap: 2rem;
-  }
-}
-
-/* ── Tags / pills ────────────────────────────────────── */
-.namu-b2b__tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.namu-b2b__tag {
-  display: inline-block;
-  padding: 0.3rem 0.9rem;
-  border: 1px solid rgba(4, 81, 51, 0.3);
-  border-radius: 999px;
-  font-family: var(--namu-font-body, sans-serif);
-  font-size: 0.68rem;
+/* ── TIPOGRAFIA ─────────────────────────────── */
+.namu-b2b-page .eyebrow {
+  color: var(--b2b-primary);
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.1em;
-  color: var(--namu-verde-matcha, #045133);
-  background: rgba(4, 81, 51, 0.05);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 16px;
+  text-align: center;
+}
+.namu-b2b-page .section-title {
+  font-size: clamp(32px, 5vw, 44px);
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--b2b-text);
+}
+.namu-b2b-page .section-subtitle {
+  font-size: 17px;
+  color: var(--b2b-text-muted);
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 64px;
+  font-weight: 300;
 }
 
-/* ── Title ───────────────────────────────────────────── */
-.namu-b2b__title {
-  font-family: var(--namu-font-heading, serif);
-  font-size: clamp(2rem, 4vw, 3.25rem);
-  font-weight: 700;
-  color: var(--namu-cinza-sombra, #1a1a1a);
-  margin: 0;
-  line-height: 1.08;
-  letter-spacing: -0.02em;
-}
-
-/* ── Subtitle ────────────────────────────────────────── */
-.namu-b2b__subtitle {
-  font-family: var(--namu-font-body, sans-serif);
-  font-size: clamp(0.9rem, 1.2vw, 1rem);
-  font-weight: 400;
-  color: #666;
-  margin: 0;
-  line-height: 1.7;
-  max-width: 420px;
-}
-
-/* ── Button ──────────────────────────────────────────── */
-.namu-b2b__btn {
-  align-self: flex-start;
+/* ── BOTÕES ─────────────────────────────────── */
+.namu-b2b-page .btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.85rem 2rem;
-  background: var(--namu-verde-matcha, #045133);
-  color: #ffffff;
-  border-radius: 999px;
-  font-family: var(--namu-font-body, sans-serif);
-  font-size: 0.8rem;
+  justify-content: center;
+  padding: 16px 36px;
+  border-radius: var(--b2b-radius-full);
+  font-family: var(--b2b-font-body);
   font-weight: 600;
+  font-size: 13px;
   letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  text-transform: uppercase;
   text-decoration: none;
-  transition:
-    background 0.25s ease,
-    box-shadow 0.25s ease,
-    gap 0.2s ease,
-    transform 0.2s ease;
 }
+.namu-b2b-page .btn-primary { background-color: var(--b2b-primary); color: white; }
+.namu-b2b-page .btn-primary:hover { background-color: var(--b2b-primary-light); transform: translateY(-2px); box-shadow: var(--b2b-shadow-md); color: white; }
+.namu-b2b-page .btn-ghost { background: transparent; border: 1.5px solid rgba(255,255,255,0.4); color: white; }
+.namu-b2b-page .btn-ghost:hover { border-color: white; background: rgba(255,255,255,0.1); color: white; }
+.namu-b2b-page .btn-outline-dark { background: transparent; border: 1.2px solid var(--b2b-primary); color: var(--b2b-primary); }
+.namu-b2b-page .btn-outline-dark:hover { background: var(--b2b-primary); color: white; }
 
-.namu-b2b__btn:hover {
-  background: #033c26;
-  box-shadow: 0 8px 28px rgba(4, 81, 51, 0.28);
-  gap: 0.85rem;
-  transform: translateY(-1px);
-}
+/* ── ÍCONES ─────────────────────────────────── */
+.namu-b2b-page .icon-box { width: 40px; height: 40px; margin-bottom: 20px; color: var(--b2b-primary); display: block; }
 
-/* ── Coluna direita — imagem ─────────────────────────── */
-.namu-b2b__right {
-  position: relative;
-  order: -1; /* mobile: imagem em cima */
-  min-height: 320px;
-}
-
-@media (min-width: 768px) {
-  .namu-b2b__right {
-    order: 0; /* desktop: imagem à direita */
-    min-height: unset;
-  }
-}
-
-.namu-b2b__media {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
-
-/* Mobile: posição relativa sem absolute */
-@media (max-width: 767px) {
-  .namu-b2b__right {
-    position: relative;
-    min-height: 340px;
-  }
-
-  .namu-b2b__media {
-    position: absolute;
-    inset: 0;
-  }
-}
-
-/* ── Image ───────────────────────────────────────────── */
-.namu-b2b__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  display: block;
-  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
-}
-
-.namu-b2b__right:hover .namu-b2b__img {
-  transform: scale(1.03);
-}
-
-/* ── Placeholder ─────────────────────────────────────── */
-.namu-b2b__img-placeholder {
-  width: 100%;
-  height: 100%;
+/* ── HERO ───────────────────────────────────── */
+.namu-b2b-page .hero {
+  height: 90vh;
+  min-height: 650px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  background: #eae8e3;
+  position: relative;
+  background: #1C2B1E;
+  overflow: hidden;
+}
+.namu-b2b-page .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.55; border-radius: 0; }
+.namu-b2b-page .hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(28,43,30,0.95) 0%, rgba(28,43,30,0.4) 60%, transparent 100%); }
+.namu-b2b-page .hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 650px;
+  color: white;
+  animation: b2bHeroIn 0.9s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+@keyframes b2bHeroIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) { .namu-b2b-page .hero-content { animation: none; } }
+
+.namu-b2b-page .hero h1 { font-size: clamp(38px, 6vw, 60px); margin-bottom: 24px; letter-spacing: -0.01em; }
+.namu-b2b-page .hero p { font-size: clamp(17px, 2vw, 20px); font-weight: 300; margin-bottom: 40px; opacity: 0.95; max-width: 550px; line-height: 1.6; }
+.namu-b2b-page .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+/* ── MARQUEE ────────────────────────────────── */
+.namu-b2b-page .marquee { background: var(--b2b-bg-warm); padding: 18px 0; border-bottom: 1px solid var(--b2b-border); overflow: hidden; display: flex; }
+.namu-b2b-page .marquee-track { display: flex; gap: 80px; animation: b2bScroll 35s linear infinite; white-space: nowrap; flex-shrink: 0; }
+.namu-b2b-page .marquee span { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; color: var(--b2b-text-muted); text-transform: uppercase; }
+@keyframes b2bScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ── BENEFÍCIOS ─────────────────────────────── */
+.namu-b2b-page .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+.namu-b2b-page .benefit-card { padding: 40px; background: white; border: 1px solid var(--b2b-border); border-radius: var(--b2b-radius-md); transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease; }
+.namu-b2b-page .benefit-card:hover { border-color: var(--b2b-primary); transform: translateY(-5px); box-shadow: var(--b2b-shadow-md); }
+.namu-b2b-page .benefit-card h3 { font-size: 22px; margin-bottom: 12px; color: var(--b2b-primary); }
+.namu-b2b-page .benefit-card p { font-size: 15px; color: var(--b2b-text-muted); line-height: 1.7; font-weight: 300; }
+
+/* ── ORIGEM ─────────────────────────────────── */
+.namu-b2b-page .origin-section { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.namu-b2b-page .origin-text h2 { font-size: 40px; margin-bottom: 24px; }
+.namu-b2b-page .origin-text p { font-size: 16px; color: var(--b2b-text-muted); margin-bottom: 32px; font-weight: 300; line-height: 1.8; }
+.namu-b2b-page .origin-bullets { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.namu-b2b-page .bullet { display: flex; flex-direction: column; gap: 10px; }
+.namu-b2b-page .bullet-icon { color: var(--b2b-primary); font-size: 16px; font-weight: 600; }
+.namu-b2b-page .bullet h4 { font-size: 15px; margin-bottom: 2px; color: var(--b2b-text); }
+.namu-b2b-page .bullet p { font-size: 13px; color: var(--b2b-text-muted); opacity: 0.8; margin: 0; }
+.namu-b2b-page .origin-caption { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; margin-top: 16px; color: var(--b2b-text-muted); text-align: center; }
+@media (max-width: 992px) {
+  .namu-b2b-page .origin-section { grid-template-columns: 1fr; gap: 40px; }
+  .namu-b2b-page .origin-img { order: 2; }
 }
 
-.namu-b2b__img-placeholder svg {
-  width: 80%;
-  max-width: 320px;
-  height: auto;
+/* ── SEGMENTOS ──────────────────────────────── */
+.namu-b2b-page .segments-stack { display: flex; flex-direction: column; gap: 32px; }
+.namu-b2b-page .segment-row { display: flex; background: white; border-radius: var(--b2b-radius-md); overflow: hidden; border: 1px solid var(--b2b-border); min-height: 280px; }
+.namu-b2b-page .segment-row:nth-child(even) { flex-direction: row-reverse; }
+.namu-b2b-page .segment-media { flex: 1.1; overflow: hidden; }
+.namu-b2b-page .segment-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; border-radius: 0; }
+.namu-b2b-page .segment-row:hover .segment-media img { transform: scale(1.04); }
+.namu-b2b-page .segment-info { flex: 1; padding: 40px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+.namu-b2b-page .segment-info h3 { font-size: 28px; margin-bottom: 12px; }
+.namu-b2b-page .segment-info p { font-size: 14px; color: var(--b2b-text-muted); margin-bottom: 24px; font-weight: 300; max-width: 400px; }
+@media (max-width: 768px) {
+  .namu-b2b-page .segment-row,
+  .namu-b2b-page .segment-row:nth-child(even) { flex-direction: column; }
+  .namu-b2b-page .segment-media { height: 200px; flex: none; }
+  .namu-b2b-page .segment-info { padding: 32px; }
 }
 
-/* ── Subtle decorative line — desktop only ───────────── */
-@media (min-width: 768px) {
-  .namu-b2b__left::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 10%;
-    height: 80%;
-    width: 1px;
-    background: linear-gradient(
-      to bottom,
-      transparent,
-      rgba(0, 0, 0, 0.08) 30%,
-      rgba(0, 0, 0, 0.08) 70%,
-      transparent
-    );
-    pointer-events: none;
-  }
+/* ── DEPOIMENTOS ────────────────────────────── */
+.namu-b2b-page .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+.namu-b2b-page .testimonial-card { background: #F9F8F6; padding: 32px; border-radius: var(--b2b-radius-md); border-left: 4px solid var(--b2b-primary); display: flex; flex-direction: column; justify-content: space-between; }
+.namu-b2b-page .testimonial-quote { font-size: 15px; line-height: 1.7; color: var(--b2b-text); font-style: italic; margin-bottom: 32px; font-weight: 300; }
+.namu-b2b-page .testimonial-author h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; font-family: var(--b2b-font-body); }
+.namu-b2b-page .testimonial-author p { font-size: 12px; color: var(--b2b-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
 
-  .namu-b2b__left {
-    position: relative;
-  }
-}
+/* ── CTA + FORMULÁRIO ───────────────────────── */
+.namu-b2b-page .cta-section { background: var(--b2b-bg-dark); padding: 100px 0; }
+.namu-b2b-page .cta-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 80px; align-items: center; }
+.namu-b2b-page .cta-content { color: white; }
+.namu-b2b-page .cta-content .eyebrow { color: var(--b2b-accent); text-align: left; margin-bottom: 20px; }
+.namu-b2b-page .cta-content h2 { font-size: clamp(34px, 5vw, 52px); margin-bottom: 32px; line-height: 1.15; color: white; }
+.namu-b2b-page .cta-content p { font-size: 16px; color: rgba(255,255,255,0.75); margin-bottom: 24px; font-weight: 300; max-width: 520px; }
+.namu-b2b-page .cta-list { list-style: none; padding: 0; margin-bottom: 24px; }
+.namu-b2b-page .cta-list li { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; font-size: 15px; color: rgba(255,255,255,0.9); font-weight: 400; }
+.namu-b2b-page .plus-icon { flex-shrink: 0; width: 24px; height: 24px; background: rgba(143,186,46,0.2); color: var(--b2b-accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 600; }
 
-/* ── Reduced motion ──────────────────────────────────── */
-@media (prefers-reduced-motion: reduce) {
-  .namu-b2b__img,
-  .namu-b2b__btn {
-    transition: none;
-  }
+.namu-b2b-page .form-card { background: rgba(255,255,255,0.04); backdrop-filter: blur(8px); padding: 48px; border-radius: var(--b2b-radius-lg); border: 1px solid rgba(255,255,255,0.1); box-shadow: var(--b2b-shadow-lg); }
+.namu-b2b-page .form-card h3 { font-size: 32px; margin-bottom: 12px; color: white; font-family: var(--b2b-font-heading); }
+.namu-b2b-page .form-desc { font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 32px; font-weight: 300; }
+.namu-b2b-page .form-group { margin-bottom: 20px; }
+.namu-b2b-page .form-label { display: block; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.6); margin-bottom: 10px; }
+.namu-b2b-page .form-input { width: 100%; padding: 14px 20px; background: #F8F9FA; border: none; border-radius: var(--b2b-radius-full); font-family: var(--b2b-font-body); font-size: 15px; color: var(--b2b-text); transition: all 0.3s ease; -webkit-appearance: none; appearance: none; }
+.namu-b2b-page .form-input:focus { outline: none; background: white; box-shadow: 0 0 0 3px rgba(143,186,46,0.3); }
+.namu-b2b-page .form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23666666' d='M6 8L0 0h12z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 20px center; background-color: #F8F9FA; cursor: pointer; }
+.namu-b2b-page .btn-accent { background: #4A7043; color: white; width: 100%; margin-top: 12px; font-size: 14px; text-transform: none; font-weight: 500; letter-spacing: 0; border: none; }
+.namu-b2b-page .btn-accent:hover { background: #3d5c37; transform: translateY(-2px); color: white; }
+.namu-b2b-page .form-success { text-align: center; padding: 32px; color: var(--b2b-accent); font-size: 16px; font-weight: 500; line-height: 1.6; }
+.namu-b2b-page .form-footer { font-size: 11px; text-align: center; margin-top: 24px; color: rgba(255,255,255,0.5); line-height: 1.5; max-width: 320px; margin-left: auto; margin-right: auto; display: block; }
+
+@media (max-width: 992px) { .namu-b2b-page .cta-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+/* ── MOBILE ─────────────────────────────────── */
+@media (max-width: 480px) {
+  .namu-b2b-page section { padding: 60px 0; }
+  .namu-b2b-page .hero { height: 75vh; }
+  .namu-b2b-page .form-card { padding: 32px 20px; }
+  .namu-b2b-page .origin-bullets { grid-template-columns: 1fr; }
+  .namu-b2b-page .benefits-grid { grid-template-columns: 1fr; }
+  .namu-b2b-page .cta-section { padding: 60px 0; }
+  .namu-b2b-page .hero-btns { flex-direction: column; }
+  .namu-b2b-page .hero-btns .btn { width: 100%; }
 }
