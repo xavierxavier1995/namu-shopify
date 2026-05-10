@@ -48,7 +48,10 @@
       "WebFetch(domain:raw.githubusercontent.com)",
       "Bash(gh api *)",
       "mcp__plugin_context-mode_context-mode__ctx_batch_execute",
-      "Bash(taskkill /F /IM node.exe)"
+      "Bash(taskkill /F /IM node.exe)",
+      "mcp__18e92181-5692-4279-ae83-cb34b3e476bf__graphql_schema",
+      "mcp__18e92181-5692-4279-ae83-cb34b3e476bf__search_docs_chunks",
+      "mcp__18e92181-5692-4279-ae83-cb34b3e476bf__validate_graphql_codeblocks"
     ]
   },
   "hooks": {

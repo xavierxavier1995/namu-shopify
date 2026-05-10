@@ -47,6 +47,23 @@
   /* Espaçamentos de seção */
   --namu-section-gap-mobile:  3.5rem;
   --namu-section-gap-desktop: 5rem;
+
+  /* ─────────────────────────────────────────────
+     LAYOUT GLOBAL — alturas de header (use estas vars
+     em qualquer página com hero overlap) */
+  --namu-header-height-desktop: 88px;
+  --namu-header-height-mobile:  72px;
+  --namu-announcement-height:   32px;
+
+  /* Helpers prontos pra usar */
+  --namu-header-overlap: -88px;
+  --namu-viewport-minus-announcement: calc(100vh - var(--namu-announcement-height));
+}
+
+@media (max-width: 989px) {
+  :root {
+    --namu-header-overlap: -72px;
+  }
 }
 
 /* ── Scroll suave (respeita preferência do usuário) ── */

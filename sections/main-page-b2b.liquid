@@ -1,13 +1,17 @@
 {{ 'namu-b2b.css' | asset_url | stylesheet_tag }}
 
+
 {%- comment -%} SVG sprite inline — 6 ícones scopados com prefixo b2b- {%- endcomment -%}
 {{ 'namu-b2b-icons.svg' | inline_asset_content }}
 
 <div class="namu-b2b-page">
 
   <!-- ═══════════════════════════════════════
-       HERO
+       VIEWPORT FIRST — hero + marquee = 100vh
   ═══════════════════════════════════════ -->
+  <div class="b2b-viewport-first">
+
+  <!-- HERO -->
   <section class="hero">
     {%- if section.settings.hero_image != blank -%}
       {{
@@ -78,6 +82,8 @@
     </div>
   </div>
 
+  </div>{%- comment -%} /b2b-viewport-first {%- endcomment -%}
+
   <!-- ═══════════════════════════════════════
        BENEFÍCIOS
   ═══════════════════════════════════════ -->
@@ -123,35 +129,27 @@
   </section>
 
   <!-- ═══════════════════════════════════════
-       ORIGEM
+       ORIGEM — Viewport-Locked Full-Bleed (100vh, sem container)
   ═══════════════════════════════════════ -->
-  <section class="bg-warm">
-    <div class="b2b-container">
-      <div class="origin-section">
-        <div class="origin-img">
-          {%- if section.settings.origin_image != blank -%}
-            {{
-              section.settings.origin_image
-              | image_url: width: 900
-              | image_tag:
-                widths: '450, 600, 900',
-                sizes: '(max-width: 992px) 100vw, 50vw',
-                alt: section.settings.origin_image.alt | default: 'Hadong Plantation',
-                loading: 'lazy'
-            }}
-          {%- else -%}
-            <img
-              src="https://images.unsplash.com/photo-1582793988951-9aed55099993?q=80&w=2021&auto=format&fit=crop"
-              alt="Hadong Plantation"
-              loading="lazy"
-              width="900"
-              height="600"
-            >
-          {%- endif -%}
-          <p class="origin-caption">{{ section.settings.origin_image_caption }}</p>
-        </div>
+  <section class="origin-viewport">
+    <div class="origin-section">
 
-        <div class="origin-text">
+      <div class="origin-img">
+        <img
+          src="{{ 'plantacao-matcha.webp' | asset_url }}"
+          alt="Plantação de Matcha Namu"
+          loading="lazy"
+          width="1000"
+          height="600"
+        >
+        <div class="badge badge--tl">{{ section.settings.badge_1 }}</div>
+        <div class="badge badge--tr">{{ section.settings.badge_2 }}</div>
+        <div class="badge badge--bl">{{ section.settings.badge_3 }}</div>
+        <div class="badge badge--br">{{ section.settings.badge_4 }}</div>
+      </div>
+
+      <div class="origin-text">
+        <div class="origin-text-inner">
           <span class="eyebrow" style="text-align:left;">{{ section.settings.origin_eyebrow }}</span>
           <h2>{{ section.settings.origin_title }}</h2>
           <p>{{ section.settings.origin_text }}</p>
@@ -179,6 +177,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </section>
 
@@ -302,9 +301,9 @@
           <p>{{ section.settings.cta_text_1 }}</p>
           <p>{{ section.settings.cta_text_2 }}</p>
           <ul class="cta-list">
-            <li><span class="plus-icon" aria-hidden="true">+</span>{{ section.settings.cta_list_1 }}</li>
-            <li><span class="plus-icon" aria-hidden="true">+</span>{{ section.settings.cta_list_2 }}</li>
-            <li><span class="plus-icon" aria-hidden="true">+</span>{{ section.settings.cta_list_3 }}</li>
+            <li><span class="plus-icon" aria-hidden="true">✦</span>{{ section.settings.cta_list_1 }}</li>
+            <li><span class="plus-icon" aria-hidden="true">✦</span>{{ section.settings.cta_list_2 }}</li>
+            <li><span class="plus-icon" aria-hidden="true">✦</span>{{ section.settings.cta_list_3 }}</li>
           </ul>
         </div>
 
@@ -421,9 +420,12 @@
     { "type": "textarea", "id": "benefit_6_text", "label": "Texto", "default": "Lotes testados e certificados. Livre de aditivos, corantes ou conservantes. Apenas o poder do matcha 100% puro e orgânico." },
 
     { "type": "header", "content": "ORIGEM — Seção com Imagem" },
-    { "type": "image_picker", "id": "origin_image", "label": "Imagem da Plantação" },
-    { "type": "text", "id": "origin_image_caption", "label": "Legenda da Imagem", "default": "Cultivado artesanalmente em Hadong" },
     { "type": "text", "id": "origin_eyebrow", "label": "Tag Superior", "default": "Vantagem Competitiva" },
+    { "type": "paragraph", "content": "— Badges na Imagem —" },
+    { "type": "text", "id": "badge_1", "label": "Badge 1 (Topo Esq.)", "default": "Premium Quality" },
+    { "type": "text", "id": "badge_2", "label": "Badge 2 (Topo Dir.)", "default": "100% Organic" },
+    { "type": "text", "id": "badge_3", "label": "Badge 3 (Rodapé Esq.)", "default": "Hadong Origin" },
+    { "type": "text", "id": "badge_4", "label": "Badge 4 (Rodapé Dir.)", "default": "Certified Pure" },
     { "type": "text", "id": "origin_title", "label": "Título", "default": "Diferenciação que o seu cliente percebe." },
     { "type": "textarea", "id": "origin_text", "label": "Texto", "default": "A escolha de Hadong vai além do sabor. É uma decisão estratégica para negócios que buscam exclusividade narrativa em um mercado saturado de opções genéricas." },
     { "type": "paragraph", "content": "— Bullets de Diferenciação —" },

@@ -78,7 +78,7 @@
         },
         "menu-b2b": {
           "type": "menu_item",
-          "settings": { "label": "Para seu negócio", "link": "/pages/b2b" }
+          "settings": { "label": "Para seu negócio", "link": "/pages/para-seu-negocio" }
         }
       },
       "block_order": [

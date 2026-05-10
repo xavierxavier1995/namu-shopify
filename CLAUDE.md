@@ -267,6 +267,85 @@ The following Dawn defaults were **removed** — do NOT recreate them. If functi
 
 **Sections that MUST stay** (Shopify loads them dynamically): `cart-drawer`, `cart-icon-bubble`, `cart-notification-*`, `predictive-search`, `apps`, `main-404`, `pickup-availability`, `related-products`, `custom-liquid`, plus all `main-*` for product/collection/cart/customers/search.
 
+## Design Preferences
+
+### Seções: Viewport-Locked Section (PREFERÊNCIA DO PROJETO)
+O cliente prefere seções que **ocupam 100% da viewport**, independente de zoom ou resolução.
+
+**O que é:** `height: 100vh` sem container limitante — a seção preenche exatamente a janela visível.
+
+**Quando usar:** Sempre que o design tiver imagem de fundo, split 50/50, ou hero destacado.
+
+**Padrão CSS:**
+```css
+.namu-minha-secao-viewport {
+  height: 100vh;
+  padding: 0;        /* sem padding — ocupa tudo */
+  overflow: hidden;
+}
+.namu-minha-secao-viewport .inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;  /* ou conforme o layout */
+  height: 100%;
+}
+```
+
+**Referência visual:** Jade Leaf Matcha (jadeleafmatcha.com) — seções de split que travam no viewport.
+
+**Responsivo:** Em mobile (`max-width: 992px`), remover `height: 100vh` e empilhar verticalmente.
+
+### Header — Comportamento Padrão (TODAS as páginas)
+O header é **sempre igual** em todas as páginas:
+- **Pill branca** flutuando com `box-shadow` suave
+- **Espaço ao redor da pill** transparente — o conteúdo da página aparece por baixo
+- **Funciona em hero escuro e claro** — a pill branca flutua sobre qualquer fundo
+
+**NÃO alterar** o header por página. Se a hero for escura, a pill branca flutua sobre ela — esse é o design correto (referência: Jade Leaf Matcha).
+
+#### Como fazer o hero ficar ATRÁS do header (REGRA OBRIGATÓRIA)
+O `<main>` do Shopify ocupa espaço natural no fluxo. Para o hero ficar **embaixo do header** (pill flutuando sobre a imagem), use **`margin-top` negativo no ELEMENTO RAIZ DA SEÇÃO** (não num filho aninhado — não funciona).
+
+#### Variáveis globais (em `assets/namu-tokens.css`)
+**SEMPRE usar essas vars, NUNCA hardcode os valores:**
+```css
+--namu-header-height-desktop: 88px;
+--namu-header-height-mobile:  72px;
+--namu-announcement-height:   40px;
+--namu-header-overlap:        -88px;   /* responsive: vira -72px em ≤989px */
+--namu-viewport-minus-announcement: calc(100vh - 40px);
+```
+
+#### Como aplicar (template padrão)
+```css
+/* CERTO: margin-top no root da seção, usando var global */
+.namu-minha-secao {
+  margin-top: var(--namu-header-overlap);   /* responsive automático */
+  position: relative;
+  z-index: 1;                                /* header tem z:50, fica por cima */
+}
+
+/* Se a primeira sub-seção precisar ser 100vh visível
+   (descontando announcement bar), use a var pronta: */
+.namu-minha-secao .meu-hero-viewport {
+  height: var(--namu-viewport-minus-announcement);
+}
+```
+
+```css
+/* ERRADO: margin-top num filho aninhado */
+.namu-minha-secao .filho-interno {
+  margin-top: var(--namu-header-overlap);   /* não vai sair do parent */
+}
+```
+
+#### Onde já é aplicado
+- `namu-hero-slider.css` → `.namu-hero--overlap` (homepage)
+- `namu-b2b.css` → `.namu-b2b-page` (página B2B)
+
+Replicar em qualquer nova página/template com hero em destaque.
+
+---
+
 ## Liquid Conventions
 
 ### NEVER do this

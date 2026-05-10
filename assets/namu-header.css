@@ -6,7 +6,9 @@
   padding: 1rem 1.5rem;
   pointer-events: none;
   font-family: var(--namu-font-body);
+  background: transparent;
 }
+
 
 .namu-header__pill {
   pointer-events: auto;
