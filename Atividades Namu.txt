@@ -1,0 +1,659 @@
+Atividades Namu
+
+npx skills add shopify/liquid-skills
+npx skills add https://github.com/shopify/shopify-ai-toolkit --skill shopify-liquid
+https://skills.sh/benjaminsehl/liquid-skills/shopify-liquid-themes
+
+
+Atividades Namu:
+Construir homepage completa
+alterar fotos para produtos de matcha
+
+____
+
+Sites:
+Criar sisteminha simples de criação de sites
+Criar 5 sites de exemplo
+Estudar os cursos da Milena, criar o conceito e criar os textos das landingpages dos principais nichos
+Ajustar a homepage do two digital
+
+
+
+_____
+https://namumatcha.com.br/produto/matcha-cerimonial/
+https://namumatcha.com.br/produto/chocolate-branco-com-matcha-utopia/
+https://namumatcha.com.br/produto/matcha-vanilla-150g-2/
+https://namumatcha.com.br/produto/kit-cerimonial-de-matcha-dia-das-maes-por-ceramica-naoko-namu-matcha/
+https://namumatcha.com.br/produto/pote-porta-cha-100g/
+https://namumatcha.com.br/produto/chawan-e-naoshi-naoko-preto/
+https://namumatcha.com.br/produto/jukro-hongcha-cha-preto-50g/
+https://namumatcha.com.br/produto/dojaemyungcha-yuja-hongcha-25g-cha-misto-de-cha-preto/
+
+___________
+Sequencia de prompt
+
+Refatorar o componente de Header (Cabeçalho) e seu comportamento de navegação em todo o site. O foco é aumentar o impacto visual do branding, melhorar a legibilidade e implementar um sistema de "Mega Menu" com imagens, além de uma lógica de exibição inteligente ao rolar a página.
+
+1. Limpeza e Ajustes de Dimensão (Desktop)
+Remoção de Top Bar: Elimine qualquer faixa de anúncio superior (ex: Frete grátis, cupons de desconto, avisos de kits). O Header deve começar do topo absoluto da página.
+
+Altura e Espaçamento:
+
+Aumente a altura total do Header em 5%.
+
+Aumente significativamente o logo da Namu. Para que ele tenha espaço sem quebrar o layout, reduza os espaçamentos (gap/padding) entre os itens do menu ("Loja", "Receitas", etc.).
+
+Tipografia: Aumente o font-size dos links de navegação em 15% em relação ao tamanho atual.
+
+2. O Novo "Mega Menu" (Hover em Loja)
+Ao passar o mouse ou clicar em "Loja", o dropdown deve seguir a estrutura da referência Jade Leaf:
+
+Lado Esquerdo: Lista vertical das categorias existentes (Best Sellers, Matchá Cerimonial, etc.) com o botão "Ver Tudo" ao final.
+
+Lado Direito (Novo): Adicione dois cards de destaque lado a lado.
+
+Card 1: Imagem de um Kit de Matcha + Texto "Kit Iniciante".
+
+Card 2: Imagem de um produto novo + Texto "Kit Lançamento".
+
+Design: O container do menu deve ser largo (quase full-width ou centralizado largo), com bordas levemente arredondadas e sombra suave (shadow-sm/md).
+
+3. Comportamento de Scroll (Sticky Dinâmico)
+O Header deve se comportar exatamente como o da Jade Leaf:
+
+Scroll Down: O Header deve sumir da tela para dar foco ao conteúdo.
+
+Scroll Up: Ao detectar qualquer rolagem para cima (mesmo que o usuário não esteja no topo), o Header deve aparecer de forma fluida e sutil (animação de slide-down ou fade-in).
+
+Estado inicial: Se o usuário estiver no topo da página (dobra 1), o Header deve ser estático ou transparente conforme o design da página inicial, mas sempre acessível.
+
+4. Reestruturação Mobile
+O layout do Header em dispositivos móveis deve ser alterado para uma estrutura de três colunas:
+
+Esquerda: Ícone de Menu Hambúrguer.
+
+Centro: Logo da Namu em sua versão horizontal, centralizado.
+
+Direita: Apenas o ícone de Carrinho (Sacola).
+
+Menu Lateral (Drawer): Ao abrir o menu hambúrguer, ele deve seguir o estilo da Jade Leaf Mobile: listar as categorias e, logo abaixo, exibir as duas imagens de destaque ("Kit Iniciante" e "Kit Lançamento") de forma vertical ou em grid 2x2 pequeno.
+
+5. Regras Técnicas e Escopo
+Aplicação Global: Este componente e seu comportamento devem ser consistentes em todas as páginas do site (Home, PDP, Carrinho, etc.).
+
+Imagens: Use os assets de imagem de matcha já presentes no projeto para os cards do menu. Caso não encontre, utilize placeholders de alta qualidade com proporção 1:1 ou 4:3.
+
+Identidade Visual: Respeite as cores e fontes da Namu. Use transições suaves (transition: all 0.3s ease-in-out).
+
+NÃO altere nenhuma outra seção das páginas além do Header e seu conteúdo de navegação.
+
+Instrução para o Claude: "Analise os arquivos Header.tsx (ou equivalente) e os estilos globais de navegação. Antes de aplicar, confirme se entendeu a lógica de 'Scroll Up Reveal' e a nova estrutura do Mega Menu com imagens."
+
+
+_____________________________________
+
+
+Prompt 01 - Textual
+Reestruturação de Conteúdo e Seções da Homepage
+Contexto:
+Preciso realizar ajustes textuais e de layout na Homepage do projeto Namu. O objetivo é alinhar a comunicação visual e remover redundâncias de texto.
+
+1. Atualização de Texto (Categorias):
+
+Localize a seção "EXPLORE NOSSAS CATEGORIAS".
+
+Altere o título e o subtítulo para:
+
+Título (H2): MATCHA PARA TODOS OS GOSTOS
+
+Subtítulo (P): DO MATCHA CERIMONIAL AO DELICIOSO MATCHA COM VANILLA NATURAL DA BAHIA. ENCONTRE O MATCHA PERFEITO PARA VOCÊ.
+
+Siga a tipografia e o estilo de cores (verde escuro) da imagem de referência.
+
+
+________________
+Prompt 02 seção sobre
+
+2. Nova Seção "Namu Experience" (Substituição):
+
+Remova a seção antiga que contém "Claridade Atendimento Suporte Pós Venda" e o texto de "Matcha para o seu negócio".
+
+Crie uma nova seção com as seguintes especificações:
+
+Layout: 50% Bloco de Conteúdo (Esquerda) e 50% Imagem (Direita).
+
+Dimensão: Deve ser Viewport 100% (h-screen), garantindo que a seção ocupe a tela inteira independentemente do zoom (mesmo comportamento da PDP).
+
+Conteúdo: Utiize o texto "Por que a namu matcha?
+Do berço do chá coreano até a sua mesa
+e um botão escrito "Nossos campos" que ao clicar vai para o /sobre na seção da esquerda
+e no link imagem da direita que imita um play de vídeo, colocar um link que abre modal de vídeo do youtube com qualquer vídeo aleatório de exemplo  na esquerda sofisticado e uma imagem namu-banner-seção-02-500x500-player que está na pasta C:\Users\unk_g\OneDrive\Área de Trabalho\namu-shopify. 
+
+
+________________
+
+Prompt 03 Criação da Seção "Para Sua Empresa" (B2B)
+Contexto:
+Desenvolver uma nova seção focada no público corporativo (B2B), utilizando assets específicos do projeto.
+
+Especificações da Seção:
+
+Asset: Utilize a imagem localizada em C:\Users\unk_g\OneDrive\Área de Trabalho\namu-shopify com o nome NAMU-banner_para-o-seu-negócio_desktop.
+
+Layout: - A imagem deve servir de fundo para a seção (Background Image).
+
+O texto deve ser renderizado em HTML puro (não deve fazer parte da imagem) e posicionado na lateral esquerda.
+
+Conteúdo Textual (Baseado no Print):
+
+Título: PARA O SEU NEGÓCIO
+
+Subtítulo: Seu negócio merece um matcha à altura. Nossas soluções para empresas são versáteis e vão muito além da venda.
+
+Botões/Links de Categoria: Adicione as opções: INDÚSTRIA, FOOD SERVICE, CORPORATIVO, CONSULTORIA (estilo outline buttons conforme o print). 
+
+Comportamento: Toda a área da seção deve ser clicável e encaminhar o usuário para a página /para-seu-negocio.
+
+Design: Mantenha a estética premium, garantindo contraste legível entre o texto branco/claro e o fundo da imagem.
+______________________
+
+Prompt 04 Claude Code: Auditoria de Assets e Debug de Localhost
+Contexto:
+Estou enfrentando problemas técnicos ao adicionar novos assets (imagens) ao projeto. Sempre que insiro arquivos na pasta assets, o ambiente de desenvolvimento (localhost) quebra ou entra em loop de erro. Preciso que você audite minha estrutura de arquivos e implemente a melhor prática para gerenciamento de mídia.
+
+Objetivo:
+
+Descobrir por que a inserção de imagens está derrubando o servidor local.
+
+Organizar a pasta de assets para que você (Claude) consiga referenciá-los corretamente no código.
+
+Garantir que a inserção de novos materiais não cause erros de compilação.
+
+1. Diagnóstico de Erro (Debug)
+Análise de Watcher: Verifique se o nosso bundler (Vite, Webpack ou Shopify CLI) está configurado para observar a pasta de assets e se isso está causando um "infinite reload" ou erro de memória ao indexar novos arquivos.
+
+Verificação de Caminhos: Analise se existem referências a arquivos inexistentes ou caminhos absolutos quebras que impedem o npm run dev de completar o build.
+
+2. Estruturação de Pastas (Best Practices)
+Explique e execute a organização ideal para este projeto (considerando que é um projeto moderno de e-commerce):
+
+Imagens Estáticas: Onde devo colocar logos e ícones fixos? (ex: /public vs /src/assets).
+
+Imagens de Conteúdo: Onde devo colocar fotos de produtos e banners temporários?
+
+Referenciamento: Como devo importar essas imagens no React/Liquid para que você as identifique? (Ex: import img from '...' ou caminhos relativos).
+
+3. Procedimento de Inserção Segura
+Crie um guia rápido de como eu devo adicionar novas imagens para que você as reconheça imediatamente sem quebrar o projeto.
+
+_________________
+
+Prompt 5
+Implementação de Seção de Dificenciais (Badges)
+Contexto:
+Preciso adicionar uma nova seção de "Diferenciais do Produto" (Trust Badges) na Homepage. Esta seção deve ser posicionada imediatamente abaixo da seção "Por que escolher a Namu?".
+
+Objetivo:
+Criar uma linha de ícones minimalistas com textos explicativos curtos, reforçando os benefícios do nosso Matcha, seguindo o padrão visual premium da marca.
+
+1. Estrutura e Conteúdo (Baseado no Print)
+Crie um componente de grid/flexbox contendo 6 itens, cada um com um ícone (SVG) e um texto centralizado abaixo. Os itens são:
+
+Ícone: Planta com setas circulares (Fonte de energia).
+
+Texto: Uma fonte limpa e natural de energia
+
+Ícone: Erlenmeyer/Frasco com sinal de proibido (Livre de químicos).
+
+Texto: Livre de agrotóxicos e aditivos
+
+Ícone: Mão segurando uma folha (Colheita manual).
+
+Texto: Matcha fresco, colhido artesanalmente
+
+Ícone: Estrutura molecular/círculos (Nutrientes).
+
+Texto: Rico em antioxidantes e vitaminas
+
+Ícone: Raio/Relâmpago (Duração da energia).
+
+Texto: 4 a 6 horas de energia calma
+
+Ícone: Chama/Cérebro com setas circulares (Foco).
+
+Texto: Apoia na função cognitiva
+
+2. Estilização e Design (Namu Style)
+Ícones: Devem ser em formato SVG (Line Art), com traços finos e elegantes. Utilize a cor verde institucional da Namu. Caso não tenhamos os ícones idênticos no repositório, utilize uma biblioteca como Lucide-React ou Phosphor Icons com ícones que representem fielmente os descritos.
+
+Tipografia: Texto pequeno, com bom espaçamento entre linhas e centralizado. Use a fonte sans-serif da marca.
+
+Layout Desktop: Uma linha única horizontal com os 6 itens distribuídos igualmente (justify-between ou grid-cols-6).
+
+Layout Mobile: Transforme em um grid de 2 colunas e 3 linhas (ou um carrossel horizontal sutil) para garantir a legibilidade em telas pequenas.
+
+Espaçamento: Adicione um padding generoso (superior e inferior) para que a seção "respire" entre os blocos da página.
+
+3. Implementação Técnica
+Localize o arquivo da Homepage (ex: index.tsx ou home.liquid).
+
+Identifique o fim da seção "Por que escolher a Namu?" e insira o novo componente.
+
+Certifique-se de que a seção seja responsiva e mantenha o alinhamento central em todas as resoluções.
+
+Instrução para o Claude: "Claude, utilize ícones que passem uma sensação de leveza e pureza. O texto deve ser discreto mas legível. Antes de gerar o código, verifique se já existe um componente de 'Feature' ou 'IconBox' no projeto que possamos reaproveitar para manter a consistência."
+
+Dica Extra: Se você quiser que esses ícones tenham uma leve animação de "fade-in" quando o usuário rolar a página até eles, você pode adicionar no final do prompt: "Adicione uma animação suave de entrada (Reveal) para os ícones ao entrar no viewport."
+
+_______________
+
+Prompt 06 Implementação da Seção de Blog (Homepage)
+Contexto:
+Preciso criar uma nova seção de Destaques do Blog na Homepage da Namu. Esta seção deve ser posicionada imediatamente abaixo da seção de "Diferenciais" (Badges) recém-criada. O objetivo é educar o usuário ("Matcha do Zero ao Avançado") e aumentar o tempo de permanência no site.
+
+1. Estrutura de Layout e Design
+Background da Seção: Utilize o Verde Escuro institucional da Namu (referência Jade Leaf).
+
+Título da Seção: - H2: Matcha do Zero ao Avançado (Cor: Branco ou Off-white).
+
+Subtítulo: Novo no mundo do matcha? Aprenda tudo aqui! Descubra o que é, seus benefícios e como preparar o seu matcha perfeito hoje mesmo. 🍵 ✨
+
+Grid de Artigos: Crie um grid com 3 cards dispostos horizontalmente no Desktop e empilhados (1 coluna) no Mobile.
+
+Estilo do Card:
+
+Imagem: No topo, com bordas arredondadas suaves (rounded-lg ou xl).
+
+Corpo do Card: Fundo branco (ou levemente acinzentado) para contraste, com padding interno generoso.
+
+Conteúdo: Título (H3) em negrito, seguido por um breve resumo (excerpt) e um link "LER MAIS" em caixa alta com uma pequena seta (->).
+
+2. Conteúdo dos Artigos (Placeholders de Destaque)
+A seção deve simular a puxada de 3 artigos específicos:
+
+Artigo 1:
+
+Título: O que é matcha? Quais os tipos e os seus benefícios
+
+Resumo: Entenda o que é o matcha, de onde vem e por que esse chá verde em pó é tão famoso entre os amantes da saúde e bem-estar.
+
+Link: /blog/o-que-e-matcha
+
+Artigo 2:
+
+Título: Guia definitivo de como fazer o matcha perfeito
+
+Resumo: Aprenda o passo a passo para preparar o matcha perfeito em casa. Dicas práticas para um chá cremoso, saboroso e energizante.
+
+Link: /blog/guia-preparo-matcha
+
+Artigo 3:
+
+Título: 7 benefícios comprovados do Matcha para sua saúde
+
+Resumo: Descubra os principais benefícios do matcha para a saúde, com respaldo científico. Mais energia, foco e bem-estar no seu dia a dia.
+
+Link: /blog/beneficios-do-matcha
+
+3. Chamada para Ação (CTA Global)
+Abaixo do grid de 3 artigos, centralize um botão principal.
+
+Texto do Botão: CONFIRA TODOS OS NOSSOS CONTEÚDOS (ou MATCHA BLOG).
+
+Destino: /blog
+
+Estilo: Botão com fundo verde claro (ou o tom de destaque da Namu) e texto em contraste, com efeito de hover que mude levemente a tonalidade.
+
+4. Requisitos Técnicos e UX
+Hover State: Ao passar o mouse nos cards, aplique uma leve elevação (shadow-lg) e um zoom sutil na imagem do artigo.
+
+Responsividade: Garanta que no mobile as imagens ocupem a largura total e os textos fiquem confortáveis para leitura.
+
+Componentização: Se possível, crie um componente reutilizável BlogCard para facilitar a manutenção.
+
+Imagens: Use assets de imagens de matcha de alta qualidade (plantações, preparo com batedor de bambu e consumo) que já existam no projeto ou use placeholders temáticos.
+
+Instrução para o Claude: "Claude, analise o estilo visual que usamos na seção de diferenciais para manter a harmonia. O espaçamento (gap) entre os cards deve ser elegante. Aplique transições suaves em todos os estados de hover dos links e botões."
+
+_________________
+
+Prompt 07
+Claude Code: Reorganização e Contraste (Blog vs. Receitas)
+Contexto:
+Preciso ajustar a ordem das seções na Homepage para melhorar o fluxo de conteúdo e garantir que haja uma distinção visual clara entre os blocos de "Blog" e "Receitas".
+
+Objetivo:
+
+Mover a seção de Receitas para ficar posicionada logo abaixo da seção de Blog.
+
+Criar um contraste visual forte entre as duas para que o usuário perceba a transição de conteúdo.
+
+1. Reposicionamento de Layout
+Localize a seção de Blog (que possui fundo Verde Escuro).
+
+Localize a seção de Receitas.
+
+Mova a seção de Receitas para que ela seja a seção seguinte, imediatamente abaixo do Blog.
+
+2. Estratégia de Contraste Visual
+Para evitar que as duas seções se misturem (já que ambas usavam tons de verde), aplique a seguinte lógica de cores:
+
+A. Seção de Blog (Manter conforme criado):
+
+Fundo: Verde Escuro Institucional.
+
+Textos/Títulos: Branco ou Off-white.
+
+Cards: Fundo Branco.
+
+B. Seção de Receitas (Nova Estilização para Contraste):
+
+Fundo: Altere para Off-white ou Bege bem claro (estilo papel/creme premium). Isso criará um "respiro" visual após o bloco escuro do blog.
+
+Títulos e Textos: Altere de branco para o Verde Escuro da Namu, garantindo leitura perfeita sobre o fundo claro.
+
+Imagens das Receitas: Mantenha as bordas arredondadas e o comportamento de clique para /receitas. Como o fundo agora é claro, as imagens ganharão mais destaque natural.
+
+3. Ajustes de Espaçamento (Padding)
+Certifique-se de que o espaçamento superior (padding-top) da seção de Receitas seja generoso, para que a transição do fundo Verde Escuro (Blog) para o fundo Claro (Receitas) seja elegante e não abrupta.
+
+Adicione uma transição suave ou um leve divisor se julgar necessário para a estética premium.
+
+Este é o prompt ideal para realizar essa reestruturação de layout, garantindo que a navegação da Homepage tenha um "ritmo" visual agradável através do contraste de cores.
+
+Prompt para Claude Code: Reorganização e Contraste (Blog vs. Receitas)
+Contexto:
+Preciso ajustar a ordem das seções na Homepage para melhorar o fluxo de conteúdo e garantir que haja uma distinção visual clara entre os blocos de "Blog" e "Receitas".
+
+Objetivo:
+
+Mover a seção de Receitas para ficar posicionada logo abaixo da seção de Blog.
+
+Criar um contraste visual forte entre as duas para que o usuário perceba a transição de conteúdo.
+
+1. Reposicionamento de Layout
+Localize a seção de Blog (que possui fundo Verde Escuro).
+
+Localize a seção de Receitas.
+
+Mova a seção de Receitas para que ela seja a seção seguinte, imediatamente abaixo do Blog.
+
+2. Estratégia de Contraste Visual
+Para evitar que as duas seções se misturem (já que ambas usavam tons de verde), aplique a seguinte lógica de cores:
+
+A. Seção de Blog (Manter conforme criado):
+
+Fundo: Verde Escuro Institucional.
+
+Textos/Títulos: Branco ou Off-white.
+
+Cards: Fundo Branco.
+
+B. Seção de Receitas (Nova Estilização para Contraste):
+
+Fundo: Altere para Off-white ou Bege bem claro (estilo papel/creme premium). Isso criará um "respiro" visual após o bloco escuro do blog.
+
+Títulos e Textos: Altere de branco para o Verde Escuro da Namu, garantindo leitura perfeita sobre o fundo claro.
+
+Imagens das Receitas: Mantenha as bordas arredondadas e o comportamento de clique para /receitas. Como o fundo agora é claro, as imagens ganharão mais destaque natural.
+
+3. Ajustes de Espaçamento (Padding)
+Certifique-se de que o espaçamento superior (padding-top) da seção de Receitas seja generoso, para que a transição do fundo Verde Escuro (Blog) para o fundo Claro (Receitas) seja elegante e não abrupta.
+
+Adicione uma transição suave ou um leve divisor se julgar necessário para a estética premium.
+
+4. Resumo da Ordem Final da Homepage:
+A sequência deve ser:
+
+... (Seções anteriores)
+
+Por que escolher a Namu? (Fundo claro/imagem)
+
+Diferenciais/Badges (Fundo branco)
+
+Blog: Matcha do Zero ao Avançado (Fundo VERDE ESCURO)
+
+Receitas Favoritas (Fundo OFF-WHITE / CLARO)
+
+Para sua Empresa / B2B (Fundo Imagem)
+
+Instrução para o Claude: "Claude, o objetivo aqui é criar um efeito 'fatiado' na página, onde alternamos entre blocos escuros e claros. Isso ajuda a manter o usuário engajado enquanto ele faz o scroll. Verifique se as fontes da seção de receitas foram devidamente invertidas para verde escuro para manter o contraste no novo fundo claro."
+___________
+
+
+Prompt 08 Este é o prompt final para consolidar a captura de leads (Newsletter) de forma elegante e integrada ao rodapé, utilizando gatilhos de conversão baseados na Jade Leaf e a estética da Namu.
+
+Prompt para Claude Code: Refatoração e Integração da Newsletter no Footer
+Contexto:
+Preciso integrar a seção de captura de Newsletter diretamente no componente de Footer (Rodapé). Atualmente, ela está isolada e precisa de um ajuste fino de design e hierarquia para parecer uma "faixa de entrada" do rodapé, sendo mais fina e sofisticada.
+
+1. Reposicionamento e Estrutura
+Localização: Mova o formulário de Newsletter para a parte superior do Footer (como uma Pre-footer strip).
+
+Layout: A faixa deve ser mais fina (thin) do que a versão atual.
+
+Desktop: Organize os elementos em uma linha única (ou duas colunas bem distribuídas):
+
+Esquerda: Branding (Logo + Bandeira + Slogan).
+
+Centro/Direita: Texto de incentivo + Campos de Input + Botão.
+
+Mobile: Empilhamento vertical elegante, priorizando a clareza do formulário.
+
+2. Branding e Elementos Visuais
+Logo Namu: Remova a versão branca (que está sem contraste). Utilize apenas o símbolo (ícone da folha) da Namu em uma cor que contraste bem com o fundo (ex: Verde Namu se o fundo for claro, ou um tom de creme se o fundo for escuro).
+
+Slogan: Logo abaixo do símbolo, insira o texto: "Do campo à sua xícara." em uma fonte pequena e discreta.
+
+Elemento de Origem: Adicione um ícone pequeno da bandeira da Coreia do Sul ao lado do símbolo da Namu para reforçar a autenticidade e origem do Matcha.
+
+3. Conteúdo e Gatilhos (Copywriting)
+Refaça o texto de incentivo combinando o senso de comunidade com benefícios claros. Utilize este modelo:
+
+Título (H4/H5): Faça parte da nossa comunidade
+
+Texto de Apoio: "Ganhe um presente na sua primeira compra! Além disso, receba receitas exclusivas, novidades e ofertas direto no seu e-mail."
+
+Campos do Formulário:
+
+Input: "Seu nome"
+
+Input: "Seu melhor e-mail"
+
+Botão: "QUERO MEU BENEFÍCIO" ou "CADASTRAR" (com uma seta minimalista ->).
+
+4. Especificações de Design (Namu ID)
+Cores: Se o Footer for Verde Escuro, a faixa de newsletter pode ter um tom levemente diferente para destaque, ou manter o Verde Escuro com divisores finos.
+
+Inputs: Devem ser minimalistas, com bordas finas e fundos limpos.
+
+Botão: Deve seguir o padrão premium (caixa alta, espaçamento entre letras), com um efeito de hover sofisticado.
+
+Contraste: Garanta que todos os textos sejam legíveis, evitando o erro de baixo contraste da versão anterior.
+
+5. Instruções Técnicas para o Claude:
+"Claude, analise o arquivo Footer.tsx e o Newsletter.tsx. Una os dois em um único arquivo de estrutura ou certifique-se de que o componente de Newsletter seja chamado como a primeira linha do Footer."
+
+"Certifique-se de que a lógica de envio do formulário (integração com Shopify/Klaviyo/Mailchimp) permaneça funcional."
+
+"A bandeira da Coreia do Sul deve ser um SVG pequeno ou um emoji estilizado que não quebre a estética minimalista."
+
+Dica Final: Este ajuste vai transformar a newsletter de uma "interrupção" em um "benefício de boas-vindas". Se precisar de mais algum ajuste na hierarquia do rodapé após isso, é só me avisar!
+__________________
+
+Prompt 09 Implementação de FAQ Premium e Estrutura de SEO
+Contexto:
+Preciso criar uma seção de Perguntas Frequentes (FAQ) para o site da Namu. Ela deve ser posicionada ao final da página (antes do footer). O design deve ser inspirado na referência da Bubbles (accordions limpos), mas adaptado para a estética premium e minimalista da Namu.
+
+1. Especificações de Layout e UX
+Estrutura: Layout vertical (uma pergunta abaixo da outra), centralizado na página.
+
+Comportamento: Accordion funcional. A primeira pergunta deve vir aberta por padrão ao carregar a página.
+
+Design:
+
+Fundo da seção em Off-white ou um tom creme muito suave para dar contraste com o fundo branco das seções anteriores.
+
+Bordas dos itens do FAQ levemente arredondadas.
+
+Ícones de "+" e "-" (ou setas minimalistas) para indicar abertura/fechamento.
+
+Transições suaves (transition-all) na abertura do conteúdo.
+
+Tipografia: Títulos das perguntas em negrito (Verde Escuro Namu). Respostas em fonte legível com espaçamento adequado.
+
+2. Otimização de SEO (Foco em Rich Snippets)
+Schema.org: Implemente automaticamente o JSON-LD de FAQPage. Isso permitirá que as perguntas e respostas apareçam diretamente nos resultados de busca do Google (Rich Snippets).
+
+Semântica HTML: Use tags <details> e <summary> ou garanta que os botões tenham os atributos aria-expanded e aria-controls para total acessibilidade.
+
+3. Conteúdo do FAQ (15 Perguntas e Respostas Namu)
+Insira as seguintes 15 perguntas baseadas no cenário da marca:
+
+O que diferencia o Matcha da Namu de outros chás verdes?
+
+Resposta: O Matcha Namu é cultivado à sombra na Coreia do Sul, colhido artesanalmente e moído em moinhos de pedra. Diferente do chá verde comum, você consome a folha inteira integralmente, o que garante 10x mais antioxidantes e um sabor muito mais cremoso e adocicado (Umami).
+
+Qual a origem do Matcha Namu?
+
+Resposta: Nosso matcha é importado diretamente de fazendas boutique na Coreia do Sul, selecionadas por seus processos rigorosos de pureza e sustentabilidade.
+
+Qual a diferença entre o Matcha Cerimonial e o Premium?
+
+Resposta: O Cerimonial é feito com as folhas mais jovens da primeira colheita, ideal para beber apenas com água. O Premium é vibrante e versátil, perfeito para lattes, smoothies e receitas culinárias.
+
+O Matcha Namu contém cafeína?
+
+Resposta: Sim, o matcha contém cafeína natural. No entanto, devido à alta concentração de L-Teanina, a energia é liberada de forma gradual (4 a 6 horas), sem causar a "queda" ou ansiedade comum no café.
+
+Como devo preparar o meu matcha em casa?
+
+Resposta: Basta peneirar 1-2g de matcha em uma tigela, adicionar água quente (não fervendo, cerca de 80°C) e bater com o batedor de bambu (Chasen) ou um mixer elétrico até formar uma espuma densa.
+
+Qual a melhor forma de armazenar meu matcha?
+
+Resposta: Para manter o frescor e a cor vibrante, guarde-o na embalagem original bem fechada, em local fresco, seco e longe da luz. Muitas pessoas preferem mantê-lo na geladeira após aberto.
+
+Os produtos da Namu são orgânicos e livres de agrotóxicos?
+
+Resposta: Sim. Priorizamos produtores que utilizam práticas de cultivo limpas. Nossos lotes passam por testes rigorosos para garantir que sejam 100% livres de aditivos e agrotóxicos.
+
+Matcha ajuda no processo de emagrecimento?
+
+Resposta: O matcha é um potente termogênico natural que ajuda a acelerar o metabolismo e a queima de gordura, especialmente quando aliado a uma rotina de exercícios.
+
+Grávidas e crianças podem consumir matcha?
+
+Resposta: O matcha contém cafeína. Recomendamos que gestantes, lactantes ou responsáveis por crianças consultem um médico antes de incluir o matcha na rotina.
+
+O matcha quebra o jejum intermitente?
+
+Resposta: Se consumido apenas com água, o matcha não quebra o jejum, sendo um excelente aliado para manter o foco e a saciedade durante o período.
+
+Quanto tempo dura uma lata de Matcha Namu?
+
+Resposta: Uma lata de 30g rende aproximadamente 30 doses, se utilizado 1g por porção.
+
+Qual o prazo de entrega para o meu endereço?
+
+Resposta: O prazo varia conforme sua região, mas geralmente entregamos em todo o Brasil entre 3 a 7 dias úteis após a confirmação do pedido.
+
+Posso comprar o Matcha Namu para o meu negócio (B2B)?
+
+Resposta: Com certeza! Temos condições especiais para cafeterias, empórios e empresas. Visite nossa seção "Para seu Negócio" no menu superior.
+
+O matcha da Namu é vegano e sem glúten?
+
+Resposta: Sim, nosso matcha é 100% puro, de origem vegetal, naturalmente livre de glúten, lactose e qualquer componente de origem animal.
+
+Vocês oferecem garantia de satisfação?
+
+Resposta: Sim, queremos que sua experiência com o matcha seja perfeita. Caso tenha qualquer problema com seu pedido, nossa equipe de suporte está pronta para resolver da melhor forma possível.
+
+4. Instrução Final para o Claude
+"Claude, ao implementar, certifique-se de que os nomes das classes CSS sejam amigáveis e não conflitem com outras seções. Use as cores institucionais (Verde Namu #... e Creme #...) que estão no nosso arquivo de variáveis."
+
+"Verifique se a responsividade no mobile está permitindo que as perguntas longas não quebrem o layout do ícone de abrir/fechar."
+
+Dica para você: Após o Claude terminar, peça para ele: "Agora gere o código de teste para validar se o Schema JSON-LD de FAQ está correto para o Google Search Console." Isso garante que seu SEO vai funcionar de primeira!
+
+___________
+
+Prompt 10 Construção do Footer Premium Namu
+Contexto:
+Preciso refatorar o componente de Footer (Rodapé) do e-commerce da Namu. O objetivo é adotar a estrutura organizada da referência "Bubbles Pet", mas com a identidade visual sofisticada da Namu (Verde Escuro, Off-white, minimalismo).
+
+1. Estrutura de Colunas (Grid Principal)
+O rodapé deve ser dividido em 4 colunas principais no Desktop (e 1 ou 2 no Mobile):
+
+Coluna 1 (Compras):
+
+Título: COMPRAS
+
+Links: Todos os produtos, Matcha, Hojicha, Utensílios para chá, Colaborações, Kits & Gifts, Vestuário.
+
+Coluna 2 (Institucional):
+
+Título: INSTITUCIONAL
+
+Links: Sobre a Namu, Blog, Nossos Campos, Receitas, O que é Matcha, Como fazer Matcha, Benefícios.
+
+Coluna 3 (Suporte & Ajuda):
+
+Título: PROCURANDO AJUDA?
+
+Links: Clique aqui (FAQ), Fale Conosco.
+
+Subtítulo: PRECISA FALAR COM UM HUMANO?
+
+Info: alo@namumatcha.com.br | +55 11 93087-6268.
+
+Coluna 4 (Atendimento & Redes):
+
+Título: ATENDIMENTO
+
+Info: Seg a Sex: 08:00 às 17:00 | Sáb: 08:00 às 12:00.
+
+Endereço: Rua João Elias Saada 134 – Pinheiros/SP.
+
+Abaixo, insira a seção SIGA A NAMU com ícones minimalistas de Instagram, TikTok e YouTube.
+
+2. Faixa de Políticas (Inspirado na Bubbles)
+Logo abaixo do grid de colunas, adicione uma faixa horizontal separada por uma linha fina:
+
+Links horizontais: Políticas: Envio e Frete | Privacidade | Termos de Serviço | Troca e Devoluções | Guia de Diluição.
+
+Estilo: Fonte pequena, uppercase ou capitalize, com espaçamento elegante entre os itens.
+
+3. Barra de Selos e Pagamento (Bottom Bar)
+A última parte do rodapé deve conter:
+
+Lado Esquerdo (Pagamento): Título "PAGAMENTO SEGURO" seguido pelos ícones de cartões (Visa, Master, Amex, Elo, Pix, etc.).
+
+Lado Direito (Selos de Confiança): Ícones de Shopify Secure, Site Blindado/SSL, Google Safe Browsing e o selo do Reclame Aqui.
+
+Centro/Base: Texto de Copyright: © 2026 Namu Matcha | CNPJ: 41.401.743/0001-50 | Endereço Legal...
+
+4. Ajustes de Design e Regras
+Fundo: Utilize o Verde Escuro da Namu.
+
+Texto: Off-white ou Branco, com tipografia limpa.
+
+REMOÇÃO OBRIGATÓRIA: Não inclua nenhuma seção de "Minha Conta" ou "Login" no rodapé.
+
+Branding Extra: No canto superior do footer (ou acima das colunas), mantenha o símbolo da folha da Namu + Slogan ("Do campo à sua xícara") + Bandeira da Coreia do Sul em miniatura.
+
+Responsividade: No Mobile, as colunas devem se transformar em Accordions (sanfonas) que abrem ao clicar no título, para economizar espaço vertical.
+
+5. Instrução Técnica para o Claude:
+"Claude, utilize flexbox e grid para garantir que o alinhamento das colunas seja perfeito."
+
+"Os ícones de pagamento e selos devem ter um tamanho uniforme e serem monocromáticos (branco ou cinza claro) para não brigar visualmente com o fundo verde."
+
+"Garanta que todos os links tenham um estado de hover sutil (ex: opacidade 0.7)."
+
+
+
+
+
+
