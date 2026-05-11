@@ -1,0 +1,651 @@
+{{ 'namu-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'namu-product.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign on_sale = false
+  if current_variant.compare_at_price > current_variant.price
+    assign on_sale = true
+  endif
+  assign product_images = product.images
+-%}
+
+<div class="namu-pdp" id="namu-pdp-{{ section.id }}">
+
+  {%- comment -%} ── HERO: Gallery + Buy Block ─────────────────── {%- endcomment -%}
+  <div class="namu-pdp__hero">
+
+    {%- comment -%} Gallery {%- endcomment -%}
+    <div class="namu-pdp__gallery" id="NamuGallery-{{ section.id }}">
+      <div class="namu-pdp__gallery-main" id="NamuGalleryMain-{{ section.id }}" role="img" aria-label="{{ product.title | escape }}">
+        {%- if product_images.size > 0 -%}
+          {%- assign main_img = product_images[0] -%}
+          <img
+            id="NamuGalleryImg-{{ section.id }}"
+            src="{{ main_img | image_url: width: 900 }}"
+            srcset="{{ main_img | image_url: width: 600 }} 600w,
+                    {{ main_img | image_url: width: 900 }} 900w,
+                    {{ main_img | image_url: width: 1200 }} 1200w"
+            sizes="(max-width: 900px) 100vw, 50vw"
+            alt="{{ main_img.alt | default: product.title | escape }}"
+            loading="eager"
+            decoding="async"
+            width="{{ main_img.width }}"
+            height="{{ main_img.height }}"
+          >
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'namu-pdp__gallery-placeholder' }}
+        {%- endif -%}
+        <span class="namu-pdp__gallery-zoom-hint" aria-hidden="true">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          Ampliar
+        </span>
+      </div>
+
+      {%- if product_images.size > 1 -%}
+        <div class="namu-pdp__gallery-thumbs" role="list" aria-label="Miniaturas do produto">
+          {%- for img in product_images limit: 8 -%}
+            <button
+              class="namu-pdp__thumb{% if forloop.first %} is-active{% endif %}"
+              type="button"
+              role="listitem"
+              aria-label="Ver imagem {{ forloop.index }}"
+              data-src="{{ img | image_url: width: 900 }}"
+              data-srcset="{{ img | image_url: width: 600 }} 600w, {{ img | image_url: width: 900 }} 900w, {{ img | image_url: width: 1200 }} 1200w"
+              data-alt="{{ img.alt | default: product.title | escape }}"
+            >
+              <img
+                src="{{ img | image_url: width: 150 }}"
+                alt="{{ img.alt | default: product.title | escape }}"
+                loading="lazy"
+                decoding="async"
+                width="72"
+                height="72"
+              >
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Buy Block {%- endcomment -%}
+    <div class="namu-pdp__buy">
+
+      {%- comment -%} Badges {%- endcomment -%}
+      <div class="namu-pdp__badge-row">
+        {%- if on_sale -%}
+          <span class="namu-pdp__badge namu-pdp__badge--sale">Sale</span>
+        {%- endif -%}
+        {%- if section.settings.badge_text != blank -%}
+          <span class="namu-pdp__badge namu-pdp__badge--limited">{{ section.settings.badge_text | escape }}</span>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Title {%- endcomment -%}
+      <h1 class="namu-pdp__title">{{ product.title | escape }}</h1>
+
+      {%- comment -%} Stars (static — replace with app integration if needed) {%- endcomment -%}
+      {%- if section.settings.show_stars -%}
+        <div class="namu-pdp__stars">
+          <div class="namu-pdp__stars-icons" aria-hidden="true">
+            {%- for i in (1..5) -%}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            {%- endfor -%}
+          </div>
+          <span class="namu-pdp__stars-count">
+            <a href="#namu-pdp-reviews-{{ section.id }}">{{ section.settings.review_count | default: 0 }} avaliações</a>
+          </span>
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} Price {%- endcomment -%}
+      <div class="namu-pdp__price-block">
+        <div class="namu-pdp__price-row">
+          {%- if on_sale -%}
+            <span class="namu-pdp__price-compare">{{ current_variant.compare_at_price | money }}</span>
+            <span class="namu-pdp__price-sale">{{ current_variant.price | money }}</span>
+          {%- elsif product.price_varies -%}
+            <span class="namu-pdp__price-regular">A partir de {{ product.price_min | money }}</span>
+          {%- else -%}
+            <span class="namu-pdp__price-regular">{{ current_variant.price | money }}</span>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.show_installments and current_variant.price >= 10000 -%}
+          {%- assign installment_value = current_variant.price | divided_by: 6 -%}
+          <p class="namu-pdp__price-installments">ou 6x de {{ installment_value | money }} sem juros</p>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Short description {%- endcomment -%}
+      {%- if product.description != blank -%}
+        <p class="namu-pdp__short-desc">{{ product.description | strip_html | truncate: 200 }}</p>
+      {%- endif -%}
+
+      {%- comment -%} Variant picker {%- endcomment -%}
+      {%- unless product.has_only_default_variant -%}
+        {%- for option in product.options_with_values -%}
+          <div class="namu-pdp__variants">
+            <p class="namu-pdp__variants-label">{{ option.name | escape }}</p>
+            <div class="namu-pdp__variants-options" role="group" aria-label="{{ option.name | escape }}">
+              {%- for value in option.values -%}
+                {%- assign is_active = false -%}
+                {%- if current_variant.options contains value -%}
+                  {%- assign is_active = true -%}
+                {%- endif -%}
+                <button
+                  type="button"
+                  class="namu-pdp__variant-btn{% if is_active %} is-active{% endif %}"
+                  data-option-index="{{ forloop.parentloop.index0 }}"
+                  data-option-value="{{ value | escape }}"
+                  aria-pressed="{{ is_active }}"
+                >{{ value | escape }}</button>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endunless -%}
+
+      {%- comment -%} Add to cart form {%- endcomment -%}
+      {%- form 'product', product, id: 'NamuProductForm', class: 'namu-pdp__form' -%}
+        <input type="hidden" name="id" id="NamuVariantId-{{ section.id }}" value="{{ current_variant.id }}">
+        <div class="namu-pdp__atc-row">
+          <div class="namu-pdp__qty" role="group" aria-label="Quantidade">
+            <button type="button" class="namu-pdp__qty-btn" aria-label="Diminuir quantidade" data-qty-minus>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <input type="number" name="quantity" value="1" min="1" class="namu-pdp__qty-input" aria-label="Quantidade" id="NamuQty-{{ section.id }}">
+            <button type="button" class="namu-pdp__qty-btn" aria-label="Aumentar quantidade" data-qty-plus>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+          </div>
+          <button
+            type="submit"
+            name="add"
+            class="namu-pdp__atc-btn"
+            {% unless current_variant.available %}disabled{% endunless %}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            {%- if current_variant.available -%}
+              Adicionar ao Carrinho
+            {%- else -%}
+              Indisponível
+            {%- endif -%}
+          </button>
+        </div>
+      {%- endform -%}
+
+      {%- comment -%} Trust signals {%- endcomment -%}
+      <div class="namu-pdp__trust" aria-label="Diferenciais">
+        <div class="namu-pdp__trust-item">
+          <span class="namu-pdp__trust-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </span>
+          <span class="namu-pdp__trust-label">Frete Grátis acima de R$200</span>
+        </div>
+        <div class="namu-pdp__trust-item">
+          <span class="namu-pdp__trust-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </span>
+          <span class="namu-pdp__trust-label">Compra 100% Segura</span>
+        </div>
+        <div class="namu-pdp__trust-item">
+          <span class="namu-pdp__trust-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </span>
+          <span class="namu-pdp__trust-label">Origem Rastreável</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  {%- comment -%} ── TUDO SOBRE O PRODUTO ─────────────────────── {%- endcomment -%}
+  {%- if section.blocks.size > 0 -%}
+    {%- assign about_blocks = section.blocks | where: 'type', 'about_card' -%}
+    {%- if about_blocks.size > 0 -%}
+      <section class="namu-pdp__about" aria-labelledby="namu-pdp-about-{{ section.id }}">
+        <div class="namu-pdp__about-header">
+          <p class="namu-pdp__about-label">{{ section.settings.about_label | default: 'DETALHES' | upcase | escape }}</p>
+          <h2 class="namu-pdp__about-title" id="namu-pdp-about-{{ section.id }}">{{ section.settings.about_title | default: 'Tudo sobre o Produto' | escape }}</h2>
+        </div>
+        <div class="namu-pdp__about-grid">
+          {%- for block in about_blocks -%}
+            <div class="namu-pdp__about-card" {{ block.shopify_attributes }}>
+              <span class="namu-pdp__about-card-icon" aria-hidden="true">
+                {%- case block.settings.icon -%}
+                  {%- when 'leaf' -%}
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 4.5 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+                  {%- when 'shield' -%}
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  {%- when 'energy' -%}
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  {%- when 'heart' -%}
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  {%- else -%}
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                {%- endcase -%}
+              </span>
+              <h3 class="namu-pdp__about-card-title">{{ block.settings.title | escape }}</h3>
+              <p class="namu-pdp__about-card-text">{{ block.settings.text }}</p>
+            </div>
+          {%- endfor -%}
+        </div>
+      </section>
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- comment -%} ── COMPARISON TABLE ──────────────────────────── {%- endcomment -%}
+  {%- if section.settings.show_comparison -%}
+    <section class="namu-pdp__compare" aria-labelledby="namu-pdp-compare-{{ section.id }}">
+      <div class="namu-pdp__compare-inner">
+        <div class="namu-pdp__compare-header">
+          <h2 class="namu-pdp__compare-title" id="namu-pdp-compare-{{ section.id }}">{{ section.settings.compare_title | default: 'Namu vs. Concorrentes' | escape }}</h2>
+        </div>
+        <table class="namu-pdp__compare-table" role="table">
+          <thead>
+            <tr>
+              <th scope="col">Critério</th>
+              <th scope="col">Namu Matcha</th>
+              <th scope="col">Outros</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- assign compare_blocks = section.blocks | where: 'type', 'compare_row' -%}
+            {%- for block in compare_blocks -%}
+              <tr {{ block.shopify_attributes }}>
+                <td>{{ block.settings.criteria | escape }}</td>
+                <td class="namu-pdp__compare-namu">{{ block.settings.namu_value | escape }}</td>
+                <td class="namu-pdp__compare-other">{{ block.settings.other_value | escape }}</td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ── REVIEWS / SOCIAL PROOF ───────────────────── {%- endcomment -%}
+  {%- assign review_blocks = section.blocks | where: 'type', 'review' -%}
+  {%- if review_blocks.size > 0 -%}
+    <section class="namu-pdp__reviews" id="namu-pdp-reviews-{{ section.id }}" aria-labelledby="namu-pdp-reviews-title-{{ section.id }}">
+      <div class="namu-pdp__reviews-header">
+        <h2 class="namu-pdp__reviews-title" id="namu-pdp-reviews-title-{{ section.id }}">{{ section.settings.reviews_title | default: 'O que nossos clientes dizem' | escape }}</h2>
+        <div class="namu-pdp__reviews-summary">
+          <span class="namu-pdp__reviews-avg">{{ section.settings.review_avg | default: '4.9' }}</span>
+          <span class="namu-pdp__reviews-stars" aria-hidden="true">
+            {%- for i in (1..5) -%}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            {%- endfor -%}
+          </span>
+          <span class="namu-pdp__reviews-total">({{ section.settings.review_count | default: 0 }} avaliações)</span>
+        </div>
+      </div>
+      <div class="namu-pdp__reviews-grid">
+        {%- for block in review_blocks -%}
+          <div class="namu-pdp__review-card" {{ block.shopify_attributes }}>
+            <div class="namu-pdp__review-top">
+              <span class="namu-pdp__review-name">{{ block.settings.name | escape }}</span>
+              <span class="namu-pdp__review-date">{{ block.settings.date | escape }}</span>
+            </div>
+            <div class="namu-pdp__review-stars" aria-label="{{ block.settings.stars | default: 5 }} estrelas">
+              {%- assign star_count = block.settings.stars | default: 5 -%}
+              {%- for i in (1..star_count) -%}
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              {%- endfor -%}
+            </div>
+            <p class="namu-pdp__review-text">{{ block.settings.text }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ── FAQ ──────────────────────────────────────── {%- endcomment -%}
+  {%- assign faq_blocks = section.blocks | where: 'type', 'faq' -%}
+  {%- if faq_blocks.size > 0 -%}
+    <section class="namu-pdp__faq" aria-labelledby="namu-pdp-faq-{{ section.id }}">
+      <div class="namu-pdp__faq-header">
+        <h2 class="namu-pdp__faq-title" id="namu-pdp-faq-{{ section.id }}">{{ section.settings.faq_title | default: 'Perguntas Frequentes' | escape }}</h2>
+      </div>
+      <div class="namu-pdp__faq-list">
+        {%- for block in faq_blocks -%}
+          <details class="namu-pdp__faq-item" {{ block.shopify_attributes }}>
+            <summary>
+              {{ block.settings.question | escape }}
+              <svg class="namu-pdp__faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="namu-pdp__faq-answer">{{ block.settings.answer }}</div>
+          </details>
+        {%- endfor -%}
+      </div>
+    </section>
+  {%- endif -%}
+
+</div>
+
+<script>
+(function() {
+  var sid = '{{ section.id }}';
+  var pdp = document.getElementById('namu-pdp-' + sid);
+  if (!pdp) return;
+
+  var mainWrap  = document.getElementById('NamuGalleryMain-' + sid);
+  var mainImg   = document.getElementById('NamuGalleryImg-' + sid);
+  var thumbs    = pdp.querySelectorAll('.namu-pdp__thumb');
+  var qtyInput  = document.getElementById('NamuQty-' + sid);
+  var variantId = document.getElementById('NamuVariantId-' + sid);
+
+  // Thumbnail switching
+  thumbs.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      thumbs.forEach(function(t) { t.classList.remove('is-active'); });
+      btn.classList.add('is-active');
+      if (mainImg) {
+        mainImg.src    = btn.dataset.src;
+        mainImg.srcset = btn.dataset.srcset;
+        mainImg.alt    = btn.dataset.alt;
+      }
+      if (mainWrap) mainWrap.classList.remove('is-zoomed');
+    });
+  });
+
+  // Zoom on click
+  if (mainWrap) {
+    mainWrap.addEventListener('click', function(e) {
+      if (mainWrap.classList.contains('is-zoomed')) {
+        mainWrap.classList.remove('is-zoomed');
+        if (mainImg) mainImg.style.transformOrigin = '';
+      } else {
+        var rect = mainWrap.getBoundingClientRect();
+        var x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
+        var y = ((e.clientY - rect.top)  / rect.height * 100).toFixed(1);
+        if (mainImg) mainImg.style.transformOrigin = x + '% ' + y + '%';
+        mainWrap.classList.add('is-zoomed');
+      }
+    });
+  }
+
+  // Quantity buttons
+  var qtyMinus = pdp.querySelector('[data-qty-minus]');
+  var qtyPlus  = pdp.querySelector('[data-qty-plus]');
+  if (qtyMinus && qtyInput) {
+    qtyMinus.addEventListener('click', function() {
+      var v = parseInt(qtyInput.value, 10) || 1;
+      if (v > 1) qtyInput.value = v - 1;
+    });
+  }
+  if (qtyPlus && qtyInput) {
+    qtyPlus.addEventListener('click', function() {
+      var v = parseInt(qtyInput.value, 10) || 1;
+      qtyInput.value = v + 1;
+    });
+  }
+
+  // Variant picker
+  var variantBtns = pdp.querySelectorAll('.namu-pdp__variant-btn');
+  var productVariants = {{ product.variants | json }};
+
+  variantBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var optIdx = parseInt(btn.dataset.optionIndex, 10);
+      variantBtns.forEach(function(b) {
+        if (parseInt(b.dataset.optionIndex, 10) === optIdx) {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-pressed', 'false');
+        }
+      });
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-pressed', 'true');
+
+      var selected = [];
+      [0,1,2].forEach(function(i) {
+        var a = pdp.querySelector('.namu-pdp__variant-btn.is-active[data-option-index="' + i + '"]');
+        if (a) selected[i] = a.dataset.optionValue;
+      });
+
+      var matched = productVariants.find(function(v) {
+        return v.options.every(function(opt, i) {
+          return !selected[i] || selected[i] === opt;
+        });
+      });
+
+      if (matched) {
+        if (variantId) variantId.value = matched.id;
+        var priceRow = pdp.querySelector('.namu-pdp__price-row');
+        if (priceRow) {
+          var fmt = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+          if (matched.compare_at_price && matched.compare_at_price > matched.price) {
+            priceRow.innerHTML =
+              '<span class="namu-pdp__price-compare">' + fmt.format(matched.compare_at_price / 100) + '</span>' +
+              '<span class="namu-pdp__price-sale">' + fmt.format(matched.price / 100) + '</span>';
+          } else {
+            priceRow.innerHTML = '<span class="namu-pdp__price-regular">' + fmt.format(matched.price / 100) + '</span>';
+          }
+        }
+        var atcBtn = pdp.querySelector('.namu-pdp__atc-btn');
+        if (atcBtn) atcBtn.disabled = !matched.available;
+      }
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Produto Namu",
+  "tag": "section",
+  "class": "shopify-section-namu-product",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Texto do badge (ex: Edição Limitada)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stars",
+      "label": "Mostrar estrelas de avaliação",
+      "default": true
+    },
+    {
+      "type": "number",
+      "id": "review_count",
+      "label": "Número de avaliações",
+      "default": 0
+    },
+    {
+      "type": "text",
+      "id": "review_avg",
+      "label": "Nota média (ex: 4.9)",
+      "default": "4.9"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_installments",
+      "label": "Mostrar parcelamento",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Tudo sobre o Produto"
+    },
+    {
+      "type": "text",
+      "id": "about_label",
+      "label": "Rótulo da seção",
+      "default": "DETALHES"
+    },
+    {
+      "type": "text",
+      "id": "about_title",
+      "label": "Título da seção",
+      "default": "Tudo sobre o Produto"
+    },
+    {
+      "type": "header",
+      "content": "Tabela Comparativa"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_comparison",
+      "label": "Mostrar tabela comparativa",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "compare_title",
+      "label": "Título da tabela",
+      "default": "Namu vs. Concorrentes"
+    },
+    {
+      "type": "header",
+      "content": "Avaliações"
+    },
+    {
+      "type": "text",
+      "id": "reviews_title",
+      "label": "Título da seção de avaliações",
+      "default": "O que nossos clientes dizem"
+    },
+    {
+      "type": "header",
+      "content": "FAQ"
+    },
+    {
+      "type": "text",
+      "id": "faq_title",
+      "label": "Título do FAQ",
+      "default": "Perguntas Frequentes"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "about_card",
+      "name": "Card — Sobre o Produto",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Ícone",
+          "options": [
+            { "value": "leaf",   "label": "Folha" },
+            { "value": "shield", "label": "Escudo" },
+            { "value": "energy", "label": "Energia" },
+            { "value": "heart",  "label": "Coração" },
+            { "value": "clock",  "label": "Relógio" }
+          ],
+          "default": "leaf"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Origem Rastreável"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Texto",
+          "default": "Nosso matcha vem diretamente de Hadong, Coreia do Sul, com processo 100% rastreável do campo à sua xícara."
+        }
+      ]
+    },
+    {
+      "type": "compare_row",
+      "name": "Linha Comparativa",
+      "settings": [
+        {
+          "type": "text",
+          "id": "criteria",
+          "label": "Critério",
+          "default": "Origem"
+        },
+        {
+          "type": "text",
+          "id": "namu_value",
+          "label": "Valor Namu",
+          "default": "Hadong, Coreia do Sul"
+        },
+        {
+          "type": "text",
+          "id": "other_value",
+          "label": "Valor Concorrentes",
+          "default": "Origem desconhecida"
+        }
+      ]
+    },
+    {
+      "type": "review",
+      "name": "Avaliação",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Nome do cliente",
+          "default": "Ana S."
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Data",
+          "default": "Maio 2025"
+        },
+        {
+          "type": "range",
+          "id": "stars",
+          "label": "Estrelas",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Texto da avaliação",
+          "default": "Melhor matcha que já experimentei. Cor vibrante, sabor suave e energia limpa o dia todo."
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "Pergunta — FAQ",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Pergunta",
+          "default": "Qual a diferença entre o Matcha Cerimonial e o Culinário?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Resposta",
+          "default": "O Matcha Cerimonial é de grau superior, com folhas mais jovens, cor verde intensa e sabor suave. Ideal para beber puro. O Culinário tem sabor mais intenso e é perfeito para receitas e lattes."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Produto Namu",
+      "blocks": [
+        { "type": "about_card", "settings": { "icon": "leaf",   "title": "Origem Rastreável",   "text": "Matcha direto de Hadong, Coreia do Sul. Processo 100% rastreável do campo à sua xícara." } },
+        { "type": "about_card", "settings": { "icon": "shield", "title": "100% Puro e Orgânico", "text": "Sem aditivos, corantes ou conservantes. Apenas folhas de Camellia sinensis moídas em pedra." } },
+        { "type": "about_card", "settings": { "icon": "energy", "title": "Energia Limpa",        "text": "Rico em L-teanina, proporciona foco e energia sem a ansiedade do café. Efeito de 4 a 6 horas." } },
+        { "type": "compare_row", "settings": { "criteria": "Origem",          "namu_value": "Hadong, Coreia do Sul", "other_value": "Origem desconhecida" } },
+        { "type": "compare_row", "settings": { "criteria": "Grau",            "namu_value": "Cerimonial",           "other_value": "Culinário" } },
+        { "type": "compare_row", "settings": { "criteria": "Cor",             "namu_value": "Verde vibrante",       "other_value": "Verde amarelado" } },
+        { "type": "compare_row", "settings": { "criteria": "Rastreabilidade", "namu_value": "100% rastreável",      "other_value": "Sem informação" } },
+        { "type": "review", "settings": { "name": "Mariana C.", "date": "Abril 2025", "stars": 5, "text": "Cor incrível, sabor suave e adocicado. Nunca mais comprei matcha de outra marca." } },
+        { "type": "review", "settings": { "name": "Rafael T.",  "date": "Março 2025", "stars": 5, "text": "Substituí o café pelo matcha da Namu há 3 meses. Foco total sem ansiedade. Recomendo demais." } },
+        { "type": "review", "settings": { "name": "Juliana M.", "date": "Maio 2025",  "stars": 5, "text": "Embalagem linda, produto de altíssima qualidade. Dá para sentir a diferença na primeira xícara." } },
+        { "type": "faq", "settings": { "question": "Qual a diferença entre o Matcha Cerimonial e o Culinário?", "answer": "O Matcha Cerimonial é de grau superior, com folhas mais jovens, cor verde intensa e sabor suave. Ideal para beber puro. O Culinário tem sabor mais intenso e é perfeito para receitas e lattes." } },
+        { "type": "faq", "settings": { "question": "Como preparar o matcha corretamente?", "answer": "Peneire 1-2g de matcha em uma tigela (chawan). Adicione 70ml de água a 70-80°C. Bata com o chasen em movimentos de W até formar espuma. Sirva imediatamente." } },
+        { "type": "faq", "settings": { "question": "O matcha tem cafeína?", "answer": "Sim, mas em quantidade menor que o café e combinada com L-teanina, que suaviza o efeito estimulante. O resultado é energia limpa e foco sem ansiedade ou palpitações." } },
+        { "type": "faq", "settings": { "question": "Como armazenar o matcha?", "answer": "Guarde em local fresco, seco e longe da luz solar. Após aberto, consuma em até 30 dias para preservar cor, sabor e propriedades." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

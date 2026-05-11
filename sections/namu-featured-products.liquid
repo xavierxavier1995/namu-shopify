@@ -6,12 +6,9 @@
   if fp_collection != blank and fp_collection.products_count > 0
     assign fp_products = fp_collection.products
   else
-    assign fp_products = collections['mais-vendidos'].products
-    if fp_products.size == 0
-      assign fp_products = collections.all.products
-    endif
+    assign fp_products = collections.all.products
   endif
-  assign limit = section.settings.products_to_show | default: 8
+  assign limit = section.settings.products_to_show | default: 14
 -%}
 
 <namu-featured-products class="namu-fp">
@@ -21,7 +18,7 @@
         <p class="namu-fp__label">{{ section.settings.label | upcase | escape }}</p>
       {%- endif -%}
       {%- if section.settings.title != blank -%}
-        <h2 class="namu-fp__title">{{ section.settings.title | upcase | escape }}</h2>
+        <h2 class="namu-fp__title">{{ section.settings.title | escape }}</h2>
       {%- endif -%}
     </div>
     {%- if section.settings.cta_label != blank -%}
@@ -40,38 +37,37 @@
 
     <div class="namu-fp__track" role="list">
       {%- for product in fp_products limit: limit -%}
+        {%- assign fp_on_sale = false -%}
+        {%- if product.compare_at_price > product.price -%}
+          {%- assign fp_on_sale = true -%}
+        {%- endif -%}
         <div class="namu-fp__card" role="listitem">
           <a href="{{ product.url }}" class="namu-fp__card-link">
-            <div class="namu-fp__card-img">
-              {%- if product.featured_image != blank -%}
-                {%- assign fp_img = product.featured_image -%}
-                {%- assign fp_alt = fp_img.alt | default: product.title | escape -%}
-                <img
-                  src="{{ fp_img | image_url: width: 600 }}"
-                  srcset="{{ fp_img | image_url: width: 400 }} 400w,
-                          {{ fp_img | image_url: width: 600 }} 600w,
-                          {{ fp_img | image_url: width: 900 }} 900w"
-                  sizes="(max-width: 768px) 78vw, 25vw"
-                  alt="{{ fp_alt }}"
-                  loading="lazy"
-                  decoding="async"
-                  width="{{ fp_img.width }}"
-                  height="{{ fp_img.height }}"
-                  class="namu-fp__card-img-el"
-                >
-              {%- else -%}
-                <div class="namu-fp__card-img-placeholder"></div>
+            <div class="namu-fp__card-media">
+              {%- capture fp_demo_img -%}{% cycle 'receita.webp', 'receita2.webp', 'receita3.webp', 'receita4.webp', 'cat-matchas-puros.jpg', 'cat-blends.jpg', 'cat-kits.jpg', 'cat-utensilios.jpg', 'slide01.jpg', 'slide02.jpg', 'slide03.jpg', 'b2b-cafeteria.jpg' %}{%- endcapture -%}
+              <img
+                src="{{ fp_demo_img | asset_url }}"
+                alt="{{ product.title | escape }}"
+                loading="lazy"
+                decoding="async"
+                class="namu-fp__card-img"
+              >
+              {%- if fp_on_sale -%}
+                <span class="namu-fp__badge">Sale</span>
               {%- endif -%}
             </div>
             <div class="namu-fp__card-info">
               <p class="namu-fp__card-title">{{ product.title | escape }}</p>
-              <p class="namu-fp__card-price">
-                {%- if product.price_varies -%}
-                  {{ product.price_min | money }} &ndash; {{ product.price_max | money }}
+              <div class="namu-fp__card-price {%- if fp_on_sale %} namu-fp__card-price--sale{%- endif %}">
+                {%- if fp_on_sale -%}
+                  <span class="namu-fp__price-compare">{{ product.compare_at_price | money }}</span>
+                  <span class="namu-fp__price-sale">{{ product.price | money }}</span>
+                {%- elsif product.price_varies -%}
+                  <span class="namu-fp__price-regular">A partir de {{ product.price_min | money }}</span>
                 {%- else -%}
-                  {{ product.price | money }}
+                  <span class="namu-fp__price-regular">{{ product.price | money }}</span>
                 {%- endif -%}
-              </p>
+              </div>
             </div>
           </a>
         </div>
@@ -175,9 +171,9 @@
       "id": "products_to_show",
       "label": "Quantidade de produtos",
       "min": 4,
-      "max": 12,
+      "max": 20,
       "step": 1,
-      "default": 8
+      "default": 14
     }
   ],
   "presets": [

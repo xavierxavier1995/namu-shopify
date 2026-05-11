@@ -2,107 +2,52 @@
 {{ 'namu-b2b.css' | asset_url | stylesheet_tag }}
 
 <section class="namu-b2b" aria-label="{{ section.settings.title | default: 'Para o seu negócio' | escape }}">
-  <div class="namu-b2b__inner">
-
-    {%- comment -%} ── Coluna esquerda ──────────────────────── {%- endcomment -%}
-    <div class="namu-b2b__left">
-
-      {%- comment -%} Tags / pills {%- endcomment -%}
-      {%- if section.settings.tag_1 != blank or section.settings.tag_2 != blank or section.settings.tag_3 != blank -%}
-        <div class="namu-b2b__tags" aria-label="Diferenciais">
-          {%- if section.settings.tag_1 != blank -%}
-            <span class="namu-b2b__tag">{{ section.settings.tag_1 | escape }}</span>
-          {%- endif -%}
-          {%- if section.settings.tag_2 != blank -%}
-            <span class="namu-b2b__tag">{{ section.settings.tag_2 | escape }}</span>
-          {%- endif -%}
-          {%- if section.settings.tag_3 != blank -%}
-            <span class="namu-b2b__tag">{{ section.settings.tag_3 | escape }}</span>
-          {%- endif -%}
-        </div>
+  <a href="{{ section.settings.cta_link | default: '/pages/para-seu-negocio' }}" class="namu-b2b__link">
+    <div class="namu-b2b__bg">
+      {%- if section.settings.image != blank -%}
+        {%- assign img = section.settings.image -%}
+        <img
+          src="{{ img | image_url: width: 1600 }}"
+          srcset="{{ img | image_url: width: 800 }} 800w,
+                  {{ img | image_url: width: 1200 }} 1200w,
+                  {{ img | image_url: width: 1600 }} 1600w"
+          sizes="100vw"
+          alt="{{ img.alt | default: section.settings.title | escape }}"
+          loading="lazy"
+          width="{{ img.width }}"
+          height="{{ img.height }}"
+          class="namu-b2b__bg-img"
+        >
+      {%- else -%}
+        <img
+          src="{{ section.settings.fallback_asset | default: 'NAMU-banner_para-o-seu-negocio_desktop.jpg' | asset_url }}"
+          alt="{{ section.settings.title | escape }}"
+          loading="lazy"
+          decoding="async"
+          class="namu-b2b__bg-img"
+        >
       {%- endif -%}
+      <div class="namu-b2b__overlay"></div>
+    </div>
 
-      {%- comment -%} Título {%- endcomment -%}
+    <div class="namu-b2b__content">
       {%- if section.settings.title != blank -%}
         <h2 class="namu-b2b__title">{{ section.settings.title | escape }}</h2>
       {%- endif -%}
 
-      {%- comment -%} Subtexto {%- endcomment -%}
       {%- if section.settings.subtitle != blank -%}
         <p class="namu-b2b__subtitle">{{ section.settings.subtitle | escape }}</p>
       {%- endif -%}
 
-      {%- comment -%} Botão {%- endcomment -%}
-      {%- if section.settings.cta_label != blank -%}
-        <a
-          href="{{ section.settings.cta_link | default: '/collections/all' }}"
-          class="namu-b2b__btn"
-        >
-          {{ section.settings.cta_label | escape }}
-          <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <line x1="1" y1="6" x2="15" y2="6"/>
-            <polyline points="10 1 15 6 10 11"/>
-          </svg>
-        </a>
-      {%- endif -%}
-
-    </div>
-
-    {%- comment -%} ── Coluna direita — imagem ──────────────── {%- endcomment -%}
-    <div class="namu-b2b__right">
-      <div class="namu-b2b__media">
-        {%- if section.settings.image != blank -%}
-          {%- assign img = section.settings.image -%}
-          <img
-            src="{{ img | image_url: width: 1000 }}"
-            srcset="
-              {{ img | image_url: width: 500 }}  500w,
-              {{ img | image_url: width: 800 }}  800w,
-              {{ img | image_url: width: 1200 }} 1200w"
-            sizes="(max-width: 767px) 100vw, 50vw"
-            alt="{{ img.alt | default: section.settings.title | escape }}"
-            loading="lazy"
-            width="{{ img.width }}"
-            height="{{ img.height }}"
-            class="namu-b2b__img"
-          >
-        {%- elsif section.settings.fallback_asset != blank -%}
-          <img
-            src="{{ section.settings.fallback_asset | asset_url }}"
-            alt="{{ section.settings.title | escape }}"
-            loading="lazy"
-            decoding="async"
-            width="1200"
-            height="800"
-            class="namu-b2b__img"
-          >
-        {%- else -%}
-          <div class="namu-b2b__img-placeholder" aria-hidden="true">
-            {%- comment -%} Elegante SVG placeholder editorial {%- endcomment -%}
-            <svg viewBox="0 0 400 540" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <rect width="400" height="540" fill="#eae8e3"/>
-              <!-- Silhueta estilizada pessoa segurando bowl -->
-              <ellipse cx="200" cy="145" rx="52" ry="52" fill="none" stroke="#c2bdb5" stroke-width="1.2"/>
-              <path d="M120 380 C120 310 148 270 200 265 C252 270 280 310 280 380 L280 440 L120 440 Z" fill="none" stroke="#c2bdb5" stroke-width="1.2"/>
-              <!-- Bowl matcha -->
-              <ellipse cx="200" cy="370" rx="48" ry="16" fill="none" stroke="#c2bdb5" stroke-width="1.2"/>
-              <path d="M152 370 Q160 405 200 410 Q240 405 248 370" fill="none" stroke="#c2bdb5" stroke-width="1.2"/>
-              <!-- Vapor / matcha lines -->
-              <path d="M185 360 Q182 350 186 342" stroke="#c2bdb5" stroke-width="1" stroke-linecap="round"/>
-              <path d="M200 356 Q197 344 201 335" stroke="#c2bdb5" stroke-width="1" stroke-linecap="round"/>
-              <path d="M215 360 Q218 349 214 341" stroke="#c2bdb5" stroke-width="1" stroke-linecap="round"/>
-              <!-- Arms holding bowl -->
-              <path d="M148 340 Q152 360 155 370" fill="none" stroke="#c2bdb5" stroke-width="1.2" stroke-linecap="round"/>
-              <path d="M252 340 Q248 360 245 370" fill="none" stroke="#c2bdb5" stroke-width="1.2" stroke-linecap="round"/>
-              <!-- Subtle label -->
-              <text x="200" y="495" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#a09990" letter-spacing="0.12em">ADICIONE UMA IMAGEM</text>
-            </svg>
-          </div>
-        {%- endif -%}
+      <div class="namu-b2b__categories">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'category_pill' and block.settings.label != blank -%}
+            <span class="namu-b2b__pill" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</span>
+          {%- endif -%}
+        {%- endfor -%}
       </div>
     </div>
-
-  </div>
+  </a>
 </section>
 
 {% schema %}
@@ -112,82 +57,63 @@
   "class": "shopify-section-namu-b2b",
   "settings": [
     {
-      "type": "header",
-      "content": "Tags / Diferenciais"
-    },
-    {
-      "type": "text",
-      "id": "tag_1",
-      "label": "Tag 1",
-      "default": "Claridade"
-    },
-    {
-      "type": "text",
-      "id": "tag_2",
-      "label": "Tag 2",
-      "default": "Atendimento"
-    },
-    {
-      "type": "text",
-      "id": "tag_3",
-      "label": "Tag 3",
-      "default": "Suporte Pós Venda"
-    },
-    {
-      "type": "header",
-      "content": "Conteúdo"
-    },
-    {
       "type": "text",
       "id": "title",
       "label": "Título",
-      "default": "Matcha para o seu negócio."
+      "default": "PARA O SEU NEGÓCIO"
     },
     {
       "type": "textarea",
       "id": "subtitle",
-      "label": "Subtexto",
-      "default": "Leve a tradição e qualidade do nosso matcha para sua cafeteria, empório ou empresa."
-    },
-    {
-      "type": "text",
-      "id": "cta_label",
-      "label": "Texto do botão",
-      "default": "Conheça nossos matchás"
+      "label": "Subtítulo",
+      "default": "Seu negócio merece um matcha à altura. Nossas soluções para empresas são versáteis e vão muito além da venda."
     },
     {
       "type": "url",
       "id": "cta_link",
-      "label": "Link do botão",
-      "default": "/collections/all"
-    },
-    {
-      "type": "header",
-      "content": "Imagem"
+      "label": "Link da seção",
+      "default": "/pages/para-seu-negocio"
     },
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Imagem editorial (Shopify CDN)"
+      "label": "Imagem de fundo (Shopify CDN)"
     },
     {
       "type": "text",
       "id": "fallback_asset",
-      "label": "Asset local (ex: b2b-cafeteria.jpg)",
-      "info": "Usado quando nenhuma imagem CDN está selecionada"
+      "label": "Asset local (fallback)",
+      "default": "NAMU-banner_para-o-seu-negocio_desktop.jpg"
     }
   ],
+  "blocks": [
+    {
+      "type": "category_pill",
+      "name": "Categoria",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Texto",
+          "default": "Categoria"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
   "presets": [
     {
       "name": "Seção B2B",
       "settings": {
-        "tag_1": "Claridade",
-        "tag_2": "Atendimento",
-        "tag_3": "Suporte Pós Venda",
-        "title": "Matcha para o seu negócio.",
-        "subtitle": "Leve a tradição e qualidade do nosso matcha para sua cafeteria, empório ou empresa.",
-        "cta_label": "Conheça nossos matchás"
-      }
+        "title": "PARA O SEU NEGÓCIO",
+        "subtitle": "Seu negócio merece um matcha à altura. Nossas soluções para empresas são versáteis e vão muito além da venda."
+      },
+      "blocks": [
+        { "type": "category_pill", "settings": { "label": "INDÚSTRIA" } },
+        { "type": "category_pill", "settings": { "label": "FOOD SERVICE" } },
+        { "type": "category_pill", "settings": { "label": "CORPORATIVO" } },
+        { "type": "category_pill", "settings": { "label": "CONSULTORIA" } }
+      ]
     }
   ]
 }

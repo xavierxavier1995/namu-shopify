@@ -193,6 +193,33 @@
   gap: 0.75rem;
 }
 
+/* ── CTA Global ──────────────────────────────────────── */
+.namu-blog__cta-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.namu-blog__cta-global {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  background: var(--namu-verde-puro, #78C33F);
+  color: #fff;
+  border-radius: 999px;
+  font-family: var(--namu-font-body, sans-serif);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.namu-blog__cta-global:hover {
+  background: var(--namu-verde-matcha, #045133);
+  transform: translateY(-2px);
+}
+
 /* ── Mobile stacked ───────────────────────────────────── */
 @media (max-width: 767px) {
   .namu-blog {

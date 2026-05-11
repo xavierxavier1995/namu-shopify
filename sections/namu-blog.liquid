@@ -142,6 +142,14 @@
       {%- endif -%}
     </div>
 
+    {%- if section.settings.cta_global_label != blank -%}
+      <div class="namu-blog__cta-wrap">
+        <a href="{{ section.settings.cta_global_link | default: '/blogs/news' }}" class="namu-blog__cta-global">
+          {{ section.settings.cta_global_label | escape }}
+        </a>
+      </div>
+    {%- endif -%}
+
   </div>
 </section>
 
@@ -185,7 +193,19 @@
       "type": "text",
       "id": "cta_label",
       "label": "Texto do CTA do card",
-      "default": "Ler mais"
+      "default": "LER MAIS"
+    },
+    {
+      "type": "text",
+      "id": "cta_global_label",
+      "label": "Texto do botão global (abaixo do grid)",
+      "default": "CONFIRA TODOS OS NOSSOS CONTEÚDOS"
+    },
+    {
+      "type": "url",
+      "id": "cta_global_link",
+      "label": "Link do botão global",
+      "default": "/blogs/news"
     }
   ],
   "blocks": [

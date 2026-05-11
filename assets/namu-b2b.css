@@ -217,3 +217,125 @@ html { scroll-behavior: smooth; }
   .namu-b2b-page .hero-btns { flex-direction: column; }
   .namu-b2b-page .hero-btns .btn { width: 100%; }
 }
+
+/* ============================================================
+   NAMU B2B HOMEPAGE SECTION
+   Seção com imagem de fundo e texto à esquerda
+   ============================================================ */
+
+.namu-b2b {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+.namu-b2b__link {
+  display: block;
+  position: relative;
+  min-height: 520px;
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.namu-b2b__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.namu-b2b__bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.namu-b2b__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.25) 55%, transparent 100%);
+}
+
+.namu-b2b__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 520px;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.namu-b2b__title {
+  font-family: var(--namu-font-heading);
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.namu-b2b__subtitle {
+  font-family: var(--namu-font-body);
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 2rem;
+  max-width: 480px;
+  line-height: 1.6;
+}
+
+.namu-b2b__categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.namu-b2b__pill {
+  display: inline-block;
+  padding: 0.6rem 1.4rem;
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  border-radius: 999px;
+  font-family: var(--namu-font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+}
+
+.namu-b2b__link:hover .namu-b2b__pill {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+@media (max-width: 768px) {
+  .namu-b2b__link {
+    min-height: 420px;
+  }
+
+  .namu-b2b__content {
+    min-height: 420px;
+    padding: 3rem 1.5rem;
+  }
+
+  .namu-b2b__overlay {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.3) 100%);
+  }
+
+  .namu-b2b__categories {
+    gap: 0.5rem;
+  }
+
+  .namu-b2b__pill {
+    padding: 0.5rem 1rem;
+    font-size: 0.68rem;
+  }
+}
