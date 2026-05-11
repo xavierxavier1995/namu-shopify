@@ -6,8 +6,8 @@ https://skills.sh/benjaminsehl/liquid-skills/shopify-liquid-themes
 
 
 Atividades Namu:
-Construir homepage completa
-alterar fotos para produtos de matcha
+Continuar na onde o Claude Code terminou
+Enviar 10 novos prompts um por um
 
 ____
 
