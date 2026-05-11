@@ -84,8 +84,9 @@
     "namu_categories": {
       "type": "namu-categories",
       "settings": {
-        "label": "Explore",
-        "title": "Nossas Categorias"
+        "label": "",
+        "title": "Matcha para todos os gostos",
+        "subtitle": "Do matcha cerimonial ao delicioso matcha com vanilla natural da Bahia. Encontre o matcha perfeito para você."
       },
       "blocks": {
         "cat-matchas": {
@@ -138,22 +139,36 @@
         "title": "Favoritos da Estação",
         "cta_label": "IR PARA LOJA",
         "cta_link": "/collections/mais-vendidos",
-        "collection": "mais-vendidos",
-        "products_to_show": 8
+        "collection": "all",
+        "products_to_show": 14
+      }
+    },
+    "namu_experience": {
+      "type": "namu-experience",
+      "settings": {
+        "label": "Namu Experience",
+        "title": "Por que a Namu Matcha?",
+        "subtitle": "Do berço do chá coreano até a sua mesa",
+        "cta_label": "Nossos campos",
+        "cta_link": "/pages/sobre",
+        "video_url": "https://www.youtube.com/embed/dQw4w9WgXcQ"
       }
     },
     "namu_b2b": {
       "type": "namu-b2b",
       "settings": {
-        "tag_1": "Claridade",
-        "tag_2": "Atendimento",
-        "tag_3": "Suporte Pós Venda",
-        "title": "Matcha para o seu negócio.",
-        "subtitle": "Leve a tradição e qualidade do nosso matcha para sua cafeteria, empório ou empresa.",
-        "cta_label": "Conheça nossos matchás",
-        "cta_link": "/collections/all",
-        "fallback_asset": "b2b-cafeteria.jpg"
-      }
+        "title": "PARA O SEU NEGÓCIO",
+        "subtitle": "Seu negócio merece um matcha à altura. Nossas soluções para empresas são versáteis e vão muito além da venda.",
+        "cta_link": "/pages/para-seu-negocio",
+        "fallback_asset": "NAMU-banner_para-o-seu-negocio_desktop.jpg"
+      },
+      "blocks": {
+        "cat-1": { "type": "category_pill", "settings": { "label": "INDÚSTRIA" } },
+        "cat-2": { "type": "category_pill", "settings": { "label": "FOOD SERVICE" } },
+        "cat-3": { "type": "category_pill", "settings": { "label": "CORPORATIVO" } },
+        "cat-4": { "type": "category_pill", "settings": { "label": "CONSULTORIA" } }
+      },
+      "block_order": ["cat-1", "cat-2", "cat-3", "cat-4"]
     },
     "namu_recipes": {
       "type": "namu-recipes",
@@ -185,7 +200,11 @@
       "type": "namu-blog",
       "settings": {
         "pill_label": "Matcha Blog",
-        "cta_label": "Ler mais",
+        "title": "Matcha do Zero ao Avançado",
+        "subtitle": "Novo no mundo do matcha? Aprenda tudo aqui! Descubra o que é, seus benefícios e como preparar o seu matcha perfeito hoje mesmo.",
+        "cta_label": "LER MAIS",
+        "cta_global_label": "CONFIRA TODOS OS NOSSOS CONTEÚDOS",
+        "cta_global_link": "/blogs/news",
         "posts_to_show": 3
       },
       "blocks": {
@@ -193,24 +212,27 @@
           "type": "article",
           "settings": {
             "tag": "Guia",
-            "title": "O que é matcha?",
-            "excerpt": "Descubra a origem, o cultivo e os segredos por trás da folha de chá mais celebrada do mundo."
+            "title": "O que é matcha? Quais os tipos e os seus benefícios",
+            "excerpt": "Entenda o que é o matcha, de onde vem e por que esse chá verde em pó é tão famoso entre os amantes da saúde e bem-estar.",
+            "link": "/blogs/news/o-que-e-matcha"
           }
         },
         "art-2": {
           "type": "article",
           "settings": {
             "tag": "Guia",
-            "title": "Guia definitivo do matcha perfeito",
-            "excerpt": "Da temperatura da água à técnica de chasen: tudo o que você precisa para preparar o matcha ideal."
+            "title": "Guia definitivo de como fazer o matcha perfeito",
+            "excerpt": "Aprenda o passo a passo para preparar o matcha perfeito em casa. Dicas práticas para um chá cremoso, saboroso e energizante.",
+            "link": "/blogs/news/guia-preparo-matcha"
           }
         },
         "art-3": {
           "type": "article",
           "settings": {
             "tag": "Saúde",
-            "title": "7 benefícios comprovados do matcha",
-            "excerpt": "Energia limpa, antioxidantes e foco sem ansiedade. Veja o que a ciência diz sobre o matcha."
+            "title": "7 benefícios comprovados do Matcha para sua saúde",
+            "excerpt": "Descubra os principais benefícios do matcha para a saúde, com respaldo científico. Mais energia, foco e bem-estar no seu dia a dia.",
+            "link": "/blogs/news/beneficios-do-matcha"
           }
         }
       },
@@ -234,10 +256,11 @@
     "namu_marquee",
     "namu_featured_products",
     "namu_categories",
-    "namu_b2b",
-    "namu_recipes",
-    "namu_newsletter",
+    "namu_experience",
+    "namu_benefits",
     "namu_blog",
-    "namu_benefits"
+    "namu_recipes",
+    "namu_b2b",
+    "namu_newsletter"
   ]
 }

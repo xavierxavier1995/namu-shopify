@@ -8,6 +8,9 @@
         <p class="namu-cat__label">{{ section.settings.label | upcase | escape }}</p>
       {%- endif -%}
       <h2 class="namu-cat__heading">{{ section.settings.title | upcase | escape }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="namu-cat__subtitle">{{ section.settings.subtitle | escape }}</p>
+      {%- endif -%}
     </div>
   {%- endif -%}
 
@@ -85,7 +88,13 @@
       "type": "text",
       "id": "title",
       "label": "Título da seção (opcional)",
-      "default": "Nossas Categorias"
+      "default": "Matcha para todos os gostos"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtítulo (opcional)",
+      "default": "Do matcha cerimonial ao delicioso matcha com vanilla natural da Bahia. Encontre o matcha perfeito para você."
     }
   ],
   "blocks": [

@@ -49,12 +49,74 @@
       "Bash(gh api *)",
       "mcp__plugin_context-mode_context-mode__ctx_batch_execute",
       "Bash(taskkill /F /IM node.exe)",
-      "mcp__18e92181-5692-4279-ae83-cb34b3e476bf__graphql_schema",
-      "mcp__18e92181-5692-4279-ae83-cb34b3e476bf__search_docs_chunks",
-      "mcp__18e92181-5692-4279-ae83-cb34b3e476bf__validate_graphql_codeblocks"
+      "Skill(update-config)",
+      "Skill(update-config:*)",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('.claude/settings.local.json','utf8'\\)\\);console.log\\('JSON valido'\\)\")",
+      "Bash(node -e \"const i=JSON.parse\\(require\\('fs'\\).readFileSync\\('/dev/stdin','utf8'\\)\\);const f=i.tool_input&&\\(i.tool_input.file_path||i.tool_input.path\\)||'';const ext=f.split\\('.'\\).pop\\(\\);const isShopify=/\\\\.\\(liquid|css|js|json\\)$/.test\\(f\\)&&/sections|snippets|assets|templates|layout|config/.test\\(f\\);if\\(!isShopify\\){process.exit\\(0\\);}const map={liquid:'shopify-liquid + liquid-theme-standards',css:'liquid-theme-standards \\(CSS patterns\\)',json:'shopify-liquid \\(schema/settings\\)',js:'liquid-theme-standards \\(JS patterns\\)'};const skill=map[ext]||'shopify-liquid';const msg=JSON.stringify\\({hookSpecificOutput:{hookEventName:'PreToolUse',additionalContext:'[AUTO-SKILL] Arquivo Shopify detectado: '+f+'\\\\nSkill obrigatória ANTES de escrever: '+skill+'\\\\nSe ainda não invocou esta skill nesta tarefa, invoque agora via Skill tool antes de prosseguir.'}}\\);process.stdout.write\\(msg\\);\")",
+      "Bash(node -e \"let d='';process.stdin.on\\('data',c=>d+=c\\);process.stdin.on\\('end',\\(\\)=>{try{const i=JSON.parse\\(d\\);const f=\\(i.tool_input&&\\(i.tool_input.file_path||i.tool_input.path\\)\\)||'';const ext=f.split\\('.'\\).pop\\(\\);const ok=/\\\\.\\(liquid|css|js|json\\)$/.test\\(f\\)&&/sections|snippets|assets|templates|layout|config/.test\\(f\\);if\\(!ok\\)return;const map={liquid:'shopify-liquid + liquid-theme-standards',css:'liquid-theme-standards',json:'shopify-liquid',js:'liquid-theme-standards'};const skill=map[ext]||'shopify-liquid';process.stdout.write\\(JSON.stringify\\({hookSpecificOutput:{hookEventName:'PreToolUse',additionalContext:'[AUTO-SKILL] Arquivo Shopify: '+f+' | Skill obrigatoria: '+skill+' — invoque via Skill tool antes de escrever.'}}\\)\\);}catch\\(e\\){}}\\);\")",
+      "Bash(node scripts/search_docs.mjs \"featured collection carousel horizontal scroll product card price\" --model claude-opus-4-7 --client-name claude-code --client-version 1.0)",
+      "Bash(node scripts/validate.mjs --theme-path \"C:\\\\Users\\\\unk_g\\\\OneDrive\\\\Área de Trabalho\\\\namu-shopify\\\\.claude\\\\worktrees\\\\xenodochial-chebyshev-43e7a3\" --files \"sections/namu-featured-products.liquid\" --model claude-opus-4-7 --client-name claude-code --client-version 1.0 --artifact-id namu-fp-carousel-001 --revision 1)",
+      "WebFetch(domain:namumatcha.com.br)",
+      "Bash(curl -s \"https://namumatcha.com.br/produto/matcha-cerimonial/\" -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\" -L --max-time 20 -o /tmp/matcha.html)",
+      "Bash(echo \"Exit: $?\")",
+      "Read(//tmp/**)",
+      "Bash(curl -s \"https://namumatcha.com.br/produto/matcha-cerimonial/\" -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\" -L --max-time 20 --insecure -o /tmp/matcha.html)",
+      "Bash(mkdir -p \"/c/Users/unk_g/AppData/Local/Temp/namu_products\" && echo \"dir created\")",
+      "Bash(python3 -c \"import os; print\\(os.path.abspath\\('/c/Users/unk_g/AppData/Local/Temp/namu_products'\\)\\)\")",
+      "Bash(python3 -c \"import os; print\\(os.environ.get\\('TEMP', os.environ.get\\('TMP', ''\\)\\)\\)\")",
+      "Bash(python3 \"C:/Users/unk_g/AppData/Local/Temp/namu_products/parse.py\")",
+      "Bash(cat .mcp.json)",
+      "Bash(cat ../.mcp.json)",
+      "Bash(cat ../../.mcp.json)",
+      "Bash(node scripts/search_docs.mjs \"productCreate mutation with variants images status tags\" --model claude-opus-4-7 --client-name claude-code --client-version 1.0.0)",
+      "Bash(node scripts/search_docs.mjs \"ProductInput variants options ProductVariantInput price\" --model claude-opus-4-7 --client-name claude-code --client-version 1.0.0)",
+      "Bash(node scripts/search_docs.mjs \"productCreate mutation example with media images\" --model claude-opus-4-7 --client-name claude-code --client-version 1.0.0)",
+      "Bash(node scripts/search_docs.mjs \"ProductCreateInput fields status tags descriptionHtml variants\" --model claude-opus-4-7 --client-name claude-code --client-version 1.0.0)",
+      "Bash(node scripts/validate.mjs --code 'mutation CreateProduct\\($product: ProductCreateInput!, $media: [CreateMediaInput!]\\) { *)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d.get\\('mcpServers', {}\\), indent=2\\)\\)\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); servers=d.get\\('mcpServers', {}\\); [print\\(k\\) for k in servers.keys\\(\\)]\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(list\\(d.keys\\(\\)\\)[:5]\\)\")",
+      "Read(//c/Users/unk_g/.config/**)",
+      "Bash(cd \"C:/Users/unk_g/OneDrive/Área de Trabalho/namu-shopify\" && shopify theme info --store namu-matcha.myshopify.com 2>&1 | head -5)",
+      "Bash(node scripts/search_docs.mjs \"productCreate mutation with media\" --model claude-opus-4-7 --client-name claude-code --client-version 1.0.0)",
+      "Bash(node scripts/search_docs.mjs \"productCreate mutation with variants and media\" --model claude-opus-4-7 --client-name claude-code --client-version 2.1.128)",
+      "Bash(node scripts/search_docs.mjs \"productCreate mutation variants price media input\" --model claude-opus-4-7 --client-name claude-code --client-version 1.0.0)",
+      "Bash(shopify app *)",
+      "Bash(shopify --version)",
+      "Bash(node scripts/validate.mjs --code 'mutation { *)",
+      "Bash(node scripts/search_docs.mjs \"ProductCreateInput fields price variant\" --model claude-opus-4-7 --client-name claude-code --client-version 1.0.0)",
+      "Bash(node scripts/search_docs.mjs \"ProductCreateInput fields\" --model claude-opus-4-7 --client-name claude-code --client-version 1.0.0)",
+      "Bash(node scripts/search_docs.mjs \"productCreate mutation input\" --model claude-opus-4-7 --client-name claude-code --client-version 1.0.0)",
+      "Bash(node scripts/search_docs.mjs \"productCreate price variant example\" --model claude-opus-4-7 --client-name claude-code --client-version 1.0.0)",
+      "Bash(node scripts/search_docs.mjs \"ProductCreateInput\" --model claude-opus-4-7 --client-name claude-code --client-version 1.0.0)",
+      "Bash(cat \"C:\\\\Users\\\\unk_g\\\\Downloads\\\\bubbles-pdp_vercel_app \\(1\\).html\" | wc -l)",
+      "Bash(cat \"C:\\\\Users\\\\unk_g\\\\Downloads\\\\bubbles-pdp_vercel_app.html\" | wc -l)",
+      "Bash(node scripts/search_docs.mjs \"productCreate mutation with variants\" --model claude-haiku-4-5 --client-name claude-code --client-version 2.1.128)",
+      "Bash(node scripts/search_docs.mjs \"products query list\" --model claude-haiku-4-5 --client-name claude-code --client-version 2.1.128)",
+      "mcp__claude_ai_Shopify__graphql_mutation",
+      "mcp__claude_ai_Shopify__graphql_query",
+      "Bash(node scripts/search_docs.mjs \"productCreateMedia mutation\" --model claude-haiku-4-5 --client-name claude-code --client-version 2.1.128)",
+      "Bash(node scripts/search_docs.mjs \"CreateMediaInput\" --model claude-haiku-4-5 --client-name claude-code --client-version 2.1.128)",
+      "Bash(node scripts/validate.mjs --code 'query { products\\(first: 20\\) { edges { node { id title images\\(first: 1\\) { edges { node { id } } } } } } }' --model claude-haiku-4-5 --client-name claude-code --client-version 2.1.128 --artifact-id prod-query-001 --revision 1)",
+      "Bash(node scripts/validate.mjs --code 'mutation productCreateMedia\\($productId: ID!, $media: [CreateMediaInput!]!\\) { productCreateMedia\\(productId: $productId, media: $media\\) { media { ... on MediaImage { id image { url } } } mediaUserErrors { field message } } }' --model claude-haiku-4-5 --client-name claude-code --client-version 2.1.128 --artifact-id prod-media-001 --revision 1)",
+      "Bash(cp \"C:/Users/unk_g/OneDrive/Área de Trabalho/namu-shopify/namu-banner-seção-02-500x500-player.jpg\" \"C:/Users/unk_g/OneDrive/Área de Trabalho/namu-shopify/.claude/worktrees/xenodochial-chebyshev-43e7a3/assets/namu-banner-secao-02-player.jpg\")",
+      "Bash(git commit -m 'feat: homepage refactor - header, categories, experience, benefits, blog, recipes *)"
     ]
   },
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"let d='';process.stdin.on('data',c=>d+=c);process.stdin.on('end',()=>{try{const i=JSON.parse(d);const f=(i.tool_input&&(i.tool_input.file_path||i.tool_input.path))||'';const ext=f.split('.').pop();const ok=/\\.(liquid|css|js|json)$/.test(f)&&/sections|snippets|assets|templates|layout|config/.test(f);if(!ok)return;const map={liquid:'shopify-liquid + liquid-theme-standards',css:'liquid-theme-standards',json:'shopify-liquid',js:'liquid-theme-standards'};const skill=map[ext]||'shopify-liquid';process.stdout.write(JSON.stringify({hookSpecificOutput:{hookEventName:'PreToolUse',additionalContext:'[AUTO-SKILL] Arquivo Shopify: '+f+' | Skill obrigatoria: '+skill+' — invoque via Skill tool antes de escrever.'}}));}catch(e){}});\"",
+            "shell": "bash",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
     "SessionStart": [
       {
         "hooks": [

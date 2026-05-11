@@ -1,0 +1,161 @@
+{{ 'namu-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'namu-experience.css' | asset_url | stylesheet_tag }}
+
+<section class="namu-exp" aria-label="{{ section.settings.title | default: 'Namu Experience' | escape }}">
+  <div class="namu-exp__inner">
+    <div class="namu-exp__content">
+      {%- if section.settings.label != blank -%}
+        <p class="namu-exp__label">{{ section.settings.label | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="namu-exp__title">{{ section.settings.title | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subtitle != blank -%}
+        <p class="namu-exp__subtitle">{{ section.settings.subtitle | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.cta_label != blank -%}
+        <a href="{{ section.settings.cta_link | default: '/pages/sobre' }}" class="namu-exp__cta">
+          {{ section.settings.cta_label | escape }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="namu-exp__media">
+      <button class="namu-exp__play" type="button" aria-label="Assistir vídeo" data-video-url="{{ section.settings.video_url }}">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 800 | image_tag:
+            loading: 'lazy',
+            alt: section.settings.title,
+            class: 'namu-exp__img'
+          }}
+        {%- else -%}
+          <img
+            src="{{ 'namu-banner-secao-02-player.jpg' | asset_url }}"
+            alt="{{ section.settings.title | default: 'Namu Experience' | escape }}"
+            loading="lazy"
+            decoding="async"
+            class="namu-exp__img"
+          >
+        {%- endif -%}
+        <div class="namu-exp__play-icon" aria-hidden="true">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="23" stroke="#fff" stroke-width="2"/>
+            <polygon points="20,16 34,24 20,32" fill="#fff"/>
+          </svg>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <div class="namu-exp__modal" hidden>
+    <div class="namu-exp__modal-overlay"></div>
+    <div class="namu-exp__modal-content">
+      <button class="namu-exp__modal-close" type="button" aria-label="Fechar vídeo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+      <div class="namu-exp__modal-video">
+        <iframe width="100%" height="100%" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    const section = document.querySelector('.namu-exp');
+    if (!section) return;
+
+    const playBtn = section.querySelector('.namu-exp__play');
+    const modal = section.querySelector('.namu-exp__modal');
+    const overlay = section.querySelector('.namu-exp__modal-overlay');
+    const closeBtn = section.querySelector('.namu-exp__modal-close');
+    const iframe = section.querySelector('.namu-exp__modal-video iframe');
+
+    function openModal() {
+      const url = playBtn.dataset.videoUrl || 'https://www.youtube.com/embed/dQw4w9WgXcQ';
+      const embedUrl = url.includes('embed') ? url : url.replace('watch?v=', 'embed/').replace('youtu.be/', 'www.youtube.com/embed/');
+      iframe.src = embedUrl + '?autoplay=1';
+      modal.hidden = false;
+      requestAnimationFrame(() => modal.classList.add('is-open'));
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('is-open');
+      iframe.src = '';
+      document.body.style.overflow = '';
+      setTimeout(() => { modal.hidden = true; }, 300);
+    }
+
+    playBtn?.addEventListener('click', openModal);
+    overlay?.addEventListener('click', closeModal);
+    closeBtn?.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Namu Experience",
+  "tag": "section",
+  "class": "shopify-section-namu-experience",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Rótulo superior",
+      "default": "Namu Experience"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Por que a Namu Matcha?"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Do berço do chá coreano até a sua mesa"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Texto do botão",
+      "default": "Nossos campos"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Link do botão",
+      "default": "/pages/sobre"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagem (lado direito)"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "URL do vídeo YouTube",
+      "default": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Namu Experience",
+      "settings": {
+        "label": "Namu Experience",
+        "title": "Por que a Namu Matcha?",
+        "subtitle": "Do berço do chá coreano até a sua mesa",
+        "cta_label": "Nossos campos",
+        "cta_link": "/pages/sobre",
+        "video_url": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+      }
+    }
+  ]
+}
+{% endschema %}

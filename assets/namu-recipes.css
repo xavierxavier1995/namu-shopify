@@ -1,6 +1,6 @@
 /* ── Section wrapper ─────────────────────────────────── */
 .namu-rec {
-  padding: 5rem 0;
+  padding: 6rem 0 5rem;
   background: var(--namu-branco-porcelana, #f8f5f0);
 }
 
@@ -88,7 +88,7 @@
   }
 
   .namu-rec {
-    padding: 6rem 0;
+    padding: 7rem 0 6rem;
   }
 }
 

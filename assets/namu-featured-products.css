@@ -70,7 +70,7 @@
 
 .namu-fp__nav {
   position: absolute;
-  top: 50%;
+  top: 40%;
   transform: translateY(-50%);
   width: 48px;
   height: 48px;
@@ -111,7 +111,6 @@
   scroll-behavior: smooth;
   scrollbar-width: none;
   padding: 0.5rem max(1.5rem, calc((100vw - 1320px) / 2 + 1.5rem)) 1rem;
-  padding-right: max(1.5rem, calc((100vw - 1320px) / 2 + 1.5rem));
 }
 
 .namu-fp__track::-webkit-scrollbar {
@@ -120,13 +119,11 @@
 
 /* ── Cards ────────────────────────────────────────────── */
 .namu-fp__card {
-  /* Normal desktop: 3 cards + partial */
   flex: 0 0 calc((100vw - 2 * max(1.5rem, calc((100vw - 1320px) / 2 + 1.5rem)) - 2 * 1.25rem) / 3.15);
   min-width: 200px;
   scroll-snap-align: start;
 }
 
-/* Ultrawide: 4 cards + partial */
 @media (min-width: 1441px) {
   .namu-fp__card {
     flex: 0 0 calc((100vw - 2 * max(1.5rem, calc((100vw - 1320px) / 2 + 1.5rem)) - 3 * 1.25rem) / 4.15);
@@ -143,7 +140,7 @@
   display: block;
   text-decoration: none;
   background: var(--namu-branco-porcelana);
-  border-radius: 20px;
+  border-radius: var(--namu-radius-lg);
   overflow: hidden;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
@@ -153,55 +150,91 @@
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
 }
 
-.namu-fp__card-img {
+/* ── Card media (formato vertical / portrait) */
+.namu-fp__card-media {
+  position: relative;
   aspect-ratio: 3 / 4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.75rem;
   overflow: hidden;
+  background: #f0ede8;
 }
 
-.namu-fp__card-img-el {
+.namu-fp__card-img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   display: block;
-  transition: transform 0.3s ease;
+  transition: transform 0.35s ease;
 }
 
-.namu-fp__card-link:hover .namu-fp__card-img-el {
-  transform: scale(1.03);
+.namu-fp__card-link:hover .namu-fp__card-img {
+  transform: scale(1.04);
 }
 
 .namu-fp__card-img-placeholder {
   width: 100%;
   height: 100%;
   background: #e8e4df;
-  border-radius: 8px;
 }
 
+/* ── Badge de sale ────────────────────────────────────── */
+.namu-fp__badge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  background: var(--namu-verde-matcha);
+  color: #fff;
+  font-family: var(--namu-font-body);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--namu-radius-pill);
+  line-height: 1;
+}
+
+/* ── Card info ────────────────────────────────────────── */
 .namu-fp__card-info {
-  padding: 0.6rem 1.25rem 1.25rem;
+  padding: 0.85rem 1rem 1rem;
 }
 
 .namu-fp__card-title {
   font-family: var(--namu-font-body);
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--namu-verde-matcha);
-  margin: 0 0 0.35rem;
-  line-height: 1.35;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--namu-cinza-sombra);
+  margin: 0 0 0.4rem;
+  line-height: 1.4;
 }
 
+/* ── Preço ────────────────────────────────────────────── */
 .namu-fp__card-price {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.namu-fp__price-regular {
+  font-family: var(--namu-font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--namu-cinza-sombra);
+}
+
+.namu-fp__price-compare {
   font-family: var(--namu-font-body);
   font-size: 0.82rem;
   font-weight: 400;
-  color: #888;
-  margin: 0;
+  color: #aaa;
+  text-decoration: line-through;
+}
+
+.namu-fp__price-sale {
+  font-family: var(--namu-font-body);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--namu-verde-matcha);
 }
 
 /* ── Progress bar ─────────────────────────────────────── */
@@ -229,7 +262,7 @@
   transition: left 0.15s ease, width 0.15s ease;
 }
 
-/* ── Mobile adjustments ───────────────────────────────── */
+/* ── Mobile ───────────────────────────────────────────── */
 @media (max-width: 768px) {
   .namu-fp {
     padding: 2.5rem 0 2rem;

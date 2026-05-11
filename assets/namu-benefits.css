@@ -1,77 +1,68 @@
 /* ── Section wrapper ─────────────────────────────────── */
 .namu-ben {
-  padding: 4rem 0;
+  padding: 4rem 1.5rem;
   background: #ffffff;
 }
 
-/* ── Inner — mobile: horizontal slider ──────────────── */
+/* ── Inner — mobile: 2x3 grid ────────────────────────── */
 .namu-ben__inner {
-  display: flex;
-  gap: 0;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  padding: 0 1.5rem;
-  -webkit-overflow-scrolling: touch;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem 1rem;
+  max-width: 1320px;
+  margin: 0 auto;
 }
 
-.namu-ben__inner::-webkit-scrollbar {
-  display: none;
-}
-
-/* ── Item — mobile: 70vw card ────────────────────────── */
+/* ── Item ────────────────────────────────────────────── */
 .namu-ben__item {
-  flex: 0 0 70vw;
-  max-width: 260px;
-  scroll-snap-align: start;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 1.5rem 1.25rem;
-  gap: 1rem;
+  padding: 1rem 0.5rem;
+  gap: 0.75rem;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.namu-ben__item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ── Tablet: 3 colunas ───────────────────────────────── */
 @media (min-width: 640px) {
   .namu-ben__inner {
-    display: grid;
     grid-template-columns: repeat(3, 1fr);
-    overflow-x: unset;
-    scroll-snap-type: unset;
-    max-width: 1320px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    gap: 0;
+    gap: 2.5rem 1.5rem;
   }
 
   .namu-ben__item {
-    flex: unset;
-    max-width: unset;
-    padding: 2rem 1.5rem;
+    padding: 1.5rem 1rem;
   }
 }
 
 /* ── Desktop: 6 colunas ──────────────────────────────── */
 @media (min-width: 1024px) {
-  .namu-ben__inner {
-    grid-template-columns: repeat(6, 1fr);
+  .namu-ben {
+    padding: 5.5rem 1.5rem;
   }
 
-  .namu-ben {
-    padding: 5rem 0;
+  .namu-ben__inner {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0;
   }
 
   .namu-ben__item {
-    padding: 1rem 1rem 1.5rem;
+    padding: 1.5rem 1rem;
   }
 }
 
 /* ── Icon ─────────────────────────────────────────────── */
 .namu-ben__icon {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   flex-shrink: 0;
   color: var(--namu-verde-matcha, #045133);
 }
@@ -91,12 +82,12 @@
 
 .namu-ben__title {
   font-family: var(--namu-font-body, sans-serif);
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   color: var(--namu-cinza-sombra, #1a1a1a);
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .namu-ben__desc {
@@ -117,7 +108,9 @@
 
 /* ── Reduced motion ──────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .namu-ben__inner {
-    scroll-behavior: auto;
+  .namu-ben__item {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

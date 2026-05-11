@@ -3,6 +3,14 @@
 
 <namu-header class="namu-header" data-sticky="{{ section.settings.sticky }}">
   <div class="namu-header__pill">
+    <button class="namu-header__icon namu-header__menu-toggle" aria-label="Abrir menu" type="button">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+
     <a href="{{ routes.root_url }}" class="namu-header__logo" aria-label="{{ shop.name }}">
       {%- if section.settings.logo != blank -%}
         {{ section.settings.logo | image_url: width: 480 | image_tag:
@@ -46,20 +54,20 @@
     </nav>
 
     <div class="namu-header__icons">
-      <a href="{{ routes.search_url }}" class="namu-header__icon" aria-label="Buscar">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+      <a href="{{ routes.search_url }}" class="namu-header__icon namu-header__icon--desktop" aria-label="Buscar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
           <circle cx="11" cy="11" r="7"/>
           <line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
       </a>
-      <a href="{{ routes.account_url }}" class="namu-header__icon" aria-label="Minha conta">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+      <a href="{{ routes.account_url }}" class="namu-header__icon namu-header__icon--desktop" aria-label="Minha conta">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
           <circle cx="12" cy="7" r="4"/>
         </svg>
       </a>
       <a href="{{ routes.cart_url }}" class="namu-header__icon namu-header__icon--cart" aria-label="Carrinho">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
           <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
           <line x1="3" y1="6" x2="21" y2="6"/>
           <path d="M16 10a4 4 0 0 1-8 0"/>
@@ -68,17 +76,9 @@
           <span class="namu-header__cart-count">{{ cart.item_count }}</span>
         {%- endif -%}
       </a>
-      <button class="namu-header__icon namu-header__menu-toggle" aria-label="Abrir menu" type="button">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <line x1="3" y1="6" x2="21" y2="6"/>
-          <line x1="3" y1="12" x2="21" y2="12"/>
-          <line x1="3" y1="18" x2="21" y2="18"/>
-        </svg>
-      </button>
     </div>
   </div>
 
-  {%- comment -%} Mega menus (rendered as siblings of pill, positioned absolute) {%- endcomment -%}
   {%- for block in section.blocks -%}
     {%- if block.type == 'menu_item' and block.settings.has_mega_menu -%}
       <div
@@ -126,21 +126,27 @@
               {%- assign feat_img = block.settings[img_key] -%}
               {%- assign feat_label = block.settings[label_key] -%}
               {%- assign feat_link = block.settings[link_key] -%}
-              {%- if feat_img != blank -%}
-                <a href="{{ feat_link | default: '#' }}" class="namu-mega__feature">
-                  <div class="namu-mega__feature-img">
+              <a href="{{ feat_link | default: '#' }}" class="namu-mega__feature">
+                <div class="namu-mega__feature-img">
+                  {%- if feat_img != blank -%}
                     {{ feat_img | image_url: width: 600 | image_tag:
                       loading: 'lazy',
                       width: feat_img.width,
                       height: feat_img.height,
                       alt: feat_label
                     }}
-                  </div>
-                  {%- if feat_label != blank -%}
-                    <span class="namu-mega__feature-label">{{ feat_label | escape }}</span>
+                  {%- else -%}
+                    {%- if n == 1 -%}
+                      <img src="{{ 'cat-kits.jpg' | asset_url }}" alt="{{ feat_label | default: 'Kit Iniciante' | escape }}" loading="lazy">
+                    {%- else -%}
+                      <img src="{{ 'receita.webp' | asset_url }}" alt="{{ feat_label | default: 'Kit Lançamento' | escape }}" loading="lazy">
+                    {%- endif -%}
                   {%- endif -%}
-                </a>
-              {%- endif -%}
+                </div>
+                {%- if feat_label != blank -%}
+                  <span class="namu-mega__feature-label">{{ feat_label | escape }}</span>
+                {%- endif -%}
+              </a>
             {%- endfor -%}
           </div>
         </div>
@@ -148,20 +154,61 @@
     {%- endif -%}
   {%- endfor -%}
 
-  <div class="namu-header__mobile-menu" hidden>
-    <nav aria-label="Menu mobile">
-      <ul class="namu-header__mobile-list">
+  <div class="namu-header__drawer" hidden>
+    <div class="namu-header__drawer-overlay"></div>
+    <div class="namu-header__drawer-panel">
+      <div class="namu-header__drawer-top">
+        <span class="namu-header__drawer-title">Menu</span>
+        <button class="namu-header__drawer-close" type="button" aria-label="Fechar menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <nav aria-label="Menu mobile">
+        <ul class="namu-header__drawer-list">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'menu_item' -%}
+              <li class="namu-header__drawer-item">
+                <a href="{{ block.settings.link | default: '#' }}" class="namu-header__drawer-link">
+                  {{ block.settings.label | escape }}
+                </a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </nav>
+      <div class="namu-header__drawer-features">
         {%- for block in section.blocks -%}
-          {%- if block.type == 'menu_item' -%}
-            <li class="namu-header__mobile-item">
-              <a href="{{ block.settings.link | default: '#' }}" class="namu-header__mobile-link">
-                {{ block.settings.label | escape }}
+          {%- if block.type == 'menu_item' and block.settings.has_mega_menu -%}
+            {%- for n in (1..2) -%}
+              {%- assign img_key = 'feature_' | append: n | append: '_image' -%}
+              {%- assign label_key = 'feature_' | append: n | append: '_label' -%}
+              {%- assign link_key = 'feature_' | append: n | append: '_link' -%}
+              {%- assign feat_img = block.settings[img_key] -%}
+              {%- assign feat_label = block.settings[label_key] -%}
+              {%- assign feat_link = block.settings[link_key] -%}
+              <a href="{{ feat_link | default: '#' }}" class="namu-header__drawer-feature">
+                <div class="namu-header__drawer-feature-img">
+                  {%- if feat_img != blank -%}
+                    {{ feat_img | image_url: width: 400 | image_tag: loading: 'lazy', alt: feat_label }}
+                  {%- else -%}
+                    {%- if n == 1 -%}
+                      <img src="{{ 'cat-kits.jpg' | asset_url }}" alt="{{ feat_label | default: 'Kit Iniciante' | escape }}" loading="lazy">
+                    {%- else -%}
+                      <img src="{{ 'receita.webp' | asset_url }}" alt="{{ feat_label | default: 'Kit Lançamento' | escape }}" loading="lazy">
+                    {%- endif -%}
+                  {%- endif -%}
+                </div>
+                {%- if feat_label != blank -%}
+                  <span class="namu-header__drawer-feature-label">{{ feat_label | escape }}</span>
+                {%- endif -%}
               </a>
-            </li>
+            {%- endfor -%}
           {%- endif -%}
         {%- endfor -%}
-      </ul>
-    </nav>
+      </div>
+    </div>
   </div>
 </namu-header>
 
@@ -169,13 +216,20 @@
   class NamuHeader extends HTMLElement {
     constructor() {
       super();
+      this.pill = this.querySelector('.namu-header__pill');
       this.toggle = this.querySelector('.namu-header__menu-toggle');
-      this.mobileMenu = this.querySelector('.namu-header__mobile-menu');
+      this.drawer = this.querySelector('.namu-header__drawer');
+      this.drawerClose = this.querySelector('.namu-header__drawer-close');
+      this.drawerOverlay = this.querySelector('.namu-header__drawer-overlay');
       this.megas = this.querySelectorAll('.namu-mega');
       this.megaTriggers = this.querySelectorAll('[data-mega-trigger]');
       this.closeTimer = null;
+      this.lastScrollY = 0;
+      this.scrollThreshold = 60;
 
-      this.toggle?.addEventListener('click', () => this.toggleMobileMenu());
+      this.toggle?.addEventListener('click', () => this.openDrawer());
+      this.drawerClose?.addEventListener('click', () => this.closeDrawer());
+      this.drawerOverlay?.addEventListener('click', () => this.closeDrawer());
 
       this.megaTriggers.forEach(trigger => {
         const id = trigger.dataset.megaTrigger;
@@ -187,17 +241,34 @@
         parent.addEventListener('mouseleave', () => this.scheduleClose());
         mega.addEventListener('mouseenter', () => this.cancelClose());
         mega.addEventListener('mouseleave', () => this.scheduleClose());
-
         trigger.addEventListener('focus', () => this.openMega(mega, trigger));
       });
 
       document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') this.closeAllMegas();
+        if (e.key === 'Escape') {
+          this.closeAllMegas();
+          this.closeDrawer();
+        }
       });
 
       if (this.dataset.sticky === 'true') {
         window.addEventListener('scroll', () => this.handleScroll(), { passive: true });
       }
+    }
+
+    handleScroll() {
+      const currentY = window.scrollY;
+      if (currentY <= 10) {
+        this.classList.remove('namu-header--hidden');
+        this.classList.remove('namu-header--scrolled');
+      } else if (currentY > this.lastScrollY && currentY > this.scrollThreshold) {
+        this.classList.add('namu-header--hidden');
+        this.closeAllMegas();
+      } else if (currentY < this.lastScrollY) {
+        this.classList.remove('namu-header--hidden');
+        this.classList.add('namu-header--scrolled');
+      }
+      this.lastScrollY = currentY;
     }
 
     openMega(mega, trigger) {
@@ -228,14 +299,16 @@
       });
     }
 
-    toggleMobileMenu() {
-      const isOpen = !this.mobileMenu.hidden;
-      this.mobileMenu.hidden = isOpen;
-      this.classList.toggle('namu-header--menu-open', !isOpen);
+    openDrawer() {
+      this.drawer.hidden = false;
+      requestAnimationFrame(() => this.drawer.classList.add('is-open'));
+      document.body.style.overflow = 'hidden';
     }
 
-    handleScroll() {
-      this.classList.toggle('namu-header--scrolled', window.scrollY > 20);
+    closeDrawer() {
+      this.drawer.classList.remove('is-open');
+      document.body.style.overflow = '';
+      setTimeout(() => { this.drawer.hidden = true; }, 300);
     }
   }
   customElements.define('namu-header', NamuHeader);
