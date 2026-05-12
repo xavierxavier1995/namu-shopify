@@ -1,0 +1,123 @@
+{{ 'namu-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'namu-faq.css' | asset_url | stylesheet_tag }}
+
+<section class="namu-faq" aria-label="Perguntas Frequentes">
+  <div class="namu-faq__inner">
+    <div class="namu-faq__header">
+      {%- if section.settings.label != blank -%}
+        <p class="namu-faq__label">{{ section.settings.label | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="namu-faq__title">{{ section.settings.title | escape }}</h2>
+      {%- endif -%}
+    </div>
+
+    <div class="namu-faq__list">
+      {%- for block in section.blocks -%}
+        <details class="namu-faq__item" {{ block.shopify_attributes }} {% if forloop.first %}open{% endif %}>
+          <summary class="namu-faq__question">
+            <span class="namu-faq__question-text">{{ block.settings.question | escape }}</span>
+            <span class="namu-faq__icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <line class="namu-faq__icon-h" x1="3" y1="8" x2="13" y2="8"/>
+                <line class="namu-faq__icon-v" x1="8" y1="3" x2="8" y2="13"/>
+              </svg>
+            </span>
+          </summary>
+          <div class="namu-faq__answer">
+            <p>{{ block.settings.answer }}</p>
+          </div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{%- comment -%} Schema.org FAQPage JSON-LD {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- for block in section.blocks -%}
+      {
+        "@type": "Question",
+        "name": {{ block.settings.question | json }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ block.settings.answer | strip_html | json }}
+        }
+      }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ]
+}
+</script>
+
+{% schema %}
+{
+  "name": "FAQ Namu",
+  "tag": "section",
+  "class": "shopify-section-namu-faq",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Rótulo superior",
+      "default": "Dúvidas"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Perguntas Frequentes"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "Pergunta",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Pergunta",
+          "default": "Pergunta frequente"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Resposta",
+          "default": "<p>Resposta aqui.</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "FAQ Namu",
+      "settings": {
+        "label": "Dúvidas",
+        "title": "Perguntas Frequentes"
+      },
+      "blocks": [
+        { "type": "faq_item", "settings": { "question": "O que diferencia o Matcha da Namu de outros chás verdes?", "answer": "<p>O Matcha Namu é cultivado à sombra na Coreia do Sul, colhido artesanalmente e moído em moinhos de pedra. Diferente do chá verde comum, você consome a folha inteira, o que garante 10x mais antioxidantes e um sabor muito mais cremoso e adocicado (Umami).</p>" } },
+        { "type": "faq_item", "settings": { "question": "Qual a origem do Matcha Namu?", "answer": "<p>Nosso matcha é importado diretamente de fazendas boutique na Coreia do Sul, selecionadas por seus processos rigorosos de pureza e sustentabilidade.</p>" } },
+        { "type": "faq_item", "settings": { "question": "Qual a diferença entre o Matcha Cerimonial e o Premium?", "answer": "<p>O Cerimonial é feito com as folhas mais jovens da primeira colheita, ideal para beber apenas com água. O Premium é vibrante e versátil, perfeito para lattes, smoothies e receitas culinárias.</p>" } },
+        { "type": "faq_item", "settings": { "question": "O Matcha Namu contém cafeína?", "answer": "<p>Sim, o matcha contém cafeína natural. No entanto, devido à alta concentração de L-Teanina, a energia é liberada de forma gradual (4 a 6 horas), sem causar a \"queda\" ou ansiedade comum no café.</p>" } },
+        { "type": "faq_item", "settings": { "question": "Como devo preparar o meu matcha em casa?", "answer": "<p>Basta peneirar 1-2g de matcha em uma tigela, adicionar água quente (não fervendo, cerca de 80°C) e bater com o batedor de bambu (Chasen) ou um mixer elétrico até formar uma espuma densa.</p>" } },
+        { "type": "faq_item", "settings": { "question": "Qual a melhor forma de armazenar meu matcha?", "answer": "<p>Para manter o frescor e a cor vibrante, guarde-o na embalagem original bem fechada, em local fresco, seco e longe da luz. Muitas pessoas preferem mantê-lo na geladeira após aberto.</p>" } },
+        { "type": "faq_item", "settings": { "question": "Os produtos da Namu são orgânicos e livres de agrotóxicos?", "answer": "<p>Sim. Priorizamos produtores que utilizam práticas de cultivo limpas. Nossos lotes passam por testes rigorosos para garantir que sejam 100% livres de aditivos e agrotóxicos.</p>" } },
+        { "type": "faq_item", "settings": { "question": "Matcha ajuda no processo de emagrecimento?", "answer": "<p>O matcha é um potente termogênico natural que ajuda a acelerar o metabolismo e a queima de gordura, especialmente quando aliado a uma rotina de exercícios.</p>" } },
+        { "type": "faq_item", "settings": { "question": "Grávidas e crianças podem consumir matcha?", "answer": "<p>O matcha contém cafeína. Recomendamos que gestantes, lactantes ou responsáveis por crianças consultem um médico antes de incluir o matcha na rotina.</p>" } },
+        { "type": "faq_item", "settings": { "question": "O matcha quebra o jejum intermitente?", "answer": "<p>Se consumido apenas com água, o matcha não quebra o jejum, sendo um excelente aliado para manter o foco e a saciedade durante o período.</p>" } },
+        { "type": "faq_item", "settings": { "question": "Quanto tempo dura uma lata de Matcha Namu?", "answer": "<p>Uma lata de 30g rende aproximadamente 30 doses, se utilizado 1g por porção.</p>" } },
+        { "type": "faq_item", "settings": { "question": "Qual o prazo de entrega para o meu endereço?", "answer": "<p>O prazo varia conforme sua região, mas geralmente entregamos em todo o Brasil entre 3 a 7 dias úteis após a confirmação do pedido.</p>" } },
+        { "type": "faq_item", "settings": { "question": "Posso comprar o Matcha Namu para o meu negócio (B2B)?", "answer": "<p>Com certeza! Temos condições especiais para cafeterias, empórios e empresas. Visite nossa seção \"Para seu Negócio\" no menu superior.</p>" } },
+        { "type": "faq_item", "settings": { "question": "O matcha da Namu é vegano e sem glúten?", "answer": "<p>Sim, nosso matcha é 100% puro, de origem vegetal, naturalmente livre de glúten, lactose e qualquer componente de origem animal.</p>" } },
+        { "type": "faq_item", "settings": { "question": "Vocês oferecem garantia de satisfação?", "answer": "<p>Sim, queremos que sua experiência com o matcha seja perfeita. Caso tenha qualquer problema com seu pedido, nossa equipe de suporte está pronta para resolver da melhor forma possível.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

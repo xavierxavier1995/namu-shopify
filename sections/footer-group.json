@@ -4,19 +4,7 @@
   "sections": {
     "namu-footer": {
       "type": "namu-footer",
-      "settings": {
-        "brand_name": "Namu Matcha",
-        "tagline": "Do campo à sua xícara.",
-        "col1_heading": "Compras",
-        "col2_heading": "Institucional",
-        "col3_heading": "Ajuda",
-        "col4_heading": "Minha Conta",
-        "col5_heading": "Atendimento",
-        "contact_email": "oi@namumatcha.com.br",
-        "contact_hours": "Seg – Sex, 9h às 18h",
-        "contact_address": "São Paulo, SP – Brasil",
-        "copyright_text": "· Todos os direitos reservados."
-      }
+      "settings": {}
     }
   },
   "order": [
