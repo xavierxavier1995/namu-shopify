@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"C:\\\\Users\\\\unk_g\\\\OneDrive\\\\Área de Trabalho\\\\namu-shopify\" branch -a)",
+      "Bash(git -C \"C:\\\\Users\\\\unk_g\\\\OneDrive\\\\Área de Trabalho\\\\namu-shopify\" worktree list)",
+      "Bash(git -C \"C:\\\\Users\\\\unk_g\\\\OneDrive\\\\Área de Trabalho\\\\namu-shopify\" status --short)"
+    ]
+  }
+}
