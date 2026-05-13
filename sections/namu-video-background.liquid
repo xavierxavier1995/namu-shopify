@@ -1,0 +1,72 @@
+{{ 'namu-video-background.css' | asset_url | stylesheet_tag }}
+
+<section class="namu-video-bg" aria-label="{{ section.settings.aria_label | default: 'Vídeo' }}">
+  <div class="namu-video-bg__overlay"></div>
+  <div class="namu-video-bg__wrapper" data-video-id="{{ section.settings.youtube_id }}">
+    <div class="namu-video-bg__iframe-wrap" id="namu-video-{{ section.id }}"></div>
+  </div>
+</section>
+
+<script>
+(function() {
+  var section = document.querySelector('.namu-video-bg');
+  var wrapper = section.querySelector('.namu-video-bg__wrapper');
+  var videoId = wrapper.getAttribute('data-video-id');
+  var container = document.getElementById('namu-video-{{ section.id }}');
+  var loaded = false;
+
+  function loadVideo() {
+    if (loaded) return;
+    loaded = true;
+    var iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&mute=1&loop=1&playlist=' + videoId + '&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&playsinline=1&enablejsapi=0&origin=' + window.location.origin;
+    iframe.setAttribute('frameborder', '0');
+    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+    iframe.setAttribute('allowfullscreen', '');
+    iframe.setAttribute('loading', 'lazy');
+    iframe.setAttribute('title', '{{ section.settings.aria_label | default: "Vídeo de fundo" | escape }}');
+    iframe.className = 'namu-video-bg__iframe';
+    container.appendChild(iframe);
+  }
+
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting) {
+        loadVideo();
+        observer.disconnect();
+      }
+    }, { rootMargin: '200px' });
+    observer.observe(section);
+  } else {
+    loadVideo();
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Vídeo Background",
+  "tag": "section",
+  "class": "shopify-section-namu-video-bg",
+  "settings": [
+    {
+      "type": "text",
+      "id": "youtube_id",
+      "label": "YouTube Video ID",
+      "default": "PH41yfLxXxo",
+      "info": "Apenas o ID do vídeo (ex: PH41yfLxXxo)"
+    },
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "Descrição acessível",
+      "default": "Vídeo demonstrativo de preparo do matcha"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vídeo Background"
+    }
+  ]
+}
+{% endschema %}
