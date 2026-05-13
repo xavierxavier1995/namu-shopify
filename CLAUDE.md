@@ -7,6 +7,12 @@ Inspiration: jadeleafmatcha.com
 
 ## ⚠️ CRITICAL WORKFLOW RULES (read before EVERY task)
 
+### Iron Law #0 — NUNCA usar worktrees. Editar diretamente nos arquivos do projeto.
+- **PROIBIDO** usar `EnterWorktree` ou editar em `.claude/worktrees/`
+- O usuário usa Git Desktop — worktrees criam uma cópia isolada que o Git Desktop não enxerga
+- Sempre editar diretamente em `C:\Users\unk_g\OneDrive\Área de Trabalho\namu-shopify\`
+- Se por algum motivo um worktree já estiver ativo, copiar as alterações de volta ANTES de reportar "pronto"
+
 ### Iron Law #1 — Never push for every small change
 - **DEFAULT:** assume `shopify theme dev` is running locally — edits reload automatically.
 - **ONLY push** when (a) the user explicitly asks "envia pro Shopify" / "faz upload", or (b) finishing a session.
