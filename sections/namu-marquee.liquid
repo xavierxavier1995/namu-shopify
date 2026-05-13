@@ -8,7 +8,7 @@
 <section
   class="namu-marquee"
   aria-label="{{ section.settings.aria_label | default: 'Diferenciais Namu' }}"
-  style="--namu-marquee-bg: {{ section.settings.bg_color }}; --namu-marquee-text: {{ section.settings.text_color }};"
+  style="--namu-marquee-bg: #F8F5F0; --namu-marquee-text: #8C7B6B;"
 >
   <div class="namu-marquee__track" data-duration="{{ duration }}">
     {%- comment -%} Renderiza dois grupos para loop infinito sem corte {%- endcomment -%}
@@ -18,7 +18,7 @@
           <li class="namu-marquee__item" {{ block.shopify_attributes }}>
             <span class="namu-marquee__text">{{ block.settings.text | escape }}</span>
           </li>
-          <li class="namu-marquee__sep" aria-hidden="true">|</li>
+          <li class="namu-marquee__sep" aria-hidden="true">✦</li>
         {%- endfor -%}
       </ul>
     {%- endfor -%}

@@ -14,18 +14,9 @@
 
     {%- comment -%} ── Col 1: Logo / institucional ─────────── {%- endcomment -%}
     <div class="namu-nl__brand">
-      {%- if section.settings.logo != blank -%}
+      <div class="namu-nl__brand-logos">
         <img
-          src="{{ section.settings.logo | image_url: width: 240 }}"
-          alt="{{ shop.name | escape }}"
-          loading="lazy"
-          width="{{ section.settings.logo.width }}"
-          height="{{ section.settings.logo.height }}"
-          class="namu-nl__logo"
-        >
-      {%- elsif section.settings.logo_asset != blank -%}
-        <img
-          src="{{ section.settings.logo_asset | asset_url }}"
+          src="{{ 'namu-logo-horizontal-white.svg' | asset_url }}"
           alt="{{ shop.name | escape }}"
           loading="lazy"
           decoding="async"
@@ -33,9 +24,16 @@
           height="60"
           class="namu-nl__logo"
         >
-      {%- else -%}
-        <span class="namu-nl__brand-name">{{ section.settings.brand_name | default: shop.name | escape }}</span>
-      {%- endif -%}
+        <img
+          src="{{ 'flag-south-korea.svg' | asset_url }}"
+          alt="Coreia do Sul"
+          loading="lazy"
+          decoding="async"
+          width="32"
+          height="22"
+          class="namu-nl__flag"
+        >
+      </div>
       {%- if section.settings.tagline != blank -%}
         <p class="namu-nl__tagline">{{ section.settings.tagline | escape }}</p>
       {%- endif -%}

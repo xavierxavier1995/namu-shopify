@@ -45,6 +45,20 @@
   object-fit: contain;
 }
 
+.namu-nl__brand-logos {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.namu-nl__flag {
+  width: 32px;
+  height: 22px;
+  object-fit: cover;
+  border-radius: 0;
+  display: block;
+}
+
 .namu-nl__brand-name {
   font-family: var(--namu-font-heading, serif);
   font-size: 1.4rem;
