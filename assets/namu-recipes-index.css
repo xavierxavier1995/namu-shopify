@@ -1,0 +1,249 @@
+/* ══════════════════════════════════════════════════════
+   NAMU RECIPES INDEX — Filtros + Grid
+   ══════════════════════════════════════════════════════ */
+
+/* ── Header ──────────────────────────────────────────── */
+.namu-rec__header {
+  background: var(--namu-branco-porcelana);
+  padding: 3.5rem 1.5rem 2.5rem;
+  text-align: center;
+}
+
+.namu-rec__header-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.namu-rec__breadcrumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-family: var(--namu-font-body);
+  font-size: 0.72rem;
+  color: var(--namu-color-text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.namu-rec__breadcrumb a {
+  color: var(--namu-color-text-muted);
+  text-decoration: none;
+}
+
+.namu-rec__breadcrumb a:hover {
+  color: var(--namu-verde-matcha);
+}
+
+.namu-rec__title {
+  font-family: var(--namu-font-heading);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 400;
+  color: var(--namu-cinza-sombra);
+  margin: 0 0 0.75rem;
+}
+
+.namu-rec__subtitle {
+  font-family: var(--namu-font-body);
+  font-size: 0.95rem;
+  color: var(--namu-color-text-muted);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── Filter pills ───────────────────────────────────── */
+.namu-rec__filters {
+  padding: 0 1.5rem 2.5rem;
+  overflow-x: auto;
+}
+
+.namu-rec__filters-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.namu-rec__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: var(--namu-radius-pill);
+  font-family: var(--namu-font-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--namu-cinza-sombra);
+  background: var(--namu-branco-porcelana);
+  text-decoration: none;
+  transition: background var(--namu-transition-fast), color var(--namu-transition-fast);
+  white-space: nowrap;
+}
+
+.namu-rec__pill svg {
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.namu-rec__pill:hover {
+  background: rgba(4, 81, 51, 0.1);
+  color: var(--namu-verde-matcha);
+}
+
+.namu-rec__pill--active {
+  background: var(--namu-verde-matcha);
+  color: #fff;
+}
+
+.namu-rec__pill--active svg {
+  opacity: 1;
+}
+
+.namu-rec__pill--active:hover {
+  background: var(--namu-verde-matcha);
+  color: #fff;
+}
+
+/* ── Recipe grid ────────────────────────────────────── */
+.namu-rec__grid-section {
+  padding: 0 1.5rem 3rem;
+}
+
+.namu-rec__grid {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+/* ── Recipe card ────────────────────────────────────── */
+.namu-rec__card {
+  display: flex;
+  flex-direction: column;
+}
+
+.namu-rec__card-media {
+  display: block;
+  position: relative;
+  border-radius: var(--namu-radius-md);
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+
+.namu-rec__card-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.namu-rec__card-media:hover .namu-rec__card-img {
+  transform: scale(1.04);
+}
+
+.namu-rec__card-placeholder {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.namu-rec__card-badge {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 0.75rem;
+  padding: 0.3rem 0.65rem;
+  background: rgba(45, 45, 45, 0.85);
+  color: #fff;
+  font-family: var(--namu-font-body);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  border-radius: var(--namu-radius-sm);
+}
+
+.namu-rec__card-title {
+  font-family: var(--namu-font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--namu-cinza-sombra);
+  margin: 0;
+  line-height: 1.35;
+}
+
+.namu-rec__card-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ── Pagination ─────────────────────────────────────── */
+.namu-rec__pagination {
+  padding: 0 1.5rem 3rem;
+  text-align: center;
+}
+
+.namu-rec__pagination a,
+.namu-rec__pagination span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 0.5rem;
+  border-radius: var(--namu-radius-sm);
+  font-family: var(--namu-font-body);
+  font-size: 0.85rem;
+  text-decoration: none;
+  color: var(--namu-cinza-sombra);
+  transition: background var(--namu-transition-fast);
+}
+
+.namu-rec__pagination a:hover {
+  background: var(--namu-branco-porcelana);
+}
+
+.namu-rec__pagination span.current {
+  background: var(--namu-verde-matcha);
+  color: #fff;
+}
+
+/* ── Mobile ──────────────────────────────────────────── */
+@media (max-width: 992px) {
+  .namu-rec__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .namu-rec__filters-inner {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.5rem;
+  }
+
+  .namu-rec__pill {
+    flex-shrink: 0;
+    scroll-snap-align: start;
+  }
+}
+
+@media (max-width: 480px) {
+  .namu-rec__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .namu-rec__header {
+    padding: 2.5rem 1.5rem 2rem;
+  }
+}
+
+/* ── Reduced motion ──────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .namu-rec__card-img,
+  .namu-rec__pill {
+    transition: none;
+  }
+}
