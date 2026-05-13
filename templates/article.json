@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "namu_article": {
+      "type": "namu-article",
+      "settings": {}
+    }
+  },
+  "order": [
+    "namu_article"
+  ]
+}
