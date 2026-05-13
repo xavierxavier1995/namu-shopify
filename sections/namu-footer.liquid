@@ -8,12 +8,24 @@
     <div class="namu-ft__newsletter-inner">
       <div class="namu-ft__newsletter-brand">
         <div class="namu-ft__newsletter-logo">
-          <svg width="28" height="28" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M24 42 V22"/>
-            <path d="M24 22 C24 8 8 6 8 6 S8 22 24 22 Z"/>
-            <path d="M24 22 C24 8 40 6 40 6 S40 22 24 22 Z"/>
-          </svg>
-          <span class="namu-ft__flag" aria-label="Origem: Coreia do Sul">🇰🇷</span>
+          <img
+            src="{{ 'namu-logo-horizontal-white.svg' | asset_url }}"
+            alt="{{ shop.name | escape }}"
+            loading="lazy"
+            decoding="async"
+            width="140"
+            height="40"
+            class="namu-ft__logo-img"
+          >
+          <img
+            src="{{ 'flag-south-korea.svg' | asset_url }}"
+            alt="Origem: Coreia do Sul"
+            loading="lazy"
+            decoding="async"
+            width="28"
+            height="19"
+            class="namu-ft__flag-img"
+          >
         </div>
         <p class="namu-ft__slogan">Do campo à sua xícara.</p>
       </div>

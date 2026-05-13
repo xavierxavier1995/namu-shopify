@@ -44,20 +44,41 @@
         <div class="namu-fp__card" role="listitem">
           <a href="{{ product.url }}" class="namu-fp__card-link">
             <div class="namu-fp__card-media">
-              {%- capture fp_demo_img -%}{% cycle 'receita.webp', 'receita2.webp', 'receita3.webp', 'receita4.webp', 'cat-matchas-puros.jpg', 'cat-blends.jpg', 'cat-kits.jpg', 'cat-utensilios.jpg', 'slide01.jpg', 'slide02.jpg', 'slide03.jpg', 'b2b-cafeteria.jpg' %}{%- endcapture -%}
-              <img
-                src="{{ fp_demo_img | asset_url }}"
-                alt="{{ product.title | escape }}"
-                loading="lazy"
-                decoding="async"
-                class="namu-fp__card-img"
-              >
+              {%- if product.featured_image != blank -%}
+                <img
+                  src="{{ product.featured_image | image_url: width: 600 }}"
+                  alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                  width="600"
+                  height="{{ 600 | divided_by: product.featured_image.aspect_ratio | round }}"
+                  loading="lazy"
+                  decoding="async"
+                  class="namu-fp__card-img"
+                >
+              {%- else -%}
+                <img
+                  src="{{ 'cat-matchas-puros.jpg' | asset_url }}"
+                  alt="{{ product.title | escape }}"
+                  width="600"
+                  height="600"
+                  loading="lazy"
+                  decoding="async"
+                  class="namu-fp__card-img"
+                >
+              {%- endif -%}
               {%- if fp_on_sale -%}
                 <span class="namu-fp__badge">Sale</span>
               {%- endif -%}
             </div>
             <div class="namu-fp__card-info">
               <p class="namu-fp__card-title">{{ product.title | escape }}</p>
+              <div class="namu-fp__card-stars" aria-label="5 de 5 estrelas">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--namu-verde-matcha, #045133)" aria-hidden="true"><polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--namu-verde-matcha, #045133)" aria-hidden="true"><polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--namu-verde-matcha, #045133)" aria-hidden="true"><polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--namu-verde-matcha, #045133)" aria-hidden="true"><polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--namu-verde-matcha, #045133)" aria-hidden="true"><polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9"/></svg>
+                <span class="namu-fp__card-reviews">(0)</span>
+              </div>
               <div class="namu-fp__card-price {%- if fp_on_sale %} namu-fp__card-price--sale{%- endif %}">
                 {%- if fp_on_sale -%}
                   <span class="namu-fp__price-compare">{{ product.compare_at_price | money }}</span>

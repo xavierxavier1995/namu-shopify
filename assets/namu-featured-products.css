@@ -153,10 +153,12 @@
   position: relative;
   aspect-ratio: 3 / 4;
   overflow: hidden;
+  border-radius: 5px;
   background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: translateZ(0);
 }
 
 .namu-fp__card-img {

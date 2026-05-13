@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+  <rect fill="#FFFFFF" width="900" height="600"/>
+  <circle cx="450" cy="300" r="150" fill="#CD2E3A"/>
+  <path d="M450 300c0-82.84 67.16-150 150-150C517.16 150 450 217.16 450 300s67.16 150 150 150c-82.84 0-150-67.16-150-150z" fill="#0047A0"/>
+  <g stroke="#000" stroke-width="25" fill="none">
+    <line x1="186" y1="477" x2="306" y2="397" transform="rotate(0 246 437)"/>
+    <line x1="186" y1="517" x2="306" y2="437" transform="rotate(0 246 477)"/>
+    <line x1="186" y1="557" x2="306" y2="477" transform="rotate(0 246 517)"/>
+  </g>
+  <g stroke="#000" stroke-width="25" fill="none">
+    <line x1="594" y1="123" x2="714" y2="203" transform="rotate(0 654 163)"/>
+    <line x1="594" y1="163" x2="714" y2="243" transform="rotate(0 654 203)"/>
+    <line x1="594" y1="203" x2="714" y2="283" transform="rotate(0 654 243)"/>
+  </g>
+  <g stroke="#000" stroke-width="25" fill="none">
+    <line x1="594" y1="397" x2="714" y2="477" transform="rotate(0 654 437)"/>
+    <line x1="594" y1="437" x2="714" y2="517" transform="rotate(0 654 477)"/>
+  </g>
+  <g stroke="#000" stroke-width="25" fill="none">
+    <line x1="186" y1="123" x2="306" y2="203" transform="rotate(0 246 163)"/>
+    <line x1="186" y1="163" x2="306" y2="243" transform="rotate(0 246 203)"/>
+  </g>
+</svg>

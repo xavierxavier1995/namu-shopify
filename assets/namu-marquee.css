@@ -1,9 +1,10 @@
 .namu-marquee {
-  background: var(--namu-marquee-bg, var(--namu-verde-matcha));
-  color: var(--namu-marquee-text, #fff);
+  background: var(--namu-marquee-bg, #F8F5F0);
+  color: var(--namu-marquee-text, #666666);
   overflow: hidden;
   width: 100%;
   font-family: var(--namu-font-body);
+  border-bottom: 1px solid #E5E0D8;
 }
 
 .namu-marquee__track {
@@ -23,18 +24,19 @@
 
 .namu-marquee__item,
 .namu-marquee__sep {
-  font-size: 0.95rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   white-space: nowrap;
-  padding: 1rem 1.5rem;
+  padding: 18px 40px;
   display: inline-flex;
   align-items: center;
 }
 
 .namu-marquee__sep {
-  opacity: 0.5;
-  padding: 1rem 0.25rem;
+  opacity: 0.3;
+  padding: 18px 0.5rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -47,7 +49,7 @@
 @media (max-width: 749px) {
   .namu-marquee__item,
   .namu-marquee__sep {
-    font-size: 0.85rem;
-    padding: 0.75rem 1rem;
+    font-size: 10px;
+    padding: 14px 24px;
   }
 }
