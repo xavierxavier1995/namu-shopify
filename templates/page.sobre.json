@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "namu_about": {
+      "type": "namu-about",
+      "settings": {}
+    }
+  },
+  "order": [
+    "namu_about"
+  ]
+}

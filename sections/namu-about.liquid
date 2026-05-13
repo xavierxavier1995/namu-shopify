@@ -1,0 +1,122 @@
+{{ 'namu-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'namu-about.css' | asset_url | stylesheet_tag }}
+
+<section class="namu-about" aria-label="Nossa História">
+
+  <div class="namu-about__hero">
+    <div class="namu-about__hero-inner">
+      <h1 class="namu-about__hero-title">Do campo à sua xícara: o ritual que atravessa oceanos</h1>
+      <p class="namu-about__hero-subtitle">A primeira marca no Brasil dedicada exclusivamente ao Matcha. Trazemos o melhor da tradição milenar coreana para transformar o seu dia a dia.</p>
+    </div>
+  </div>
+
+  <div class="namu-about__story">
+    <div class="namu-about__story-inner">
+      <span class="namu-about__eyebrow">Nossa História</span>
+      <h2 class="namu-about__section-title">Olá, somos Namu</h2>
+      <div class="namu-about__prose">
+        <p>A Namu é a primeira marca no Brasil dedicada exclusivamente ao Matcha, um chá conhecido no mundo todo pelos seus diversos benefícios para o organismo e pela sua versatilidade gastronômica.</p>
+        <p>Nossa missão é oferecer um produto de alta qualidade que respeite o meio ambiente em todas as suas etapas de produção.</p>
+        <p>Aquilo que comemos está diretamente associado à saúde do nosso corpo, por isso acreditamos ser fundamental a transparência em relação à rastreabilidade dos alimentos que chegam até nós. Na Namu entendemos que um alimento bom não se resume apenas à sua qualidade, é indispensável que ele também faça parte de uma cadeia de mercado honesta, que respeita o meio ambiente e valoriza cada trabalhador até o consumidor final.</p>
+        <p>Acreditamos que não basta apenas vender um Matcha orgânico por um preço acessível, é necessário construir uma marca que dialogue com o seu tempo, mantendo um olhar atento ao meio ambiente, que fomente a economia local e valorize todas as pessoas envolvidas na cadeia de produção.</p>
+        <p>A busca por uma harmonia entre aquilo que consumimos e o bem-estar do nosso corpo é o que inspira a nossa marca.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="namu-about__origin">
+    <div class="namu-about__origin-inner">
+      <div class="namu-about__origin-media">
+        {%- if section.settings.origin_image != blank -%}
+          {{ section.settings.origin_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'namu-about__origin-img', alt: 'Campos de chá em Hadong, Coreia do Sul' }}
+        {%- else -%}
+          <img src="{{ 'cat-kits.jpg' | asset_url }}" alt="Campos de chá em Hadong" loading="lazy" class="namu-about__origin-img">
+        {%- endif -%}
+      </div>
+      <div class="namu-about__origin-text">
+        <span class="namu-about__eyebrow">Origem</span>
+        <h2 class="namu-about__section-title">O Coração da Namu: Hadong</h2>
+        <p>Hadong tem mais de 1200 anos de história com plantações de chá verde. Segundo a História dos Três Reinos (Samguk Sagi), no ano de 828 sementes foram trazidas da China e o rei mandou plantá-las nas ladeiras da montanha Jirisan.</p>
+        <p>Devido à antiguidade das árvores, é impossível industrializar o processo sem perder qualidade, por isso, a colheita continua sendo artesanal — selecionando e separando as folhas uma a uma pelos produtores.</p>
+        <p>Atualmente, a região conta com o <strong>Hadong Green Tea Institute</strong>, que visa melhorar a qualidade e produção do chá respeitando o meio ambiente e apoiando a comunidade local.</p>
+        <p>Desde 2017, Hadong é considerado <strong>Patrimônio Agrícola Mundial pela FAO</strong> (GIAHS) pela manutenção das técnicas tradicionais de agricultura e pelo cuidado com o meio ambiente.</p>
+        <p class="namu-about__origin-highlight">O chá de Hadong ficou conhecido como o "Chá do Rei" pela sua alta qualidade.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="namu-about__values">
+    <div class="namu-about__values-inner">
+      <span class="namu-about__eyebrow">Nossos Pilares</span>
+      <h2 class="namu-about__section-title">O que nos move</h2>
+      <div class="namu-about__values-grid">
+        <div class="namu-about__value">
+          <div class="namu-about__value-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="namu-about__value-title">Autenticidade</h3>
+          <p class="namu-about__value-desc">Matcha 100% coreano, rastreável do campo à embalagem. Sem intermediários, sem misturas.</p>
+        </div>
+        <div class="namu-about__value">
+          <div class="namu-about__value-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg>
+          </div>
+          <h3 class="namu-about__value-title">Qualidade</h3>
+          <p class="namu-about__value-desc">Colheita artesanal, folha a folha. Certificado pelo Hadong Green Tea Institute e reconhecido pela FAO.</p>
+        </div>
+        <div class="namu-about__value">
+          <div class="namu-about__value-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          </div>
+          <h3 class="namu-about__value-title">Ritual</h3>
+          <p class="namu-about__value-desc">Mais que um chá, um momento de presença. Cada xícara é um convite à pausa consciente.</p>
+        </div>
+        <div class="namu-about__value">
+          <div class="namu-about__value-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <h3 class="namu-about__value-title">Transparência</h3>
+          <p class="namu-about__value-desc">Cadeia produtiva honesta que respeita o meio ambiente e valoriza cada trabalhador envolvido.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="namu-about__cta">
+    <div class="namu-about__cta-inner">
+      <h2 class="namu-about__cta-title">Pronto para iniciar seu ritual?</h2>
+      <p class="namu-about__cta-desc">Descubra o sabor autêntico do matcha coreano e transforme sua rotina.</p>
+      <a href="/collections/all" class="namu-about__cta-btn">
+        Descobrir Matchas
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="1" y1="6" x2="15" y2="6"/><polyline points="10 1 15 6 10 11"/></svg>
+      </a>
+    </div>
+  </div>
+
+</section>
+
+{% schema %}
+{
+  "name": "Sobre a Namu",
+  "tag": "section",
+  "class": "shopify-section-namu-about",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Imagem Hero"
+    },
+    {
+      "type": "image_picker",
+      "id": "origin_image",
+      "label": "Imagem dos campos (Hadong)"
+    }
+  ],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "Sobre a Namu"
+    }
+  ]
+}
+{% endschema %}
