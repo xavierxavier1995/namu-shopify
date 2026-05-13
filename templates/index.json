@@ -143,6 +143,13 @@
         "products_to_show": 14
       }
     },
+    "namu_video_background": {
+      "type": "namu-video-background",
+      "settings": {
+        "youtube_id": "PH41yfLxXxo",
+        "aria_label": "Vídeo demonstrativo de preparo do matcha"
+      }
+    },
     "namu_experience": {
       "type": "namu-experience",
       "settings": {
@@ -269,6 +276,7 @@
     "namu_hero",
     "namu_marquee",
     "namu_featured_products",
+    "namu_video_background",
     "namu_categories",
     "namu_experience",
     "namu_benefits",
