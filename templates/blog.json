@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "namu_blog_index": {
+      "type": "namu-blog-index",
+      "settings": {}
+    }
+  },
+  "order": [
+    "namu_blog_index"
+  ]
+}
