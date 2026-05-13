@@ -1,0 +1,428 @@
+/* ══════════════════════════════════════════════════════
+   NAMU COLLECTION — Category page
+   ══════════════════════════════════════════════════════ */
+
+/* ── Hero ────────────────────────────────────────────── */
+.namu-coll__hero {
+  position: relative;
+  background: var(--namu-verde-matcha);
+  padding: 4.5rem 1.5rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.namu-coll__hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+}
+
+.namu-coll__hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.namu-coll__hero-title {
+  font-family: var(--namu-font-heading);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 400;
+  color: #fff;
+  margin: 0 0 0.75rem;
+  line-height: 1.25;
+}
+
+.namu-coll__hero-desc {
+  font-family: var(--namu-font-body);
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── Benefits bar ───────────────────────────────────── */
+.namu-coll__benefits {
+  background: var(--namu-verde-matcha);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.9rem 1.5rem;
+  overflow-x: auto;
+}
+
+.namu-coll__benefits-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  white-space: nowrap;
+}
+
+.namu-coll__benefit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--namu-font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.02em;
+}
+
+.namu-coll__benefit svg {
+  flex-shrink: 0;
+  color: var(--namu-verde-puro);
+}
+
+/* ── Body layout ────────────────────────────────────── */
+.namu-coll__body {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 2.5rem;
+}
+
+/* ── Sidebar ────────────────────────────────────────── */
+.namu-coll__sidebar {
+  position: sticky;
+  top: 100px;
+  align-self: start;
+}
+
+.namu-coll__filter-toggle {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.2rem;
+  background: var(--namu-branco-porcelana);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: var(--namu-radius-sm);
+  font-family: var(--namu-font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--namu-cinza-sombra);
+  cursor: pointer;
+}
+
+.namu-coll__filter-group {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 1rem 0;
+}
+
+.namu-coll__filter-group:first-child {
+  padding-top: 0;
+}
+
+.namu-coll__filter-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--namu-font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--namu-cinza-sombra);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.namu-coll__filter-heading::-webkit-details-marker {
+  display: none;
+}
+
+.namu-coll__filter-heading svg {
+  transition: transform var(--namu-transition-fast);
+}
+
+.namu-coll__filter-group[open] .namu-coll__filter-heading svg {
+  transform: rotate(180deg);
+}
+
+.namu-coll__filter-options {
+  padding-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.namu-coll__filter-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--namu-font-body);
+  font-size: 0.82rem;
+  color: var(--namu-cinza-sombra);
+  cursor: pointer;
+}
+
+.namu-coll__filter-check {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--namu-verde-matcha);
+}
+
+.namu-coll__filter-count {
+  font-size: 0.72rem;
+  color: var(--namu-color-text-muted);
+}
+
+.namu-coll__price-range {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.namu-coll__price-input {
+  width: 80px;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: var(--namu-radius-sm);
+  font-family: var(--namu-font-body);
+  font-size: 0.82rem;
+  outline: none;
+}
+
+.namu-coll__price-input:focus {
+  border-color: var(--namu-verde-matcha);
+}
+
+.namu-coll__price-sep {
+  color: var(--namu-color-text-muted);
+}
+
+/* ── Toolbar ────────────────────────────────────────── */
+.namu-coll__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.namu-coll__count {
+  font-family: var(--namu-font-body);
+  font-size: 0.82rem;
+  color: var(--namu-color-text-muted);
+  margin: 0;
+}
+
+.namu-coll__sort {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.namu-coll__sort-label {
+  font-family: var(--namu-font-body);
+  font-size: 0.78rem;
+  color: var(--namu-color-text-muted);
+}
+
+.namu-coll__sort-select {
+  padding: 0.4rem 0.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: var(--namu-radius-sm);
+  font-family: var(--namu-font-body);
+  font-size: 0.82rem;
+  color: var(--namu-cinza-sombra);
+  background: #fff;
+  outline: none;
+}
+
+/* ── Product grid ───────────────────────────────────── */
+.namu-coll__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+/* ── Product card ───────────────────────────────────── */
+.namu-coll__card {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--namu-radius-md);
+  overflow: hidden;
+  transition: box-shadow var(--namu-transition-base);
+}
+
+.namu-coll__card:hover {
+  box-shadow: var(--namu-shadow-md);
+}
+
+.namu-coll__card-media {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--namu-branco-porcelana);
+}
+
+.namu-coll__card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.namu-coll__card:hover .namu-coll__card-img {
+  transform: scale(1.05);
+}
+
+.namu-coll__card-placeholder {
+  width: 100%;
+  height: 100%;
+}
+
+.namu-coll__badge-sale {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.25rem 0.6rem;
+  background: var(--namu-laranja-premium);
+  color: #fff;
+  font-family: var(--namu-font-body);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  border-radius: var(--namu-radius-pill);
+}
+
+.namu-coll__card-info {
+  padding: 1rem 0.5rem;
+}
+
+.namu-coll__card-type {
+  font-family: var(--namu-font-body);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--namu-verde-matcha);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.namu-coll__card-title {
+  font-family: var(--namu-font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--namu-cinza-sombra);
+  margin: 0 0 0.5rem;
+  line-height: 1.35;
+}
+
+.namu-coll__card-price {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.namu-coll__price-compare {
+  font-family: var(--namu-font-body);
+  font-size: 0.82rem;
+  color: var(--namu-color-text-muted);
+  text-decoration: line-through;
+}
+
+.namu-coll__price-current {
+  font-family: var(--namu-font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--namu-cinza-sombra);
+}
+
+/* ── Pagination ─────────────────────────────────────── */
+.namu-coll__pagination {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.namu-coll__pagination .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+}
+
+.namu-coll__pagination a,
+.namu-coll__pagination span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 0.5rem;
+  border-radius: var(--namu-radius-sm);
+  font-family: var(--namu-font-body);
+  font-size: 0.85rem;
+  text-decoration: none;
+  color: var(--namu-cinza-sombra);
+  transition: background var(--namu-transition-fast);
+}
+
+.namu-coll__pagination a:hover {
+  background: var(--namu-branco-porcelana);
+}
+
+.namu-coll__pagination span.current {
+  background: var(--namu-verde-matcha);
+  color: #fff;
+}
+
+/* ── Mobile ──────────────────────────────────────────── */
+@media (max-width: 992px) {
+  .namu-coll__body {
+    grid-template-columns: 1fr;
+  }
+
+  .namu-coll__sidebar {
+    position: static;
+  }
+
+  .namu-coll__filter-toggle {
+    display: inline-flex;
+  }
+
+  .namu-coll__filters {
+    display: none;
+    margin-top: 1rem;
+  }
+
+  .namu-coll__filters--open {
+    display: block;
+  }
+
+  .namu-coll__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .namu-coll__benefits-inner {
+    justify-content: flex-start;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .namu-coll__hero {
+    padding: 3rem 1.5rem;
+  }
+
+  .namu-coll__card-info {
+    padding: 0.75rem 0.25rem;
+  }
+}
+
+/* ── Reduced motion ──────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .namu-coll__card-img,
+  .namu-coll__filter-heading svg {
+    transition: none;
+  }
+}
