@@ -1,0 +1,114 @@
+/* ══════════════════════════════════════════════════════
+   NAMU COLLECTION FAQ — Accordion
+   ══════════════════════════════════════════════════════ */
+
+.namu-faq-coll {
+  background: var(--namu-branco-porcelana);
+  padding: 4rem 1.5rem;
+}
+
+.namu-faq-coll__inner {
+  max-width: 740px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.namu-faq-coll__eyebrow {
+  display: inline-block;
+  font-family: var(--namu-font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--namu-verde-matcha);
+  background: rgba(4, 81, 51, 0.08);
+  padding: 0.35rem 0.9rem;
+  border-radius: var(--namu-radius-pill);
+  margin-bottom: 1rem;
+}
+
+.namu-faq-coll__title {
+  font-family: var(--namu-font-heading);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 400;
+  color: var(--namu-cinza-sombra);
+  margin: 0 0 2.5rem;
+}
+
+.namu-faq-coll__list {
+  text-align: left;
+}
+
+.namu-faq-coll__item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.namu-faq-coll__item:first-child {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.namu-faq-coll__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  font-family: var(--namu-font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--namu-verde-matcha);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.namu-faq-coll__question::-webkit-details-marker {
+  display: none;
+}
+
+.namu-faq-coll__question::marker {
+  display: none;
+  content: "";
+}
+
+.namu-faq-coll__icon {
+  flex-shrink: 0;
+  color: var(--namu-verde-matcha);
+}
+
+.namu-faq-coll__icon-minus {
+  display: none;
+}
+
+.namu-faq-coll__item[open] .namu-faq-coll__icon-plus {
+  display: none;
+}
+
+.namu-faq-coll__item[open] .namu-faq-coll__icon-minus {
+  display: block;
+}
+
+.namu-faq-coll__answer {
+  padding: 0 0 1.25rem;
+}
+
+.namu-faq-coll__answer p {
+  font-family: var(--namu-font-body);
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--namu-color-text-muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── Mobile ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .namu-faq-coll {
+    padding: 3rem 1.5rem;
+  }
+
+  .namu-faq-coll__question {
+    font-size: 0.88rem;
+    padding: 1rem 0;
+  }
+}

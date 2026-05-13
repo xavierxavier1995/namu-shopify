@@ -3,9 +3,16 @@
     "namu_collection": {
       "type": "namu-collection",
       "settings": {}
+    },
+    "namu_collection_faq": {
+      "type": "namu-collection-faq",
+      "settings": {
+        "title": "Perguntas Frequentes"
+      }
     }
   },
   "order": [
-    "namu_collection"
+    "namu_collection",
+    "namu_collection_faq"
   ]
 }
