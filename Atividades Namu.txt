@@ -1,12 +1,9 @@
 Atividades Namu
 
-npx skills add shopify/liquid-skills
-npx skills add https://github.com/shopify/shopify-ai-toolkit --skill shopify-liquid
 https://skills.sh/benjaminsehl/liquid-skills/shopify-liquid-themes
 
 
 Atividades Namu:
-Continuar na onde o Claude Code terminou
 Enviar 10 novos prompts um por um
 
 ____
@@ -90,7 +87,7 @@ NÃO altere nenhuma outra seção das páginas além do Header e seu conteúdo d
 Instrução para o Claude: "Analise os arquivos Header.tsx (ou equivalente) e os estilos globais de navegação. Antes de aplicar, confirme se entendeu a lógica de 'Scroll Up Reveal' e a nova estrutura do Mega Menu com imagens."
 
 
-_____________________________________
+________________________________________________________________________________________________
 
 
 Prompt 01 - Textual
