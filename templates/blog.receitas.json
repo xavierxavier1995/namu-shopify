@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "namu_recipes_index": {
+      "type": "namu-recipes-index",
+      "settings": {}
+    }
+  },
+  "order": [
+    "namu_recipes_index"
+  ]
+}
