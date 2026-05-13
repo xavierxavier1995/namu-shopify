@@ -185,17 +185,6 @@
       },
       "block_order": ["rec-1", "rec-2", "rec-3", "rec-4"]
     },
-    "namu_newsletter": {
-      "type": "namu-newsletter",
-      "settings": {
-        "logo_asset": "namu-logo-horizontal-white.svg",
-        "brand_name": "Namu Matcha",
-        "tagline": "Do campo à sua xícara.",
-        "title": "Faça parte da nossa comunidade",
-        "subtitle": "Receba receitas exclusivas, novidades e ofertas especiais direto no seu e-mail.",
-        "cta_label": "Cadastrar"
-      }
-    },
     "namu_blog": {
       "type": "namu-blog",
       "settings": {
@@ -286,7 +275,6 @@
     "namu_blog",
     "namu_recipes",
     "namu_b2b",
-    "namu_newsletter",
     "namu_faq"
   ]
 }
