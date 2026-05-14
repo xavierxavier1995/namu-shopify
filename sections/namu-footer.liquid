@@ -1,5 +1,4 @@
-{{ 'namu-tokens.css' | asset_url | stylesheet_tag }}
-{{ 'namu-footer.css' | asset_url | stylesheet_tag }}
+{% render 'css-defer', file: 'namu-footer.css' %}
 
 <footer class="namu-ft" role="contentinfo" aria-label="Rodapé">
 
@@ -17,9 +16,7 @@
           <h4 class="namu-ft__newsletter-title">Faça parte da nossa comunidade</h4>
           <p class="namu-ft__newsletter-desc">Ganhe um presente na sua primeira compra! Além disso, receba receitas exclusivas, novidades e ofertas direto no seu e-mail.</p>
         </div>
-        <form class="namu-ft__newsletter-form" action="/contact#contact_form" method="post" accept-charset="UTF-8">
-          <input type="hidden" name="form_type" value="customer">
-          <input type="hidden" name="utf8" value="✓">
+        {% form 'customer', class: 'namu-ft__newsletter-form' %}
           <input type="hidden" name="contact[tags]" value="newsletter">
           <div class="namu-ft__newsletter-fields">
             <input type="text" name="contact[first_name]" placeholder="Seu nome" class="namu-ft__input" aria-label="Seu nome">
@@ -29,7 +26,7 @@
               <svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="1" y1="5" x2="13" y2="5"/><polyline points="9 1 13 5 9 9"/></svg>
             </button>
           </div>
-        </form>
+        {% endform %}
       </div>
     </div>
   </div>

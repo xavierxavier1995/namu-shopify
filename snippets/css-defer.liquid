@@ -1,0 +1,6 @@
+{%- comment -%}
+  Carrega CSS de forma não-bloqueante (deferred).
+  Uso: {% render 'css-defer', file: 'namu-categories.css' %}
+{%- endcomment -%}
+<link rel="stylesheet" href="{{ file | asset_url }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ file | asset_url }}"></noscript>

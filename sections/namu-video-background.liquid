@@ -1,4 +1,4 @@
-{{ 'namu-video-background.css' | asset_url | stylesheet_tag }}
+{% render 'css-defer', file: 'namu-video-background.css' %}
 
 <section class="namu-video-bg" aria-label="{{ section.settings.aria_label | default: 'Vídeo' }}">
   <div class="namu-video-bg__overlay"></div>

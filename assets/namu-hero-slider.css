@@ -13,12 +13,12 @@
 }
 
 .namu-hero--overlap {
-  margin-top: -88px;
+  margin-top: 0;
 }
 
 @media (max-width: 989px) {
   .namu-hero--overlap {
-    margin-top: -72px;
+    margin-top: 0;
   }
 }
 

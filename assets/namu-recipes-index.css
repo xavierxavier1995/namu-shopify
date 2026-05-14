@@ -3,18 +3,18 @@
    ══════════════════════════════════════════════════════ */
 
 /* ── Header ──────────────────────────────────────────── */
-.namu-rec__header {
+.namu-rec-idx__header {
   background: var(--namu-branco-porcelana);
   padding: 3.5rem 1.5rem 2.5rem;
   text-align: center;
 }
 
-.namu-rec__header-inner {
+.namu-rec-idx__header-inner {
   max-width: 600px;
   margin: 0 auto;
 }
 
-.namu-rec__breadcrumb {
+.namu-rec-idx__breadcrumb {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,16 +25,16 @@
   margin-bottom: 1.25rem;
 }
 
-.namu-rec__breadcrumb a {
+.namu-rec-idx__breadcrumb a {
   color: var(--namu-color-text-muted);
   text-decoration: none;
 }
 
-.namu-rec__breadcrumb a:hover {
+.namu-rec-idx__breadcrumb a:hover {
   color: var(--namu-verde-matcha);
 }
 
-.namu-rec__title {
+.namu-rec-idx__title {
   font-family: var(--namu-font-heading);
   font-size: clamp(2rem, 4vw, 2.8rem);
   font-weight: 400;
@@ -42,7 +42,7 @@
   margin: 0 0 0.75rem;
 }
 
-.namu-rec__subtitle {
+.namu-rec-idx__subtitle {
   font-family: var(--namu-font-body);
   font-size: 0.95rem;
   color: var(--namu-color-text-muted);
@@ -51,12 +51,12 @@
 }
 
 /* ── Filter pills ───────────────────────────────────── */
-.namu-rec__filters {
+.namu-rec-idx__filters {
   padding: 0 1.5rem 2.5rem;
   overflow-x: auto;
 }
 
-.namu-rec__filters-inner {
+.namu-rec-idx__filters-inner {
   max-width: 1320px;
   margin: 0 auto;
   display: flex;
@@ -65,7 +65,7 @@
   justify-content: center;
 }
 
-.namu-rec__pill {
+.namu-rec-idx__pill {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -81,36 +81,36 @@
   white-space: nowrap;
 }
 
-.namu-rec__pill svg {
+.namu-rec-idx__pill svg {
   flex-shrink: 0;
   opacity: 0.7;
 }
 
-.namu-rec__pill:hover {
+.namu-rec-idx__pill:hover {
   background: rgba(4, 81, 51, 0.1);
   color: var(--namu-verde-matcha);
 }
 
-.namu-rec__pill--active {
+.namu-rec-idx__pill--active {
   background: var(--namu-verde-matcha);
   color: #fff;
 }
 
-.namu-rec__pill--active svg {
+.namu-rec-idx__pill--active svg {
   opacity: 1;
 }
 
-.namu-rec__pill--active:hover {
+.namu-rec-idx__pill--active:hover {
   background: var(--namu-verde-matcha);
   color: #fff;
 }
 
 /* ── Recipe grid ────────────────────────────────────── */
-.namu-rec__grid-section {
+.namu-rec-idx__grid-section {
   padding: 0 1.5rem 3rem;
 }
 
-.namu-rec__grid {
+.namu-rec-idx__grid {
   max-width: 1320px;
   margin: 0 auto;
   display: grid;
@@ -119,12 +119,12 @@
 }
 
 /* ── Recipe card ────────────────────────────────────── */
-.namu-rec__card {
+.namu-rec-idx__card {
   display: flex;
   flex-direction: column;
 }
 
-.namu-rec__card-media {
+.namu-rec-idx__card-media {
   display: block;
   position: relative;
   border-radius: var(--namu-radius-md);
@@ -132,7 +132,7 @@
   margin-bottom: 0.75rem;
 }
 
-.namu-rec__card-img {
+.namu-rec-idx__card-img {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
@@ -140,16 +140,16 @@
   transition: transform 0.4s ease;
 }
 
-.namu-rec__card-media:hover .namu-rec__card-img {
+.namu-rec-idx__card-media:hover .namu-rec-idx__card-img {
   transform: scale(1.04);
 }
 
-.namu-rec__card-placeholder {
+.namu-rec-idx__card-placeholder {
   width: 100%;
   aspect-ratio: 1 / 1;
 }
 
-.namu-rec__card-badge {
+.namu-rec-idx__card-badge {
   position: absolute;
   bottom: 0.75rem;
   left: 0.75rem;
@@ -163,7 +163,7 @@
   border-radius: var(--namu-radius-sm);
 }
 
-.namu-rec__card-title {
+.namu-rec-idx__card-title {
   font-family: var(--namu-font-body);
   font-size: 0.95rem;
   font-weight: 600;
@@ -172,19 +172,19 @@
   line-height: 1.35;
 }
 
-.namu-rec__card-title a {
+.namu-rec-idx__card-title a {
   color: inherit;
   text-decoration: none;
 }
 
 /* ── Pagination ─────────────────────────────────────── */
-.namu-rec__pagination {
+.namu-rec-idx__pagination {
   padding: 0 1.5rem 3rem;
   text-align: center;
 }
 
-.namu-rec__pagination a,
-.namu-rec__pagination span {
+.namu-rec-idx__pagination a,
+.namu-rec-idx__pagination span {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -199,23 +199,23 @@
   transition: background var(--namu-transition-fast);
 }
 
-.namu-rec__pagination a:hover {
+.namu-rec-idx__pagination a:hover {
   background: var(--namu-branco-porcelana);
 }
 
-.namu-rec__pagination span.current {
+.namu-rec-idx__pagination span.current {
   background: var(--namu-verde-matcha);
   color: #fff;
 }
 
 /* ── Mobile ──────────────────────────────────────────── */
 @media (max-width: 992px) {
-  .namu-rec__grid {
+  .namu-rec-idx__grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.25rem;
   }
 
-  .namu-rec__filters-inner {
+  .namu-rec-idx__filters-inner {
     flex-wrap: nowrap;
     justify-content: flex-start;
     overflow-x: auto;
@@ -224,26 +224,26 @@
     padding-bottom: 0.5rem;
   }
 
-  .namu-rec__pill {
+  .namu-rec-idx__pill {
     flex-shrink: 0;
     scroll-snap-align: start;
   }
 }
 
 @media (max-width: 480px) {
-  .namu-rec__grid {
+  .namu-rec-idx__grid {
     grid-template-columns: 1fr;
   }
 
-  .namu-rec__header {
+  .namu-rec-idx__header {
     padding: 2.5rem 1.5rem 2rem;
   }
 }
 
 /* ── Reduced motion ──────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .namu-rec__card-img,
-  .namu-rec__pill {
+  .namu-rec-idx__card-img,
+  .namu-rec-idx__pill {
     transition: none;
   }
 }

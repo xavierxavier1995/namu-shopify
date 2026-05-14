@@ -182,7 +182,8 @@
       "settings": {
         "label": "Inspiração",
         "title": "Nossas Receitas Favoritas com Matcha",
-        "cta_label": "Ver todas"
+        "cta_label": "Ver todas",
+        "cta_link": "/blogs/receitas"
       },
       "blocks": {
         "rec-1": { "type": "recipe", "settings": { "category": "Bebida", "title": "Lemon Soda Matcha",  "fallback_asset": "receita.webp",   "placeholder_color": "#1e3a2a" } },

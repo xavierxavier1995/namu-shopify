@@ -1,5 +1,4 @@
-{{ 'namu-tokens.css' | asset_url | stylesheet_tag }}
-{{ 'namu-b2b.css' | asset_url | stylesheet_tag }}
+{% render 'css-defer', file: 'namu-b2b.css' %}
 
 <section class="namu-b2b" aria-label="{{ section.settings.title | default: 'Para o seu negócio' | escape }}">
   <a href="{{ section.settings.cta_link | default: '/pages/para-seu-negocio' }}" class="namu-b2b__link">

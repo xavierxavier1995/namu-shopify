@@ -1,5 +1,4 @@
-{{ 'namu-tokens.css' | asset_url | stylesheet_tag }}
-{{ 'namu-collection.css' | asset_url | stylesheet_tag }}
+{% render 'css-defer', file: 'namu-collection.css' %}
 
 {%- paginate collection.products by 48 -%}
 

@@ -1,5 +1,4 @@
-{{ 'namu-tokens.css' | asset_url | stylesheet_tag }}
-{{ 'namu-product.css' | asset_url | stylesheet_tag }}
+{% render 'css-defer', file: 'namu-product.css' %}
 
 {%- liquid
   assign current_variant = product.selected_or_first_available_variant

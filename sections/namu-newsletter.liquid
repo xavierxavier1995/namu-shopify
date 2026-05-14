@@ -1,12 +1,8 @@
-{{ 'namu-tokens.css' | asset_url | stylesheet_tag }}
-{{ 'namu-newsletter.css' | asset_url | stylesheet_tag }}
+{% render 'css-defer', file: 'namu-newsletter.css' %}
 
 {%- liquid
   assign success = false
   assign error   = false
-  if customer
-    assign success = true
-  endif
 -%}
 
 <section class="namu-nl" aria-label="{{ section.settings.title | default: 'Newsletter' | escape }}">

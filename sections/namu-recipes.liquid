@@ -1,5 +1,4 @@
-{{ 'namu-tokens.css' | asset_url | stylesheet_tag }}
-{{ 'namu-recipes.css' | asset_url | stylesheet_tag }}
+{% render 'css-defer', file: 'namu-recipes.css' %}
 
 <section class="namu-rec" aria-label="{{ section.settings.title | default: 'Receitas' | escape }}">
   <div class="namu-rec__inner">

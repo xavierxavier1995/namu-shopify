@@ -1,4 +1,4 @@
-{{ 'namu-b2b.css' | asset_url | stylesheet_tag }}
+{% render 'css-defer', file: 'namu-b2b.css' %}
 
 
 {%- comment -%} SVG sprite inline — 6 ícones scopados com prefixo b2b- {%- endcomment -%}
