@@ -1,5 +1,4 @@
-{{ 'namu-tokens.css' | asset_url | stylesheet_tag }}
-{{ 'namu-article.css' | asset_url | stylesheet_tag }}
+{% render 'css-defer', file: 'namu-article.css' %}
 
 {%- assign words = article.content | strip_html | split: ' ' | size -%}
 {%- assign reading_time = words | divided_by: 200 -%}

@@ -1,5 +1,4 @@
-{{ 'namu-tokens.css' | asset_url | stylesheet_tag }}
-{{ 'namu-featured-products.css' | asset_url | stylesheet_tag }}
+{% render 'css-defer', file: 'namu-featured-products.css' %}
 
 {%- liquid
   assign fp_collection = section.settings.collection

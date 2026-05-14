@@ -1,5 +1,4 @@
-{{ 'namu-tokens.css' | asset_url | stylesheet_tag }}
-{{ 'namu-about.css' | asset_url | stylesheet_tag }}
+{% render 'css-defer', file: 'namu-about.css' %}
 
 <section class="namu-about" aria-label="Nossa História">
 

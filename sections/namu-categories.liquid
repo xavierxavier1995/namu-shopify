@@ -1,5 +1,4 @@
-{{ 'namu-tokens.css' | asset_url | stylesheet_tag }}
-{{ 'namu-categories.css' | asset_url | stylesheet_tag }}
+{% render 'css-defer', file: 'namu-categories.css' %}
 
 <section class="namu-cat" aria-label="{{ section.settings.title | default: 'Categorias' | escape }}">
   {%- if section.settings.title != blank -%}

@@ -1,5 +1,4 @@
-{{ 'namu-tokens.css' | asset_url | stylesheet_tag }}
-{{ 'namu-experience.css' | asset_url | stylesheet_tag }}
+{% render 'css-defer', file: 'namu-experience.css' %}
 
 <section class="namu-exp" aria-label="{{ section.settings.title | default: 'Namu Experience' | escape }}">
   <div class="namu-exp__inner">

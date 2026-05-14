@@ -1,5 +1,4 @@
-{{ 'namu-tokens.css' | asset_url | stylesheet_tag }}
-{{ 'namu-faq.css' | asset_url | stylesheet_tag }}
+{% render 'css-defer', file: 'namu-faq.css' %}
 
 <section class="namu-faq" aria-label="Perguntas Frequentes">
   <div class="namu-faq__inner">

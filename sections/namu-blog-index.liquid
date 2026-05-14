@@ -1,23 +1,22 @@
-{{ 'namu-tokens.css' | asset_url | stylesheet_tag }}
-{{ 'namu-blog-index.css' | asset_url | stylesheet_tag }}
+{% render 'css-defer', file: 'namu-blog-index.css' %}
 
 {%- paginate blog.articles by 12 -%}
 
-<section class="namu-blog" aria-label="Namu Journal">
+<section class="namu-blog-idx" aria-label="Namu Journal">
 
-  <div class="namu-blog__hero">
-    <div class="namu-blog__hero-inner">
-      <span class="namu-blog__eyebrow">Blog</span>
-      <h1 class="namu-blog__hero-title">Namu Journal</h1>
-      <p class="namu-blog__hero-desc">Descubra a cultura do matcha, receitas exclusivas e rituais de bem-estar para transformar o seu dia a dia.</p>
+  <div class="namu-blog-idx__hero">
+    <div class="namu-blog-idx__hero-inner">
+      <span class="namu-blog-idx__eyebrow">Blog</span>
+      <h1 class="namu-blog-idx__hero-title">Namu Journal</h1>
+      <p class="namu-blog-idx__hero-desc">Descubra a cultura do matcha, receitas exclusivas e rituais de bem-estar para transformar o seu dia a dia.</p>
     </div>
   </div>
 
   {%- if blog.articles.size > 0 -%}
     {%- assign featured = blog.articles.first -%}
-    <div class="namu-blog__featured">
-      <div class="namu-blog__featured-inner">
-        <a href="{{ featured.url }}" class="namu-blog__featured-media">
+    <div class="namu-blog-idx__featured">
+      <div class="namu-blog-idx__featured-inner">
+        <a href="{{ featured.url }}" class="namu-blog-idx__featured-media">
           {%- if featured.image != blank -%}
             <img
               src="{{ featured.image | image_url: width: 1200 }}"
@@ -25,19 +24,19 @@
               sizes="(max-width: 767px) 100vw, 60vw"
               alt="{{ featured.image.alt | default: featured.title | escape }}"
               loading="eager"
-              class="namu-blog__featured-img"
+              class="namu-blog-idx__featured-img"
             >
           {%- endif -%}
         </a>
-        <div class="namu-blog__featured-content">
+        <div class="namu-blog-idx__featured-content">
           {%- if featured.tags.size > 0 -%}
-            <span class="namu-blog__tag">{{ featured.tags.first | upcase }}</span>
+            <span class="namu-blog-idx__tag">{{ featured.tags.first | upcase }}</span>
           {%- endif -%}
-          <h2 class="namu-blog__featured-title">
+          <h2 class="namu-blog-idx__featured-title">
             <a href="{{ featured.url }}">{{ featured.title }}</a>
           </h2>
-          <p class="namu-blog__featured-excerpt">{{ featured.excerpt_or_content | strip_html | truncate: 180 }}</p>
-          <a href="{{ featured.url }}" class="namu-blog__read-more">
+          <p class="namu-blog-idx__featured-excerpt">{{ featured.excerpt_or_content | strip_html | truncate: 180 }}</p>
+          <a href="{{ featured.url }}" class="namu-blog-idx__read-more">
             LER MAIS
             <svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="1" y1="5" x2="13" y2="5"/><polyline points="9 1 13 5 9 9"/></svg>
           </a>
@@ -46,21 +45,21 @@
     </div>
   {%- endif -%}
 
-  <div class="namu-blog__filters">
-    <div class="namu-blog__filters-inner">
-      <a href="{{ blog.url }}" class="namu-blog__filter-pill {% if current_tags == blank %}namu-blog__filter-pill--active{% endif %}">Todos</a>
+  <div class="namu-blog-idx__filters">
+    <div class="namu-blog-idx__filters-inner">
+      <a href="{{ blog.url }}" class="namu-blog-idx__filter-pill {% if current_tags == blank %}namu-blog-idx__filter-pill--active{% endif %}">Todos</a>
       {%- for tag in blog.all_tags -%}
-        <a href="{{ blog.url }}/tagged/{{ tag | handleize }}" class="namu-blog__filter-pill {% if current_tags contains tag %}namu-blog__filter-pill--active{% endif %}">{{ tag }}</a>
+        <a href="{{ blog.url }}/tagged/{{ tag | handleize }}" class="namu-blog-idx__filter-pill {% if current_tags contains tag %}namu-blog-idx__filter-pill--active{% endif %}">{{ tag }}</a>
       {%- endfor -%}
     </div>
   </div>
 
-  <div class="namu-blog__grid-section">
-    <div class="namu-blog__grid">
+  <div class="namu-blog-idx__grid-section">
+    <div class="namu-blog-idx__grid">
       {%- for article in blog.articles -%}
         {%- if forloop.first and current_tags == blank -%}{%- continue -%}{%- endif -%}
-        <article class="namu-blog__card">
-          <a href="{{ article.url }}" class="namu-blog__card-media">
+        <article class="namu-blog-idx__card">
+          <a href="{{ article.url }}" class="namu-blog-idx__card-media">
             {%- if article.image != blank -%}
               <img
                 src="{{ article.image | image_url: width: 600 }}"
@@ -68,21 +67,21 @@
                 sizes="(max-width: 767px) 100vw, 33vw"
                 alt="{{ article.image.alt | default: article.title | escape }}"
                 loading="lazy"
-                class="namu-blog__card-img"
+                class="namu-blog-idx__card-img"
               >
             {%- else -%}
-              {{ 'lifestyle-1' | placeholder_svg_tag: 'namu-blog__card-placeholder' }}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'namu-blog-idx__card-placeholder' }}
             {%- endif -%}
           </a>
-          <div class="namu-blog__card-content">
+          <div class="namu-blog-idx__card-content">
             {%- if article.tags.size > 0 -%}
-              <span class="namu-blog__tag namu-blog__tag--sm">{{ article.tags.first }}</span>
+              <span class="namu-blog-idx__tag namu-blog-idx__tag--sm">{{ article.tags.first }}</span>
             {%- endif -%}
-            <h3 class="namu-blog__card-title">
+            <h3 class="namu-blog-idx__card-title">
               <a href="{{ article.url }}">{{ article.title }}</a>
             </h3>
-            <p class="namu-blog__card-excerpt">{{ article.excerpt_or_content | strip_html | truncate: 120 }}</p>
-            <a href="{{ article.url }}" class="namu-blog__read-more namu-blog__read-more--sm">
+            <p class="namu-blog-idx__card-excerpt">{{ article.excerpt_or_content | strip_html | truncate: 120 }}</p>
+            <a href="{{ article.url }}" class="namu-blog-idx__read-more namu-blog-idx__read-more--sm">
               LER MAIS
               <svg width="12" height="8" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="1" y1="5" x2="13" y2="5"/><polyline points="9 1 13 5 9 9"/></svg>
             </a>
@@ -93,7 +92,7 @@
   </div>
 
   {%- if paginate.pages > 1 -%}
-    <nav class="namu-blog__pagination" aria-label="Paginação do blog">
+    <nav class="namu-blog-idx__pagination" aria-label="Paginação do blog">
       {{ paginate | default_pagination }}
     </nav>
   {%- endif -%}

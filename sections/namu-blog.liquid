@@ -1,5 +1,4 @@
-{{ 'namu-tokens.css' | asset_url | stylesheet_tag }}
-{{ 'namu-blog.css' | asset_url | stylesheet_tag }}
+{% render 'css-defer', file: 'namu-blog.css' %}
 
 {%- liquid
   assign blog_obj    = section.settings.blog
