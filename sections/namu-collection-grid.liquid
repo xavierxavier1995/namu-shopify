@@ -1,0 +1,214 @@
+{%- paginate collection.products by 12 -%}
+
+<section class="namu-coll-grid" aria-label="Produtos">
+  <div class="namu-coll-grid__body">
+
+    <aside class="namu-coll-grid__sidebar" aria-label="Filtros">
+      <button class="namu-coll-grid__filter-toggle" type="button" aria-expanded="false" aria-controls="namu-coll-filters">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="14" y2="12"/><line x1="4" y1="18" x2="9" y2="18"/></svg>
+        Filtrar
+      </button>
+
+      <div class="namu-coll-grid__filter-backdrop" aria-hidden="true"></div>
+
+      <form class="namu-coll-grid__filters" id="namu-coll-filters" action="{{ collection.url }}" method="get">
+        {%- for filter in collection.filters -%}
+          <details class="namu-coll-grid__filter-group" {% if forloop.index <= 3 %}open{% endif %}>
+            <summary class="namu-coll-grid__filter-heading">
+              {{ filter.label }}
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 1 5 5 9 1"/></svg>
+            </summary>
+            <div class="namu-coll-grid__filter-options">
+              {%- case filter.type -%}
+                {%- when 'price_range' -%}
+                  <div class="namu-coll-grid__price-range">
+                    <input type="number" name="{{ filter.min_value.param_name }}" value="{{ filter.min_value.value | money_without_currency | replace: '.', '' | replace: ',', '.' }}" placeholder="Min" class="namu-coll-grid__price-input" aria-label="Preço mínimo">
+                    <span class="namu-coll-grid__price-sep">—</span>
+                    <input type="number" name="{{ filter.max_value.param_name }}" value="{{ filter.max_value.value | money_without_currency | replace: '.', '' | replace: ',', '.' }}" placeholder="Max" class="namu-coll-grid__price-input" aria-label="Preço máximo">
+                  </div>
+                {%- else -%}
+                  {%- for value in filter.values -%}
+                    <label class="namu-coll-grid__filter-label">
+                      <input type="checkbox" name="{{ value.param_name }}" value="{{ value.value }}" {% if value.active %}checked{% endif %} class="namu-coll-grid__filter-check">
+                      <span class="namu-coll-grid__filter-text">{{ value.label }}</span>
+                      <span class="namu-coll-grid__filter-count">({{ value.count }})</span>
+                    </label>
+                  {%- endfor -%}
+              {%- endcase -%}
+            </div>
+          </details>
+        {%- endfor -%}
+        <button type="submit" class="namu-coll-grid__filter-apply">Aplicar filtros</button>
+      </form>
+    </aside>
+
+    <main class="namu-coll-grid__main">
+      <div class="namu-coll-grid__toolbar">
+        <p class="namu-coll-grid__count">{{ collection.products_count }} produtos</p>
+        <div class="namu-coll-grid__sort">
+          <label for="namu-sort" class="namu-coll-grid__sort-label">Ordenar:</label>
+          <select id="namu-sort" class="namu-coll-grid__sort-select" onchange="window.location.href=this.value">
+            {%- for option in collection.sort_options -%}
+              <option value="{{ option.url }}" {% if collection.sort_by == option.value %}selected{% endif %}>{{ option.name }}</option>
+            {%- endfor -%}
+          </select>
+        </div>
+      </div>
+
+      <div class="namu-coll-grid__grid">
+        {%- for product in collection.products -%}
+          {%- if forloop.index == 7 and section.settings.banner_image != blank -%}
+            <div class="namu-coll-grid__editorial">
+              <div class="namu-coll-grid__editorial-media">
+                <img
+                  src="{{ section.settings.banner_image | image_url: width: 800 }}"
+                  alt="{{ section.settings.banner_title | default: 'Destaque' | escape }}"
+                  loading="lazy"
+                  width="{{ section.settings.banner_image.width }}"
+                  height="{{ section.settings.banner_image.height }}"
+                  class="namu-coll-grid__editorial-img"
+                >
+              </div>
+              <div class="namu-coll-grid__editorial-content">
+                {%- if section.settings.banner_title != blank -%}
+                  <h2 class="namu-coll-grid__editorial-title">{{ section.settings.banner_title | escape }}</h2>
+                {%- endif -%}
+                {%- if section.settings.banner_text != blank -%}
+                  <p class="namu-coll-grid__editorial-text">{{ section.settings.banner_text | escape }}</p>
+                {%- endif -%}
+                {%- if section.settings.banner_cta != blank -%}
+                  <a href="{{ section.settings.banner_link | default: '#' }}" class="namu-coll-grid__editorial-cta">
+                    {{ section.settings.banner_cta | escape }}
+                    <svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="1" y1="5" x2="13" y2="5"/><polyline points="9 1 13 5 9 9"/></svg>
+                  </a>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+
+          <a href="{{ product.url }}" class="namu-coll-grid__card" aria-label="{{ product.title | escape }}">
+            <div class="namu-coll-grid__card-media">
+              {%- if product.featured_image != blank -%}
+                <img
+                  src="{{ product.featured_image | image_url: width: 600 }}"
+                  srcset="{{ product.featured_image | image_url: width: 300 }} 300w, {{ product.featured_image | image_url: width: 450 }} 450w, {{ product.featured_image | image_url: width: 600 }} 600w"
+                  sizes="(max-width: 992px) 50vw, 33vw"
+                  alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                  {% if forloop.index <= 6 %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}
+                  width="{{ product.featured_image.width }}"
+                  height="{{ product.featured_image.height }}"
+                  class="namu-coll-grid__card-img"
+                >
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag: 'namu-coll-grid__card-placeholder' }}
+              {%- endif -%}
+              {%- if product.compare_at_price > product.price -%}
+                <span class="namu-coll-grid__badge">OFERTA</span>
+              {%- endif -%}
+            </div>
+            <div class="namu-coll-grid__card-info">
+              {%- if product.type != blank -%}
+                <span class="namu-coll-grid__card-type">{{ product.type }}</span>
+              {%- endif -%}
+              <h3 class="namu-coll-grid__card-title">{{ product.title }}</h3>
+              <div class="namu-coll-grid__card-price">
+                {%- if product.compare_at_price > product.price -%}
+                  <span class="namu-coll-grid__price-compare">{{ product.compare_at_price | money }}</span>
+                {%- endif -%}
+                <span class="namu-coll-grid__price-current">{{ product.price | money }}</span>
+              </div>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <div class="namu-coll-grid__loadmore">
+          <p class="namu-coll-grid__progress">Mostrando {{ paginate.current_offset | plus: collection.products.size }} de {{ collection.products_count }}</p>
+          {%- if paginate.next -%}
+            <a href="{{ paginate.next.url }}" class="namu-coll-grid__loadmore-btn" id="namu-loadmore">
+              Carregar mais produtos
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </main>
+
+  </div>
+</section>
+
+{%- endpaginate -%}
+
+<script>
+(function(){
+  var toggle = document.querySelector('.namu-coll-grid__filter-toggle');
+  var filters = document.querySelector('.namu-coll-grid__filters');
+  var backdrop = document.querySelector('.namu-coll-grid__filter-backdrop');
+  if (!toggle || !filters) return;
+
+  function openFilters() {
+    filters.classList.add('is-open');
+    backdrop.classList.add('is-open');
+    toggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeFilters() {
+    filters.classList.remove('is-open');
+    backdrop.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  toggle.addEventListener('click', function() {
+    var expanded = this.getAttribute('aria-expanded') === 'true';
+    expanded ? closeFilters() : openFilters();
+  });
+  if (backdrop) backdrop.addEventListener('click', closeFilters);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Collection Grid",
+  "tag": "section",
+  "class": "shopify-section-namu-collection-grid",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Banner Editorial (aparece após 6 produtos)"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Imagem do banner"
+    },
+    {
+      "type": "text",
+      "id": "banner_title",
+      "label": "Título do banner"
+    },
+    {
+      "type": "textarea",
+      "id": "banner_text",
+      "label": "Texto do banner"
+    },
+    {
+      "type": "text",
+      "id": "banner_cta",
+      "label": "Texto do botão",
+      "default": "Saiba mais"
+    },
+    {
+      "type": "url",
+      "id": "banner_link",
+      "label": "Link do botão"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Grid"
+    }
+  ]
+}
+{% endschema %}
