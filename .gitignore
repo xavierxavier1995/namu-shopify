@@ -19,6 +19,8 @@ node_modules/
 .claude/.skills-last-update
 .claude/.skills-update.log
 .claude/scheduled_tasks.lock
+.claude/settings.local.json
+.claude/worktrees/
 
 # Skills locais instaladas via npx skills add
 .agents/

@@ -1,0 +1,73 @@
+{% render 'css-defer', file: 'namu-collection.css' %}
+
+{%- liquid
+  assign hero_img = section.settings.hero_image | default: collection.image
+  assign overlay_opacity = section.settings.overlay_opacity | default: 40 | divided_by: 100.0
+-%}
+
+<section class="namu-coll-hero" aria-label="{{ collection.title | escape }}">
+  <div class="namu-coll-hero__bg">
+    {%- if hero_img != blank -%}
+      <img
+        src="{{ hero_img | image_url: width: 1400 }}"
+        srcset="{{ hero_img | image_url: width: 800 }} 800w, {{ hero_img | image_url: width: 1200 }} 1200w, {{ hero_img | image_url: width: 1400 }} 1400w"
+        sizes="100vw"
+        alt="{{ collection.title | escape }}"
+        loading="eager"
+        fetchpriority="high"
+        width="{{ hero_img.width }}"
+        height="{{ hero_img.height }}"
+        class="namu-coll-hero__img"
+      >
+    {%- endif -%}
+    <div class="namu-coll-hero__overlay" style="--overlay-opacity: {{ overlay_opacity }};"></div>
+  </div>
+
+  <div class="namu-coll-hero__inner">
+    <nav class="namu-coll-hero__breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Início</a></li>
+        <li aria-current="page">{{ collection.title }}</li>
+      </ol>
+    </nav>
+    <h1 class="namu-coll-hero__title">{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <p class="namu-coll-hero__desc">{{ collection.description | strip_html | truncate: 200 }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Início", "item": "{{ shop.url }}" },
+    { "@type": "ListItem", "position": 2, "name": {{ collection.title | json }}, "item": "{{ shop.url }}{{ collection.url }}" }
+  ]
+}
+</script>
+
+{% schema %}
+{
+  "name": "Collection Hero",
+  "tag": "section",
+  "class": "shopify-section-namu-collection-hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Imagem de fundo (sobrescreve imagem da collection)"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Opacidade do overlay (%)",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "default": 40
+    }
+  ]
+}
+{% endschema %}

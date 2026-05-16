@@ -1,56 +1,68 @@
-{% render 'css-defer', file: 'namu-collection-faq.css' %}
+{%- if section.blocks.size > 0 -%}
+<section class="namu-coll-faq" aria-label="Perguntas Frequentes">
+  <div class="namu-coll-faq__inner">
+    <div class="namu-coll-faq__header">
+      {%- if section.settings.label != blank -%}
+        <p class="namu-coll-faq__label">{{ section.settings.label | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="namu-coll-faq__title">{{ section.settings.title | escape }}</h2>
+      {%- endif -%}
+    </div>
 
-<section class="namu-faq-coll" aria-label="Perguntas Frequentes">
-  <div class="namu-faq-coll__inner">
-    <span class="namu-faq-coll__eyebrow">FAQ</span>
-    <h2 class="namu-faq-coll__title">{{ section.settings.title | default: 'Perguntas Frequentes' }}</h2>
-
-    <div class="namu-faq-coll__list">
+    <div class="namu-coll-faq__list">
       {%- for block in section.blocks -%}
-        <details class="namu-faq-coll__item" {% if forloop.first %}open{% endif %} {{ block.shopify_attributes }}>
-          <summary class="namu-faq-coll__question">
-            <span>{{ block.settings.question }}</span>
-            <span class="namu-faq-coll__icon" aria-hidden="true">
-              <svg class="namu-faq-coll__icon-plus" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="9" y1="3" x2="9" y2="15"/><line x1="3" y1="9" x2="15" y2="9"/></svg>
-              <svg class="namu-faq-coll__icon-minus" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="3" y1="9" x2="15" y2="9"/></svg>
+        <details class="namu-coll-faq__item" {{ block.shopify_attributes }} {% if forloop.first %}open{% endif %}>
+          <summary class="namu-coll-faq__question">
+            <span class="namu-coll-faq__question-text">{{ block.settings.question | escape }}</span>
+            <span class="namu-coll-faq__icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <line class="namu-coll-faq__icon-h" x1="3" y1="8" x2="13" y2="8"/>
+                <line class="namu-coll-faq__icon-v" x1="8" y1="3" x2="8" y2="13"/>
+              </svg>
             </span>
           </summary>
-          <div class="namu-faq-coll__answer">
-            <p>{{ block.settings.answer }}</p>
+          <div class="namu-coll-faq__answer">
+            {{ block.settings.answer }}
           </div>
         </details>
       {%- endfor -%}
     </div>
   </div>
-
-  {%- if section.blocks.size > 0 -%}
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {%- for block in section.blocks -%}
-          {
-            "@type": "Question",
-            "name": {{ block.settings.question | json }},
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": {{ block.settings.answer | json }}
-            }
-          }{% unless forloop.last %},{% endunless %}
-        {%- endfor -%}
-      ]
-    }
-    </script>
-  {%- endif -%}
 </section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- for block in section.blocks -%}
+      {
+        "@type": "Question",
+        "name": {{ block.settings.question | json }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ block.settings.answer | strip_html | json }}
+        }
+      }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ]
+}
+</script>
+{%- endif -%}
 
 {% schema %}
 {
-  "name": "FAQ Coleção",
+  "name": "Collection FAQ",
   "tag": "section",
   "class": "shopify-section-namu-collection-faq",
   "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Rótulo superior",
+      "default": "Dúvidas"
+    },
     {
       "type": "text",
       "id": "title",
@@ -66,41 +78,30 @@
         {
           "type": "text",
           "id": "question",
-          "label": "Pergunta"
+          "label": "Pergunta",
+          "default": "Pergunta frequente"
         },
         {
-          "type": "textarea",
+          "type": "richtext",
           "id": "answer",
-          "label": "Resposta"
+          "label": "Resposta",
+          "default": "<p>Resposta aqui.</p>"
         }
       ]
     }
   ],
+  "max_blocks": 12,
   "presets": [
     {
-      "name": "FAQ Coleção",
+      "name": "Collection FAQ",
+      "settings": {
+        "label": "Dúvidas",
+        "title": "Perguntas Frequentes"
+      },
       "blocks": [
-        {
-          "type": "faq_item",
-          "settings": {
-            "question": "Qual a diferença entre Matcha Culinário e Cerimonial?",
-            "answer": "O Matcha Cerimonial é feito com as folhas mais jovens e delicadas, resultando em um sabor mais suave e doce, ideal para beber puro. O Culinário tem um sabor mais intenso e é perfeito para receitas."
-          }
-        },
-        {
-          "type": "faq_item",
-          "settings": {
-            "question": "Como armazenar o Matcha corretamente?",
-            "answer": "Mantenha o Matcha em local fresco, seco e protegido da luz. Após aberto, guarde na geladeira em recipiente hermético e consuma em até 30 dias para máximo frescor."
-          }
-        },
-        {
-          "type": "faq_item",
-          "settings": {
-            "question": "O Matcha Namu é orgânico?",
-            "answer": "Sim! Nosso Matcha é 100% orgânico, cultivado em Hadong, Coreia do Sul, sem uso de pesticidas ou fertilizantes químicos. Certificado pelo Hadong Green Tea Institute."
-          }
-        }
+        { "type": "faq_item", "settings": { "question": "Qual a diferença entre matcha cerimonial e premium?", "answer": "<p>O matcha cerimonial é feito com as folhas mais jovens da primeira colheita, ideal para beber puro com água. O premium é versátil, perfeito para lattes e receitas.</p>" } },
+        { "type": "faq_item", "settings": { "question": "Como armazenar meu matcha?", "answer": "<p>Guarde na embalagem original bem fechada, em local fresco, seco e longe da luz. Após aberto, consuma em 4-6 semanas.</p>" } },
+        { "type": "faq_item", "settings": { "question": "Matcha contém cafeína?", "answer": "<p>Sim, cerca de 35-70mg por porção. A L-Teanina modula a absorção, liberando energia gradual por 4-6 horas sem crash.</p>" } }
       ]
     }
   ]

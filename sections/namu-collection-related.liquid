@@ -1,0 +1,91 @@
+{%- if section.blocks.size > 0 -%}
+<section class="namu-coll-related" aria-label="{{ section.settings.title | default: 'Explore também' | escape }}">
+  <div class="namu-coll-related__inner">
+    {%- if section.settings.title != blank -%}
+      <h2 class="namu-coll-related__title">{{ section.settings.title | escape }}</h2>
+    {%- endif -%}
+
+    <div class="namu-coll-related__grid">
+      {%- for block in section.blocks -%}
+        {%- assign coll = block.settings.collection -%}
+        {%- if coll != blank -%}
+          <a href="{{ coll.url }}" class="namu-coll-related__card" {{ block.shopify_attributes }}>
+            <div class="namu-coll-related__card-media">
+              {%- if block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 600 }}"
+                  srcset="{{ block.settings.image | image_url: width: 300 }} 300w, {{ block.settings.image | image_url: width: 600 }} 600w"
+                  sizes="(max-width: 639px) 70vw, 25vw"
+                  alt="{{ coll.title | escape }}"
+                  loading="lazy"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                  class="namu-coll-related__card-img"
+                >
+              {%- elsif coll.image != blank -%}
+                <img
+                  src="{{ coll.image | image_url: width: 600 }}"
+                  srcset="{{ coll.image | image_url: width: 300 }} 300w, {{ coll.image | image_url: width: 600 }} 600w"
+                  sizes="(max-width: 639px) 70vw, 25vw"
+                  alt="{{ coll.title | escape }}"
+                  loading="lazy"
+                  width="{{ coll.image.width }}"
+                  height="{{ coll.image.height }}"
+                  class="namu-coll-related__card-img"
+                >
+              {%- else -%}
+                <div class="namu-coll-related__card-placeholder"></div>
+              {%- endif -%}
+              <div class="namu-coll-related__card-overlay"></div>
+            </div>
+            <span class="namu-coll-related__card-badge">{{ coll.title | escape }}</span>
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Collections Relacionadas",
+  "tag": "section",
+  "class": "shopify-section-namu-collection-related",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Explore também"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_card",
+      "name": "Coleção",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Coleção"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagem (sobrescreve imagem da coleção)"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Collections Relacionadas",
+      "settings": {
+        "title": "Explore também"
+      }
+    }
+  ]
+}
+{% endschema %}

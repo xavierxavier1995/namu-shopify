@@ -1,0 +1,27 @@
+{%- if section.settings.content != blank -%}
+<section class="namu-coll-seo" aria-label="Sobre esta coleção">
+  <div class="namu-coll-seo__inner">
+    {{ section.settings.content }}
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Collection SEO Content",
+  "tag": "section",
+  "class": "shopify-section-namu-collection-seo",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Conteúdo SEO (aparece abaixo do grid)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection SEO Content"
+    }
+  ]
+}
+{% endschema %}
