@@ -33,11 +33,12 @@
 .namu-exp__title {
   font-family: var(--namu-font-heading);
   font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: 700;
+  font-weight: 600;
   color: var(--namu-cinza-sombra);
   margin: 0;
   line-height: 1.1;
   letter-spacing: -0.02em;
+  text-transform: uppercase;
 }
 
 .namu-exp__subtitle {

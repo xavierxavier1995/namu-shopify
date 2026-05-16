@@ -1,18 +1,18 @@
 /* ── Section wrapper ─────────────────────────────────── */
 .namu-faq {
-  padding: 5rem 1.5rem;
+  padding: 3rem 1.5rem;
   background: var(--namu-branco-porcelana, #f8f5f0);
 }
 
 .namu-faq__inner {
-  max-width: 800px;
+  max-width: 680px;
   margin: 0 auto;
 }
 
 /* ── Header ──────────────────────────────────────────── */
 .namu-faq__header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .namu-faq__label {
@@ -28,10 +28,11 @@
 .namu-faq__title {
   font-family: var(--namu-font-heading, serif);
   font-size: clamp(1.5rem, 3vw, 2.25rem);
-  font-weight: 700;
+  font-weight: 600;
   color: var(--namu-cinza-sombra, #1a1a1a);
   margin: 0;
   line-height: 1.1;
+  text-transform: uppercase;
 }
 
 /* ── List ────────────────────────────────────────────── */
@@ -132,11 +133,11 @@
 /* ── Desktop ─────────────────────────────────────────── */
 @media (min-width: 1024px) {
   .namu-faq {
-    padding: 6rem 1.5rem;
+    padding: 4rem 1.5rem;
   }
 
   .namu-faq__question {
-    padding: 1.5rem 0;
+    padding: 1.25rem 0;
   }
 
   .namu-faq__question-text {

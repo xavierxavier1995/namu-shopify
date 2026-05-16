@@ -60,11 +60,7 @@
             style="--overlay-opacity: {{ block.settings.overlay_opacity | default: 40 | divided_by: 100.0 }};"
           ></div>
 
-          <div class="namu-cat__content">
-            {%- if block.settings.title != blank -%}
-              <span class="namu-cat__badge">{{ block.settings.title | escape }}</span>
-            {%- endif -%}
-          </div>
+          <div class="namu-cat__content"></div>
         </a>
       </div>
     {%- endfor -%}

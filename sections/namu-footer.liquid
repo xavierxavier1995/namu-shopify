@@ -60,12 +60,12 @@
           <summary class="namu-ft__col-heading">Institucional<span class="namu-ft__chevron" aria-hidden="true"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 1 5 5 9 1"/></svg></span></summary>
           <nav aria-label="Institucional">
             <a href="/pages/sobre" class="namu-ft__link">Sobre</a>
-            <a href="/blogs/news" class="namu-ft__link">Blog</a>
+            <a href="/blogs/noticias" class="namu-ft__link">Blog</a>
             <a href="/pages/nossos-campos" class="namu-ft__link">Nossos campos</a>
             <a href="/blogs/receitas" class="namu-ft__link">Receitas</a>
-            <a href="/blogs/news/o-que-e-matcha" class="namu-ft__link">O que é Matcha</a>
-            <a href="/blogs/news/guia-preparo-matcha" class="namu-ft__link">Como fazer Matcha</a>
-            <a href="/blogs/news/beneficios-do-matcha" class="namu-ft__link">Benefícios do Matcha</a>
+            <a href="/blogs/noticias/o-que-e-matcha" class="namu-ft__link">O que é Matcha</a>
+            <a href="/blogs/noticias/guia-preparo-matcha" class="namu-ft__link">Como fazer Matcha</a>
+            <a href="/blogs/noticias/beneficios-do-matcha" class="namu-ft__link">Benefícios do Matcha</a>
           </nav>
         </details>
         <details class="namu-ft__accordion" open>
@@ -89,15 +89,6 @@
           <p class="namu-ft__sub-heading">Precisa falar com um humano?</p>
           <a href="mailto:alo@namumatcha.com.br" class="namu-ft__contact-link">alo@namumatcha.com.br</a>
           <a href="tel:+5511930876268" class="namu-ft__contact-link">+55 11 93087-6268</a>
-        </details>
-        <details class="namu-ft__accordion" open>
-          <summary class="namu-ft__col-heading">Políticas<span class="namu-ft__chevron" aria-hidden="true"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 1 5 5 9 1"/></svg></span></summary>
-          <nav aria-label="Políticas">
-            <a href="/policies/privacy-policy" class="namu-ft__link">Política de privacidade</a>
-            <a href="/policies/terms-of-service" class="namu-ft__link">Políticas de cookie</a>
-            <a href="/policies/refund-policy" class="namu-ft__link">Política de troca/devolução</a>
-            <a href="/policies/shipping-policy" class="namu-ft__link">Política de envio</a>
-          </nav>
         </details>
       </div>
 
@@ -153,9 +144,25 @@
   </div>
 
   <div class="namu-ft__bottom">
-    <p class="namu-ft__copyright">
-      &copy; {{ 'now' | date: '%Y' }} Namu Matcha | CNPJ: 41.401.743/0001-50 | Rua João Elias Saada 134 – Pinheiros/SP
-    </p>
+    <div class="namu-ft__bottom-inner">
+      <div class="namu-ft__security-badges">
+        <span class="namu-ft__badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Compra Segura
+        </span>
+        <span class="namu-ft__badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          SSL Encrypted
+        </span>
+        <span class="namu-ft__badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Shopify Secure
+        </span>
+      </div>
+      <p class="namu-ft__copyright">
+        &copy; {{ 'now' | date: '%Y' }} Namu Matcha | CNPJ: 41.401.743/0001-50 | Rua João Elias Saada 134 – Pinheiros/SP
+      </p>
+    </div>
   </div>
 
 </footer>
