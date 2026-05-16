@@ -2,10 +2,10 @@
    NAMU ARTICLE — Single post editorial
    ══════════════════════════════════════════════════════ */
 
-/* ── Header ──────────────────────────────────────────── */
+/* ── Header (meta info below hero) ──────────────────── */
 .namu-art__header {
   background: var(--namu-branco-porcelana);
-  padding: 3rem 1.5rem 2.5rem;
+  padding: 2rem 1.5rem;
   text-align: center;
 }
 
@@ -81,19 +81,50 @@
   object-fit: cover;
 }
 
-/* ── Hero image ──────────────────────────────────────── */
-.namu-art__hero-image {
-  max-width: 900px;
-  margin: 0 auto 3rem;
-  padding: 0 1.5rem;
+/* ── Hero (image as background + title overlay) ─────── */
+.namu-art__hero {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  min-height: 360px;
+  max-height: 560px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
 }
 
-.namu-art__hero-img {
+.namu-art__hero-bg {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  aspect-ratio: 3 / 2;
+  height: 100%;
   object-fit: cover;
-  border-radius: var(--namu-radius-xl);
-  display: block;
+  z-index: 1;
+}
+
+.namu-art__hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.1) 50%, transparent 100%);
+  z-index: 2;
+}
+
+.namu-art__hero-content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  padding: 2.5rem 2rem;
+  max-width: 900px;
+}
+
+.namu-art__hero-content .namu-art__title {
+  font-family: var(--namu-font-heading);
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+  margin: 0;
+  text-transform: uppercase;
 }
 
 /* ── Body / Content ──────────────────────────────────── */

@@ -8,6 +8,24 @@
   <meta itemprop="author" content="{{ article.author }}">
   <meta itemprop="datePublished" content="{{ article.published_at | date: '%Y-%m-%d' }}">
 
+  <div class="namu-art__hero">
+    {%- if article.image != blank -%}
+      <img
+        src="{{ article.image | image_url: width: 1600 }}"
+        srcset="{{ article.image | image_url: width: 800 }} 800w, {{ article.image | image_url: width: 1200 }} 1200w, {{ article.image | image_url: width: 1600 }} 1600w"
+        sizes="100vw"
+        alt="{{ article.image.alt | default: article.title | escape }}"
+        loading="eager"
+        class="namu-art__hero-bg"
+        itemprop="image"
+      >
+    {%- endif -%}
+    <div class="namu-art__hero-overlay"></div>
+    <div class="namu-art__hero-content">
+      <h1 class="namu-art__title" itemprop="headline">{{ article.title }}</h1>
+    </div>
+  </div>
+
   <header class="namu-art__header">
     <div class="namu-art__header-inner">
       <nav class="namu-art__breadcrumb" aria-label="Breadcrumb">
@@ -24,8 +42,6 @@
         <span class="namu-art__category">{{ article.tags.first | upcase }}</span>
       {%- endif -%}
 
-      <h1 class="namu-art__title" itemprop="headline">{{ article.title }}</h1>
-
       <div class="namu-art__meta">
         <span class="namu-art__reading-time">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -38,20 +54,6 @@
       </div>
     </div>
   </header>
-
-  {%- if article.image != blank -%}
-    <div class="namu-art__hero-image">
-      <img
-        src="{{ article.image | image_url: width: 1200 }}"
-        srcset="{{ article.image | image_url: width: 600 }} 600w, {{ article.image | image_url: width: 900 }} 900w, {{ article.image | image_url: width: 1200 }} 1200w"
-        sizes="(max-width: 767px) 100vw, 740px"
-        alt="{{ article.image.alt | default: article.title | escape }}"
-        loading="eager"
-        class="namu-art__hero-img"
-        itemprop="image"
-      >
-    </div>
-  {%- endif -%}
 
   <div class="namu-art__body">
     <div class="namu-art__content" itemprop="articleBody">

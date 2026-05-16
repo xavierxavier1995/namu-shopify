@@ -22,3 +22,4 @@ node_modules/
 
 # Skills locais instaladas via npx skills add
 .agents/
+.env
