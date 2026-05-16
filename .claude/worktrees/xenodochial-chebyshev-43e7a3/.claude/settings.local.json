@@ -54,7 +54,18 @@
       "Bash(curl -s -L --ssl-no-revoke \"https://namumatcha.com.br/5-curiosidades-sobre-o-matcha/\")",
       "Bash(curl -s -L --ssl-no-revoke \"https://namumatcha.com.br/guia-para-a-espuma-perfeita-no-matcha/\")",
       "Bash(git -C \"C:\\\\Users\\\\unk_g\\\\OneDrive\\\\Área de Trabalho\\\\namu-shopify\" add _data/blog-articles-seed.json)",
-      "Bash(cd \"/c/Users/unk_g/OneDrive/Área de Trabalho/namu-shopify\" && cat .claude/settings.local.json 2>/dev/null | head -5)"
+      "Bash(cd \"/c/Users/unk_g/OneDrive/Área de Trabalho/namu-shopify\" && cat .claude/settings.local.json 2>/dev/null | head -5)",
+      "Bash(node \".agents/skills/shopify-dev/scripts/search_docs.mjs\" \"custom app admin api access token\" --model claude-sonnet-4-20250514 --client-name claude-code --client-version 2.1.128)",
+      "Bash(node \".agents/skills/shopify-admin/scripts/search_docs.mjs\" \"develop apps store admin settings\" --model claude-sonnet-4-20250514 --client-name claude-code --client-version 2.1.128)",
+      "Bash(node \".agents/skills/shopify-admin/scripts/search_docs.mjs\" \"admin api authentication access token\" --model claude-sonnet-4-20250514 --client-name claude-code --client-version 2.1.128)",
+      "Bash(node \".agents/skills/shopify-dev/scripts/search_docs.mjs\" \"enable custom app development store settings\" --model claude-sonnet-4-20250514 --client-name claude-code --client-version 2.1.128)",
+      "Bash(node \".agents/skills/shopify-dev/scripts/search_docs.mjs\" \"admin api scopes products metaobjects files content migration\" --model claude-sonnet-4-20250514 --client-name claude-code --client-version 2.1.128)",
+      "WebFetch(domain:shopify.dev)",
+      "Bash(node \".agents/skills/shopify-dev/scripts/search_docs.mjs\" \"custom apps create install configure API scopes admin\" --model claude-sonnet-4-20250514 --client-name claude-code --client-version 2.1.128)",
+      "Bash(node \".agents/skills/shopify-dev/scripts/search_docs.mjs\" \"access scopes list read_products write_products read_content write_content\" --model claude-sonnet-4-20250514 --client-name claude-code --client-version 2.1.128)",
+      "Bash(grep -aB5 '<wp:status><!\\\\[CDATA\\\\[publish\\\\]' \"C:\\\\Users\\\\unk_g\\\\Downloads\\\\namumatcha.WordPress.2026-05-15.xml\")",
+      "Bash(curl -s -X POST \"https://7uvwdy-up.myshopify.com/admin/api/2025-04/graphql.json\" -H \"Content-Type: application/json\" -H \"X-Shopify-Access-Token: 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\" -d \"{\\\\\"query\\\\\":\\\\\"{ blogs\\(first:10\\) { edges { node { id handle title } } } }\\\\\"}\")",
+      "Bash(findstr /i \"article\")"
     ]
   }
 }

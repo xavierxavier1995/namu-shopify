@@ -26,7 +26,7 @@
         },
         "menu-receitas": {
           "type": "menu_item",
-          "settings": { "label": "Receitas", "link": "/blogs/receitas", "show_arrow": true }
+          "settings": { "label": "Receitas", "link": "/blogs/receitas-matcha", "show_arrow": true }
         },
         "menu-sobre": {
           "type": "menu_item",
@@ -34,7 +34,7 @@
         },
         "menu-blog": {
           "type": "menu_item",
-          "settings": { "label": "Blog", "link": "/blogs/news", "show_arrow": true }
+          "settings": { "label": "Blog", "link": "/blogs/noticias", "show_arrow": true }
         },
         "menu-b2b": {
           "type": "menu_item",
