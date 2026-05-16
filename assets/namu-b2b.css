@@ -158,6 +158,29 @@ html { scroll-behavior: smooth; }
 .namu-b2b-page .benefit-card h3 { font-size: 22px; margin-bottom: 12px; color: var(--b2b-primary); }
 .namu-b2b-page .benefit-card p { font-size: 15px; color: var(--b2b-text-muted); line-height: 1.7; font-weight: 300; }
 
+/* ── BENEFÍCIOS: Mobile Sticky Stack ───────────── */
+@media (max-width: 768px) {
+  .namu-b2b-page .benefits-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    overflow: visible;
+  }
+
+  .namu-b2b-page .benefit-card {
+    position: sticky;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+  }
+
+  .namu-b2b-page .benefit-card:nth-child(1) { top: 72px; z-index: 1; }
+  .namu-b2b-page .benefit-card:nth-child(2) { top: 100px; z-index: 2; }
+  .namu-b2b-page .benefit-card:nth-child(3) { top: 128px; z-index: 3; }
+  .namu-b2b-page .benefit-card:nth-child(4) { top: 156px; z-index: 4; }
+  .namu-b2b-page .benefit-card:nth-child(5) { top: 184px; z-index: 5; }
+  .namu-b2b-page .benefit-card:nth-child(6) { top: 212px; z-index: 6; }
+}
+
 /* ── ORIGEM — Viewport-Locked Full-Bleed ────────────────────────────────── */
 /* "Viewport-locked" = height:100vh, sem container, preenche tela toda independente do zoom */
 .namu-b2b-page .origin-viewport {

@@ -21,36 +21,28 @@
   margin-bottom: 3rem;
 }
 
-/* Pill button */
-.namu-blog__pill {
+/* Section label (plain text, no pill) */
+.namu-blog__label {
   display: inline-block;
-  padding: 0.5rem 1.5rem;
-  border: 1.5px solid rgba(255, 255, 255, 0.35);
-  border-radius: 999px;
   font-family: var(--namu-font-body, sans-serif);
   font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #ffffff;
-  text-decoration: none;
-  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
-}
-
-.namu-blog__pill:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0.5rem;
 }
 
 /* Section title (optional) */
 .namu-blog__title {
   font-family: var(--namu-font-heading, serif);
   font-size: clamp(1.75rem, 3.5vw, 2.75rem);
-  font-weight: 700;
+  font-weight: 600;
   color: #ffffff;
   margin: 0;
   line-height: 1.05;
   letter-spacing: -0.01em;
+  text-transform: uppercase;
 }
 
 /* Subtitle (optional) */
@@ -201,23 +193,25 @@
 }
 
 .namu-blog__cta-global {
-  display: inline-block;
-  padding: 1rem 2.5rem;
-  background: var(--namu-verde-puro, #78C33F);
-  color: #fff;
-  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-family: var(--namu-font-body, sans-serif);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
+  color: #ffffff;
   text-decoration: none;
-  transition: background 0.3s ease, transform 0.2s ease;
+  padding-bottom: 0.2rem;
+  border-bottom: 1.5px solid #ffffff;
+  transition: color 0.2s ease, border-color 0.2s ease, gap 0.2s ease;
 }
 
 .namu-blog__cta-global:hover {
-  background: var(--namu-verde-matcha, #045133);
-  transform: translateY(-2px);
+  color: var(--namu-verde-puro, #78C33F);
+  border-color: var(--namu-verde-puro, #78C33F);
+  gap: 0.75rem;
 }
 
 /* ── Mobile stacked ───────────────────────────────────── */
@@ -229,6 +223,23 @@
   .namu-blog__header {
     margin-bottom: 2rem;
   }
+
+  .namu-blog__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    overflow: visible;
+  }
+
+  .namu-blog__card {
+    position: sticky;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+  }
+
+  .namu-blog__card:nth-child(1) { top: 72px; z-index: 1; }
+  .namu-blog__card:nth-child(2) { top: 100px; z-index: 2; }
+  .namu-blog__card:nth-child(3) { top: 128px; z-index: 3; }
 }
 
 /* ── Reduced motion ──────────────────────────────────── */

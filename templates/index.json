@@ -48,7 +48,7 @@
           "type": "slide",
           "settings": {
             "alt": "Receitas exclusivas com matcha — inspire-se",
-            "link": "/blogs/news",
+            "link": "/blogs/noticias",
             "fallback_asset": "NAMU_site_banner-principal_receitas_desktop.jpg",
             "fallback_asset_mobile": "NAMU_site_banner-principal_receitas_mobile.jpg"
           }
@@ -94,7 +94,7 @@
           "settings": {
             "title": "Matchas Puros",
             "link": "/collections/matcha-cerimonial",
-            "fallback_asset": "cat-matchas-puros.jpg",
+            "fallback_asset": "matchas-puros.png",
             "overlay_opacity": 35,
             "placeholder_color": "#045133"
           }
@@ -104,7 +104,7 @@
           "settings": {
             "title": "Blends",
             "link": "/collections/matcha-vanilla",
-            "fallback_asset": "cat-blends.jpg",
+            "fallback_asset": "blends.png",
             "overlay_opacity": 35,
             "placeholder_color": "#33348E"
           }
@@ -114,7 +114,7 @@
           "settings": {
             "title": "Utensílios",
             "link": "/collections/kits",
-            "fallback_asset": "cat-utensilios.jpg",
+            "fallback_asset": "utensilios-para-cha.png",
             "overlay_opacity": 35,
             "placeholder_color": "#10A6BD"
           }
@@ -124,7 +124,7 @@
           "settings": {
             "title": "Kits",
             "link": "/collections/kits",
-            "fallback_asset": "cat-kits.jpg",
+            "fallback_asset": "kits-gifts.png",
             "overlay_opacity": 35,
             "placeholder_color": "#BE5B28"
           }
@@ -183,25 +183,24 @@
         "label": "Inspiração",
         "title": "Nossas Receitas Favoritas com Matcha",
         "cta_label": "Ver todas",
-        "cta_link": "/blogs/receitas"
+        "cta_link": "/blogs/receitas-matcha"
       },
       "blocks": {
-        "rec-1": { "type": "recipe", "settings": { "category": "Bebida", "title": "Lemon Soda Matcha",  "fallback_asset": "receita.webp",   "placeholder_color": "#1e3a2a" } },
-        "rec-2": { "type": "recipe", "settings": { "category": "Bebida", "title": "Maracumatcha",       "fallback_asset": "receita2.webp",  "placeholder_color": "#2b3d1f" } },
-        "rec-3": { "type": "recipe", "settings": { "category": "Latte",  "title": "Houjicha Latte",     "fallback_asset": "receita3.webp", "placeholder_color": "#3d2b1a" } },
-        "rec-4": { "type": "recipe", "settings": { "category": "Prato",  "title": "Gnocchi de Matcha",  "fallback_asset": "receita4.webp",  "placeholder_color": "#1a2e1e" } }
+        "rec-1": { "type": "recipe", "settings": { "category": "Bebidas Geladas", "title": "Bebidas Geladas com Matcha", "fallback_asset": "receitas-bebidas-frias-matcha.jpg", "placeholder_color": "#1e3a2a", "link": "/blogs/receitas-matcha/tagged/bebidas-geladas" } },
+        "rec-2": { "type": "recipe", "settings": { "category": "Bebidas Quentes", "title": "Bebidas Quentes com Matcha", "fallback_asset": "receitas-bebida-quentes-matcha.jpg", "placeholder_color": "#2b3d1f", "link": "/blogs/receitas-matcha/tagged/bebidas-quentes" } },
+        "rec-3": { "type": "recipe", "settings": { "category": "Comidinhas", "title": "Comidinhas com Matcha", "fallback_asset": "receitas-comidinhas.jpg", "placeholder_color": "#3d2b1a", "link": "/blogs/receitas-matcha/tagged/comidinhas" } }
       },
-      "block_order": ["rec-1", "rec-2", "rec-3", "rec-4"]
+      "block_order": ["rec-1", "rec-2", "rec-3"]
     },
     "namu_blog": {
       "type": "namu-blog",
       "settings": {
-        "pill_label": "Matcha Blog",
+        "pill_label": "Blog Namu",
         "title": "Matcha do Zero ao Avançado",
         "subtitle": "Novo no mundo do matcha? Aprenda tudo aqui! Descubra o que é, seus benefícios e como preparar o seu matcha perfeito hoje mesmo.",
         "cta_label": "LER MAIS",
         "cta_global_label": "CONFIRA TODOS OS NOSSOS CONTEÚDOS",
-        "cta_global_link": "/blogs/news",
+        "cta_global_link": "/blogs/noticias",
         "posts_to_show": 3
       },
       "blocks": {
@@ -211,7 +210,7 @@
             "tag": "Guia",
             "title": "O que é matcha? Quais os tipos e os seus benefícios",
             "excerpt": "Entenda o que é o matcha, de onde vem e por que esse chá verde em pó é tão famoso entre os amantes da saúde e bem-estar.",
-            "link": "/blogs/news/o-que-e-matcha"
+            "link": "/blogs/noticias/o-que-e-matcha"
           }
         },
         "art-2": {
@@ -220,7 +219,7 @@
             "tag": "Guia",
             "title": "Guia definitivo de como fazer o matcha perfeito",
             "excerpt": "Aprenda o passo a passo para preparar o matcha perfeito em casa. Dicas práticas para um chá cremoso, saboroso e energizante.",
-            "link": "/blogs/news/guia-preparo-matcha"
+            "link": "/blogs/noticias/guia-preparo-matcha"
           }
         },
         "art-3": {
@@ -229,7 +228,7 @@
             "tag": "Saúde",
             "title": "7 benefícios comprovados do Matcha para sua saúde",
             "excerpt": "Descubra os principais benefícios do matcha para a saúde, com respaldo científico. Mais energia, foco e bem-estar no seu dia a dia.",
-            "link": "/blogs/news/beneficios-do-matcha"
+            "link": "/blogs/noticias/beneficios-do-matcha"
           }
         }
       },

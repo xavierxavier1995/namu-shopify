@@ -194,6 +194,35 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
+/* ── Mobile: Sticky Stack Cards ──────────────────────── */
+@media (max-width: 639px) {
+  .namu-cat__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    overflow: visible;
+    scroll-snap-type: none;
+    padding: 0 1.5rem;
+  }
+
+  .namu-cat__item {
+    position: sticky;
+    flex: unset;
+    min-width: unset;
+    max-width: unset;
+    width: 100%;
+    scroll-snap-align: unset;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    margin-bottom: 1rem;
+  }
+
+  .namu-cat__item:nth-child(1) { top: 72px; z-index: 1; }
+  .namu-cat__item:nth-child(2) { top: 100px; z-index: 2; }
+  .namu-cat__item:nth-child(3) { top: 128px; z-index: 3; }
+  .namu-cat__item:nth-child(4) { top: 156px; z-index: 4; }
+}
+
 /* ── Reduced motion ──────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .namu-cat__img,

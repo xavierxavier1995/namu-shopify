@@ -69,10 +69,6 @@
 
             {%- comment -%} Content on top of overlay {%- endcomment -%}
             <div class="namu-rec__content">
-              {%- if block.settings.category != blank -%}
-                <span class="namu-rec__category">{{ block.settings.category | upcase | escape }}</span>
-              {%- endif -%}
-
               <div class="namu-rec__bottom">
                 <h3 class="namu-rec__name">{{ block.settings.title | escape }}</h3>
                 <span class="namu-rec__arrow" aria-hidden="true">
@@ -127,7 +123,7 @@
       "type": "text",
       "id": "cta_label",
       "label": "Texto do CTA abaixo",
-      "default": "Ver todas"
+      "default": "Ver todas as receitas"
     },
     {
       "type": "url",
@@ -184,7 +180,7 @@
       "settings": {
         "label": "Inspiração",
         "title": "Nossas Receitas Favoritas com Matcha",
-        "cta_label": "Ver todas"
+        "cta_label": "Ver todas as receitas"
       },
       "blocks": [
         {

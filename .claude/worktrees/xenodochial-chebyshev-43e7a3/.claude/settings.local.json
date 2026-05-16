@@ -65,7 +65,18 @@
       "Bash(node \".agents/skills/shopify-dev/scripts/search_docs.mjs\" \"access scopes list read_products write_products read_content write_content\" --model claude-sonnet-4-20250514 --client-name claude-code --client-version 2.1.128)",
       "Bash(grep -aB5 '<wp:status><!\\\\[CDATA\\\\[publish\\\\]' \"C:\\\\Users\\\\unk_g\\\\Downloads\\\\namumatcha.WordPress.2026-05-15.xml\")",
       "Bash(curl -s -X POST \"https://7uvwdy-up.myshopify.com/admin/api/2025-04/graphql.json\" -H \"Content-Type: application/json\" -H \"X-Shopify-Access-Token: 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\" -d \"{\\\\\"query\\\\\":\\\\\"{ blogs\\(first:10\\) { edges { node { id handle title } } } }\\\\\"}\")",
-      "Bash(findstr /i \"article\")"
+      "Bash(findstr /i \"article\")",
+      "Bash(pip install *)",
+      "Bash(where python *)",
+      "Bash(where python3 *)",
+      "Bash(where py *)",
+      "Bash(python -m pip install python-docx --quiet)",
+      "Bash(python scripts/create-recipes.py)",
+      "Bash(python -c ' *)",
+      "Bash(python scripts/update-seo-recipes.py)",
+      "Bash(ren \"namu-emblemas-site-sem-texto_livre-de-agrotóxicos.svg\" \"namu-emblemas-site-sem-texto_livre-de-agrotoxicos.svg\")",
+      "Bash(ren \"namu-emblemas-site-sem-texto_sem-açúcar.svg\" \"namu-emblemas-site-sem-texto_sem-acucar.svg\")",
+      "Bash(more)"
     ]
   }
 }

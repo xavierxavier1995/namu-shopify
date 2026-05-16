@@ -80,11 +80,13 @@
   }
 }
 
-/* ── Desktop: 4 colunas ──────────────────────────────── */
+/* ── Desktop: 3 colunas centralizadas ──────────────── */
 @media (min-width: 1024px) {
   .namu-rec__grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
+    max-width: 1080px;
+    margin: 0 auto;
   }
 
   .namu-rec {
@@ -272,6 +274,32 @@
   .namu-rec__header {
     margin-bottom: 2rem;
   }
+
+  .namu-rec__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    overflow: visible;
+    scroll-snap-type: none;
+    margin: 0;
+    padding: 0 1.5rem;
+  }
+
+  .namu-rec__item {
+    position: sticky;
+    flex: unset;
+    max-width: unset;
+    width: 100%;
+    scroll-snap-align: unset;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    margin-bottom: 1rem;
+  }
+
+  .namu-rec__item:nth-child(1) { top: 72px; z-index: 1; }
+  .namu-rec__item:nth-child(2) { top: 100px; z-index: 2; }
+  .namu-rec__item:nth-child(3) { top: 128px; z-index: 3; }
+  .namu-rec__item:nth-child(4) { top: 156px; z-index: 4; }
 }
 
 /* ── Reduced motion ──────────────────────────────────── */

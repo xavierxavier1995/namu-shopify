@@ -7,11 +7,6 @@
 
   <div class="namu-rec-idx__header">
     <div class="namu-rec-idx__header-inner">
-      <nav class="namu-rec-idx__breadcrumb" aria-label="Breadcrumb">
-        <a href="/">Home</a>
-        <span aria-hidden="true">/</span>
-        <span>Receitas</span>
-      </nav>
       <h1 class="namu-rec-idx__title">Receitas</h1>
       <p class="namu-rec-idx__subtitle">Explore nossas receitas com matcha e descubra novas formas de incluir esse superalimento no seu dia a dia.</p>
     </div>
@@ -21,31 +16,23 @@
     <div class="namu-rec-idx__filters-inner">
       <a href="{{ recipe_blog.url }}" class="namu-rec-idx__pill {% if current_tags == blank %}namu-rec-idx__pill--active{% endif %}">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-        Veja todas
+        Todas as receitas
       </a>
-      <a href="{{ recipe_blog.url }}/tagged/cat-basicos" class="namu-rec-idx__pill {% if current_tags contains 'cat-basicos' %}namu-rec-idx__pill--active{% endif %}">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-        Básicos
-      </a>
-      <a href="{{ recipe_blog.url }}/tagged/cat-drinks-quentes" class="namu-rec-idx__pill {% if current_tags contains 'cat-drinks-quentes' %}namu-rec-idx__pill--active{% endif %}">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-        Drinks Quentes
-      </a>
-      <a href="{{ recipe_blog.url }}/tagged/cat-drinks-gelados" class="namu-rec-idx__pill {% if current_tags contains 'cat-drinks-gelados' %}namu-rec-idx__pill--active{% endif %}">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-        Drinks Gelados
-      </a>
-      <a href="{{ recipe_blog.url }}/tagged/cat-sobremesas" class="namu-rec-idx__pill {% if current_tags contains 'cat-sobremesas' %}namu-rec-idx__pill--active{% endif %}">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h20"/><path d="M12 2a7 7 0 0 1 7 7v3H5V9a7 7 0 0 1 7-7z"/><path d="M5 15v2a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4v-2"/></svg>
-        Sobremesas
-      </a>
-      <a href="{{ recipe_blog.url }}/tagged/cat-salgados" class="namu-rec-idx__pill {% if current_tags contains 'cat-salgados' %}namu-rec-idx__pill--active{% endif %}">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
-        Salgados
-      </a>
-      <a href="{{ recipe_blog.url }}/tagged/cat-destaques" class="namu-rec-idx__pill {% if current_tags contains 'cat-destaques' %}namu-rec-idx__pill--active{% endif %}">
+      <a href="{{ recipe_blog.url }}/tagged/destaques" class="namu-rec-idx__pill {% if current_tags contains 'destaques' %}namu-rec-idx__pill--active{% endif %}">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         Destaques
+      </a>
+      <a href="{{ recipe_blog.url }}/tagged/bebidas-quentes" class="namu-rec-idx__pill {% if current_tags contains 'bebidas-quentes' %}namu-rec-idx__pill--active{% endif %}">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        Bebidas Quentes
+      </a>
+      <a href="{{ recipe_blog.url }}/tagged/bebidas-geladas" class="namu-rec-idx__pill {% if current_tags contains 'bebidas-geladas' %}namu-rec-idx__pill--active{% endif %}">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        Bebidas Geladas
+      </a>
+      <a href="{{ recipe_blog.url }}/tagged/comidinhas" class="namu-rec-idx__pill {% if current_tags contains 'comidinhas' %}namu-rec-idx__pill--active{% endif %}">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
+        Comidinhas
       </a>
     </div>
   </div>
