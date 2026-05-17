@@ -45,6 +45,37 @@
   line-height: 1.6;
 }
 
+/* ── Marquee ────────────────────────────────────────────── */
+.namu-blog-idx__marquee {
+  background: var(--namu-branco-porcelana);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 18px 0;
+  overflow: hidden;
+  display: flex;
+}
+
+.namu-blog-idx__marquee-track {
+  display: flex;
+  gap: 80px;
+  animation: namuBlogScroll 35s linear infinite;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.namu-blog-idx__marquee-track span {
+  font-family: var(--namu-font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--namu-color-text-muted);
+  text-transform: uppercase;
+}
+
+@keyframes namuBlogScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
 /* ── Featured article ───────────────────────────────── */
 .namu-blog-idx__featured {
   padding: 0 1.5rem 3rem;
@@ -67,7 +98,7 @@
 
 .namu-blog-idx__featured-img {
   width: 100%;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   display: block;
   transition: transform 0.4s ease;
@@ -259,35 +290,32 @@
   flex: 1;
 }
 
-/* ── Pagination ─────────────────────────────────────── */
-.namu-blog-idx__pagination {
-  padding: 0 1.5rem 3rem;
+/* ── Load More CTA ─────────────────────────────────────── */
+.namu-blog-idx__loadmore {
+  margin-top: 2.5rem;
   text-align: center;
 }
 
-.namu-blog-idx__pagination a,
-.namu-blog-idx__pagination span {
+.namu-blog-idx__loadmore-cta {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  min-width: 36px;
-  height: 36px;
-  padding: 0 0.5rem;
-  border-radius: var(--namu-radius-sm);
+  gap: 0.5rem;
   font-family: var(--namu-font-body);
-  font-size: 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--namu-verde-matcha);
   text-decoration: none;
-  color: var(--namu-cinza-sombra);
-  transition: background var(--namu-transition-fast);
+  border-bottom: 1.5px solid var(--namu-verde-matcha);
+  padding-bottom: 0.15rem;
+  transition: gap var(--namu-transition-fast), color var(--namu-transition-fast);
 }
 
-.namu-blog-idx__pagination a:hover {
-  background: var(--namu-branco-porcelana);
-}
-
-.namu-blog-idx__pagination span.current {
-  background: var(--namu-verde-matcha);
-  color: #fff;
+.namu-blog-idx__loadmore-cta:hover {
+  gap: 0.75rem;
+  color: var(--namu-verde-puro);
+  border-color: var(--namu-verde-puro);
 }
 
 /* ── Mobile ──────────────────────────────────────────── */
@@ -313,12 +341,6 @@
   .namu-blog-idx__filter-pill {
     flex-shrink: 0;
     scroll-snap-align: start;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 992px) {
-  .namu-blog-idx__grid {
-    grid-template-columns: repeat(2, 1fr);
   }
 }
 

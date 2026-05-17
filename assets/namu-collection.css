@@ -91,43 +91,35 @@
   line-height: 1.6;
 }
 
-/* ── Trust Bar ───────────────────────────────────────── */
+/* ── Trust Bar (Marquee) ─────────────────────────────── */
 .namu-coll-trust {
   background: var(--namu-branco-porcelana);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  padding: 0.9rem 1.5rem;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.namu-coll-trust::-webkit-scrollbar {
-  display: none;
-}
-
-.namu-coll-trust__inner {
-  max-width: 1320px;
-  margin: 0 auto;
+  padding: 18px 0;
+  overflow: hidden;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
+}
+
+.namu-coll-trust__track {
+  display: flex;
+  gap: 80px;
+  animation: namuCollScroll 35s linear infinite;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .namu-coll-trust__item {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
   font-family: var(--namu-font-body);
-  font-size: 0.72rem;
-  font-weight: 500;
-  color: var(--namu-cinza-sombra);
-  letter-spacing: 0.02em;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--namu-color-text-muted);
 }
 
-.namu-coll-trust__item svg {
-  flex-shrink: 0;
-  color: var(--namu-verde-puro);
+@keyframes namuCollScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 /* ── Grid Section Layout ─────────────────────────────── */
@@ -338,11 +330,6 @@
   border-radius: var(--namu-radius-lg);
   overflow: hidden;
   background: #fff;
-  transition: box-shadow var(--namu-transition-base);
-}
-
-.namu-coll-grid__card:hover {
-  box-shadow: var(--namu-shadow-md);
 }
 
 .namu-coll-grid__card-media {
@@ -356,11 +343,6 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
-}
-
-.namu-coll-grid__card:hover .namu-coll-grid__card-img {
-  transform: scale(1.04);
 }
 
 .namu-coll-grid__card-placeholder {
@@ -846,9 +828,8 @@
     padding: 1.5rem;
   }
 
-  .namu-coll-trust__inner {
-    justify-content: flex-start;
-    gap: 1.5rem;
+  .namu-coll-trust__track {
+    gap: 60px;
   }
 
   .namu-coll-related__grid {

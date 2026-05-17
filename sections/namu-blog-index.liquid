@@ -12,6 +12,21 @@
     </div>
   </div>
 
+  <div class="namu-blog-idx__marquee" aria-hidden="true">
+    <div class="namu-blog-idx__marquee-track">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'marquee_text' -%}
+          <span>✦ {{ block.settings.text }}</span>
+        {%- endif -%}
+      {%- endfor -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'marquee_text' -%}
+          <span>✦ {{ block.settings.text }}</span>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
   {%- if blog.articles.size > 0 -%}
     {%- assign featured = blog.articles.first -%}
     <div class="namu-blog-idx__featured">
@@ -92,9 +107,14 @@
   </div>
 
   {%- if paginate.pages > 1 -%}
-    <nav class="namu-blog-idx__pagination" aria-label="Paginação do blog">
-      {{ paginate | default_pagination }}
-    </nav>
+    <div class="namu-blog-idx__loadmore">
+      {%- if paginate.next -%}
+        <a href="{{ paginate.next.url }}" class="namu-blog-idx__loadmore-cta">
+          VER MAIS ARTIGOS
+          <svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="1" y1="5" x2="13" y2="5"/><polyline points="9 1 13 5 9 9"/></svg>
+        </a>
+      {%- endif -%}
+    </div>
   {%- endif -%}
 
 </section>
@@ -107,10 +127,30 @@
   "tag": "section",
   "class": "shopify-section-namu-blog-index",
   "settings": [],
-  "blocks": [],
+  "blocks": [
+    {
+      "type": "marquee_text",
+      "name": "Texto rotativo",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "Benefício"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "Blog Index Namu"
+      "name": "Blog Index Namu",
+      "blocks": [
+        { "type": "marquee_text", "settings": { "text": "Cultura do matcha" } },
+        { "type": "marquee_text", "settings": { "text": "Rituais de bem-estar" } },
+        { "type": "marquee_text", "settings": { "text": "Receitas exclusivas" } },
+        { "type": "marquee_text", "settings": { "text": "Saúde e energia" } },
+        { "type": "marquee_text", "settings": { "text": "Tradição japonesa" } }
+      ]
     }
   ]
 }

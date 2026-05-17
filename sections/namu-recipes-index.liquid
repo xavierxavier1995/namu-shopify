@@ -12,35 +12,40 @@
     </div>
   </div>
 
+  <div class="namu-rec-idx__marquee" aria-hidden="true">
+    <div class="namu-rec-idx__marquee-track">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'marquee_text' -%}
+          <span>✦ {{ block.settings.text }}</span>
+        {%- endif -%}
+      {%- endfor -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'marquee_text' -%}
+          <span>✦ {{ block.settings.text }}</span>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
   <div class="namu-rec-idx__filters" role="navigation" aria-label="Filtros de receitas">
     <div class="namu-rec-idx__filters-inner">
-      <a href="{{ recipe_blog.url }}" class="namu-rec-idx__pill {% if current_tags == blank %}namu-rec-idx__pill--active{% endif %}">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-        Todas as receitas
-      </a>
-      <a href="{{ recipe_blog.url }}/tagged/destaques" class="namu-rec-idx__pill {% if current_tags contains 'destaques' %}namu-rec-idx__pill--active{% endif %}">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        Destaques
-      </a>
-      <a href="{{ recipe_blog.url }}/tagged/bebidas-quentes" class="namu-rec-idx__pill {% if current_tags contains 'bebidas-quentes' %}namu-rec-idx__pill--active{% endif %}">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-        Bebidas Quentes
-      </a>
-      <a href="{{ recipe_blog.url }}/tagged/bebidas-geladas" class="namu-rec-idx__pill {% if current_tags contains 'bebidas-geladas' %}namu-rec-idx__pill--active{% endif %}">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-        Bebidas Geladas
-      </a>
-      <a href="{{ recipe_blog.url }}/tagged/comidinhas" class="namu-rec-idx__pill {% if current_tags contains 'comidinhas' %}namu-rec-idx__pill--active{% endif %}">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
-        Comidinhas
-      </a>
+      <button type="button" class="namu-rec-idx__pill namu-rec-idx__pill--active" data-filter="all">Todas</button>
+      <button type="button" class="namu-rec-idx__pill" data-filter="bebidas-quentes">Bebidas Quentes</button>
+      <button type="button" class="namu-rec-idx__pill" data-filter="bebidas-geladas">Bebidas Geladas</button>
+      <button type="button" class="namu-rec-idx__pill" data-filter="comidinhas">Comidinhas</button>
     </div>
   </div>
 
   <div class="namu-rec-idx__grid-section">
     <div class="namu-rec-idx__grid">
       {%- for article in recipe_blog.articles -%}
-        <article class="namu-rec-idx__card">
+        {%- assign tag_handles = '' -%}
+        {%- for tag in article.tags -%}
+          {%- assign tag_handle = tag | handleize -%}
+          {%- assign tag_handles = tag_handles | append: tag_handle -%}
+          {%- unless forloop.last -%}{%- assign tag_handles = tag_handles | append: ',' -%}{%- endunless -%}
+        {%- endfor -%}
+        <article class="namu-rec-idx__card" data-tags="{{ tag_handles }}">
           <a href="{{ article.url }}" class="namu-rec-idx__card-media">
             {%- if article.image != blank -%}
               <img
@@ -77,6 +82,47 @@
 
 </section>
 
+<script>
+(function() {
+  var section = document.querySelector('.namu-rec-idx');
+  if (!section) return;
+  var pills = section.querySelectorAll('[data-filter]');
+  var cards = section.querySelectorAll('.namu-rec-idx__card');
+
+  pills.forEach(function(pill) {
+    pill.addEventListener('click', function() {
+      var filter = this.getAttribute('data-filter');
+      pills.forEach(function(p) { p.classList.remove('namu-rec-idx__pill--active'); });
+      this.classList.add('namu-rec-idx__pill--active');
+
+      cards.forEach(function(card) {
+        if (filter === 'all') {
+          card.style.display = '';
+        } else {
+          var tags = (card.getAttribute('data-tags') || '').split(',');
+          card.style.display = tags.indexOf(filter) !== -1 ? '' : 'none';
+        }
+      });
+
+      var url = new URL(window.location);
+      if (filter === 'all') {
+        url.searchParams.delete('filtro');
+      } else {
+        url.searchParams.set('filtro', filter);
+      }
+      history.replaceState(null, '', url);
+    });
+  });
+
+  var params = new URLSearchParams(window.location.search);
+  var initial = params.get('filtro');
+  if (initial) {
+    var target = section.querySelector('[data-filter="' + initial + '"]');
+    if (target) target.click();
+  }
+})();
+</script>
+
 {%- endpaginate -%}
 
 {% schema %}
@@ -85,10 +131,30 @@
   "tag": "section",
   "class": "shopify-section-namu-recipes-index",
   "settings": [],
-  "blocks": [],
+  "blocks": [
+    {
+      "type": "marquee_text",
+      "name": "Texto rotativo",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "Benefício"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "Receitas Index"
+      "name": "Receitas Index",
+      "blocks": [
+        { "type": "marquee_text", "settings": { "text": "Receitas fáceis e rápidas" } },
+        { "type": "marquee_text", "settings": { "text": "Matcha de alta qualidade" } },
+        { "type": "marquee_text", "settings": { "text": "Bebidas quentes e geladas" } },
+        { "type": "marquee_text", "settings": { "text": "Inspiração para o dia a dia" } },
+        { "type": "marquee_text", "settings": { "text": "Superalimento japonês" } }
+      ]
     }
   ]
 }

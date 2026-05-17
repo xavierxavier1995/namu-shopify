@@ -37,6 +37,37 @@
   line-height: 1.6;
 }
 
+/* ── Marquee ────────────────────────────────────────────── */
+.namu-rec-idx__marquee {
+  background: var(--namu-branco-porcelana);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 18px 0;
+  overflow: hidden;
+  display: flex;
+}
+
+.namu-rec-idx__marquee-track {
+  display: flex;
+  gap: 80px;
+  animation: namuRecScroll 35s linear infinite;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.namu-rec-idx__marquee-track span {
+  font-family: var(--namu-font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--namu-color-text-muted);
+  text-transform: uppercase;
+}
+
+@keyframes namuRecScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
 /* ── Filter pills ───────────────────────────────────── */
 .namu-rec-idx__filters {
   padding: 0 1.5rem 2.5rem;
@@ -64,13 +95,10 @@
   color: var(--namu-cinza-sombra);
   background: var(--namu-branco-porcelana);
   text-decoration: none;
+  border: none;
+  cursor: pointer;
   transition: background var(--namu-transition-fast), color var(--namu-transition-fast);
   white-space: nowrap;
-}
-
-.namu-rec-idx__pill svg {
-  flex-shrink: 0;
-  opacity: 0.7;
 }
 
 .namu-rec-idx__pill:hover {
@@ -81,10 +109,6 @@
 .namu-rec-idx__pill--active {
   background: var(--namu-verde-matcha);
   color: #fff;
-}
-
-.namu-rec-idx__pill--active svg {
-  opacity: 1;
 }
 
 .namu-rec-idx__pill--active:hover {
