@@ -55,32 +55,22 @@
   </section>
 
   <!-- ═══════════════════════════════════════
-       MARQUEE
+       MARQUEE (snippet global)
   ═══════════════════════════════════════ -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track">
-      {%- assign marquee_items = section.settings.marquee_1
-        | append: '||'
-        | append: section.settings.marquee_2
-        | append: '||'
-        | append: section.settings.marquee_3
-        | append: '||'
-        | append: section.settings.marquee_4
-        | append: '||'
-        | append: section.settings.marquee_5
-        | append: '||'
-        | append: section.settings.marquee_6
-        | split: '||'
-      -%}
-      {%- comment -%} Duplica para loop infinito sem JS {%- endcomment -%}
-      {%- for item in marquee_items -%}
-        <span>✦ {{ item }}</span>
-      {%- endfor -%}
-      {%- for item in marquee_items -%}
-        <span>✦ {{ item }}</span>
-      {%- endfor -%}
-    </div>
-  </div>
+  {%- assign marquee_items = section.settings.marquee_1
+    | append: '||'
+    | append: section.settings.marquee_2
+    | append: '||'
+    | append: section.settings.marquee_3
+    | append: '||'
+    | append: section.settings.marquee_4
+    | append: '||'
+    | append: section.settings.marquee_5
+    | append: '||'
+    | append: section.settings.marquee_6
+    | split: '||'
+  -%}
+  {% render 'marquee-global', items: marquee_items, bg_color: 'var(--b2b-bg-warm)', border_color: 'var(--b2b-border)', text_color: 'var(--b2b-text-muted)' %}
 
   </div>{%- comment -%} /b2b-viewport-first {%- endcomment -%}
 

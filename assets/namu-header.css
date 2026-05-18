@@ -230,24 +230,28 @@
 
 .namu-mega__cta {
   align-self: flex-start;
-  display: inline-block;
-  margin-top: 0.75rem;
-  padding: 0.75rem 1.75rem;
-  border: 1.5px solid var(--namu-verde-matcha);
-  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1.25rem;
+  padding: 0 0 0.25rem;
+  border: none;
+  border-bottom: 1.5px solid var(--namu-verde-matcha);
+  border-radius: 0;
   font-family: var(--namu-font-body);
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.75rem;
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--namu-verde-matcha);
   text-decoration: none;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition: opacity 0.2s ease;
 }
 
 .namu-mega__cta:hover {
-  background: var(--namu-verde-matcha);
-  color: var(--namu-branco);
+  background: transparent;
+  color: var(--namu-verde-matcha);
+  opacity: 0.7;
 }
 
 .namu-mega__col--features {
@@ -272,7 +276,7 @@
 .namu-mega__feature-img {
   width: 100%;
   aspect-ratio: 4 / 3;
-  border-radius: 16px;
+  border-radius: 5px;
   overflow: hidden;
   background: var(--namu-branco-porcelana);
 }

@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "namu-policy",
+      "settings": {
+        "eyebrow": "Pós-venda",
+        "title": "Trocas, Devoluções e Reembolsos",
+        "subtitle": "Nosso compromisso com a sua satisfação, dentro das normas de segurança alimentar e do CDC.",
+        "last_updated": "Maio de 2025"
+      }
+    }
+  },
+  "order": ["main"]
+}

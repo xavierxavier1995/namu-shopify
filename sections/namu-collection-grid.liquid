@@ -1,4 +1,4 @@
-{%- paginate collection.products by 12 -%}
+{%- paginate collection.products by 9 -%}
 
 <section class="namu-coll-grid" aria-label="Produtos">
   <div class="namu-coll-grid__body">
@@ -57,35 +57,6 @@
 
       <div class="namu-coll-grid__grid">
         {%- for product in collection.products -%}
-          {%- if forloop.index == 7 and section.settings.banner_image != blank -%}
-            <div class="namu-coll-grid__editorial">
-              <div class="namu-coll-grid__editorial-media">
-                <img
-                  src="{{ section.settings.banner_image | image_url: width: 800 }}"
-                  alt="{{ section.settings.banner_title | default: 'Destaque' | escape }}"
-                  loading="lazy"
-                  width="{{ section.settings.banner_image.width }}"
-                  height="{{ section.settings.banner_image.height }}"
-                  class="namu-coll-grid__editorial-img"
-                >
-              </div>
-              <div class="namu-coll-grid__editorial-content">
-                {%- if section.settings.banner_title != blank -%}
-                  <h2 class="namu-coll-grid__editorial-title">{{ section.settings.banner_title | escape }}</h2>
-                {%- endif -%}
-                {%- if section.settings.banner_text != blank -%}
-                  <p class="namu-coll-grid__editorial-text">{{ section.settings.banner_text | escape }}</p>
-                {%- endif -%}
-                {%- if section.settings.banner_cta != blank -%}
-                  <a href="{{ section.settings.banner_link | default: '#' }}" class="namu-coll-grid__editorial-cta">
-                    {{ section.settings.banner_cta | escape }}
-                    <svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="1" y1="5" x2="13" y2="5"/><polyline points="9 1 13 5 9 9"/></svg>
-                  </a>
-                {%- endif -%}
-              </div>
-            </div>
-          {%- endif -%}
-
           <a href="{{ product.url }}" class="namu-coll-grid__card" aria-label="{{ product.title | escape }}">
             <div class="namu-coll-grid__card-media">
               {%- if product.featured_image != blank -%}
@@ -103,34 +74,39 @@
                 {{ 'product-1' | placeholder_svg_tag: 'namu-coll-grid__card-placeholder' }}
               {%- endif -%}
               {%- if product.compare_at_price > product.price -%}
-                <span class="namu-coll-grid__badge">OFERTA</span>
+                <span class="namu-coll-grid__badge">Sale</span>
               {%- endif -%}
             </div>
             <div class="namu-coll-grid__card-info">
-              {%- if product.type != blank -%}
-                <span class="namu-coll-grid__card-type">{{ product.type }}</span>
-              {%- endif -%}
+              <div class="namu-coll-grid__card-stars" aria-label="5 de 5 estrelas">
+                <svg viewBox="0 0 24 24" fill="var(--namu-verde-matcha)" aria-hidden="true"><polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9"/></svg>
+                <svg viewBox="0 0 24 24" fill="var(--namu-verde-matcha)" aria-hidden="true"><polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9"/></svg>
+                <svg viewBox="0 0 24 24" fill="var(--namu-verde-matcha)" aria-hidden="true"><polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9"/></svg>
+                <svg viewBox="0 0 24 24" fill="var(--namu-verde-matcha)" aria-hidden="true"><polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9"/></svg>
+                <svg viewBox="0 0 24 24" fill="var(--namu-verde-matcha)" aria-hidden="true"><polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9"/></svg>
+              </div>
               <h3 class="namu-coll-grid__card-title">{{ product.title }}</h3>
               <div class="namu-coll-grid__card-price">
                 {%- if product.compare_at_price > product.price -%}
                   <span class="namu-coll-grid__price-compare">{{ product.compare_at_price | money }}</span>
+                  <span class="namu-coll-grid__price-sale">{{ product.price | money }}</span>
+                {%- elsif product.price_varies -%}
+                  <span class="namu-coll-grid__price-current">A partir de {{ product.price_min | money }}</span>
+                {%- else -%}
+                  <span class="namu-coll-grid__price-current">{{ product.price | money }}</span>
                 {%- endif -%}
-                <span class="namu-coll-grid__price-current">{{ product.price | money }}</span>
               </div>
             </div>
           </a>
         {%- endfor -%}
       </div>
 
-      {%- if paginate.pages > 1 -%}
-        <div class="namu-coll-grid__loadmore">
-          <p class="namu-coll-grid__progress">Mostrando {{ paginate.current_offset | plus: collection.products.size }} de {{ collection.products_count }}</p>
-          {%- if paginate.next -%}
-            <a href="{{ paginate.next.url }}" class="namu-coll-grid__loadmore-btn" id="namu-loadmore">
-              Carregar mais produtos
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-            </a>
-          {%- endif -%}
+      {%- if collection.products_count > 9 -%}
+        <div class="namu-coll-grid__ver-mais">
+          <a href="{{ collection.url }}" class="namu-coll-grid__ver-mais-link">
+            Ver mais produtos
+            <svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="1" y1="5" x2="13" y2="5"/><polyline points="9 1 13 5 9 9"/></svg>
+          </a>
         </div>
       {%- endif -%}
     </main>
@@ -173,38 +149,7 @@
   "name": "Collection Grid",
   "tag": "section",
   "class": "shopify-section-namu-collection-grid",
-  "settings": [
-    {
-      "type": "header",
-      "content": "Banner Editorial (aparece após 6 produtos)"
-    },
-    {
-      "type": "image_picker",
-      "id": "banner_image",
-      "label": "Imagem do banner"
-    },
-    {
-      "type": "text",
-      "id": "banner_title",
-      "label": "Título do banner"
-    },
-    {
-      "type": "textarea",
-      "id": "banner_text",
-      "label": "Texto do banner"
-    },
-    {
-      "type": "text",
-      "id": "banner_cta",
-      "label": "Texto do botão",
-      "default": "Saiba mais"
-    },
-    {
-      "type": "url",
-      "id": "banner_link",
-      "label": "Link do botão"
-    }
-  ],
+  "settings": [],
   "presets": [
     {
       "name": "Collection Grid"

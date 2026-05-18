@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "namu-policy",
+      "settings": {
+        "eyebrow": "Jurídico",
+        "title": "Termos de Serviço",
+        "subtitle": "Condições gerais de uso do site e responsabilidades na compra de produtos Namu Matcha.",
+        "last_updated": "Maio de 2025"
+      }
+    }
+  },
+  "order": ["main"]
+}

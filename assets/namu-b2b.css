@@ -123,7 +123,8 @@ html { scroll-behavior: smooth; }
   overflow: hidden;
 }
 
-.namu-b2b-page .b2b-viewport-first .marquee {
+.namu-b2b-page .b2b-viewport-first .marquee,
+.namu-b2b-page .b2b-viewport-first .namu-marquee-global {
   flex-shrink: 0;
 }
 .namu-b2b-page .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.55; border-radius: 0; }
@@ -131,7 +132,7 @@ html { scroll-behavior: smooth; }
 .namu-b2b-page .hero-content {
   position: relative;
   z-index: 10;
-  max-width: 650px;
+  max-width: 780px;
   padding-top: var(--namu-header-height-desktop);
   color: white;
   animation: b2bHeroIn 0.9s cubic-bezier(0.4, 0, 0.2, 1) both;
@@ -142,8 +143,8 @@ html { scroll-behavior: smooth; }
 }
 @media (prefers-reduced-motion: reduce) { .namu-b2b-page .hero-content { animation: none; } }
 
-.namu-b2b-page .hero h1 { font-size: clamp(28px, 4.5vw, 48px); margin-bottom: 24px; letter-spacing: -0.01em; color: white; max-width: 100%; }
-.namu-b2b-page .hero p { font-size: clamp(17px, 2vw, 20px); font-weight: 300; margin-bottom: 40px; opacity: 0.95; max-width: 550px; line-height: 1.6; }
+.namu-b2b-page .hero h1 { font-size: clamp(24px, 3.8vw, 40px); margin-bottom: 16px; letter-spacing: -0.01em; color: white; max-width: 100%; }
+.namu-b2b-page .hero p { font-size: clamp(15px, 1.6vw, 17px); font-weight: 300; margin-bottom: 28px; opacity: 0.95; max-width: 680px; line-height: 1.6; }
 .namu-b2b-page .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
 
 /* ── MARQUEE ────────────────────────────────── */
@@ -153,11 +154,20 @@ html { scroll-behavior: smooth; }
 @keyframes b2bScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* ── BENEFÍCIOS ─────────────────────────────── */
-.namu-b2b-page .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+.namu-b2b-page #beneficios { overflow: visible; }
+.namu-b2b-page .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
 .namu-b2b-page .benefit-card { padding: 40px; background: white; border: 1px solid var(--b2b-border); border-radius: var(--b2b-radius-md); transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease; }
 .namu-b2b-page .benefit-card:hover { border-color: var(--b2b-primary); transform: translateY(-5px); box-shadow: var(--b2b-shadow-md); }
 .namu-b2b-page .benefit-card h3 { font-size: 22px; margin-bottom: 12px; color: var(--b2b-primary); }
 .namu-b2b-page .benefit-card p { font-size: 15px; color: var(--b2b-text-muted); line-height: 1.7; font-weight: 300; }
+
+/* ── BENEFÍCIOS: Tablet 2 colunas ────────────── */
+@media (max-width: 992px) and (min-width: 769px) {
+  .namu-b2b-page .benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
 
 /* ── BENEFÍCIOS: Mobile Sticky Stack ───────────── */
 @media (max-width: 768px) {

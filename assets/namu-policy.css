@@ -1,0 +1,213 @@
+/* ══════════════════════════════════════════════════════
+   NAMU POLICY PAGES — Institutional Pages
+   ══════════════════════════════════════════════════════ */
+
+.namu-policy {
+  margin-top: var(--namu-header-overlap);
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Header ──────────────────────────────────────────── */
+.namu-policy__header {
+  background: var(--namu-branco-porcelana);
+  padding: calc(var(--namu-header-height-desktop) + 3rem) 1.5rem 3rem;
+  text-align: center;
+}
+
+.namu-policy__header-inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.namu-policy__eyebrow {
+  display: inline-block;
+  font-family: var(--namu-font-body);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--namu-verde-matcha);
+  background: rgba(4, 81, 51, 0.08);
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--namu-radius-pill);
+  margin-bottom: 1rem;
+}
+
+.namu-policy__title {
+  font-family: var(--namu-font-heading);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 400;
+  color: var(--namu-cinza-sombra);
+  margin: 0 0 0.75rem;
+  line-height: 1.2;
+}
+
+.namu-policy__subtitle {
+  font-family: var(--namu-font-body);
+  font-size: 0.95rem;
+  color: var(--namu-color-text-muted);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── Content Body ────────────────────────────────────── */
+.namu-policy__body {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+}
+
+.namu-policy__section {
+  margin-bottom: 2.5rem;
+}
+
+.namu-policy__section-title {
+  font-family: var(--namu-font-heading);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--namu-cinza-sombra);
+  margin: 0 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.namu-policy__text {
+  font-family: var(--namu-font-body);
+  font-size: 0.9rem;
+  color: var(--namu-color-text-muted);
+  line-height: 1.75;
+  margin: 0 0 1rem;
+}
+
+.namu-policy__text:last-child {
+  margin-bottom: 0;
+}
+
+.namu-policy__text strong {
+  color: var(--namu-cinza-sombra);
+  font-weight: 600;
+}
+
+/* ── Callout Box ─────────────────────────────────────── */
+.namu-policy__callout {
+  background: rgba(4, 81, 51, 0.04);
+  border-left: 3px solid var(--namu-verde-matcha);
+  padding: 1.25rem 1.5rem;
+  border-radius: 0 5px 5px 0;
+  margin: 1.25rem 0;
+}
+
+.namu-policy__callout p {
+  font-family: var(--namu-font-body);
+  font-size: 0.85rem;
+  color: var(--namu-cinza-sombra);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── List ────────────────────────────────────────────── */
+.namu-policy__list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.namu-policy__list li {
+  position: relative;
+  padding-left: 1.25rem;
+  font-family: var(--namu-font-body);
+  font-size: 0.88rem;
+  color: var(--namu-color-text-muted);
+  line-height: 1.7;
+  margin-bottom: 0.5rem;
+}
+
+.namu-policy__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--namu-verde-matcha);
+}
+
+/* ── Contact CTA ─────────────────────────────────────── */
+.namu-policy__contact {
+  background: var(--namu-branco-porcelana);
+  border-radius: 5px;
+  padding: 2rem;
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.namu-policy__contact-title {
+  font-family: var(--namu-font-heading);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--namu-cinza-sombra);
+  margin: 0 0 0.5rem;
+}
+
+.namu-policy__contact-text {
+  font-family: var(--namu-font-body);
+  font-size: 0.85rem;
+  color: var(--namu-color-text-muted);
+  margin: 0 0 1.25rem;
+  line-height: 1.6;
+}
+
+.namu-policy__contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--namu-verde-matcha);
+  color: #fff;
+  font-family: var(--namu-font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: var(--namu-radius-pill);
+  transition: background var(--namu-transition-fast), transform var(--namu-transition-fast);
+}
+
+.namu-policy__contact-btn:hover {
+  background: var(--namu-verde-puro);
+  transform: translateY(-1px);
+}
+
+/* ── Last Updated ────────────────────────────────────── */
+.namu-policy__updated {
+  font-family: var(--namu-font-body);
+  font-size: 0.75rem;
+  color: var(--namu-color-text-muted);
+  text-align: center;
+  margin-top: 2rem;
+  opacity: 0.7;
+}
+
+/* ── Mobile ──────────────────────────────────────────── */
+@media (max-width: 992px) {
+  .namu-policy {
+    margin-top: calc(var(--namu-header-height-mobile) * -1);
+  }
+
+  .namu-policy__header {
+    padding-top: calc(var(--namu-header-height-mobile) + 2.5rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .namu-policy__body {
+    padding: 2rem 1.25rem 3rem;
+  }
+
+  .namu-policy__callout {
+    padding: 1rem 1.25rem;
+  }
+}

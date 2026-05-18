@@ -39,7 +39,7 @@
 }
 
 .namu-nl__logo {
-  max-width: 140px;
+  max-width: 196px;
   height: auto;
   display: block;
   object-fit: contain;
@@ -52,8 +52,8 @@
 }
 
 .namu-nl__flag {
-  width: 32px;
-  height: 22px;
+  width: 45px;
+  height: 31px;
   object-fit: cover;
   border-radius: 0;
   display: block;
@@ -127,11 +127,16 @@
 
 .namu-nl__subtitle {
   font-family: var(--namu-font-body, sans-serif);
-  font-size: 0.78rem;
+  font-size: 1rem;
   font-weight: 400;
   color: #777;
   margin: 0;
   line-height: 1.6;
+}
+
+.namu-nl__subtitle strong {
+  font-weight: 700;
+  color: #333;
 }
 
 /* ── Col 3-5: Form ───────────────────────────────────── */
@@ -156,6 +161,7 @@
   .namu-nl__form {
     flex-direction: row;
     align-items: flex-end;
+    justify-content: flex-end;
     gap: 0.75rem;
   }
 }
@@ -165,7 +171,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
-  flex: 1;
+  flex: 0 1 180px;
   min-width: 0;
 }
 

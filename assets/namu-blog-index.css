@@ -92,7 +92,7 @@
 
 .namu-blog-idx__featured-media {
   display: block;
-  border-radius: var(--namu-radius-lg);
+  border-radius: 5px;
   overflow: hidden;
 }
 
@@ -239,7 +239,7 @@
 
 .namu-blog-idx__card-media {
   display: block;
-  border-radius: var(--namu-radius-md);
+  border-radius: 5px;
   overflow: hidden;
   margin-bottom: 1rem;
 }

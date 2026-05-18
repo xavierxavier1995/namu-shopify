@@ -5,7 +5,8 @@
 /* ── Hero ────────────────────────────────────────────── */
 .namu-coll-hero {
   position: relative;
-  min-height: 220px;
+  min-height: 320px;
+  margin-top: var(--namu-header-overlap);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -36,6 +37,7 @@
   z-index: 1;
   text-align: center;
   padding: 4rem 1.5rem;
+  padding-top: calc(4rem + var(--namu-header-height-desktop, 88px));
   max-width: 700px;
   margin: 0 auto;
 }
@@ -321,21 +323,25 @@
   gap: 1.5rem;
 }
 
-/* ── Product Card ────────────────────────────────────── */
+/* ── Product Card (estilo homepage) ──────────────────── */
 .namu-coll-grid__card {
   text-decoration: none;
   color: inherit;
   display: flex;
   flex-direction: column;
-  border-radius: var(--namu-radius-lg);
-  overflow: hidden;
-  background: #fff;
+  background: transparent;
+  transition: transform 0.25s ease;
+}
+
+.namu-coll-grid__card:hover {
+  transform: translateY(-3px);
 }
 
 .namu-coll-grid__card-media {
   position: relative;
   aspect-ratio: 3 / 4;
   overflow: hidden;
+  border-radius: 5px;
   background: var(--namu-branco-porcelana);
 }
 
@@ -343,6 +349,13 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
+  border-radius: 5px;
+  transition: transform 0.35s ease;
+}
+
+.namu-coll-grid__card:hover .namu-coll-grid__card-img {
+  transform: scale(1.02);
 }
 
 .namu-coll-grid__card-placeholder {
@@ -354,58 +367,100 @@
   position: absolute;
   top: 0.75rem;
   left: 0.75rem;
-  padding: 0.25rem 0.6rem;
-  background: var(--namu-laranja-premium);
+  padding: 0.3rem 0.7rem;
+  background: var(--namu-cinza-sombra);
   color: #fff;
   font-family: var(--namu-font-body);
   font-size: 0.65rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.08em;
-  border-radius: var(--namu-radius-pill);
+  text-transform: uppercase;
+  border-radius: 999px;
+  line-height: 1;
 }
 
 .namu-coll-grid__card-info {
-  padding: 1rem 0.75rem;
+  padding: 1rem 0.5rem;
+  text-align: center;
 }
 
-.namu-coll-grid__card-type {
-  font-family: var(--namu-font-body);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--namu-verde-matcha);
-  display: block;
-  margin-bottom: 0.3rem;
+.namu-coll-grid__card-stars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.namu-coll-grid__card-stars svg {
+  width: 14px;
+  height: 14px;
 }
 
 .namu-coll-grid__card-title {
   font-family: var(--namu-font-body);
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--namu-cinza-sombra);
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.4rem;
   line-height: 1.35;
 }
 
 .namu-coll-grid__card-price {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .namu-coll-grid__price-compare {
   font-family: var(--namu-font-body);
   font-size: 0.82rem;
-  color: var(--namu-color-text-muted);
+  color: #aaa;
   text-decoration: line-through;
 }
 
 .namu-coll-grid__price-current {
   font-family: var(--namu-font-body);
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   font-weight: 600;
   color: var(--namu-cinza-sombra);
+}
+
+.namu-coll-grid__price-sale {
+  font-family: var(--namu-font-body);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--namu-verde-puro);
+}
+
+/* ── Ver Mais Link ──────────────────────────────────── */
+.namu-coll-grid__ver-mais {
+  margin-top: 2.5rem;
+  text-align: center;
+}
+
+.namu-coll-grid__ver-mais-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--namu-font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--namu-verde-matcha);
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--namu-verde-matcha);
+  padding-bottom: 0.15rem;
+  transition: gap var(--namu-transition-fast), color var(--namu-transition-fast);
+}
+
+.namu-coll-grid__ver-mais-link:hover {
+  gap: 0.75rem;
+  color: var(--namu-verde-puro);
+  border-color: var(--namu-verde-puro);
 }
 
 /* ── Editorial Banner ────────────────────────────────── */
@@ -477,41 +532,6 @@
   border-color: var(--namu-verde-puro);
 }
 
-/* ── Load More ───────────────────────────────────────── */
-.namu-coll-grid__loadmore {
-  margin-top: 2.5rem;
-  text-align: center;
-}
-
-.namu-coll-grid__progress {
-  font-family: var(--namu-font-body);
-  font-size: 0.78rem;
-  color: var(--namu-color-text-muted);
-  margin: 0 0 1rem;
-}
-
-.namu-coll-grid__loadmore-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.85rem 2rem;
-  background: transparent;
-  border: 1.5px solid var(--namu-cinza-sombra);
-  border-radius: var(--namu-radius-pill);
-  font-family: var(--namu-font-body);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--namu-cinza-sombra);
-  text-decoration: none;
-  transition: background var(--namu-transition-base), color var(--namu-transition-base);
-}
-
-.namu-coll-grid__loadmore-btn:hover {
-  background: var(--namu-cinza-sombra);
-  color: #fff;
-}
 
 /* ── SEO Content ─────────────────────────────────────── */
 .namu-coll-seo {
@@ -844,7 +864,11 @@
   }
 
   .namu-coll-grid__card-info {
-    padding: 0.75rem 0.5rem;
+    padding: 0.75rem 0.25rem;
+  }
+
+  .namu-coll-grid__card-title {
+    font-size: 0.82rem;
   }
 
   .namu-coll-related__grid {

@@ -2,7 +2,15 @@
   "sections": {
     "namu_blog_index": {
       "type": "namu-blog-index",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "m1": { "type": "marquee_text", "settings": { "text": "Cultura do matcha" } },
+        "m2": { "type": "marquee_text", "settings": { "text": "Rituais de bem-estar" } },
+        "m3": { "type": "marquee_text", "settings": { "text": "Receitas exclusivas" } },
+        "m4": { "type": "marquee_text", "settings": { "text": "Saúde e energia" } },
+        "m5": { "type": "marquee_text", "settings": { "text": "Tradição coreana" } }
+      },
+      "block_order": ["m1", "m2", "m3", "m4", "m5"]
     }
   },
   "order": [

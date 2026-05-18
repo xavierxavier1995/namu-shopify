@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "namu-policy",
+      "settings": {
+        "eyebrow": "Logística",
+        "title": "Política de Frete",
+        "subtitle": "Entenda como funciona o envio dos nossos produtos, prazos e cuidados especiais com o seu matcha.",
+        "last_updated": "Maio de 2025"
+      }
+    }
+  },
+  "order": ["main"]
+}

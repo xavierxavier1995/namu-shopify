@@ -44,7 +44,7 @@
         <p class="namu-nl__title">{{ section.settings.title | escape }}</p>
       {%- endif -%}
       {%- if section.settings.subtitle != blank -%}
-        <p class="namu-nl__subtitle">{{ section.settings.subtitle | escape }}</p>
+        <p class="namu-nl__subtitle">{{ section.settings.subtitle }}</p>
       {%- endif -%}
     </div>
 
@@ -164,7 +164,7 @@
       "type": "text",
       "id": "subtitle",
       "label": "Subtítulo",
-      "default": "Receba receitas exclusivas, novidades e ofertas especiais direto no seu e-mail."
+      "default": "Receba receitas exclusivas, novidades e <strong>ofertas exclusivas direto no seu e-mail</strong>."
     },
     {
       "type": "header",

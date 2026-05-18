@@ -1,0 +1,69 @@
+{% render 'css-defer', file: 'namu-policy.css' %}
+
+<div class="namu-policy">
+
+  <header class="namu-policy__header">
+    <div class="namu-policy__header-inner">
+      <span class="namu-policy__eyebrow">{{ section.settings.eyebrow }}</span>
+      <h1 class="namu-policy__title">{{ section.settings.title }}</h1>
+      <p class="namu-policy__subtitle">{{ section.settings.subtitle }}</p>
+    </div>
+  </header>
+
+  <div class="namu-policy__body">
+    <div class="rte">
+      {{ page.content }}
+    </div>
+
+    <div class="namu-policy__contact">
+      <h2 class="namu-policy__contact-title">Ficou com alguma dúvida?</h2>
+      <p class="namu-policy__contact-text">Nossa equipe está pronta para ajudar. Fale diretamente com o Suporte Namu Matcha.</p>
+      <a href="https://wa.me/5511999999999" target="_blank" rel="noopener" class="namu-policy__contact-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        Falar com Suporte
+      </a>
+    </div>
+
+    <p class="namu-policy__updated">Última atualização: {{ section.settings.last_updated }}</p>
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Página de Política",
+  "tag": "section",
+  "class": "shopify-section-namu-policy",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Tag Superior",
+      "default": "Institucional"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título da Página",
+      "default": "Política"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Transparência e segurança em cada detalhe."
+    },
+    {
+      "type": "text",
+      "id": "last_updated",
+      "label": "Data da última atualização",
+      "default": "Maio de 2025"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Página de Política"
+    }
+  ]
+}
+{% endschema %}

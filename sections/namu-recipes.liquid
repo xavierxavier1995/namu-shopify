@@ -67,19 +67,6 @@
             {%- comment -%} Overlay {%- endcomment -%}
             <div class="namu-rec__overlay" aria-hidden="true"></div>
 
-            {%- comment -%} Content on top of overlay {%- endcomment -%}
-            <div class="namu-rec__content">
-              <div class="namu-rec__bottom">
-                <h3 class="namu-rec__name">{{ block.settings.title | escape }}</h3>
-                <span class="namu-rec__arrow" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="4" y1="10" x2="16" y2="10"/>
-                    <polyline points="11 5 16 10 11 15"/>
-                  </svg>
-                </span>
-              </div>
-            </div>
-
           </a>
         </div>
       {%- endfor -%}

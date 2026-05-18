@@ -1,0 +1,58 @@
+{% doc %}
+Renders an infinite-scroll marquee strip with duplicated items for seamless loop.
+@param {Array} items - Array of text strings to display
+@param {String} [bg_color] - Background color (CSS value), defaults to var(--namu-branco-porcelana)
+@param {String} [border_color] - Border-bottom color, defaults to rgba(0,0,0,0.05)
+@param {String} [text_color] - Text color, defaults to var(--namu-color-text-muted)
+@param {String} [speed] - Animation duration, defaults to 35s
+@example
+{% render 'marquee-global', items: my_array, bg_color: 'var(--b2b-bg-warm)' %}
+{% enddoc %}
+
+{%- assign marquee_bg = bg_color | default: 'var(--namu-branco-porcelana)' -%}
+{%- assign marquee_border = border_color | default: 'rgba(0,0,0,0.05)' -%}
+{%- assign marquee_text = text_color | default: 'var(--namu-color-text-muted)' -%}
+{%- assign marquee_speed = speed | default: '35s' -%}
+
+<div class="namu-marquee-global" aria-hidden="true" style="--marquee-bg:{{ marquee_bg }};--marquee-border:{{ marquee_border }};--marquee-text:{{ marquee_text }};--marquee-speed:{{ marquee_speed }};">
+  <div class="namu-marquee-global__track">
+    {%- for item in items -%}
+      <span>✦ {{ item }}</span>
+    {%- endfor -%}
+    {%- for item in items -%}
+      <span>✦ {{ item }}</span>
+    {%- endfor -%}
+  </div>
+</div>
+
+<style>
+  .namu-marquee-global {
+    background: var(--marquee-bg);
+    border-bottom: 1px solid var(--marquee-border);
+    padding: 18px 0;
+    overflow: hidden;
+    display: flex;
+  }
+  .namu-marquee-global__track {
+    display: flex;
+    gap: 80px;
+    animation: namuMarqueeGlobal var(--marquee-speed) linear infinite;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .namu-marquee-global__track span {
+    font-family: var(--namu-font-body, 'Work Sans', sans-serif);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--marquee-text);
+    text-transform: uppercase;
+  }
+  @keyframes namuMarqueeGlobal {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .namu-marquee-global__track { animation: none; }
+  }
+</style>

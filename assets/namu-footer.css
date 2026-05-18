@@ -78,10 +78,15 @@
 }
 
 .namu-ft__newsletter-desc {
-  font-size: 0.78rem;
+  font-size: 1rem;
   color: rgba(255, 255, 255, 0.6);
   margin: 0;
   line-height: 1.5;
+}
+
+.namu-ft__newsletter-desc strong {
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .namu-ft__newsletter-form {
@@ -157,7 +162,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 0.85rem;
+  font-size: 1.1rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -195,7 +200,7 @@
 
 /* ── Links ──────────────────────────────────────────── */
 .namu-ft__link {
-  font-size: 0.88rem;
+  font-size: 1.14rem;
   color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
   transition: color 0.2s ease;
@@ -207,7 +212,7 @@
 
 /* ── Sub-headings ───────────────────────────────────── */
 .namu-ft__sub-heading {
-  font-size: 0.72rem;
+  font-size: 0.94rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   color: rgba(255, 255, 255, 0.55);
@@ -216,7 +221,7 @@
 
 /* ── Contact links ──────────────────────────────────── */
 .namu-ft__contact-link {
-  font-size: 0.82rem;
+  font-size: 1.07rem;
   color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
   display: block;
@@ -230,7 +235,7 @@
 
 /* ── Info block ─────────────────────────────────────── */
 .namu-ft__info p {
-  font-size: 0.82rem;
+  font-size: 1.07rem;
   color: rgba(255, 255, 255, 0.75);
   margin: 0;
   line-height: 1.5;

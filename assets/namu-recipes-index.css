@@ -125,7 +125,7 @@
   max-width: 1320px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
 }
 
@@ -138,7 +138,7 @@
 .namu-rec-idx__card-media {
   display: block;
   position: relative;
-  border-radius: var(--namu-radius-md);
+  border-radius: 5px;
   overflow: hidden;
   margin-bottom: 0.75rem;
 }
@@ -181,6 +181,7 @@
   color: var(--namu-cinza-sombra);
   margin: 0;
   line-height: 1.35;
+  text-align: center;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -190,6 +191,33 @@
 .namu-rec-idx__card-title a {
   color: inherit;
   text-decoration: none;
+}
+
+.namu-rec-idx__card-excerpt {
+  font-family: var(--namu-font-body);
+  font-size: 0.8rem;
+  color: var(--namu-color-text-muted);
+  margin: 0.4rem 0 0;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.namu-rec-idx__card-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-family: var(--namu-font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--namu-verde-matcha);
+  text-decoration: none;
+  text-align: center;
+  width: 100%;
+}
+
+.namu-rec-idx__card-link:hover {
+  opacity: 0.7;
 }
 
 /* ── Pagination ─────────────────────────────────────── */

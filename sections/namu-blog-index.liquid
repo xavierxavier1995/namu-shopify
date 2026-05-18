@@ -62,10 +62,16 @@
 
   <div class="namu-blog-idx__filters">
     <div class="namu-blog-idx__filters-inner">
-      <a href="{{ blog.url }}" class="namu-blog-idx__filter-pill {% if current_tags == blank %}namu-blog-idx__filter-pill--active{% endif %}">Todos</a>
-      {%- for tag in blog.all_tags -%}
-        <a href="{{ blog.url }}/tagged/{{ tag | handleize }}" class="namu-blog-idx__filter-pill {% if current_tags contains tag %}namu-blog-idx__filter-pill--active{% endif %}">{{ tag }}</a>
-      {%- endfor -%}
+      <a href="{{ blog.url }}" class="namu-blog-idx__filter-pill {% if current_tags == blank %}namu-blog-idx__filter-pill--active{% endif %}">Ver todas</a>
+      <a href="{{ blog.url }}/tagged/matcha-tradicional" class="namu-blog-idx__filter-pill {% if current_tags contains 'matcha-tradicional' %}namu-blog-idx__filter-pill--active{% endif %}">Matcha Tradicional</a>
+      <a href="{{ blog.url }}/tagged/coreia-do-sul" class="namu-blog-idx__filter-pill {% if current_tags contains 'coreia-do-sul' %}namu-blog-idx__filter-pill--active{% endif %}">Coreia do Sul</a>
+      <a href="{{ blog.url }}/tagged/hadong" class="namu-blog-idx__filter-pill {% if current_tags contains 'hadong' %}namu-blog-idx__filter-pill--active{% endif %}">Hadong</a>
+      <a href="{{ blog.url }}/tagged/armazenamento-chasen" class="namu-blog-idx__filter-pill {% if current_tags contains 'armazenamento-chasen' %}namu-blog-idx__filter-pill--active{% endif %}">Armazenamento Chasen</a>
+      <a href="{{ blog.url }}/tagged/dia-das-maes" class="namu-blog-idx__filter-pill {% if current_tags contains 'dia-das-maes' %}namu-blog-idx__filter-pill--active{% endif %}">Dia das Mães</a>
+      <a href="{{ blog.url }}/tagged/eventos" class="namu-blog-idx__filter-pill {% if current_tags contains 'eventos' %}namu-blog-idx__filter-pill--active{% endif %}">Eventos</a>
+      <a href="{{ blog.url }}/tagged/l-teanina" class="namu-blog-idx__filter-pill {% if current_tags contains 'l-teanina' %}namu-blog-idx__filter-pill--active{% endif %}">L-Teanina</a>
+      <a href="{{ blog.url }}/tagged/matcha-meditacao" class="namu-blog-idx__filter-pill {% if current_tags contains 'matcha-meditacao' %}namu-blog-idx__filter-pill--active{% endif %}">Matcha Meditação</a>
+      <a href="{{ blog.url }}/tagged/presente" class="namu-blog-idx__filter-pill {% if current_tags contains 'presente' %}namu-blog-idx__filter-pill--active{% endif %}">Presente</a>
     </div>
   </div>
 

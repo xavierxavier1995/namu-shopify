@@ -14,19 +14,33 @@
             "label": "Loja",
             "link": "/collections/all",
             "has_mega_menu": true,
+            "show_arrow": true,
             "column_heading": "Categorias",
-            "submenu_links": "Best Sellers|/collections/best-sellers\nMatchá Cerimonial|/collections/matcha-cerimonial\nMatchá Premium|/collections/matcha-premium\nMatchá Vanilla|/collections/matcha-vanilla\nHojicha|/collections/hojicha\nKits & Acessórios|/collections/kits",
-            "shop_all_label": "Ver tudo",
+            "submenu_links": "Mais vendidos|/collections/all\nMatchas|/collections/all\nUtensílios para chá|/collections/all\nColaborações|/collections/all\nKits & Gifts|/collections/all\nVestuário|/collections/all",
+            "shop_all_label": "VER TODAS →",
             "shop_all_link": "/collections/all",
             "feature_1_label": "Kit Iniciante",
-            "feature_1_link": "/collections/kits",
+            "feature_1_link": "/collections/all",
             "feature_2_label": "Kit Lançamento",
-            "feature_2_link": "/products/hojicha"
+            "feature_2_link": "/collections/all"
           }
         },
         "menu-receitas": {
           "type": "menu_item",
-          "settings": { "label": "Receitas", "link": "/blogs/receitas-matcha", "show_arrow": true }
+          "settings": {
+            "label": "Receitas",
+            "link": "/blogs/receitas-matcha",
+            "has_mega_menu": true,
+            "show_arrow": true,
+            "column_heading": "Categorias",
+            "submenu_links": "Destaques|/blogs/receitas-matcha/tagged/destaques\nBebidas Quentes|/blogs/receitas-matcha/tagged/bebidas-quentes\nBebidas Geladas|/blogs/receitas-matcha/tagged/bebidas-geladas\nComidinhas|/blogs/receitas-matcha/tagged/comidinhas",
+            "shop_all_label": "VER TODAS →",
+            "shop_all_link": "/blogs/receitas-matcha",
+            "feature_1_label": "Bebidas Quentes",
+            "feature_1_link": "/blogs/receitas-matcha/tagged/bebidas-quentes",
+            "feature_2_label": "Bebidas Geladas",
+            "feature_2_link": "/blogs/receitas-matcha/tagged/bebidas-geladas"
+          }
         },
         "menu-sobre": {
           "type": "menu_item",
@@ -34,7 +48,7 @@
         },
         "menu-blog": {
           "type": "menu_item",
-          "settings": { "label": "Blog", "link": "/blogs/noticias", "show_arrow": true }
+          "settings": { "label": "Blog", "link": "/blogs/noticias" }
         },
         "menu-b2b": {
           "type": "menu_item",

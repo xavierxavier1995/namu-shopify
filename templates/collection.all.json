@@ -1,7 +1,18 @@
 {
   "sections": {
     "hero": { "type": "namu-collection-hero", "settings": {} },
-    "trust": { "type": "namu-collection-trust", "settings": {} },
+    "trust": {
+      "type": "namu-collection-trust",
+      "settings": {},
+      "blocks": {
+        "b1": { "type": "benefit", "settings": { "text": "Matcha direto de Hadong" } },
+        "b2": { "type": "benefit", "settings": { "text": "Processo 100% rastreável" } },
+        "b3": { "type": "benefit", "settings": { "text": "+5.000 clientes satisfeitos" } },
+        "b4": { "type": "benefit", "settings": { "text": "100% orgânico" } },
+        "b5": { "type": "benefit", "settings": { "text": "Energia limpa + foco" } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4", "b5"]
+    },
     "grid": { "type": "namu-collection-grid", "settings": {} },
     "seo": { "type": "namu-collection-seo", "settings": {} },
     "faq": {

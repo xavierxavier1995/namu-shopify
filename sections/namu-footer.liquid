@@ -14,7 +14,7 @@
       <div class="namu-ft__newsletter-content">
         <div class="namu-ft__newsletter-text">
           <h4 class="namu-ft__newsletter-title">Faça parte da nossa comunidade</h4>
-          <p class="namu-ft__newsletter-desc">Ganhe um presente na sua primeira compra! Além disso, receba receitas exclusivas, novidades e ofertas direto no seu e-mail.</p>
+          <p class="namu-ft__newsletter-desc">Ganhe um presente na sua primeira compra! Além disso, receba receitas exclusivas, novidades e <strong>ofertas exclusivas direto no seu e-mail</strong>.</p>
         </div>
         {% form 'customer', class: 'namu-ft__newsletter-form' %}
           <input type="hidden" name="contact[tags]" value="newsletter">
@@ -86,7 +86,7 @@
             <a href="/pages/faq" class="namu-ft__link">Perguntas Frequentes (FAQ)</a>
             <a href="/pages/contato" class="namu-ft__link">Fale Conosco</a>
           </nav>
-          <p class="namu-ft__sub-heading">Precisa falar com um humano?</p>
+          <p class="namu-ft__sub-heading"><strong>Precisa falar com um humano?</strong></p>
           <a href="mailto:alo@namumatcha.com.br" class="namu-ft__contact-link">alo@namumatcha.com.br</a>
           <a href="tel:+5511930876268" class="namu-ft__contact-link">+55 11 93087-6268</a>
         </details>
@@ -100,14 +100,6 @@
             <a href="/account" class="namu-ft__link">Meus pedidos</a>
             <a href="#namu-nl-form" class="namu-ft__link">Cadastrar na Newsletter</a>
           </nav>
-        </details>
-        <details class="namu-ft__accordion" open>
-          <summary class="namu-ft__col-heading">Meios de Pagamento<span class="namu-ft__chevron" aria-hidden="true"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 1 5 5 9 1"/></svg></span></summary>
-          <div class="namu-ft__payment-icons">
-            {%- for type in shop.enabled_payment_types -%}
-              {{ type | payment_type_svg_tag: class: 'namu-ft__pay-icon' }}
-            {%- endfor -%}
-          </div>
         </details>
       </div>
 
@@ -136,10 +128,10 @@
 
   <div class="namu-ft__policies">
     <div class="namu-ft__policies-inner">
-      <a href="/policies/shipping-policy">Envio e Frete</a>
-      <a href="/policies/privacy-policy">Privacidade</a>
-      <a href="/policies/terms-of-service">Termos de Serviço</a>
-      <a href="/policies/refund-policy">Troca e Devoluções</a>
+      <a href="/pages/politica-de-frete">Política de Frete</a>
+      <a href="/pages/politica-de-privacidade">Privacidade</a>
+      <a href="/pages/termos-de-servico">Termos de Serviço</a>
+      <a href="/pages/politica-de-trocas">Trocas e Devoluções</a>
     </div>
   </div>
 

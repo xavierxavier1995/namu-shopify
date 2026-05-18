@@ -2,7 +2,15 @@
   "sections": {
     "namu_recipes_index": {
       "type": "namu-recipes-index",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "m1": { "type": "marquee_text", "settings": { "text": "Receitas fáceis e rápidas" } },
+        "m2": { "type": "marquee_text", "settings": { "text": "Matcha de alta qualidade" } },
+        "m3": { "type": "marquee_text", "settings": { "text": "Bebidas quentes e geladas" } },
+        "m4": { "type": "marquee_text", "settings": { "text": "Inspiração para o dia a dia" } },
+        "m5": { "type": "marquee_text", "settings": { "text": "Superalimento coreano" } }
+      },
+      "block_order": ["m1", "m2", "m3", "m4", "m5"]
     }
   },
   "order": [

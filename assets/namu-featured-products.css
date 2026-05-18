@@ -159,6 +159,8 @@
   align-items: center;
   justify-content: center;
   transform: translateZ(0);
+  will-change: transform;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
 }
 
 .namu-fp__card-img {

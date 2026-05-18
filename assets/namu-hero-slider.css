@@ -33,13 +33,13 @@
   flex: 0 0 100%;
   min-width: 0;
   position: relative;
-  height: 100vh;
+  height: calc(100vh - 56px);
   background: var(--namu-branco-porcelana);
 }
 
 @media (max-width: 749px) {
   .namu-hero__slide {
-    height: 100vh;
+    height: calc(100vh - 48px);
   }
 }
 

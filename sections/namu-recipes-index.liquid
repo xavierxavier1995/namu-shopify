@@ -7,7 +7,7 @@
 
   <div class="namu-rec-idx__header">
     <div class="namu-rec-idx__header-inner">
-      <h1 class="namu-rec-idx__title">Receitas</h1>
+      <h1 class="namu-rec-idx__title">Guia de Receitas Namu</h1>
       <p class="namu-rec-idx__subtitle">Explore nossas receitas com matcha e descubra novas formas de incluir esse superalimento no seu dia a dia.</p>
     </div>
   </div>
@@ -29,9 +29,10 @@
 
   <div class="namu-rec-idx__filters" role="navigation" aria-label="Filtros de receitas">
     <div class="namu-rec-idx__filters-inner">
-      <button type="button" class="namu-rec-idx__pill namu-rec-idx__pill--active" data-filter="all">Todas</button>
-      <button type="button" class="namu-rec-idx__pill" data-filter="bebidas-quentes">Bebidas Quentes</button>
+      <button type="button" class="namu-rec-idx__pill namu-rec-idx__pill--active" data-filter="all">Ver todas</button>
+      <button type="button" class="namu-rec-idx__pill" data-filter="destaques">Destaques</button>
       <button type="button" class="namu-rec-idx__pill" data-filter="bebidas-geladas">Bebidas Geladas</button>
+      <button type="button" class="namu-rec-idx__pill" data-filter="bebidas-quentes">Bebidas Quentes</button>
       <button type="button" class="namu-rec-idx__pill" data-filter="comidinhas">Comidinhas</button>
     </div>
   </div>
@@ -69,6 +70,10 @@
           <h3 class="namu-rec-idx__card-title">
             <a href="{{ article.url }}">{{ article.title }}</a>
           </h3>
+          {%- if article.excerpt != blank -%}
+            <p class="namu-rec-idx__card-excerpt">{{ article.excerpt | strip_html | truncate: 80 }}</p>
+          {%- endif -%}
+          <a href="{{ article.url }}" class="namu-rec-idx__card-link">Ver receita</a>
         </article>
       {%- endfor -%}
     </div>
