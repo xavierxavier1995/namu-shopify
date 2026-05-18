@@ -393,15 +393,15 @@
 
 .namu-pdp__atc-btn {
   flex: 1;
-  height: 48px;
+  height: 52px;
   background: var(--namu-verde-matcha);
   color: #fff;
   border: none;
   border-radius: 5px;
   font-family: var(--namu-font-body);
-  font-size: 0.85rem;
+  font-size: 1rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   cursor: pointer;
   transition: background var(--namu-transition-fast), transform var(--namu-transition-fast);
@@ -827,10 +827,8 @@
 
 .namu-pdp__gift-alert {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
-  gap: 0.15rem;
+  gap: 0.75rem;
   background: rgba(4, 81, 51, 0.06);
   border-radius: 5px;
   padding: 1rem 1.25rem;
@@ -838,10 +836,21 @@
   animation: namu-gift-slide 0.6s ease-out;
 }
 
+.namu-pdp__gift-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(4, 81, 51, 0.1);
+  border-radius: 50%;
+  color: var(--namu-verde-matcha);
+}
+
 .namu-pdp__gift-text {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 0.1rem;
 }
 
@@ -956,4 +965,237 @@
   height: 6px;
   border-radius: 50%;
   background: var(--namu-verde-matcha);
+}
+
+/* ══════════════════════════════════════════════════════════
+   SECTION: Benefícios do Matcha
+   ══════════════════════════════════════════════════════════ */
+.namu-pdp__benefits {
+  background: var(--namu-branco-porcelana);
+  padding: 4rem 1.5rem;
+}
+
+.namu-pdp__benefits-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.namu-pdp__benefits-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.namu-pdp__benefits-label {
+  display: block;
+  font-family: var(--namu-font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--namu-verde-matcha);
+  margin-bottom: 0.5rem;
+}
+
+.namu-pdp__benefits-title {
+  font-family: var(--namu-font-heading);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 700;
+  color: var(--namu-cinza-sombra);
+  margin: 0;
+}
+
+.namu-pdp__benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.namu-pdp__benefits-card {
+  background: #fff;
+  border-radius: 5px;
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.6rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  transition: transform var(--namu-transition-base), box-shadow var(--namu-transition-base);
+}
+
+.namu-pdp__benefits-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.namu-pdp__benefits-icon {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(4, 81, 51, 0.08);
+  border-radius: 50%;
+  color: var(--namu-verde-matcha);
+  margin-bottom: 0.25rem;
+}
+
+.namu-pdp__benefits-card-title {
+  font-family: var(--namu-font-body);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--namu-cinza-sombra);
+  margin: 0;
+}
+
+.namu-pdp__benefits-card-text {
+  font-family: var(--namu-font-body);
+  font-size: 0.82rem;
+  color: var(--namu-color-text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ══════════════════════════════════════════════════════════
+   SECTION: Tabs / Accordions
+   ══════════════════════════════════════════════════════════ */
+.namu-pdp__tabs {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+}
+
+.namu-pdp__tabs-inner {
+  width: 100%;
+}
+
+.namu-pdp__tabs-title {
+  font-family: var(--namu-font-heading);
+  font-size: clamp(1.3rem, 2.5vw, 1.85rem);
+  font-weight: 700;
+  color: var(--namu-cinza-sombra);
+  margin: 0 0 1.5rem;
+  text-align: center;
+}
+
+.namu-pdp__tabs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.namu-pdp__tabs-item {
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.namu-pdp__tabs-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 0;
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--namu-font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--namu-cinza-sombra);
+  transition: color var(--namu-transition-fast);
+}
+
+.namu-pdp__tabs-item summary::-webkit-details-marker { display: none; }
+
+.namu-pdp__tabs-item summary:hover { color: var(--namu-verde-matcha); }
+
+.namu-pdp__tabs-chevron {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--namu-color-text-muted);
+  transition: transform var(--namu-transition-base);
+}
+
+.namu-pdp__tabs-item[open] .namu-pdp__tabs-chevron {
+  transform: rotate(180deg);
+}
+
+.namu-pdp__tabs-content {
+  padding: 0 0 1.5rem;
+  font-family: var(--namu-font-body);
+  font-size: 0.88rem;
+  color: var(--namu-color-text-muted);
+  line-height: 1.75;
+}
+
+.namu-pdp__tabs-content ol,
+.namu-pdp__tabs-content ul {
+  padding-left: 1.25rem;
+  margin: 0.5rem 0;
+}
+
+.namu-pdp__tabs-content li {
+  margin-bottom: 0.5rem;
+}
+
+/* ══════════════════════════════════════════════════════════
+   SECTION: Sobre a Namu (Institucional)
+   ══════════════════════════════════════════════════════════ */
+.namu-pdp__about-namu {
+  position: relative;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url('https://images.unsplash.com/photo-1556881286-fc6915169721?w=1400&q=80') center/cover no-repeat;
+  overflow: hidden;
+}
+
+.namu-pdp__about-namu-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 51, 32, 0.75);
+  z-index: 1;
+}
+
+.namu-pdp__about-namu-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  text-align: center;
+  padding: 3.5rem 1.5rem;
+}
+
+.namu-pdp__about-namu-label {
+  display: block;
+  font-family: var(--namu-font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 0.6rem;
+}
+
+.namu-pdp__about-namu-title {
+  font-family: var(--namu-font-heading);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 1rem;
+}
+
+.namu-pdp__about-namu-text {
+  font-family: var(--namu-font-body);
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.88);
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* ── Mobile: Novas seções ──────────────────────────────── */
+@media (max-width: 768px) {
+  .namu-pdp__benefits { padding: 2.5rem 1rem; }
+  .namu-pdp__benefits-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .namu-pdp__tabs { padding: 2.5rem 1rem; }
+  .namu-pdp__about-namu { min-height: 320px; }
+  .namu-pdp__about-namu-content { padding: 2.5rem 1.25rem; }
 }

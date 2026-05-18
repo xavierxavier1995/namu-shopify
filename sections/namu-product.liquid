@@ -221,6 +221,9 @@
 
       {%- comment -%} Gift alert (brinde — preço > R$199,00) {%- endcomment -%}
       <div class="namu-pdp__gift-alert" id="NamuGiftAlert-{{ section.id }}" {% unless current_variant.price > 19900 %}style="display:none;"{% endunless %}>
+        <span class="namu-pdp__gift-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+        </span>
         <div class="namu-pdp__gift-text">
           <strong>BRINDE GRÁTIS DESBLOQUEADO!</strong>
           <span>Brinde especial em compras acima de <b>R$199,00</b></span>
@@ -386,6 +389,111 @@
       </div>
     </section>
   {%- endif -%}
+
+  {%- comment -%} ── SEÇÃO 1: BENEFÍCIOS DO MATCHA ──────────────── {%- endcomment -%}
+  <section class="namu-pdp__benefits">
+    <div class="namu-pdp__benefits-inner">
+      <div class="namu-pdp__benefits-header">
+        <span class="namu-pdp__benefits-label">PUREZA CERTIFICADA</span>
+        <h2 class="namu-pdp__benefits-title">O Segredo do Matcha Puro Namu</h2>
+      </div>
+      <div class="namu-pdp__benefits-grid">
+        <div class="namu-pdp__benefits-card">
+          <span class="namu-pdp__benefits-icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12"/><path d="M12 6v6l4 2"/></svg>
+          </span>
+          <h3 class="namu-pdp__benefits-card-title">Foco Cognitivo</h3>
+          <p class="namu-pdp__benefits-card-text">L-Teanina natural que promove concentração sem ansiedade, ideal para longas horas de trabalho criativo.</p>
+        </div>
+        <div class="namu-pdp__benefits-card">
+          <span class="namu-pdp__benefits-icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </span>
+          <h3 class="namu-pdp__benefits-card-title">Energia Prolongada</h3>
+          <p class="namu-pdp__benefits-card-text">Cafeína de liberação lenta que mantém sua energia estável por até 6 horas, sem picos ou crashes.</p>
+        </div>
+        <div class="namu-pdp__benefits-card">
+          <span class="namu-pdp__benefits-icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </span>
+          <h3 class="namu-pdp__benefits-card-title">137x Mais Antioxidantes</h3>
+          <p class="namu-pdp__benefits-card-text">Catequinas EGCG em concentração máxima. Proteção celular superior a qualquer outro chá verde.</p>
+        </div>
+        <div class="namu-pdp__benefits-card">
+          <span class="namu-pdp__benefits-icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </span>
+          <h3 class="namu-pdp__benefits-card-title">Ritual de Bem-Estar</h3>
+          <p class="namu-pdp__benefits-card-text">Mais que um chá: um momento de presença e autocuidado que transforma sua rotina diária.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ── SEÇÃO 2: MARQUEE ROTATIVO ────────────────── {%- endcomment -%}
+  {%- assign marquee_items = 'Matcha Cerimonial' | append: ',' | append: 'Origem Uji, Japão' | append: ',' | append: '100% Orgânico' | append: ',' | append: 'Sem Aditivos' | append: ',' | append: 'Colheita Premium' | append: ',' | append: 'Moído em Pedra' | append: ',' | append: 'Frescor Garantido' | append: ',' | append: 'Energia Limpa' | split: ',' -%}
+  {% render 'marquee-global', items: marquee_items, bg_color: 'var(--namu-verde-matcha)', text_color: '#fff', speed: '30s' %}
+
+  {%- comment -%} ── SEÇÃO 3: TABS / ACCORDIONS ─────────────────── {%- endcomment -%}
+  <section class="namu-pdp__tabs">
+    <div class="namu-pdp__tabs-inner">
+      <h2 class="namu-pdp__tabs-title">Informações do Produto</h2>
+      <div class="namu-pdp__tabs-list">
+        <details class="namu-pdp__tabs-item" open>
+          <summary>
+            Descrição do Produto
+            <svg class="namu-pdp__tabs-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="namu-pdp__tabs-content">
+            {{ product.description }}
+          </div>
+        </details>
+        <details class="namu-pdp__tabs-item">
+          <summary>
+            Ingredientes e Composição
+            <svg class="namu-pdp__tabs-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="namu-pdp__tabs-content">
+            {%- if product.metafields.custom.ingredientes != blank -%}
+              {{ product.metafields.custom.ingredientes | metafield_tag }}
+            {%- else -%}
+              <p>100% Matcha Orgânico (Camellia sinensis). Sem adição de açúcares, conservantes ou corantes artificiais. Certificado JAS Orgânico.</p>
+            {%- endif -%}
+          </div>
+        </details>
+        <details class="namu-pdp__tabs-item">
+          <summary>
+            Como Preparar / Como Usar
+            <svg class="namu-pdp__tabs-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="namu-pdp__tabs-content">
+            {%- if product.metafields.custom.como_preparar != blank -%}
+              {{ product.metafields.custom.como_preparar | metafield_tag }}
+            {%- else -%}
+              <ol>
+                <li>Peneire 1-2g de matcha (½ colher de chá) em uma tigela.</li>
+                <li>Adicione 70ml de água quente (70-80°C, nunca fervente).</li>
+                <li>Bata com o chasen (batedor de bambu) em movimentos de "M" ou "W" por 15-20 segundos até formar uma espuma cremosa.</li>
+                <li>Para matcha latte: adicione leite vegetal gelado ou quente a gosto.</li>
+              </ol>
+            {%- endif -%}
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ── SEÇÃO 4: SOBRE A NAMU (INSTITUCIONAL) ──────── {%- endcomment -%}
+  <section class="namu-pdp__about-namu">
+    <div class="namu-pdp__about-namu-overlay"></div>
+    <div class="namu-pdp__about-namu-content">
+      <span class="namu-pdp__about-namu-label">NOSSA ORIGEM</span>
+      <h2 class="namu-pdp__about-namu-title">Da Plantação à Sua Xícara</h2>
+      <p class="namu-pdp__about-namu-text">
+        A Namu nasce da conexão direta com produtores familiares em Uji, Kyoto — a região mais prestigiada do mundo para cultivo de matcha. Cada lote é colhido à mão, sombreado por 21 dias e moído lentamente em moinhos de pedra de granito, preservando cor, aroma e nutrientes. Nosso propósito é trazer o matcha mais puro do Japão para o seu ritual diário de bem-estar.
+      </p>
+    </div>
+  </section>
 
 </div>
 
