@@ -36,36 +36,39 @@
 
       <div class="namu-ft__col">
         <details class="namu-ft__accordion" open>
-          <summary class="namu-ft__col-heading">Compras<span class="namu-ft__chevron" aria-hidden="true"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 1 5 5 9 1"/></svg></span></summary>
-          <nav aria-label="Compras">
-            <a href="/collections/all" class="namu-ft__link">Todos os produtos</a>
-            <a href="/collections/matcha-cerimonial" class="namu-ft__link">Matchas</a>
-            <a href="/collections/utensilios" class="namu-ft__link">Utensílios para chá</a>
-            <a href="/collections/colaboracoes" class="namu-ft__link">Colaborações</a>
-            <a href="/collections/kits" class="namu-ft__link">Kits & Gifts</a>
-            <a href="/collections/vestuario" class="namu-ft__link">Vestuário</a>
+          <summary class="namu-ft__col-heading">{{ section.settings.menu_1_title | default: 'Compras' }}<span class="namu-ft__chevron" aria-hidden="true"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 1 5 5 9 1"/></svg></span></summary>
+          <nav aria-label="{{ section.settings.menu_1_title | default: 'Compras' }}">
+            {%- for link in linklists[section.settings.menu_1].links -%}
+              <a href="{{ link.url }}" class="namu-ft__link">{{ link.title }}</a>
+            {%- endfor -%}
           </nav>
         </details>
         <details class="namu-ft__accordion" open>
-          <summary class="namu-ft__col-heading">Atacado<span class="namu-ft__chevron" aria-hidden="true"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 1 5 5 9 1"/></svg></span></summary>
-          <nav aria-label="Atacado">
-            <a href="/pages/b2b" class="namu-ft__link">Para Seu Negócio</a>
-            <a href="/pages/atacado" class="namu-ft__link">Atacado</a>
+          <summary class="namu-ft__col-heading">{{ section.settings.menu_2_title | default: 'Atacado' }}<span class="namu-ft__chevron" aria-hidden="true"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 1 5 5 9 1"/></svg></span></summary>
+          <nav aria-label="{{ section.settings.menu_2_title | default: 'Atacado' }}">
+            {%- for link in linklists[section.settings.menu_2].links -%}
+              <a href="{{ link.url }}" class="namu-ft__link">{{ link.title }}</a>
+            {%- endfor -%}
           </nav>
         </details>
       </div>
 
       <div class="namu-ft__col">
         <details class="namu-ft__accordion" open>
-          <summary class="namu-ft__col-heading">Institucional<span class="namu-ft__chevron" aria-hidden="true"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 1 5 5 9 1"/></svg></span></summary>
-          <nav aria-label="Institucional">
-            <a href="/pages/sobre" class="namu-ft__link">Sobre</a>
-            <a href="/blogs/noticias" class="namu-ft__link">Blog</a>
-            <a href="/pages/nossos-campos" class="namu-ft__link">Nossos campos</a>
-            <a href="/blogs/receitas" class="namu-ft__link">Receitas</a>
-            <a href="/blogs/noticias/o-que-e-matcha" class="namu-ft__link">O que é Matcha</a>
-            <a href="/blogs/noticias/guia-preparo-matcha" class="namu-ft__link">Como fazer Matcha</a>
+          <summary class="namu-ft__col-heading">{{ section.settings.menu_3_title | default: 'Institucional' }}<span class="namu-ft__chevron" aria-hidden="true"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 1 5 5 9 1"/></svg></span></summary>
+          <nav aria-label="{{ section.settings.menu_3_title | default: 'Institucional' }}">
+            {%- for link in linklists[section.settings.menu_3].links -%}
+              <a href="{{ link.url }}" class="namu-ft__link">{{ link.title }}</a>
+            {%- endfor -%}
+          </nav>
+        </details>
+        <details class="namu-ft__accordion" open>
+          <summary class="namu-ft__col-heading">Blog<span class="namu-ft__chevron" aria-hidden="true"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 1 5 5 9 1"/></svg></span></summary>
+          <nav aria-label="Blog">
+            <a href="/blogs/noticias/o-que-e-matcha" class="namu-ft__link">O que é Matcha?</a>
+            <a href="/blogs/noticias/guia-preparo-matcha" class="namu-ft__link">Guia de Preparo</a>
             <a href="/blogs/noticias/beneficios-do-matcha" class="namu-ft__link">Benefícios do Matcha</a>
+            <a href="/blogs/noticias" class="namu-ft__link">Ver todos os artigos</a>
           </nav>
         </details>
         <details class="namu-ft__accordion" open>
@@ -81,10 +84,11 @@
 
       <div class="namu-ft__col">
         <details class="namu-ft__accordion" open>
-          <summary class="namu-ft__col-heading">Precisando de ajuda?<span class="namu-ft__chevron" aria-hidden="true"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 1 5 5 9 1"/></svg></span></summary>
-          <nav aria-label="Ajuda">
-            <a href="/pages/faq" class="namu-ft__link">Perguntas Frequentes (FAQ)</a>
-            <a href="/pages/contato" class="namu-ft__link">Fale Conosco</a>
+          <summary class="namu-ft__col-heading">{{ section.settings.menu_4_title | default: 'Precisando de ajuda?' }}<span class="namu-ft__chevron" aria-hidden="true"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 1 5 5 9 1"/></svg></span></summary>
+          <nav aria-label="{{ section.settings.menu_4_title | default: 'Ajuda' }}">
+            {%- for link in linklists[section.settings.menu_4].links -%}
+              <a href="{{ link.url }}" class="namu-ft__link">{{ link.title }}</a>
+            {%- endfor -%}
           </nav>
           <p class="namu-ft__sub-heading"><strong>Precisa falar com um humano?</strong></p>
           <a href="mailto:alo@namumatcha.com.br" class="namu-ft__contact-link">alo@namumatcha.com.br</a>
@@ -94,11 +98,11 @@
 
       <div class="namu-ft__col">
         <details class="namu-ft__accordion" open>
-          <summary class="namu-ft__col-heading">Minha Conta<span class="namu-ft__chevron" aria-hidden="true"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 1 5 5 9 1"/></svg></span></summary>
-          <nav aria-label="Minha Conta">
-            <a href="/account/login" class="namu-ft__link">Entrar ou Cadastrar</a>
-            <a href="/account" class="namu-ft__link">Meus pedidos</a>
-            <a href="#namu-nl-form" class="namu-ft__link">Cadastrar na Newsletter</a>
+          <summary class="namu-ft__col-heading">{{ section.settings.menu_5_title | default: 'Minha Conta' }}<span class="namu-ft__chevron" aria-hidden="true"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 1 5 5 9 1"/></svg></span></summary>
+          <nav aria-label="{{ section.settings.menu_5_title | default: 'Minha Conta' }}">
+            {%- for link in linklists[section.settings.menu_5].links -%}
+              <a href="{{ link.url }}" class="namu-ft__link">{{ link.title }}</a>
+            {%- endfor -%}
           </nav>
         </details>
       </div>
@@ -164,7 +168,72 @@
   "name": "Footer Namu",
   "tag": "section",
   "class": "shopify-section-namu-footer",
-  "settings": [],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Menus de navegação"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_1",
+      "label": "Menu 1 (Compras)",
+      "default": "footer"
+    },
+    {
+      "type": "text",
+      "id": "menu_1_title",
+      "label": "Título do Menu 1",
+      "default": "Compras"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_2",
+      "label": "Menu 2 (Atacado)",
+      "default": "footer"
+    },
+    {
+      "type": "text",
+      "id": "menu_2_title",
+      "label": "Título do Menu 2",
+      "default": "Atacado"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_3",
+      "label": "Menu 3 (Institucional)",
+      "default": "footer"
+    },
+    {
+      "type": "text",
+      "id": "menu_3_title",
+      "label": "Título do Menu 3",
+      "default": "Institucional"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_4",
+      "label": "Menu 4 (Ajuda)",
+      "default": "footer"
+    },
+    {
+      "type": "text",
+      "id": "menu_4_title",
+      "label": "Título do Menu 4",
+      "default": "Precisando de ajuda?"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_5",
+      "label": "Menu 5 (Minha Conta)",
+      "default": "footer"
+    },
+    {
+      "type": "text",
+      "id": "menu_5_title",
+      "label": "Título do Menu 5",
+      "default": "Minha Conta"
+    }
+  ],
   "blocks": [],
   "default": {}
 }

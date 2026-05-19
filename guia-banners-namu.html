@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia de Banners — Namu Matcha (para Designer)</title>
+<style>
+:root{--verde:#045133;--verde-puro:#78C33F;--cinza:#2D2D2D;--bg:#F8F5F0;--font:'Inter',-apple-system,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);color:var(--cinza);line-height:1.7;background:#fff}
+.wrap{max-width:960px;margin:0 auto;padding:3rem 2rem}
+h1{font-size:2.2rem;color:var(--verde);margin-bottom:.3rem}
+h2{font-size:1.5rem;color:var(--verde);margin:3rem 0 1rem;border-bottom:2px solid var(--verde-puro);padding-bottom:.5rem}
+h3{font-size:1.15rem;margin:2rem 0 .5rem;color:var(--cinza)}
+h4{font-size:1rem;margin:1.2rem 0 .4rem}
+p{margin-bottom:1rem}
+.sub{color:#666;font-size:1rem;margin-bottom:2.5rem}
+table{width:100%;border-collapse:collapse;margin:1rem 0 2rem;font-size:.9rem}
+th,td{padding:.7rem 1rem;text-align:left;border:1px solid #ddd}
+th{background:var(--bg);font-weight:600}
+code{background:#f0f0f0;padding:2px 6px;border-radius:3px;font-size:.85em}
+.note{background:#e8f5e9;border-left:4px solid var(--verde-puro);padding:1rem 1.5rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+.warn{background:#fff3e0;border-left:4px solid #ff9800;padding:1rem 1.5rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+.danger{background:#fce4ec;border-left:4px solid #e53935;padding:1rem 1.5rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+ul,ol{margin:.5rem 0 1.5rem 1.5rem}
+li{margin-bottom:.4rem}
+.visual{background:var(--bg);border:1px solid #ddd;border-radius:8px;padding:0;margin:1.5rem 0;overflow:hidden}
+.visual-label{background:var(--verde);color:#fff;padding:.5rem 1rem;font-size:.75rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.visual-body{padding:1.5rem;position:relative}
+.banner-sim{position:relative;width:100%;background:#1a3a2a;border-radius:6px;overflow:hidden}
+.banner-sim--desktop{aspect-ratio:16/9}
+.banner-sim--mobile{aspect-ratio:9/16;max-width:280px;margin:0 auto}
+.pill{position:absolute;top:16px;left:24px;right:24px;height:56px;background:#fff;border-radius:999px;box-shadow:0 2px 12px rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center;font-size:.7rem;color:#666;font-weight:600;z-index:10}
+.pill--mobile{top:12px;left:12px;right:12px;height:48px}
+.zone{position:absolute;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:rgba(255,255,255,.9);text-transform:uppercase;letter-spacing:.05em}
+.zone--dead{background:rgba(255,0,0,.25);border:1px dashed rgba(255,0,0,.6)}
+.zone--safe{background:rgba(0,255,0,.12);border:2px solid rgba(0,255,0,.5)}
+.zone--cut{background:rgba(255,165,0,.2);border:1px dashed rgba(255,165,0,.7)}
+.measure{position:absolute;font-size:.6rem;color:#fff;background:rgba(0,0,0,.6);padding:2px 5px;border-radius:3px;white-space:nowrap}
+.toc{background:var(--bg);padding:1.5rem 2rem;border-radius:8px;margin-bottom:2.5rem}
+.toc ol{margin:.5rem 0 0 1.5rem}
+.toc li{margin-bottom:.3rem}
+.toc a{color:var(--verde);text-decoration:none}
+.toc a:hover{text-decoration:underline}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:1.5rem 0}
+@media(max-width:600px){.grid-2{grid-template-columns:1fr}.wrap{padding:2rem 1rem}h1{font-size:1.6rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Guia de Banners Hero — Namu Matcha</h1>
+<p class="sub">Documento para Designer | Medidas exatas em px e % | v3.0 — Maio 2026</p>
+
+<div class="toc">
+<strong>Sumário</strong>
+<ol>
+<li><a href="#conceito">Conceito: Banner Fullscreen + Pílula Flutuante</a></li>
+<li><a href="#medidas">Medidas Exatas (px e %)</a></li>
+<li><a href="#desktop">Desktop — Diagrama Visual</a></li>
+<li><a href="#mobile">Mobile — Diagrama Visual</a></li>
+<li><a href="#safe">Zonas Seguras (Safe Zones)</a></li>
+<li><a href="#crop">Como o Crop Funciona</a></li>
+<li><a href="#ultrawide">Ultrawide (2560px+)</a></li>
+<li><a href="#texto">Posição do Texto no Banner</a></li>
+<li><a href="#checklist">Checklist de Entrega</a></li>
+<li><a href="#erros">Erros Comuns</a></li>
+</ol>
+</div>
+
+<h2 id="conceito">1. Conceito: Banner Fullscreen + Pílula Flutuante</h2>
+
+<p>O sistema de banners da Namu funciona assim:</p>
+<ul>
+<li>O banner <strong>ocupa 100% da altura da tela</strong> (viewport) menos 56px do announcement bar</li>
+<li>O header é uma <strong>pílula branca flutuante</strong> que fica POR CIMA do banner (não empurra o conteúdo)</li>
+<li>A imagem usa <code>object-fit: cover</code> — ela é CORTADA para preencher o espaço</li>
+<li>O corte sempre acontece a partir das BORDAS em direção ao CENTRO</li>
+</ul>
+
+<div class="note">
+<strong>Regra de ouro:</strong> O assunto principal da foto SEMPRE deve estar no centro. Nunca nas bordas. As bordas serão cortadas em algum dispositivo.
+</div>
+
+<h3>O que é a pílula flutuante?</h3>
+<p>É o header do site — uma barra branca com cantos arredondados, sombra suave, que flutua sobre o banner. Ela tem <code>position: fixed</code> e <code>z-index: 50</code>, ou seja, fica sempre visível no topo da tela, sobrepondo qualquer conteúdo abaixo.</p>
+
+<div class="warn">
+<strong>A pílula NUNCA muda de cor.</strong> Ela é sempre branca, independente do fundo do banner. Isso significa que a área superior do banner (onde a pílula fica) terá uma barra branca sobreposta — não coloque informações importantes ali.
+</div>
+
+<h2 id="medidas">2. Medidas Exatas (px e %)</h2>
+
+<h3>Dimensões do Banner (imagem a ser entregue)</h3>
+<table>
+<tr><th>Versão</th><th>Largura</th><th>Altura</th><th>Proporção</th><th>Peso máx.</th><th>Formato</th></tr>
+<tr><td><strong>Desktop</strong></td><td>2560px</td><td>1440px</td><td>16:9</td><td>200kb</td><td>WebP ou JPG</td></tr>
+<tr><td><strong>Mobile</strong></td><td>1080px</td><td>1920px</td><td>9:16</td><td>150kb</td><td>WebP ou JPG</td></tr>
+</table>
+
+<h3>Dimensões da Pílula (header)</h3>
+<table>
+<tr><th>Propriedade</th><th>Desktop (≥990px)</th><th>Mobile (&lt;990px)</th></tr>
+<tr><td>Altura da pílula</td><td><strong>88px</strong></td><td><strong>72px</strong></td></tr>
+<tr><td>Margem do topo da tela</td><td>~16px</td><td>~12px</td></tr>
+<tr><td>Margem lateral</td><td>~24px</td><td>~12px</td></tr>
+<tr><td>Zona morta total (topo)</td><td><strong>120px</strong> (8.3% da imagem)</td><td><strong>100px</strong> (5.2% da imagem)</td></tr>
+</table>
+
+<h3>Altura visível do banner na tela</h3>
+<table>
+<tr><th>Dispositivo</th><th>Fórmula CSS</th><th>Exemplo real</th></tr>
+<tr><td>Desktop 1080p</td><td><code>100vh - 56px</code></td><td>1080 - 56 = <strong>1024px</strong></td></tr>
+<tr><td>Desktop 1440p</td><td><code>100vh - 56px</code></td><td>1440 - 56 = <strong>1384px</strong></td></tr>
+<tr><td>iPhone 14 Pro</td><td><code>100vh - 56px</code></td><td>852 - 56 = <strong>796px</strong></td></tr>
+<tr><td>iPhone SE</td><td><code>100vh - 56px</code></td><td>667 - 56 = <strong>611px</strong></td></tr>
+<tr><td>Galaxy S21</td><td><code>100vh - 56px</code></td><td>915 - 56 = <strong>859px</strong></td></tr>
+</table>
+
+<p>Os <strong>56px</strong> são do announcement bar (faixa de promoção no topo). Se não houver announcement bar, o banner ocupa 100vh inteiro.</p>
+
+<h2 id="desktop">3. Desktop — Diagrama Visual</h2>
+
+<p>Abaixo, uma simulação proporcional de como o banner aparece no desktop (16:9):</p>
+
+<div class="visual">
+<div class="visual-label">Desktop — 2560 x 1440px (16:9)</div>
+<div class="visual-body">
+<div class="banner-sim banner-sim--desktop">
+  <div class="pill">LOGO &nbsp;&nbsp;&nbsp; NAV LINKS &nbsp;&nbsp;&nbsp; BUSCA | CART</div>
+  <div class="zone zone--dead" style="top:0;left:0;right:0;height:8.3%">ZONA MORTA — 120px (8.3%)</div>
+  <div class="zone zone--cut" style="bottom:0;left:0;right:0;height:5.5%">ZONA DE CORTE — 80px (5.5%)</div>
+  <div class="zone zone--cut" style="top:8.3%;left:0;bottom:5.5%;width:7.8%">CORTE LATERAL<br>200px (7.8%)</div>
+  <div class="zone zone--cut" style="top:8.3%;right:0;bottom:5.5%;width:7.8%">CORTE LATERAL<br>200px (7.8%)</div>
+  <div class="zone zone--safe" style="top:20%;left:15%;right:15%;bottom:15%">ZONA SEGURA<br>Título + Subtítulo aqui<br>(centro da imagem)</div>
+  <div class="measure" style="top:8.3%;left:50%;transform:translateX(-50%)">↓ Abaixo daqui = visível</div>
+</div>
+</div>
+</div>
+
+<h3>Distribuição em porcentagem (Desktop 2560x1440)</h3>
+<table>
+<tr><th>Zona</th><th>Pixels</th><th>% da imagem</th><th>Descrição</th></tr>
+<tr><td>Zona morta (topo)</td><td>0 → 120px</td><td>0% → 8.3%</td><td>Pílula branca cobre esta área. NADA importante aqui.</td></tr>
+<tr><td>Zona segura (centro)</td><td>290px → 1150px</td><td>20% → 80%</td><td>Área onde o texto será posicionado pelo CSS. Assunto principal da foto aqui.</td></tr>
+<tr><td>Zona de corte (base)</td><td>1360px → 1440px</td><td>94.5% → 100%</td><td>Pode ser cortada em telas mais largas que 16:9.</td></tr>
+<tr><td>Zona de corte (laterais)</td><td>0 → 200px / 2360px → 2560px</td><td>0% → 7.8% / 92.2% → 100%</td><td>Cortada em ultrawide. Nunca colocar assunto aqui.</td></tr>
+</table>
+
+<h2 id="mobile">4. Mobile — Diagrama Visual</h2>
+
+<div class="grid-2">
+<div>
+<div class="visual">
+<div class="visual-label">Mobile — 1080 x 1920px (9:16)</div>
+<div class="visual-body">
+<div class="banner-sim banner-sim--mobile">
+  <div class="pill pill--mobile">LOGO &nbsp; MENU &nbsp; CART</div>
+  <div class="zone zone--dead" style="top:0;left:0;right:0;height:5.2%">MORTA 100px</div>
+  <div class="zone zone--cut" style="bottom:0;left:0;right:0;height:5.2%">CORTE 100px</div>
+  <div class="zone zone--cut" style="top:5.2%;left:0;bottom:5.2%;width:7.4%"></div>
+  <div class="zone zone--cut" style="top:5.2%;right:0;bottom:5.2%;width:7.4%"></div>
+  <div class="zone zone--safe" style="top:18%;left:12%;right:12%;bottom:15%">ZONA SEGURA<br><br>Título<br>Subtítulo</div>
+</div>
+</div>
+</div>
+</div>
+
+<div>
+<h4>Medidas Mobile (1080x1920)</h4>
+<table>
+<tr><th>Zona</th><th>Pixels</th><th>%</th></tr>
+<tr><td>Morta (topo)</td><td>0 → 100px</td><td>0 → 5.2%</td></tr>
+<tr><td>Corte (base)</td><td>1820 → 1920px</td><td>94.8 → 100%</td></tr>
+<tr><td>Corte (laterais)</td><td>80px cada</td><td>7.4% cada</td></tr>
+<tr><td>Segura (centro)</td><td>345 → 1630px vertical<br>130 → 950px horizontal</td><td>18-85% V<br>12-88% H</td></tr>
+</table>
+
+<div class="note">
+<strong>No mobile:</strong> A pílula é menor (72px vs 88px) e tem menos margem lateral (12px vs 24px). A zona morta é proporcionalmente menor porque a imagem é mais alta (1920px).
+</div>
+</div>
+</div>
+
+<h2 id="safe">5. Zonas Seguras — Resumo Visual</h2>
+
+<p>Pense na imagem como tendo 3 camadas concêntricas:</p>
+
+<div class="visual">
+<div class="visual-label">Modelo mental — 3 camadas</div>
+<div class="visual-body" style="text-align:center;padding:2rem">
+<div style="display:inline-block;width:100%;max-width:500px;aspect-ratio:16/9;background:repeating-linear-gradient(45deg,#ffcdd2,#ffcdd2 10px,#ef9a9a 10px,#ef9a9a 20px);border-radius:8px;position:relative">
+<div style="position:absolute;top:12%;left:10%;right:10%;bottom:10%;background:repeating-linear-gradient(45deg,#fff9c4,#fff9c4 10px,#fff176 10px,#fff176 20px);border-radius:6px">
+<div style="position:absolute;top:15%;left:12%;right:12%;bottom:12%;background:#c8e6c9;border-radius:4px;display:flex;align-items:center;justify-content:center;flex-direction:column">
+<strong style="font-size:.9rem;color:#1b5e20">ZONA SEGURA</strong>
+<span style="font-size:.75rem;color:#2e7d32">Assunto principal + texto</span>
+</div>
+</div>
+<span style="position:absolute;top:4px;left:50%;transform:translateX(-50%);font-size:.65rem;color:#b71c1c;font-weight:700">ZONA MORTA / CORTE (vermelho)</span>
+<span style="position:absolute;bottom:30%;left:50%;transform:translateX(-50%);font-size:.6rem;color:#f57f17;font-weight:600;white-space:nowrap">ZONA DE TRANSIÇÃO (amarelo) — pode ser cortada em alguns devices</span>
+</div>
+</div>
+</div>
+
+<table>
+<tr><th>Camada</th><th>Cor</th><th>Regra</th></tr>
+<tr><td>Vermelha (externa)</td><td style="background:#ffcdd2;width:30px"></td><td><strong>NUNCA</strong> colocar informação importante. Será coberta pela pílula ou cortada.</td></tr>
+<tr><td>Amarela (transição)</td><td style="background:#fff9c4;width:30px"></td><td>Pode ter elementos decorativos, mas nada essencial. Pode ser cortada em alguns dispositivos.</td></tr>
+<tr><td>Verde (centro)</td><td style="background:#c8e6c9;width:30px"></td><td><strong>SEMPRE</strong> visível em todos os dispositivos. Assunto principal aqui.</td></tr>
+</table>
+
+<h2 id="crop">6. Como o Crop (Corte) Funciona</h2>
+
+<p>O CSS <code>object-fit: cover</code> funciona assim:</p>
+<ol>
+<li>A imagem é redimensionada para PREENCHER todo o container (sem barras pretas)</li>
+<li>Se a proporção da imagem não bater com a proporção da tela, as bordas são cortadas</li>
+<li>O ponto de ancoragem é sempre o <strong>CENTRO</strong> da imagem</li>
+</ol>
+
+<h3>Exemplos práticos de crop</h3>
+<table>
+<tr><th>Cenário</th><th>Imagem</th><th>Tela</th><th>O que acontece</th></tr>
+<tr><td>Desktop normal</td><td>2560x1440 (16:9)</td><td>1920x1080 (16:9)</td><td>Sem corte — proporção idêntica. Apenas reduz.</td></tr>
+<tr><td>Ultrawide</td><td>2560x1440 (16:9)</td><td>3440x1440 (21:9)</td><td>Corta <strong>topo e base</strong> (~180px cada) para preencher a largura extra.</td></tr>
+<tr><td>Tablet portrait</td><td>2560x1440 (16:9)</td><td>768x1024 (3:4)</td><td>Corta <strong>laterais</strong> significativamente (~640px cada lado).</td></tr>
+<tr><td>Mobile (troca imagem)</td><td>1080x1920 (9:16)</td><td>390x844 (9:19)</td><td>Corta levemente <strong>laterais</strong> (~30px cada).</td></tr>
+</table>
+
+<div class="danger">
+<strong>Pior cenário:</strong> Tablet em portrait (768x1024) usando a imagem desktop (16:9). As laterais perdem ~25% de cada lado. Por isso o assunto DEVE estar no centro.
+</div>
+
+<h2 id="ultrawide">7. Ultrawide (2560px+)</h2>
+
+<p>Em monitores ultrawide (21:9, 32:9), a imagem desktop 16:9 será esticada verticalmente e as bordas superior/inferior serão cortadas:</p>
+
+<table>
+<tr><th>Monitor</th><th>Resolução</th><th>Proporção</th><th>Corte vertical</th><th>Corte lateral</th></tr>
+<tr><td>Full HD</td><td>1920x1080</td><td>16:9</td><td>0px</td><td>0px</td></tr>
+<tr><td>QHD</td><td>2560x1440</td><td>16:9</td><td>0px</td><td>0px</td></tr>
+<tr><td>Ultrawide</td><td>3440x1440</td><td>21:9</td><td>~180px topo + base</td><td>0px</td></tr>
+<tr><td>Super Ultrawide</td><td>5120x1440</td><td>32:9</td><td>~360px topo + base</td><td>0px</td></tr>
+</table>
+
+<div class="warn">
+<strong>Para a designer:</strong> Em ultrawide, a zona morta do topo (pílula) + o corte natural somam ~300px invisíveis no topo. Mantenha o assunto principal no terço central vertical da imagem.
+</div>
+
+<h2 id="texto">8. Posição do Texto no Banner</h2>
+
+<p>O texto (título + subtítulo) é posicionado pelo CSS, não pela imagem. Ele fica:</p>
+
+<table>
+<tr><th>Propriedade</th><th>Desktop</th><th>Mobile</th></tr>
+<tr><td>Alinhamento horizontal</td><td>Centro</td><td>Centro</td></tr>
+<tr><td>Alinhamento vertical</td><td>Centro (com padding-top de 88px para compensar pílula)</td><td>Centro (com padding-top de 72px)</td></tr>
+<tr><td>Largura máxima do texto</td><td>700px</td><td>90% da tela</td></tr>
+<tr><td>Cor do texto</td><td>#FFFFFF (branco)</td><td>#FFFFFF (branco)</td></tr>
+<tr><td>Overlay sobre imagem</td><td>rgba(0,0,0,0.35) — preto 35%</td><td>rgba(0,0,0,0.35)</td></tr>
+</table>
+
+<p>Isso significa que a imagem precisa ter tons <strong>médios a escuros</strong> no centro para o texto branco ser legível. O overlay de 35% ajuda, mas não salva imagens muito claras.</p>
+
+<h3>Contraste mínimo (WCAG AA)</h3>
+<ul>
+<li>Texto branco (#FFF) sobre overlay 35% em fundo médio = ratio ~5:1 (passa)</li>
+<li>Texto branco sobre overlay 35% em fundo claro (ex: céu azul claro) = ratio ~3:1 (FALHA)</li>
+<li><strong>Solução:</strong> Se a imagem for clara no centro, peça ao dev para aumentar overlay para 45-50%</li>
+</ul>
+
+<h2 id="checklist">9. Checklist de Entrega</h2>
+
+<h3>Para CADA banner, entregar:</h3>
+<table>
+<tr><th>#</th><th>Item</th><th>Desktop</th><th>Mobile</th></tr>
+<tr><td>1</td><td>Dimensão</td><td>2560 x 1440px</td><td>1080 x 1920px</td></tr>
+<tr><td>2</td><td>Proporção</td><td>16:9</td><td>9:16</td></tr>
+<tr><td>3</td><td>Peso</td><td>≤ 200kb</td><td>≤ 150kb</td></tr>
+<tr><td>4</td><td>Formato</td><td>WebP (preferido) ou JPG 80%</td><td>WebP ou JPG 80%</td></tr>
+<tr><td>5</td><td>Resolução</td><td>72dpi</td><td>72dpi</td></tr>
+<tr><td>6</td><td>Perfil de cor</td><td>sRGB</td><td>sRGB</td></tr>
+<tr><td>7</td><td>Assunto centralizado</td><td>Centro da imagem</td><td>Centro da imagem</td></tr>
+<tr><td>8</td><td>Zona morta respeitada</td><td>120px livres no topo</td><td>100px livres no topo</td></tr>
+<tr><td>9</td><td>Tom no centro</td><td>Médio a escuro</td><td>Médio a escuro</td></tr>
+<tr><td>10</td><td>Alt text</td><td colspan="2">Descrição da imagem para acessibilidade</td></tr>
+</table>
+
+<h3>Páginas que usam este sistema</h3>
+<table>
+<tr><th>Página</th><th>URL</th><th>Banners necessários</th></tr>
+<tr><td>Homepage (Hero Slider)</td><td>/</td><td>5 slides (desktop + mobile cada)</td></tr>
+<tr><td>Blog Index</td><td>/blogs/noticias</td><td>1 desktop + 1 mobile</td></tr>
+<tr><td>Receitas Index</td><td>/blogs/receitas-matcha</td><td>1 desktop + 1 mobile</td></tr>
+<tr><td>Artigos individuais</td><td>/blogs/noticias/*</td><td>1 desktop + 1 mobile por artigo</td></tr>
+<tr><td>Coleções</td><td>/collections/*</td><td>1 desktop + 1 mobile por coleção</td></tr>
+<tr><td>Página B2B</td><td>/pages/para-seu-negocio</td><td>1 desktop + 1 mobile</td></tr>
+<tr><td>Sobre a Namu</td><td>/pages/sobre-a-namu</td><td>1 desktop + 1 mobile</td></tr>
+</table>
+
+<h2 id="erros">10. Erros Comuns</h2>
+
+<div class="danger">
+<h4>Erro 1: Texto ou logo na parte superior da imagem</h4>
+<p>A pílula branca do header COBRE os primeiros 120px (desktop) / 100px (mobile). Qualquer texto ou logo nessa faixa será invisível.</p>
+</div>
+
+<div class="danger">
+<h4>Erro 2: Assunto principal na borda lateral</h4>
+<p>Em tablet portrait e ultrawide, as laterais são cortadas. Um rosto ou produto na borda esquerda/direita será cortado em ~25% dos dispositivos.</p>
+</div>
+
+<div class="warn">
+<h4>Erro 3: Imagem muito clara no centro</h4>
+<p>O texto do banner é branco. Se o centro da imagem for claro (branco, amarelo, azul claro), o texto fica ilegível mesmo com overlay de 35%.</p>
+</div>
+
+<div class="warn">
+<h4>Erro 4: Imagem pesada (>200kb)</h4>
+<p>Impacta diretamente o Lighthouse score e o tempo de carregamento. Use WebP com qualidade 75-80% para manter abaixo de 200kb sem perda visual perceptível.</p>
+</div>
+
+<div class="warn">
+<h4>Erro 5: Entregar apenas versão desktop</h4>
+<p>Se não houver versão mobile (9:16), o sistema usa a desktop (16:9) no celular — resultando em corte lateral extremo. Sempre entregar as duas versões.</p>
+</div>
+
+<hr style="margin:3rem 0;border:none;border-top:1px solid #e0e0e0">
+
+<h3>Como subir os banners no Shopify</h3>
+<ol>
+<li>Acesse o <strong>Theme Editor</strong> (Personalizar tema)</li>
+<li>Navegue até a página desejada</li>
+<li>Clique na seção do hero/banner</li>
+<li>Use os campos <strong>"Imagem Hero (desktop)"</strong> e <strong>"Imagem Hero (mobile)"</strong></li>
+<li>Faça upload das duas versões</li>
+<li>Preencha o campo "Alt text" com descrição da imagem</li>
+<li>Salve</li>
+</ol>
+
+<div class="note">
+<strong>Dica:</strong> O Shopify gera automaticamente versões menores (400w, 600w, 900w, 1200w, 1600w, 2000w, 2560w). Você só precisa fornecer a versão em tamanho máximo.
+</div>
+
+<hr style="margin:3rem 0;border:none;border-top:1px solid #e0e0e0">
+<p style="font-size:.8rem;color:#999;text-align:center">
+Documento gerado em maio/2026 — Namu Matcha Theme v3.0<br>
+Para dúvidas técnicas, consulte o desenvolvedor do tema.
+</p>
+
+</div>
+</body>
+</html>

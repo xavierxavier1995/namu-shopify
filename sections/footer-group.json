@@ -4,7 +4,18 @@
   "sections": {
     "namu-footer": {
       "type": "namu-footer",
-      "settings": {}
+      "settings": {
+        "menu_1": "footer-compras",
+        "menu_1_title": "Compras",
+        "menu_2": "footer-atacado",
+        "menu_2_title": "Atacado",
+        "menu_3": "footer-institucional",
+        "menu_3_title": "Institucional",
+        "menu_4": "footer-ajuda",
+        "menu_4_title": "Precisando de ajuda?",
+        "menu_5": "footer-minha-conta",
+        "menu_5_title": "Minha Conta"
+      }
     }
   },
   "order": [

@@ -70,12 +70,8 @@
             </div>
             <div class="namu-fp__card-info">
               <p class="namu-fp__card-title">{{ product.title | escape }}</p>
-              <div class="namu-fp__card-stars" aria-label="5 de 5 estrelas">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--namu-verde-matcha, #045133)" aria-hidden="true"><polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9"/></svg>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--namu-verde-matcha, #045133)" aria-hidden="true"><polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9"/></svg>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--namu-verde-matcha, #045133)" aria-hidden="true"><polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9"/></svg>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--namu-verde-matcha, #045133)" aria-hidden="true"><polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9"/></svg>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--namu-verde-matcha, #045133)" aria-hidden="true"><polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9"/></svg>
+              <div class="namu-fp__card-stars">
+                {% render 'namu-star-rating', count: 5, size: 14 %}
                 <span class="namu-fp__card-reviews">(0)</span>
               </div>
               <div class="namu-fp__card-price {%- if fp_on_sale %} namu-fp__card-price--sale{%- endif %}">

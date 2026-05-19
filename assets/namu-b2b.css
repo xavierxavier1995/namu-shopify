@@ -128,6 +128,8 @@ html { scroll-behavior: smooth; }
   flex-shrink: 0;
 }
 .namu-b2b-page .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.55; border-radius: 0; }
+.namu-b2b-page .hero-picture { position: absolute; inset: 0; width: 100%; height: 100%; }
+.namu-b2b-page .hero-picture img { width: 100%; height: 100%; object-fit: cover; opacity: 0.55; border-radius: 0; }
 .namu-b2b-page .hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(28,43,30,0.95) 0%, rgba(28,43,30,0.4) 60%, transparent 100%); }
 .namu-b2b-page .hero-content {
   position: relative;
@@ -136,6 +138,11 @@ html { scroll-behavior: smooth; }
   padding-top: var(--namu-header-height-desktop);
   color: white;
   animation: b2bHeroIn 0.9s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+@media (max-width: 749px) {
+  .namu-b2b-page .hero-content {
+    padding-top: var(--namu-header-height-mobile);
+  }
 }
 @keyframes b2bHeroIn {
   from { opacity: 0; transform: translateY(24px); }

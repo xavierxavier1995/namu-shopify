@@ -29,7 +29,14 @@
 
         {%- if img != blank -%}
           {%- assign desktop_url = img | image_url: width: 2400 -%}
+          {%- assign img_mobile = block.settings.image_mobile -%}
           <picture>
+            {%- if img_mobile != blank -%}
+              <source media="(max-width: 749px)" srcset="
+                {{ img_mobile | image_url: width: 750 }} 750w,
+                {{ img_mobile | image_url: width: 1080 }} 1080w,
+                {{ img_mobile | image_url: width: 1200 }} 1200w" sizes="100vw">
+            {%- endif -%}
             <source media="(min-width: 750px)" srcset="
               {{ img | image_url: width: 1600 }} 1600w,
               {{ img | image_url: width: 2000 }} 2000w,
@@ -187,6 +194,12 @@
           "type": "image_picker",
           "id": "image",
           "label": "Imagem desktop"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Imagem mobile",
+          "info": "Proporção ideal: 1080x2160px (1:2). Se vazio, usa a imagem desktop."
         },
         {
           "type": "text",

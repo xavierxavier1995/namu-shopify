@@ -14,17 +14,24 @@
   <!-- HERO -->
   <section class="hero">
     {%- if section.settings.hero_image != blank -%}
-      {{
-        section.settings.hero_image
-        | image_url: width: 2000
-        | image_tag:
-          class: 'hero-img',
-          widths: '768, 1200, 1600, 2000',
-          sizes: '100vw',
-          alt: section.settings.hero_image.alt | default: 'Namu Matcha B2B',
-          loading: 'eager',
-          fetchpriority: 'high'
-      }}
+      <picture class="hero-picture">
+        {%- if section.settings.hero_image_mobile != blank -%}
+          <source media="(max-width: 749px)" srcset="
+            {{ section.settings.hero_image_mobile | image_url: width: 750 }} 750w,
+            {{ section.settings.hero_image_mobile | image_url: width: 1080 }} 1080w" sizes="100vw">
+        {%- endif -%}
+        <source media="(min-width: 750px)" srcset="
+          {{ section.settings.hero_image | image_url: width: 1600 }} 1600w,
+          {{ section.settings.hero_image | image_url: width: 2000 }} 2000w,
+          {{ section.settings.hero_image | image_url: width: 2560 }} 2560w" sizes="100vw">
+        <img
+          src="{{ section.settings.hero_image | image_url: width: 2560 }}"
+          alt="{{ section.settings.hero_image.alt | default: 'Namu Matcha B2B' | escape }}"
+          class="hero-img"
+          loading="eager"
+          fetchpriority="high"
+        >
+      </picture>
     {%- else -%}
       <img
         src="https://images.unsplash.com/photo-1515823064-d6e0c04616a7?q=80&w=2071&auto=format&fit=crop"
@@ -371,7 +378,8 @@
   "name": "Página B2B",
   "settings": [
     { "type": "header", "content": "HERO" },
-    { "type": "image_picker", "id": "hero_image", "label": "Imagem de Fundo" },
+    { "type": "image_picker", "id": "hero_image", "label": "Imagem de Fundo (desktop)", "info": "Tamanho ideal: 2560x1440px (16:9). Peso máximo: 200kb." },
+    { "type": "image_picker", "id": "hero_image_mobile", "label": "Imagem de Fundo (mobile)", "info": "Tamanho ideal: 1080x1920px (9:16). Peso máximo: 150kb." },
     { "type": "text", "id": "hero_eyebrow", "label": "Tag Superior", "default": "Parceria B2B Exclusiva" },
     { "type": "textarea", "id": "hero_title", "label": "Título Principal", "default": "O segredo dos menus mais sofisticados: Matcha Premium de Hadong para o seu negócio." },
     { "type": "textarea", "id": "hero_subtitle", "label": "Subtítulo", "default": "Eleve o ticket médio e a estética do seu estabelecimento com o matcha coreano 100% puro, cultivado de forma artesanal." },

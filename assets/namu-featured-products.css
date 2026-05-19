@@ -160,7 +160,7 @@
   justify-content: center;
   transform: translateZ(0);
   will-change: transform;
-  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  isolation: isolate;
 }
 
 .namu-fp__card-img {
@@ -174,6 +174,7 @@
 
 .namu-fp__card-link:hover .namu-fp__card-img {
   transform: scale(1.02);
+  border-radius: 5px;
 }
 
 .namu-fp__card-img-placeholder {

@@ -1,0 +1,99 @@
+{% render 'css-defer', file: 'namu-search.css' %}
+
+{%- liquid
+  assign terms = search.terms | escape
+  assign results = search.results
+  assign results_count = search.results_count
+-%}
+
+<div class="namu-search">
+  <header class="namu-search__header">
+    <div class="namu-search__header-inner">
+      <h1 class="namu-search__title">Buscar</h1>
+      <form action="{{ routes.search_url }}" method="get" role="search" class="namu-search__form">
+        <label for="NamuSearchInput" class="visually-hidden">Buscar produtos</label>
+        <div class="namu-search__input-wrap">
+          <svg class="namu-search__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input
+            type="search"
+            id="NamuSearchInput"
+            name="q"
+            value="{{ terms }}"
+            placeholder="O que você procura?"
+            class="namu-search__input"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+          >
+          <button type="submit" class="namu-search__submit">Buscar</button>
+        </div>
+        <input type="hidden" name="type" value="product">
+      </form>
+    </div>
+  </header>
+
+  <div class="namu-search__body">
+    {%- if search.performed -%}
+      {%- if results_count > 0 -%}
+        <p class="namu-search__count">{{ results_count }} resultado{{ results_count | pluralize: '', 's' }} para "<strong>{{ terms }}</strong>"</p>
+
+        {%- paginate results by 12 -%}
+          <div class="namu-search__grid">
+            {%- for item in results -%}
+              {%- if item.object_type == 'product' -%}
+                <a href="{{ item.url }}" class="namu-search__card">
+                  <div class="namu-search__card-img">
+                    {%- if item.featured_image -%}
+                      {{ item.featured_image | image_url: width: 400 | image_tag: loading: 'lazy', alt: item.title, class: 'namu-search__img' }}
+                    {%- else -%}
+                      <div class="namu-search__placeholder"></div>
+                    {%- endif -%}
+                  </div>
+                  <div class="namu-search__card-info">
+                    <p class="namu-search__card-title">{{ item.title | escape }}</p>
+                    <p class="namu-search__card-price">{{ item.price | money }}</p>
+                  </div>
+                </a>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+
+          {%- if paginate.pages > 1 -%}
+            <nav class="namu-search__pagination" aria-label="Paginação">
+              {{ paginate | default_pagination }}
+            </nav>
+          {%- endif -%}
+        {%- endpaginate -%}
+
+      {%- else -%}
+        <div class="namu-search__empty">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <p class="namu-search__empty-title">Nenhum resultado para "<strong>{{ terms }}</strong>"</p>
+          <p class="namu-search__empty-text">Tente buscar por outro termo ou explore nossas coleções.</p>
+          <a href="/collections/all" class="namu-search__empty-btn">Ver todos os produtos</a>
+        </div>
+      {%- endif -%}
+    {%- else -%}
+      <div class="namu-search__empty">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <p class="namu-search__empty-title">Busque por produtos, receitas ou artigos</p>
+        <p class="namu-search__empty-text">Digite acima para encontrar o que procura.</p>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Busca Namu",
+  "tag": "section",
+  "class": "shopify-section-namu-search",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Busca Namu"
+    }
+  ]
+}
+{% endschema %}

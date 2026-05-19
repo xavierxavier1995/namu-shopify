@@ -5,18 +5,28 @@
 /* ── Hero ────────────────────────────────────────────── */
 .namu-coll-hero {
   position: relative;
-  min-height: 320px;
+  height: calc(100vh - 56px);
   margin-top: var(--namu-header-overlap);
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--namu-verde-matcha);
   overflow: hidden;
+  padding-top: var(--namu-header-height-desktop);
+}
+
+@media (max-width: 749px) {
+  .namu-coll-hero {
+    height: calc(100vh - 48px);
+    padding-top: var(--namu-header-height-mobile);
+  }
 }
 
 .namu-coll-hero__bg {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .namu-coll-hero__img {
@@ -36,9 +46,8 @@
   position: relative;
   z-index: 1;
   text-align: center;
-  padding: 4rem 1.5rem;
-  padding-top: calc(4rem + var(--namu-header-height-desktop, 88px));
-  max-width: 700px;
+  padding: 0 1.5rem;
+  max-width: 740px;
   margin: 0 auto;
 }
 

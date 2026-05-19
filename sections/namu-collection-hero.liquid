@@ -8,17 +8,24 @@
 <section class="namu-coll-hero" aria-label="{{ collection.title | escape }}">
   <div class="namu-coll-hero__bg">
     {%- if hero_img != blank -%}
-      <img
-        src="{{ hero_img | image_url: width: 1400 }}"
-        srcset="{{ hero_img | image_url: width: 800 }} 800w, {{ hero_img | image_url: width: 1200 }} 1200w, {{ hero_img | image_url: width: 1400 }} 1400w"
-        sizes="100vw"
-        alt="{{ collection.title | escape }}"
-        loading="eager"
-        fetchpriority="high"
-        width="{{ hero_img.width }}"
-        height="{{ hero_img.height }}"
-        class="namu-coll-hero__img"
-      >
+      <picture>
+        {%- if section.settings.hero_image_mobile != blank -%}
+          <source media="(max-width: 749px)" srcset="
+            {{ section.settings.hero_image_mobile | image_url: width: 750 }} 750w,
+            {{ section.settings.hero_image_mobile | image_url: width: 1080 }} 1080w" sizes="100vw">
+        {%- endif -%}
+        <source media="(min-width: 750px)" srcset="
+          {{ hero_img | image_url: width: 1600 }} 1600w,
+          {{ hero_img | image_url: width: 2000 }} 2000w,
+          {{ hero_img | image_url: width: 2560 }} 2560w" sizes="100vw">
+        <img
+          src="{{ hero_img | image_url: width: 2560 }}"
+          alt="{{ collection.title | escape }}"
+          loading="eager"
+          fetchpriority="high"
+          class="namu-coll-hero__img"
+        >
+      </picture>
     {%- endif -%}
     <div class="namu-coll-hero__overlay" style="--overlay-opacity: {{ overlay_opacity }};"></div>
   </div>
@@ -57,7 +64,14 @@
     {
       "type": "image_picker",
       "id": "hero_image",
-      "label": "Imagem de fundo (sobrescreve imagem da collection)"
+      "label": "Imagem de fundo desktop (sobrescreve imagem da collection)",
+      "info": "Tamanho ideal: 2560x1440px (16:9). Peso máximo: 200kb."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_mobile",
+      "label": "Imagem de fundo mobile",
+      "info": "Tamanho ideal: 1080x1920px (9:16). Peso máximo: 150kb."
     },
     {
       "type": "range",

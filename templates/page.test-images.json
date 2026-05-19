@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "test-images": {
+      "type": "namu-test-images",
+      "settings": {}
+    }
+  },
+  "order": [
+    "test-images"
+  ]
+}

@@ -2,16 +2,60 @@
    NAMU BLOG INDEX — Journal
    ══════════════════════════════════════════════════════ */
 
+/* ── Section root (overlap header) ──────────────────── */
+.namu-blog-idx {
+  margin-top: var(--namu-header-overlap);
+  position: relative;
+  z-index: 1;
+}
+
 /* ── Hero ────────────────────────────────────────────── */
 .namu-blog-idx__hero {
-  background: var(--namu-branco-porcelana);
-  padding: 4rem 1.5rem;
+  position: relative;
+  height: calc(100vh - 56px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  padding-top: var(--namu-header-height-desktop);
+  background: var(--namu-verde-matcha);
+}
+
+.namu-blog-idx__hero-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.namu-blog-idx__hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.namu-blog-idx__hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1;
 }
 
 .namu-blog-idx__hero-inner {
-  max-width: 600px;
+  position: relative;
+  z-index: 2;
+  max-width: 740px;
   margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media (max-width: 749px) {
+  .namu-blog-idx__hero {
+    height: calc(100vh - 48px);
+    padding-top: var(--namu-header-height-mobile);
+  }
 }
 
 .namu-blog-idx__eyebrow {
@@ -21,8 +65,8 @@
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--namu-verde-matcha);
-  background: rgba(4, 81, 51, 0.08);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
   padding: 0.35rem 0.9rem;
   border-radius: var(--namu-radius-pill);
   margin-bottom: 1rem;
@@ -30,19 +74,19 @@
 
 .namu-blog-idx__hero-title {
   font-family: var(--namu-font-heading);
-  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-size: clamp(2rem, 5vw, 3.2rem);
   font-weight: 400;
-  color: var(--namu-cinza-sombra);
-  margin: 0 0 0.75rem;
-  line-height: 1.2;
+  color: #fff;
+  margin: 0 0 1.25rem;
+  line-height: 1.25;
 }
 
 .namu-blog-idx__hero-desc {
   font-family: var(--namu-font-body);
-  font-size: 1rem;
-  color: var(--namu-color-text-muted);
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  color: rgba(255, 255, 255, 0.8);
   margin: 0;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 /* ── Marquee ────────────────────────────────────────────── */

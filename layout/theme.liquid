@@ -34,6 +34,39 @@
 
     {% render 'meta-tags' %}
 
+    {%- if request.page_type == 'index' -%}
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Namu Matcha",
+        "url": "{{ shop.url }}",
+        "logo": "{{ 'namu-logo-horizontal.svg' | asset_url | prepend: 'https:' }}",
+        "description": {{ shop.description | json }},
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Rua João Elias Saada 134",
+          "addressLocality": "São Paulo",
+          "addressRegion": "SP",
+          "postalCode": "05427-050",
+          "addressCountry": "BR"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+55-11-93087-6268",
+          "contactType": "customer service",
+          "availableLanguage": "Portuguese"
+        },
+        "sameAs": [
+          "https://instagram.com/namumatcha",
+          "https://facebook.com/namumatcha",
+          "https://tiktok.com/@namumatcha",
+          "https://youtube.com/@namumatcha"
+        ]
+      }
+      </script>
+    {%- endif -%}
+
     <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>

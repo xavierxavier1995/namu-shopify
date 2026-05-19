@@ -1,0 +1,15 @@
+{% doc %}
+Renders a row of filled star SVGs.
+@param {number} count - Number of stars to render (1-5)
+@param {number} [size] - Size in px (default: 14)
+@example
+{% render 'namu-star-rating', count: 5, size: 14 %}
+{% enddoc %}
+
+{%- assign star_count = count | default: 5 -%}
+{%- assign star_size = size | default: 14 -%}
+<span class="namu-stars" aria-label="{{ star_count }} de 5 estrelas">
+  {%- for i in (1..star_count) -%}
+    <svg width="{{ star_size }}" height="{{ star_size }}" viewBox="0 0 24 24" fill="var(--namu-verde-matcha, #045133)" aria-hidden="true"><polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9"/></svg>
+  {%- endfor -%}
+</span>

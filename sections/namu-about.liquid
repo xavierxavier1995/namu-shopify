@@ -3,6 +3,27 @@
 <section class="namu-about" aria-label="Nossa História">
 
   <div class="namu-about__hero">
+    {%- if section.settings.hero_image != blank -%}
+      <picture class="namu-about__hero-media">
+        {%- if section.settings.hero_image_mobile != blank -%}
+          <source media="(max-width: 749px)" srcset="
+            {{ section.settings.hero_image_mobile | image_url: width: 750 }} 750w,
+            {{ section.settings.hero_image_mobile | image_url: width: 1080 }} 1080w" sizes="100vw">
+        {%- endif -%}
+        <source media="(min-width: 750px)" srcset="
+          {{ section.settings.hero_image | image_url: width: 1600 }} 1600w,
+          {{ section.settings.hero_image | image_url: width: 2000 }} 2000w,
+          {{ section.settings.hero_image | image_url: width: 2560 }} 2560w" sizes="100vw">
+        <img
+          src="{{ section.settings.hero_image | image_url: width: 2560 }}"
+          alt="{{ section.settings.hero_image.alt | default: 'Sobre a Namu Matcha' | escape }}"
+          class="namu-about__hero-img"
+          loading="eager"
+          fetchpriority="high"
+        >
+      </picture>
+    {%- endif -%}
+    <div class="namu-about__hero-overlay"></div>
     <div class="namu-about__hero-inner">
       <h1 class="namu-about__hero-title">Do campo à sua xícara: o ritual que atravessa oceanos</h1>
       <p class="namu-about__hero-subtitle">A primeira marca no Brasil dedicada exclusivamente ao Matcha. Trazemos o melhor da tradição milenar coreana para transformar o seu dia a dia.</p>
@@ -103,7 +124,14 @@
     {
       "type": "image_picker",
       "id": "hero_image",
-      "label": "Imagem Hero"
+      "label": "Imagem Hero (desktop)",
+      "info": "Tamanho ideal: 2560x1440px (16:9). Peso máximo: 200kb."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_mobile",
+      "label": "Imagem Hero (mobile)",
+      "info": "Tamanho ideal: 1080x1920px (9:16). Peso máximo: 150kb."
     },
     {
       "type": "image_picker",

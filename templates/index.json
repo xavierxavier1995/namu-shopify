@@ -14,7 +14,7 @@
             "alt": "Novo por aqui? Ganhe 10% OFF na primeira compra com o cupom NOVONAMU",
             "link": "/collections/all",
             "fallback_asset": "NAMU_site_banner-principal_cupom_desktop.jpg",
-            "fallback_asset_mobile": "NAMU_site_banner-principal_cupom_mobile.jpg"
+            "fallback_asset_mobile": "namu-teste-mobile-9x16.png"
           }
         },
         "slide-2": {
@@ -23,7 +23,7 @@
             "alt": "Sensível à cafeína? Experimente nosso Hojicha",
             "link": "/products/hojicha",
             "fallback_asset": "NAMU_site_banner-principal_hojicha_desktop.jpg",
-            "fallback_asset_mobile": "NAMU_site_banner-principal_hojicha_mobile.jpg"
+            "fallback_asset_mobile": "namu-teste-mobile-1x2.png"
           }
         },
         "slide-3": {
@@ -195,6 +195,7 @@
     "namu_blog": {
       "type": "namu-blog",
       "settings": {
+        "blog": "noticias",
         "pill_label": "Blog Namu",
         "title": "Matcha do Zero ao Avançado",
         "subtitle": "Novo no mundo do matcha? Aprenda tudo aqui! Descubra o que é, seus benefícios e como preparar o seu matcha perfeito hoje mesmo.",

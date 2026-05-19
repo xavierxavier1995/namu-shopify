@@ -101,9 +101,7 @@
       {%- if section.settings.show_stars -%}
         <div class="namu-pdp__stars">
           <div class="namu-pdp__stars-icons" aria-hidden="true">
-            {%- for i in (1..5) -%}
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            {%- endfor -%}
+            {% render 'namu-star-rating', count: 5, size: 14 %}
           </div>
           <span class="namu-pdp__stars-avg">{{ section.settings.review_avg | default: '4.9' }}</span>
           <span class="namu-pdp__stars-count">
@@ -125,8 +123,8 @@
           {%- endif -%}
         </div>
         {%- if section.settings.show_installments and current_variant.price >= 10000 -%}
-          {%- assign installment_value = current_variant.price | divided_by: 6 -%}
-          <p class="namu-pdp__price-installments">ou 6x de {{ installment_value | money }} sem juros</p>
+          {%- assign installment_value = current_variant.price | divided_by: section.settings.installments_count -%}
+          <p class="namu-pdp__price-installments">ou {{ section.settings.installments_count }}x de {{ installment_value | money }} sem juros</p>
         {%- endif -%}
       </div>
 
@@ -220,13 +218,13 @@
       {%- endform -%}
 
       {%- comment -%} Gift alert (brinde — preço > R$199,00) {%- endcomment -%}
-      <div class="namu-pdp__gift-alert" id="NamuGiftAlert-{{ section.id }}" {% unless current_variant.price > 19900 %}style="display:none;"{% endunless %}>
+      <div class="namu-pdp__gift-alert" id="NamuGiftAlert-{{ section.id }}" {% unless current_variant.price > section.settings.gift_threshold %}style="display:none;"{% endunless %}>
         <span class="namu-pdp__gift-icon" aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
         </span>
         <div class="namu-pdp__gift-text">
-          <strong>BRINDE GRÁTIS DESBLOQUEADO!</strong>
-          <span>Brinde especial em compras acima de <b>R$199,00</b></span>
+          <strong>{{ section.settings.gift_title }}</strong>
+          <span>{{ section.settings.gift_text }}</span>
         </div>
       </div>
 
@@ -541,7 +539,7 @@
 
   // Gift alert — shows when variant price > R$199
   var giftAlert = document.getElementById('NamuGiftAlert-' + sid);
-  var GIFT_THRESHOLD = 19900;
+  var GIFT_THRESHOLD = {{ section.settings.gift_threshold }};
   var currentVariantPrice = {{ current_variant.price }};
   var currentComparePrice = {{ current_variant.compare_at_price | default: 0 }};
 
@@ -656,6 +654,40 @@
 })();
 </script>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Início",
+      "item": "{{ shop.url }}"
+    }
+    {%- if product.collections.size > 0 -%}
+    ,{
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ product.collections.first.title | json }},
+      "item": "{{ shop.url }}{{ product.collections.first.url }}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": {{ product.title | json }}
+    }
+    {%- else -%}
+    ,{
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ product.title | json }}
+    }
+    {%- endif -%}
+  ]
+}
+</script>
+
 {% schema %}
 {
   "name": "Produto Namu",
@@ -690,6 +722,30 @@
       "id": "show_installments",
       "label": "Mostrar parcelamento",
       "default": true
+    },
+    {
+      "type": "number",
+      "id": "installments_count",
+      "label": "Número de parcelas",
+      "default": 6
+    },
+    {
+      "type": "number",
+      "id": "gift_threshold",
+      "label": "Valor mínimo para brinde (em centavos, ex: 19900 = R$199)",
+      "default": 19900
+    },
+    {
+      "type": "text",
+      "id": "gift_title",
+      "label": "Título do brinde",
+      "default": "BRINDE GRÁTIS DESBLOQUEADO!"
+    },
+    {
+      "type": "text",
+      "id": "gift_text",
+      "label": "Texto do brinde",
+      "default": "Brinde especial em compras acima de R$199,00"
     },
     {
       "type": "header",

@@ -6,6 +6,27 @@
 <section class="namu-rec-idx" aria-label="Receitas">
 
   <div class="namu-rec-idx__header">
+    {%- if section.settings.hero_image != blank -%}
+      <picture class="namu-rec-idx__header-media">
+        {%- if section.settings.hero_image_mobile != blank -%}
+          <source media="(max-width: 749px)" srcset="
+            {{ section.settings.hero_image_mobile | image_url: width: 750 }} 750w,
+            {{ section.settings.hero_image_mobile | image_url: width: 1080 }} 1080w" sizes="100vw">
+        {%- endif -%}
+        <source media="(min-width: 750px)" srcset="
+          {{ section.settings.hero_image | image_url: width: 1600 }} 1600w,
+          {{ section.settings.hero_image | image_url: width: 2000 }} 2000w,
+          {{ section.settings.hero_image | image_url: width: 2560 }} 2560w" sizes="100vw">
+        <img
+          src="{{ section.settings.hero_image | image_url: width: 2560 }}"
+          alt="{{ section.settings.hero_image.alt | default: 'Receitas com Matcha' | escape }}"
+          class="namu-rec-idx__header-img"
+          loading="eager"
+          fetchpriority="high"
+        >
+      </picture>
+    {%- endif -%}
+    <div class="namu-rec-idx__header-overlay"></div>
     <div class="namu-rec-idx__header-inner">
       <h1 class="namu-rec-idx__title">Guia de Receitas Namu</h1>
       <p class="namu-rec-idx__subtitle">Explore nossas receitas com matcha e descubra novas formas de incluir esse superalimento no seu dia a dia.</p>
@@ -14,6 +35,16 @@
 
   <div class="namu-rec-idx__marquee" aria-hidden="true">
     <div class="namu-rec-idx__marquee-track">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'marquee_text' -%}
+          <span>✦ {{ block.settings.text }}</span>
+        {%- endif -%}
+      {%- endfor -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'marquee_text' -%}
+          <span>✦ {{ block.settings.text }}</span>
+        {%- endif -%}
+      {%- endfor -%}
       {%- for block in section.blocks -%}
         {%- if block.type == 'marquee_text' -%}
           <span>✦ {{ block.settings.text }}</span>
@@ -135,7 +166,20 @@
   "name": "Receitas Index",
   "tag": "section",
   "class": "shopify-section-namu-recipes-index",
-  "settings": [],
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Imagem Hero (desktop)",
+      "info": "Tamanho ideal: 2560x1440px (16:9). Peso máximo: 200kb."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_mobile",
+      "label": "Imagem Hero (mobile)",
+      "info": "Tamanho ideal: 1080x1920px (9:16). Peso máximo: 150kb."
+    }
+  ],
   "blocks": [
     {
       "type": "marquee_text",

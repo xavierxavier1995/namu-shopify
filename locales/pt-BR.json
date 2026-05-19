@@ -65,6 +65,11 @@
   "accessibility": {
     "skip_to_text": "Pular para o conteúdo",
     "close": "Fechar",
+    "menu_open": "Abrir menu",
+    "menu_close": "Fechar menu",
+    "search": "Buscar",
+    "account": "Minha conta",
+    "cart": "Carrinho",
     "unit_price_separator": "por",
     "vendor": "Fornecedor:",
     "error": "Erro",

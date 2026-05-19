@@ -4,14 +4,53 @@
 
 /* ── Hero ────────────────────────────────────────────── */
 .namu-about__hero {
-  background: var(--namu-verde-matcha);
-  padding: 6rem 1.5rem;
+  position: relative;
+  height: calc(100vh - 56px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  margin-top: var(--namu-header-overlap);
+  padding-top: var(--namu-header-height-desktop);
+  background: var(--namu-verde-matcha);
+}
+
+.namu-about__hero-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.namu-about__hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.namu-about__hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1;
 }
 
 .namu-about__hero-inner {
+  position: relative;
+  z-index: 2;
   max-width: 740px;
   margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media (max-width: 749px) {
+  .namu-about__hero {
+    height: calc(100vh - 48px);
+    margin-top: calc(var(--namu-header-height-mobile) * -1);
+    padding-top: var(--namu-header-height-mobile);
+  }
 }
 
 .namu-about__hero-title {
