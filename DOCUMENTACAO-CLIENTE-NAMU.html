@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documentação Técnica — Namu Matcha Store</title>
+<style>
+  :root {
+    --namu-green: #045133;
+    --namu-dark: #121212;
+    --namu-gray: #F3F3F3;
+    --namu-light: #FFFFFF;
+    --code-bg: #f4f4f4;
+    --border: #e0e0e0;
+    --warning-bg: #fff3cd;
+    --warning-border: #ffc107;
+    --success-bg: #d4edda;
+    --success-border: #28a745;
+    --info-bg: #d1ecf1;
+    --info-border: #17a2b8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--namu-dark);
+    line-height: 1.7;
+    background: #fafafa;
+  }
+
+  .doc-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* HEADER */
+  .doc-header {
+    background: var(--namu-green);
+    color: white;
+    padding: 48px 40px;
+    border-radius: 16px;
+    margin-bottom: 40px;
+  }
+  .doc-header__badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .doc-header h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .doc-header p {
+    font-size: 1.05rem;
+    opacity: 0.85;
+  }
+  .doc-header__meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 24px;
+    font-size: 0.85rem;
+    opacity: 0.75;
+  }
+
+  /* SECTIONS */
+  .doc-section {
+    background: var(--namu-light);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .doc-section__title {
+    background: var(--namu-gray);
+    padding: 16px 24px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--namu-green);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .doc-section__title .emoji {
+    font-size: 1.2rem;
+  }
+  .doc-section__body {
+    padding: 24px;
+  }
+
+  /* GRID */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .info-card {
+    background: var(--code-bg);
+    border-radius: 8px;
+    padding: 16px 20px;
+  }
+  .info-card__label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .info-card__value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--namu-dark);
+    word-break: break-all;
+  }
+
+  /* CODE */
+  code {
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.88em;
+    font-family: 'Courier New', Courier, monospace;
+    color: #c7254e;
+  }
+  pre {
+    background: #1e1e1e;
+    color: #d4d4d4;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin: 12px 0;
+  }
+  pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+    font-size: inherit;
+  }
+  .token-key { color: #9cdcfe; }
+  .token-str { color: #ce9178; }
+  .token-comment { color: #6a9955; }
+  .token-number { color: #b5cea8; }
+
+  /* TABLES */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    margin: 12px 0;
+  }
+  th {
+    background: var(--namu-green);
+    color: white;
+    padding: 10px 16px;
+    text-align: left;
+    font-weight: 600;
+  }
+  td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) { background: var(--code-bg); }
+
+  /* ALERTS */
+  .alert {
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 12px 0;
+    border-left: 4px solid;
+  }
+  .alert-warning {
+    background: var(--warning-bg);
+    border-color: var(--warning-border);
+  }
+  .alert-success {
+    background: var(--success-bg);
+    border-color: var(--success-border);
+  }
+  .alert-info {
+    background: var(--info-bg);
+    border-color: var(--info-border);
+  }
+  .alert-title {
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+  }
+
+  /* LISTS */
+  ul, ol {
+    padding-left: 24px;
+    margin: 8px 0;
+  }
+  li { margin-bottom: 6px; }
+
+  /* H */
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--namu-green);
+    margin: 20px 0 10px;
+  }
+  h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 16px 0 8px;
+  }
+
+  p { margin-bottom: 10px; }
+
+  /* CHANGELOG */
+  .changelog-item {
+    display: flex;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .changelog-item:last-child { border-bottom: none; }
+  .changelog-date {
+    font-size: 0.78rem;
+    color: #888;
+    font-weight: 600;
+    min-width: 80px;
+    padding-top: 2px;
+  }
+  .changelog-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-right: 6px;
+  }
+  .tag-new { background: #d4edda; color: #155724; }
+  .tag-fix { background: #fff3cd; color: #856404; }
+  .tag-doc { background: #d1ecf1; color: #0c5460; }
+  .tag-api { background: #ede7f6; color: #4a148c; }
+
+  .toc {
+    background: var(--code-bg);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .toc h3 { margin-top: 0; font-size: 0.95rem; }
+  .toc ol { margin: 0; padding-left: 20px; }
+  .toc li { margin-bottom: 4px; }
+  .toc a { color: var(--namu-green); text-decoration: none; font-weight: 500; }
+  .toc a:hover { text-decoration: underline; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 640px) {
+    .info-grid, .two-col { grid-template-columns: 1fr; }
+    pre { font-size: 0.78rem; }
+  }
+</style>
+</head>
+<body>
+<div class="doc-wrapper">
+
+  <!-- HEADER -->
+  <header class="doc-header">
+    <div class="doc-header__badge">Documentação Técnica</div>
+    <h1>Namu Matcha — Store</h1>
+    <p>Manual completo do projeto theme Shopify. Inclui arquitetura, credenciais de acesso, estrutura de arquivos, funcionalidades implementadas e guia de banners.</p>
+    <div class="doc-header__meta">
+      <span>Versão: 1.0</span>
+      <span>Última atualização: Jun/2026</span>
+      <span>Domínio: namu-matcha.myshopify.com</span>
+    </div>
+  </header>
+
+  <!-- TOC -->
+  <nav class="toc">
+    <h3>Índice</h3>
+    <ol>
+      <li><a href="#sobre">Sobre o Projeto</a></li>
+      <li><a href="#acesso">Credenciais e Acesso</a></li>
+      <li><a href="#estrutura">Estrutura de Arquivos</a></li>
+      <li><a href="#funcionalidades">Funcionalidades Implementadas</a></li>
+      <li><a href="#blog">Sistema de Blog</a></li>
+      <li><a href="#api">API GraphQL Admin</a></li>
+      <li><a href="#banners">Guia de Banners</a></li>
+      <li><a href="#colorscheme">Paleta de Cores</a></li>
+      <li><a href="#deploy">Deploy e Manutenção</a></li>
+      <li><a href="#changelog">Changelog</a></li>
+    </ol>
+  </nav>
+
+  <!-- 1. SOBRE -->
+  <section class="doc-section" id="sobre">
+    <div class="doc-section__title">
+      <span class="emoji">🏪</span> Sobre o Projeto
+    </div>
+    <div class="doc-section__body">
+      <p>O projeto <strong>Namu Matcha Store</strong> é um tema Shopify customizado (custom theme), baseado na plataforma Shopify com a API Liquid. O objetivo é uma loja virtual completa para a marca Namu, especializada em matcha importado da Coreia do Sul.</p>
+
+      <h3>Informações Gerais</h3>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-card__label">Tipo de Projeto</div>
+          <div class="info-card__value">Custom Shopify Theme (Liquid)</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card__label">Domínio Público</div>
+          <div class="info-card__value">namu-matcha.myshopify.com</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card__label">Domínio Interno</div>
+          <div class="info-card__value">7uvwdy-up.myshopify.com</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card__label">CNPJ</div>
+          <div class="info-card__value">41.401.743/0001-50</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card__label">Endereço</div>
+          <div class="info-card__value">Rua João Elias Saada 134 – Pinheiros/SP, CEP 05427-050</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card__label">E-mail Atendimento</div>
+          <div class="info-card__value">alo@namumatcha.com.br</div>
+        </div>
+      </div>
+
+      <h3>Stack Tecnológico</h3>
+      <table>
+        <tr><th>Tecnologia</th><th>Descrição</th></tr>
+        <tr><td><code>Liquid</code></td><td>Template language nativa do Shopify</td></tr>
+        <tr><td><code>Shopify Admin API</code></td><td>GraphQL API para gestão de artigos e conteúdo</td></tr>
+        <tr><td><code>CSS Custom Properties</code></td><td>Sistema de design com variáveis CSS</td></tr>
+        <tr><td><code>JavaScript (ES6+)</code></td><td>Web Components para header, drawer e interações</td></tr>
+        <tr><td><code>Shopify CLI</code></td><td>Ferramenta de desenvolvimento local e deploy</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- 2. CREDENCIAIS -->
+  <section class="doc-section" id="acesso">
+    <div class="doc-section__title">
+      <span class="emoji">🔑</span> Credenciais e Acesso
+    </div>
+    <div class="doc-section__body">
+      <div class="alert alert-warning">
+        <div class="alert-title">⚠️ Segurança</div>
+        Estas credenciais são sensíveis. Armazene-as em local seguro e nunca as commite em repositórios públicos. O arquivo <code>.env</code> contém tokens de acesso à API Admin e nunca deve ser enviado ao cliente.
+      </div>
+
+      <h3>Arquivo .env (desenvolvimento local)</h3>
+      <pre><code><span class="token-comment"># Shopify Admin API — Loja 7uvwdy-up.myshopify.com</span>
+<span class="token-key">SHOPIFY_STORE</span>=<span class="token-str">7uvwdy-up.myshopify.com</span>
+<span class="token-key">SHOPIFY_ACCESS_TOKEN</span>=<span class="token-str">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</span>
+<span class="token-key">SHOPIFY_API_VERSION</span>=<span class="token-str">2025-04</span></code></pre>
+
+      <h3>Acesso ao Admin da Loja</h3>
+      <table>
+        <tr><th>Ambiente</th><th>URL de Acesso</th></tr>
+        <tr><td>Admin Shopify</td><td><code>https://admin.shopify.com/store/namumatcha</code></td></tr>
+        <tr><td>Admin direto</td><td><code>https://7uvwdy-up.myshopify.com/admin</code></td></tr>
+        <tr><td>Theme Editor</td><td><code>https://admin.shopify.com/store/namumatcha/themes</code></td></tr>
+        <tr><td>Blog "noticias"</td><td><code>https://7uvwdy-up.myshopify.com/admin/content/blogs/96208060494</code></td></tr>
+      </table>
+
+      <h3>API GraphQL Admin</h3>
+      <p>Todas as chamadas à API Admin usam o endpoint:</p>
+      <pre><code>https://7uvwdy-up.myshopify.com/admin/api/2025-04/graphql.json</code></pre>
+      <p>Autenticação via header <code>X-Shopify-Access-Token</code> com o token do arquivo <code>.env</code>.</p>
+
+      <h3>URLs Públicas dos Artigos</h3>
+      <table>
+        <tr><th>Artigo</th><th>URL</th></tr>
+        <tr><td>O que é Matcha?</td><td><code>/blogs/noticias/o-que-e-matcha</code></td></tr>
+        <tr><td>Guia de Preparo</td><td><code>/blogs/noticias/guia-preparo-matcha</code></td></tr>
+        <tr><td>Benefícios do Matcha</td><td><code>/blogs/noticias/beneficios-do-matcha</code></td></tr>
+        <tr><td>Blog completo</td><td><code>/blogs/noticias</code></td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- 3. ESTRUTURA -->
+  <section class="doc-section" id="estrutura">
+    <div class="doc-section__title">
+      <span class="emoji">📁</span> Estrutura de Arquivos
+    </div>
+    <div class="doc-section__body">
+      <p>O projeto segue a estrutura padrão de um Shopify Theme com seções customizadas (prefixo <code>namu-</code>).</p>
+
+      <h3>Diretórios Principais</h3>
+      <table>
+        <tr><th>Diretório</th><th>Conteúdo</th></tr>
+        <tr><td><code>sections/</code></td><td>Seções Shopify customizadas (namu-header, namu-footer, namu-hero-slider, etc.)</td></tr>
+        <tr><td><code>snippets/</code></td><td>Snippets reutilizáveis (namu-star-rating, css-defer, etc.)</td></tr>
+        <tr><td><code>templates/</code></td><td>Templates de página (index.json, article.json, collection.json, etc.)</td></tr>
+        <tr><td><code>assets/</code></td><td>CSS, JS, imagens e SVG do tema</td></tr>
+        <tr><td><code>config/</code></td><td>settings_data.json (tema), settings_schema.json (customizador)</td></tr>
+        <tr><td><code>locales/</code></td><td>Arquivos de tradução i18n (pt-BR, en, ja, etc.)</td></tr>
+        <tr><td><code>layout/</code></td><td>theme.liquid (template base)</td></tr>
+        <tr><td><code>scripts/</code></td><td>Arquivos auxiliares (image-map.json, migration-results.json, etc.)</td></tr>
+        <tr><td><code>_data/</code></td><td>Dados de seed e migração (blog-articles-seed.json, wordpress-posts.json)</td></tr>
+      </table>
+
+      <h3>Seções Customizadas (prefixo namu-)</h3>
+      <div class="two-col">
+        <div>
+          <h4>Navegação</h4>
+          <ul>
+            <li><code>namu-header.liquid</code> — Header com pill flutuante, mega menu, drawer mobile</li>
+            <li><code>namu-footer.liquid</code> — Footer completo com newsletter e acordeões</li>
+          </ul>
+          <h4>Homepage</h4>
+          <ul>
+            <li><code>namu-hero-slider.liquid</code> — Slider de banners fullscreen</li>
+            <li><code>namu-marquee.liquid</code> — Barra de diferenciais com scroll infinito</li>
+            <li><code>namu-categories.liquid</code> — Grid de categorias</li>
+            <li><code>namu-video-background.liquid</code> — Vídeo fullscreen como background</li>
+            <li><code>namu-experience.liquid</code> — Seção "Por que a Namu?"</li>
+            <li><code>namu-blog.liquid</code> — Grid editorial de artigos</li>
+            <li><code>namu-recipes.liquid</code> — Cards de receitas por categoria</li>
+            <li><code>namu-b2b.liquid</code> — Seção B2B com imagem de fundo</li>
+            <li><code>namu-benefits.liquid</code> — Grid de benefícios com ícones</li>
+            <li><code>namu-faq.liquid</code> — FAQ com acordeões animados</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Coleção / Produto</h4>
+          <ul>
+            <li><code>namu-collection-grid.liquid</code> — Grid de produtos</li>
+            <li><code>namu-collection-related.liquid</code> — Produtos relacionados</li>
+            <li><code>namu-collection-trust.liquid</code> — Selos de confiança</li>
+            <li><code>namu-collection-seo.liquid</code> — Meta tags e structured data</li>
+            <li><code>namu-collection-faq.liquid</code> — FAQ específico da coleção</li>
+            <li><code>namu-product.liquid</code> — Seção de produto customizada</li>
+            <li><code>namu-featured-products.liquid</code> — Produtos em destaque na homepage</li>
+          </ul>
+          <h4>Utilitários</h4>
+          <ul>
+            <li><code>namu-newsletter.liquid</code> — Formulário de newsletter</li>
+            <li><code>namu-404.liquid</code> — Página de erro customizada</li>
+            <li><code>namu-policy.liquid</code> — Páginas institucionais</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. FUNCIONALIDADES -->
+  <section class="doc-section" id="funcionalidades">
+    <div class="doc-section__title">
+      <span class="emoji">⚙️</span> Funcionalidades Implementadas
+    </div>
+    <div class="doc-section__body">
+      <h3>Header — namu-header.liquid</h3>
+      <p>Componente <code>&lt;namu-header&gt;</code> construído como Web Component nativo (sem frameworks). Responsável por:</p>
+      <ul>
+        <li><strong>Pill flutuante:</strong> barra fixa no topo (88px desktop / 72px mobile) com logo, navegação e ícones. Z-index 50.</li>
+        <li><strong>Sticky inteligente:</strong> esconde ao rolar para baixo, reaparece ao rolar para cima. Threshold: 300px do topo.</li>
+        <li><strong>Mega menu:</strong> abre no hover (mouseenter/mouseleave com delay de 180ms para fechar). Foco acessível via teclado.</li>
+        <li><strong>Drawer mobile:</strong> painel lateral que abre no clique do hamburger. Suprime overflow do body. Fecha com ESC ou clique fora.</li>
+        <li><strong>Scroll handling:</strong> usa <code>requestAnimationFrame</code> e <code>passive: true</code> para performance.</li>
+      </ul>
+
+      <h3>Configuração do Menu via Theme Editor</h3>
+      <p>No Shopify Admin &rarr; Customizador do tema &rarr; Header Namu, cada bloco do tipo <strong>"Item de menu"</strong> permite:</p>
+      <table>
+        <tr><th>Setting</th><th>Descrição</th></tr>
+        <tr><td><code>Texto</code></td><td>Rótulo do item (ex: "Loja", "Receitas")</td></tr>
+        <tr><td><code>Link</code></td><td>URL do item (interna ou externa)</td></tr>
+        <tr><td><code>Ativar mega menu</code></td><td>Expande sub-links ao passar o mouse</td></tr>
+        <tr><td><code>Links da coluna</code></td><td>Um por linha no formato <code>Texto|/url</code></td></tr>
+        <tr><td><code>Botão "Ver tudo"</code></td><td>CTA no final da coluna do mega menu</td></tr>
+        <tr><td><code>Destaque 1 e 2</code></td><td>Imagem + título + link para cards visuais</td></tr>
+      </table>
+
+      <h3>Footer — namu-footer.liquid</h3>
+      <p>Footer completo com 5 colunas de navegação (via link_list do Shopify) + seções extras:</p>
+      <ul>
+        <li><strong>Newsletter:</strong> integra com <code>{% form 'customer' %}</code> do Liquid, cria tag "newsletter" no contato.</li>
+        <li><strong>Blog:</strong> links codificados diretamente para os 3 artigos do blog + link para o blog completo.</li>
+        <li><strong>Redes sociais:</strong> Instagram, Facebook, TikTok, YouTube com links externos.</li>
+        <li><strong>Horário de atendimento:</strong> Seg-Sex 08:00-17:00, Sáb 08:00-12:00.</li>
+        <li><strong>Selos:</strong> Compra Segura, SSL Encrypted, Shopify Secure.</li>
+      </ul>
+
+      <h3>Hero Slider — namu-hero-slider.liquid</h3>
+      <ul>
+        <li>5 slides configurados via <code>templates/index.json</code> com fallback assets para desktop e mobile.</li>
+        <li>Autoplay configurável (6 segundos por padrão).</li>
+        <li>Overlap com o header (por trás da pill).</li>
+        <li>Assets de fallback referenciam arquivos em <code>assets/</code> (ex: <code>NAMU_site_banner-principal_cupom_desktop.jpg</code>).</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. BLOG -->
+  <section class="doc-section" id="blog">
+    <div class="doc-section__title">
+      <span class="emoji">📝</span> Sistema de Blog
+    </div>
+    <div class="doc-section__body">
+      <p>O blog utiliza o blog nativo do Shopify chamado <strong>"noticias"</strong> (handle: <code>noticias</code>, ID: <code>96208060494</code>). Os artigos são criados e gerenciados via <strong>GraphQL Admin API</strong>.</p>
+
+      <div class="alert alert-info">
+        <div class="alert-title">ℹ️ Fluxo de Publicação</div>
+        Artigos são criados via API GraphQL (não pelo admin manualmente). Imagens são definidas via <code>articleUpdate</code> com URLs externas (Unsplash, CDN do cliente, etc.). O título H1 do artigo é usado como handle SEO.
+      </div>
+
+      <h3>Artigos Criados</h3>
+      <table>
+        <tr><th>Título</th><th>Handle</th><th>Tag</th><th>URL Pública</th></tr>
+        <tr>
+          <td>O que é Matcha? Quais os tipos e os seus benefícios</td>
+          <td><code>o-que-e-matcha</code></td>
+          <td><span class="changelog-tag tag-new">Guia</span></td>
+          <td><code>/blogs/noticias/o-que-e-matcha</code></td>
+        </tr>
+        <tr>
+          <td>Guia definitivo de como fazer o matcha perfeito</td>
+          <td><code>guia-preparo-matcha</code></td>
+          <td><span class="changelog-tag tag-new">Guia</span></td>
+          <td><code>/blogs/noticias/guia-preparo-matcha</code></td>
+        </tr>
+        <tr>
+          <td>7 benefícios comprovados do Matcha para sua saúde</td>
+          <td><code>beneficios-do-matcha</code></td>
+          <td><span class="changelog-tag tag-new">Saúde</span></td>
+          <td><code>/blogs/noticias/beneficios-do-matcha</code></td>
+        </tr>
+      </table>
+
+      <h3>Linkagem na Homepage</h3>
+      <p>A seção <code>namu_blog</code> em <code>templates/index.json</code> aponta para o blog <code>"noticias"</code>:</p>
+      <pre><code><span class="token-str">"namu_blog"</span>: {
+  <span class="token-str">"type"</span>: <span class="token-str">"namu-blog"</span>,
+  <span class="token-str">"settings"</span>: {
+    <span class="token-str">"blog"</span>: <span class="token-str">"noticias"</span>,   <span class="token-comment">// ← blog handle</span>
+    <span class="token-str">"pill_label"</span>: <span class="token-str">"Blog Namu"</span>,
+    <span class="token-str">"title"</span>: <span class="token-str">"Matcha do Zero ao Avançado"</span>,
+    <span class="token-str">"posts_to_show"</span>: <span class="token-number">3</span>
+  }
+}</code></pre>
+
+      <h3>Linkagem no Footer</h3>
+      <p>Os links do blog foram adicionados diretamente em <code>sections/namu-footer.liquid</code> (linha 65-73), pois a API de menus não estava acessível para criar itens via GraphQL:</p>
+      <pre><code>&lt;nav aria-label="Blog"&gt;
+  &lt;a href="/blogs/noticias/o-que-e-matcha"&gt;O que é Matcha?&lt;/a&gt;
+  &lt;a href="/blogs/noticias/guia-preparo-matcha"&gt;Guia de Preparo&lt;/a&gt;
+  &lt;a href="/blogs/noticias/beneficios-do-matcha"&gt;Benefícios do Matcha&lt;/a&gt;
+  &lt;a href="/blogs/noticias"&gt;Ver todos os artigos&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+
+      <h3>Template de Artigo</h3>
+      <p>O template <code>templates/article.json</code> define a estrutura da página de artigo. A imagem do artigo (banner) é exibida pela seção hero do template, usando <code>article.image</code>.</p>
+
+      <h3>Blog de Receitas</h3>
+      <p>Existe também um blog separado <code>"receitas-matcha"</code> (handle: <code>receitas-matcha</code>), usado na seção <code>namu-recipes</code> da homepage com tags para filtrar: <code>bebidas-geladas</code>, <code>bebidas-quentes</code>, <code>comidinhas</code>.</p>
+    </div>
+  </section>
+
+  <!-- 6. API -->
+  <section class="doc-section" id="api">
+    <div class="doc-section__title">
+      <span class="emoji">🔗</span> API GraphQL Admin
+    </div>
+    <div class="doc-section__body">
+      <h3>Como criar um artigo via API</h3>
+      <p>Use o endpoint GraphQL Admin com o token de acesso. Exemplo em curl:</p>
+      <pre><code>curl -X POST https://7uvwdy-up.myshopify.com/admin/api/2025-04/graphql.json \
+  -H "X-Shopify-Access-Token: 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" \
+  -H "Content-Type: application/json" \
+  -d @payload.json</code></pre>
+
+      <h3>Mutation: articleCreate</h3>
+      <pre><code>mutation {
+  articleCreate(input: {
+    blogId: "gid://shopify/Blog/96208060494"
+    title: "Título do Artigo"
+    handle: "titulo-do-artigo"
+    tags: ["Guia"]
+    body_html: "&lt;p&gt;Conteúdo HTML do artigo...&lt;/p&gt;"
+    excerpt: "Resumo curto do artigo para cards e SEO"
+    image: {
+      src: "https://images.unsplash.com/photo-xxxx"
+      alt_text: "Descrição da imagem"
+    }
+  }) {
+    article {
+      id
+      url
+      handle
+    }
+    userErrors { field message }
+  }
+}</code></pre>
+
+      <h3>Mutation: articleUpdate (adicionar imagem)</h3>
+      <div class="alert alert-warning">
+        <div class="alert-title">⚠️ Importante</div>
+        O campo <code>id</code> é um argumento separado da mutation, <strong>não</strong> dentro de <code>ArticleUpdateInput</code>. Esta é uma armadilha comum.
+      </div>
+      <pre><code>mutation articleUpdate(
+  $id: ID!
+  $article: ArticleUpdateInput!
+) {
+  articleUpdate(id: $id, article: $article) {
+    article { id handle image { url alt_text } }
+    userErrors { field message }
+  }
+}
+
+# Variáveis:
+{
+  "id": "gid://shopify/Article/88888888888",
+  "article": {
+    "image": {
+      "src": "https://images.unsplash.com/photo-xxxx",
+      "alt_text": "Descrição da imagem"
+    }
+  }
+}</code></pre>
+
+      <h3>Query: Listar artigos</h3>
+      <pre><code>{
+  blog(id: "gid://shopify/Blog/96208060494") {
+    articles(first: 50) {
+      edges {
+        node {
+          id
+          title
+          handle
+          url
+          tags
+          excerpt
+          image { url alt_text }
+        }
+      }
+    }
+  }
+}</code></pre>
+
+      <h3>Query: Obter blog ID</h3>
+      <pre><code>{
+  blogs(first: 20) {
+    edges {
+      node {
+        id
+        title
+        handle
+      }
+    }
+  }
+}</code></pre>
+    </div>
+  </section>
+
+  <!-- 7. BANNERS -->
+  <section class="doc-section" id="banners">
+    <div class="doc-section__title">
+      <span class="emoji">🖼️</span> Guia de Banners (Designer)
+    </div>
+    <div class="doc-section__body">
+      <p>O guia visual completo com todas as especificações de banner (zonas, safe areas, comportamento de crop, responsividade) está disponível no arquivo separado:</p>
+      <p><strong><code>guia-banners-namu.html</code></strong> — Abrir no navegador para visualizar os diagramas interativos.</p>
+
+      <h3>Resumo das Medidas-Chave</h3>
+      <table>
+        <tr><th>Item</th><th>Medida</th><th>Observação</th></tr>
+        <tr><td>Header pill altura (desktop)</td><td>88px</td><td>Z-index 50, position fixed</td></tr>
+        <tr><td>Header pill altura (mobile)</td><td>72px</td><td>Mesma posição</td></tr>
+        <tr><td>Announcement bar</td><td>56px</td><td>Pode ser hidden — reduz a dead zone</td></tr>
+        <tr><td>Banner altura</td><td><code>calc(100vh - 56px)</code></td><td>100% da viewport menos announcement bar</td></tr>
+        <tr><td>Dead zone (topo)</td><td>0–56px do topo</td><td>Coberta pela pill e announcement bar</td></tr>
+        <tr><td>Safe zone lateral</td><td>15% de cada lado</td><td>Centro = 70% da largura</td></tr>
+        <tr><td>Zona de corte (borda)</td><td>~15% de cada lado</td><td>Pode ser cortada pelo object-fit</td></tr>
+        <tr><td>object-fit</td><td><code>cover</code></td><td>Preenche o container — corta bordas</td></tr>
+      </table>
+
+      <h3>Boas Práticas para o Designer</h3>
+      <ul>
+        <li><strong>Nunca place texto importante nos 15% laterais</strong> — serão cortados em telas menores.</li>
+        <li><strong>Deixe 56px livres no topo</strong> — essa área fica sob a announcement bar e header pill.</li>
+        <li><strong>Posicione textos no centro (70% central)</strong> — fica visível em todas as telas.</li>
+        <li><strong>Para mobile 9:16:</strong> o topo é cortado para revelar o centro (mesma mecânica do cover).</li>
+        <li><strong>Para ultrawide 21:9:</strong> as laterais são cortadas — o centro fica intacto.</li>
+        <li><strong>Resolução recomendada:</strong> mínimo 1920×1080px para desktop. Proporção 16:9 é a mais segura.</li>
+      </ul>
+
+      <div class="alert alert-success">
+        <div class="alert-title">✅ Checklist de Entrega de Banner</div>
+        <ul style="margin: 0; padding-left: 20px;">
+          <li>Imagem em alta resolução (mín. 1920px de largura)</li>
+          <li>Texto principal dentro da zona segura (70% central)</li>
+          <li>Topo livre (mín. 56px sem elementos essenciais)</li>
+          <li>Versão desktop e mobile (mesma imagem, diferentes crops ou versões dedicadas)</li>
+          <li>Formato: JPG com compressão ~85% ou WebP</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. CORES -->
+  <section class="doc-section" id="colorscheme">
+    <div class="doc-section__title">
+      <span class="emoji">🎨</span> Paleta de Cores
+    </div>
+    <div class="doc-section__body">
+      <p>O tema utiliza um sistema de <strong>color schemes</strong> configurável via <code>settings_data.json</code>. Cada scheme define cores para background, texto, botões, etc.</p>
+
+      <h3>Color Schemes Definidos</h3>
+      <table>
+        <tr><th>Scheme</th><th>Background</th><th>Texto</th><th>Botão</th><th>Label do Botão</th></tr>
+        <tr>
+          <td><strong>scheme-1</strong> (Principal)</td>
+          <td><span style="display:inline-block;width:16px;height:16px;background:#fff;border:1px solid #ccc;border-radius:3px;"></span> #FFFFFF</td>
+          <td><span style="display:inline-block;width:16px;height:16px;background:#121212;border-radius:3px;"></span> #121212</td>
+          <td><span style="display:inline-block;width:16px;height:16px;background:#121212;border-radius:3px;"></span> #121212</td>
+          <td><span style="display:inline-block;width:16px;height:16px;background:#fff;border:1px solid #ccc;border-radius:3px;"></span> #FFFFFF</td>
+        </tr>
+        <tr>
+          <td><strong>scheme-2</strong> (Claro)</td>
+          <td><span style="display:inline-block;width:16px;height:16px;background:#f3f3f3;border-radius:3px;"></span> #F3F3F3</td>
+          <td><span style="display:inline-block;width:16px;height:16px;background:#121212;border-radius:3px;"></span> #121212</td>
+          <td><span style="display:inline-block;width:16px;height:16px;background:#121212;border-radius:3px;"></span> #121212</td>
+          <td><span style="display:inline-block;width:16px;height:16px;background:#f3f3f3;border-radius:3px;"></span> #F3F3F3</td>
+        </tr>
+        <tr>
+          <td><strong>scheme-3</strong> (Escuro)</td>
+          <td><span style="display:inline-block;width:16px;height:16px;background:#242833;border-radius:3px;"></span> #242833</td>
+          <td><span style="display:inline-block;width:16px;height:16px;background:#fff;border-radius:3px;"></span> #FFFFFF</td>
+          <td><span style="display:inline-block;width:16px;height:16px;background:#fff;border-radius:3px;"></span> #FFFFFF</td>
+          <td><span style="display:inline-block;width:16px;height:16px;background:#000;border-radius:3px;"></span> #000000</td>
+        </tr>
+        <tr>
+          <td><strong>scheme-4</strong> (Black)</td>
+          <td><span style="display:inline-block;width:16px;height:16px;background:#121212;border-radius:3px;"></span> #121212</td>
+          <td><span style="display:inline-block;width:16px;height:16px;background:#fff;border-radius:3px;"></span> #FFFFFF</td>
+          <td><span style="display:inline-block;width:16px;height:16px;background:#fff;border-radius:3px;"></span> #FFFFFF</td>
+          <td><span style="display:inline-block;width:16px;height:16px;background:#121212;border-radius:3px;"></span> #121212</td>
+        </tr>
+        <tr>
+          <td><strong>scheme-5</strong> (Azul)</td>
+          <td><span style="display:inline-block;width:16px;height:16px;background:#334FB4;border-radius:3px;"></span> #334FB4</td>
+          <td><span style="display:inline-block;width:16px;height:16px;background:#fff;border-radius:3px;"></span> #FFFFFF</td>
+          <td><span style="display:inline-block;width:16px;height:16px;background:#fff;border-radius:3px;"></span> #FFFFFF</td>
+          <td><span style="display:inline-block;width:16px;height:16px;background:#334FB4;border-radius:3px;"></span> #334FB4</td>
+        </tr>
+      </table>
+
+      <h3>Cor Institucional Namu</h3>
+      <div style="display: flex; gap: 16px; align-items: center; margin: 16px 0; flex-wrap: wrap;">
+        <div style="text-align: center;">
+          <div style="width:80px;height:80px;background:#045133;border-radius:8px;margin-bottom:6px;"></div>
+          <code>#045133</code><br><small>Verde Institucional</small>
+        </div>
+        <div style="text-align: center;">
+          <div style="width:80px;height:80px;background:#33348E;border-radius:8px;margin-bottom:6px;"></div>
+          <code>#33348E</code><br><small>Roxo (Blends)</small>
+        </div>
+        <div style="text-align: center;">
+          <div style="width:80px;height:80px;background:#10A6BD;border-radius:8px;margin-bottom:6px;"></div>
+          <code>#10A6BD</code><br><small>Azul (Utensílios)</small>
+        </div>
+        <div style="text-align: center;">
+          <div style="width:80px;height:80px;background:#BE5B28;border-radius:8px;margin-bottom:6px;"></div>
+          <code>#BE5B28</code><br><small>Laranja (Kits)</small>
+        </div>
+        <div style="text-align: center;">
+          <div style="width:80px;height:80px;background:#121212;border-radius:8px;margin-bottom:6px;"></div>
+          <code>#121212</code><br><small>Preto (Texto)</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. DEPLOY -->
+  <section class="doc-section" id="deploy">
+    <div class="doc-section__title">
+      <span class="emoji">🚀</span> Deploy e Manutenção
+    </div>
+    <div class="doc-section__body">
+      <h3>Desenvolvimento Local</h3>
+      <pre><code><span class="token-comment"># 1. Instalar Shopify CLI (se ainda não instalado)</span>
+npm install -g @shopify/cli @shopify/theme
+
+<span class="token-comment"># 2. Fazer login na loja</span>
+shopify auth login --store 7uvwdy-up.myshopify.com
+
+<span class="token-comment"># 3. Iniciar servidor local</span>
+shopify theme dev --store 7uvwdy-up.myshopify.com
+
+<span class="token-comment"># 4. Deploy para a loja (development)</span>
+shopify theme push --live</code></pre>
+
+      <h3>Loop de Desenvolvimento</h3>
+      <ol>
+        <li>Edite os arquivos em <code>sections/</code>, <code>snippets/</code>, <code>assets/</code>.</li>
+        <li>O CLI detecta mudanças e atualiza o preview automaticamente.</li>
+        <li>Use o Theme Editor no navegador para ajustar settings e blocos.</li>
+        <li>Quando satisfeito, use <code>shopify theme push --live</code> para publicar.</li>
+      </ol>
+
+      <h3>Publicar Artigo via API</h3>
+      <p>Para publicar um novo artigo, use o script <code>scripts/create-article.mjs</code> ou faça manualmente:</p>
+      <pre><code><span class="token-comment"># Estrutura básica da mutation em um arquivo JSON:</span>
+{
+  "query": "mutation articleCreate($input: ArticleInput!) { articleCreate(input: $input) { article { id url handle } userErrors { field message } } }",
+  "variables": {
+    "input": {
+      "blogId": "gid://shopify/Blog/96208060494",
+      "title": "Título do artigo",
+      "handle": "titulo-do-artigo",
+      "tags": ["Guia"],
+      "body_html": "&lt;p&gt;Conteúdo...&lt;/p&gt;",
+      "excerpt": "Resumo curto",
+      "image": { "src": "https://...", "alt_text": "..." }
+    }
+  }
+}</code></pre>
+
+      <h3>Pontos de Atenção</h3>
+      <ul>
+        <li><strong>Não commite o arquivo <code>.env</code></strong> em repositórios.</li>
+        <li><strong>Não altere o <code>SHOPIFY_API_VERSION</code></strong> sem testar — mutations podem mudar de versão para versão.</li>
+        <li><strong>Ao criar artigos:</strong> o <code>handle</code> é usado na URL. Use apenas letras minúsculas, números e hífens.</li>
+        <li><strong>Imagens de banner:</strong> Shopify aceita URLs externas em <code>articleUpdate</code>. Hospede as imagens em CDN confiável.</li>
+        <li><strong>Se o hero slider não aparece:</strong> verifique se os <code>fallback_asset</code> existem em <code>assets/</code>.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 10. CHANGELOG -->
+  <section class="doc-section" id="changelog">
+    <div class="doc-section__title">
+      <span class="emoji">📋</span> Changelog
+    </div>
+    <div class="doc-section__body">
+      <div class="changelog-item">
+        <div class="changelog-date">Jun/2026</div>
+        <div>
+          <span class="changelog-tag tag-new">New</span> Criados 3 artigos no blog "noticias" via GraphQL Admin API (O que é Matcha, Guia de Preparo, Benefícios do Matcha).
+        </div>
+      </div>
+      <div class="changelog-item">
+        <div class="changelog-date">Jun/2026</div>
+        <div>
+          <span class="changelog-tag tag-api">API</span> Adicionadas imagens de banner aos 3 artigos via <code>articleUpdate</code> com URLs Unsplash externas.
+        </div>
+      </div>
+      <div class="changelog-item">
+        <div class="changelog-date">Jun/2026</div>
+        <div>
+          <span class="changelog-tag tag-new">New</span> Linkagem da homepage — seção <code>namu_blog</code> em <code>templates/index.json</code> configurada para consumir artigos reais do blog <code>noticias</code>.
+        </div>
+      </div>
+      <div class="changelog-item">
+        <div class="changelog-date">Jun/2026</div>
+        <div>
+          <span class="changelog-tag tag-new">New</span> Linkagem do footer — adicionada seção "Blog" em <code>namu-footer.liquid</code> com links para os 3 artigos e link para blog completo.
+        </div>
+      </div>
+      <div class="changelog-item">
+        <div class="changelog-date">Jun/2026</div>
+        <div>
+          <span class="changelog-tag tag-doc">Doc</span> Criado guia de banners <code>guia-banners-namu.html</code> com especificações visuais completas para o designer (zonas, safe areas, crop, responsividade).
+        </div>
+      </div>
+      <div class="changelog-item">
+        <div class="changelog-date">Jun/2026</div>
+        <div>
+          <span class="changelog-tag tag-doc">Doc</span> Criada esta documentação completa para handover ao cliente.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="text-align: center; padding: 40px 0 20px; color: #888; font-size: 0.85rem;">
+    <p>Namu Matcha Store — Documentação Técnica · Jun/2026</p>
+    <p>Domínio: namu-matcha.myshopify.com · CNPJ: 41.401.743/0001-50</p>
+  </footer>
+
+</div>
+</body>
+</html>
